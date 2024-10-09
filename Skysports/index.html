@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe with Specific Size</title>
+</head>
+<body>
+    <script>
+        document.body.style.margin = '0';
+        document.body.style.padding = '0';
+        document.body.style.display = 'flex';
+        document.body.style.flexDirection = 'column';
+        document.body.style.justifyContent = 'flex-start';
+        document.body.style.alignItems = 'center';
+        document.body.style.height = '100vh';
+        document.body.style.backgroundColor = '#000';
+        document.body.style.overflow = 'hidden';
+
+        const header = document.createElement('h1');
+        header.textContent = 'Star Sports Hindi';
+        header.style.color = '#fff';
+        header.style.margin = '0';
+        header.style.padding = '20px';
+        header.style.fontSize = '24px';
+        document.body.appendChild(header);
+
+        const iframeContainer = document.createElement('div');
+        iframeContainer.id = 'iframeContainer';
+        iframeContainer.style.position = 'relative';
+        iframeContainer.style.width = '100%';
+        iframeContainer.style.height = '300px';
+        iframeContainer.style.overflow = 'hidden';
+        document.body.appendChild(iframeContainer);
+
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://cxh.pages.dev/kxp/?token=aHR0cHM6Ly9zNS4yNGN3Yy5jb20';
+        iframe.style.position = 'absolute';
+        iframe.style.top = '-100px';
+        iframe.style.left = '0';
+        iframe.style.width = '100%';
+        iframe.style.height = '350px';
+        iframe.style.border = 'none';
+        iframeContainer.appendChild(iframe);
+
+        const joinButton = document.createElement('a');
+        joinButton.href = 'https://t.me/+Pj_QX9oygJNiYmRl';
+        joinButton.textContent = 'Join Telegram Channel';
+        joinButton.target = '_blank';
+        joinButton.style.margin = '20px 0';
+        joinButton.style.padding = '10px 20px';
+        joinButton.style.backgroundColor = '#0072b1';
+        joinButton.style.color = '#fff';
+        joinButton.style.border = 'none';
+        joinButton.style.borderRadius = '5px';
+        joinButton.style.fontSize = '16px';
+        joinButton.style.cursor = 'pointer';
+        joinButton.style.textDecoration = 'none';
+        joinButton.style.transition = 'background-color 0.3s';
+        document.body.appendChild(joinButton);
+
+        joinButton.addEventListener('mouseenter', function () {
+            joinButton.style.backgroundColor = '#005e91';
+        });
+
+        joinButton.addEventListener('mouseleave', function () {
+            joinButton.style.backgroundColor = '#0072b1';
+        });
+
+        const infoText = document.createElement('p');
+        infoText.textContent = 'Open In Chrome Browser For Full Screen Mode';
+        infoText.style.color = '#fff';
+        infoText.style.fontSize = '14px';
+        infoText.style.marginTop = '10px';
+        infoText.style.textAlign = 'center';
+        document.body.appendChild(infoText);
+
+        function adjustForScreenSize() {
+            if (window.innerWidth >= 768) {
+                iframeContainer.style.height = '600px';
+                iframe.style.top = '0';
+                iframe.style.height = '440px';
+                joinButton.style.fontSize = '18px';
+                joinButton.style.padding = '12px 24px';
+            } else {
+                iframeContainer.style.height = '300px';
+                iframe.style.top = '-100px';
+                iframe.style.height = '350px';
+                joinButton.style.fontSize = '16px';
+                joinButton.style.padding = '10px 20px';
+            }
+        }
+
+        window.addEventListener('resize', adjustForScreenSize);
+        adjustForScreenSize();
+if (confirm("Join For More Links!!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
+    </script>
+</body>
+</html>
