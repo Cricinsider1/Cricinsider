@@ -50,7 +50,7 @@
 <body bgcolor="black" style="margin:0">
     <center>
         <div data-shaka-player-container style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;">
-            <video autoplay muted data-shaka-player id="video" poster="https://i.postimg.cc/BQrMbs1b/skysports-cricket-world-cup-6359058.jpg" style="width:100%; height:100%;"></video>
+            <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width:100%; height:100%;"></video>
         </div>
     </center>
 
@@ -68,7 +68,7 @@
             player.configure({
                 drm: {
                     clearKeys: {
-                        '00053ac1e9b1231eed3eb4e3540b3ae1': "0f03d8541826af3d9acbac975d751165"
+                        '03c2e0af2f8159f9f0ce9b5dbc865f10': "cd84ed136b0cc71f8ab8cd4d4f6a2e4c"
                     }
                 }
             });
@@ -93,7 +93,7 @@
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://crichype.live/script.php/linear027-ie-dash1-prd-cf.cdn.skycdp.com/016a/Content/DASH_003_720_120/Live/channel(skysportscricket)/manifest_720-120.mpd");
+                await player.load("https://crichype.in/script.php/linearjitp-playback.astro.com.my/dash-wv/linear/2504/default.mpd");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error);
