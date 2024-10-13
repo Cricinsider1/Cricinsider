@@ -12,123 +12,68 @@
 <body>
     <center>
             <div data-shaka-player-container style='width: 100%; height: 100%'>
-             <video autoplay muted data-shaka-player id="video" poster="https://i.postimg.cc/PqPx2cy3/maxresdefault.jpg" style="width:100%; height:100%;"></video>
+             <video autoplay muted data-shaka-player id="video" poster="https://i.postimg.cc/LXP7342X/1200x600wa.png" style="width:100%; height:100%;"></video>
         </div>
     </center>
-    <script> if (confirm("Join For More Links!!")) {
+    <script>
+if (confirm("Join For More Links!!")) {
             window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
         }
-async function init() {
-  const videoElement = document.getElementById("video");
-  const videoUI = videoElement.ui;
-  const videoControls = videoUI.getControls();
-  const player = videoControls.getPlayer();
-  
-  window.player = player;
-  window.ui = videoUI;
 
-  const uiConfig = {
-    'enableKeyboardPlaybackControls': true,
-    'seekBarColors': {
-      'base': "rgba(255,255,255,.2)",
-      'buffered': "rgba(255,255,255,.4)",
-      'played': "rgb(255,0,0)"
-    }
-  };
+        async function init() {
+            const video = document.getElementById("video");
+            const ui = video.ui;
+            const controls = ui.getControls();
+            const player = controls.getPlayer();
 
-  videoUI.configure(uiConfig);
-  player.configure({
-    'drm': {
-      'clearKeys': {
-        'e90836d23b4ec1b5618b2e4f3a470d38': "08f968dd99717b22564fe1089258eb40"
-      }
-    }
-  });
+            player.configure({
+                drm: {
+                    clearKeys: {
+                        'ae26845bd33038a9c0774a0981007294': "63ac662dde310cfb4cc6f9b43b34196d"
+                    }
+                }
+            });
 
-  document.addEventListener("keydown", event => {
-    const video = document.querySelector("video");
-    let currentVolume = videoElement.volume;
+            ui.configure({
+                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+                volumeBarColors: {
+                    base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                    level: "rgb(0, 255, 0)"     // Green color for the volume level
+                },
+                seekBarColors: {
+                    base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                    buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                    played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+                }
+            });
 
-    switch (event.key) {
-      case 'f':
-        if (document.fullscreenElement) {
-          document.exitFullscreen();
-        } else {
-          video.requestFullscreen();
+            window.player = player;
+            window.ui = ui;
+
+            player.addEventListener("error", onPlayerErrorEvent);
+            controls.addEventListener("error", onUIErrorEvent);
+
+            try {
+                await player.load("https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd");
+                console.log("The video has now been loaded!");
+            } catch (error) {
+                onPlayerError(error);
+            }
         }
-        event.preventDefault();
-        break;
 
-      case " ":
-        if (videoElement.paused) {
-          videoElement.play();
-        } else {
-          videoElement.pause();
+        function onPlayerErrorEvent(event) {
+            onPlayerError(event.detail);
         }
-        event.preventDefault();
-        break;
-
-      case "ArrowUp":
-        event.preventDefault();
-        if (currentVolume < 1) {
-          try {
-            videoElement.volume = Math.min(currentVolume + 0.05, 1);
-          } catch (error) {
-            videoElement.volume = 1;
-          }
-        }
-        break;
-
-      case "ArrowDown":
-        event.preventDefault();
-        if (currentVolume > 0) {
-          try {
-            videoElement.volume = Math.max(currentVolume - 0.05, 0);
-          } catch (error) {
-            videoElement.volume = 0;
-          }
-        }
-        break;
-
-      case 'm':
-        event.preventDefault();
-        videoElement.muted = !videoElement.muted;
-        break;
-
-      default:
-        break;
-    }
-  });
-
-  player.addEventListener("error", onPlayerErrorEvent);
-  videoControls.addEventListener("error", onUIErrorEvent);
-
-  try {
-    await player.load("https://aba5sdmaaaaaaaamo56zosqr4m7j7.otte.live.cf.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/0y0tptbbjk/out/v1/8b1b95c2e6dc496abe14a3ae5c675917/cenc.mpd");
-    console.log("The video has now been loaded!");
-  } catch (error) {
-    onPlayerError(error);
-  }
-}
-
-function onPlayerErrorEvent(event) {
-  onPlayerError(event.detail);
-}
-
 function onPlayerError(error) {
-  console.error("Error code", error.code, "object", error);
-}
-
-function onUIErrorEvent(event) {
-  onPlayerError(event.detail);
-}
+            console.error("Error code", error.code, "object", error);
+        }
 
 function initFailed() {
-  console.error("Unable to load the UI library!");
-}
+            console.error("Unable to load the UI library!");
+        }
 
-document.addEventListener("shaka-ui-loaded", init);
-document.addEventListener("shaka-ui-load-failed", initFailed);
+        document.addEventListener("shaka-ui-loaded", init);
+        document.addEventListener("shaka-ui-load-failed", initFailed);
 </script>
     </body>
 </html><style>
