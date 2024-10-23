@@ -29,7 +29,7 @@
             player.configure({
                 drm: {
                     clearKeys: {
-                        '4283973fc327523f93116bbcc1bc49ba': "7469e028e763ba913ec10c6d6387e9bc"
+                        '00056d5c8882917a4463d5b42ba86c31': "226c39dd7d41b6f0e27cb7d8940f644f"
                     }
                 }
             });
@@ -54,7 +54,7 @@
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://rftv.wtf/ch.mpd?id=53");
+                await player.load("https://linear007-gb-dash1-prd-ak.cdn.skycdp.com/016a/Content/DASH_003_720_120/Live/channel(skysportscricket)/manifest_720-120.mpd");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error); 
