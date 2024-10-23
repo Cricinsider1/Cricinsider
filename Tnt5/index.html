@@ -1,0 +1,139 @@
+<html>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>TG_@Cricinsider365</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+  <style>img{position:relative;right:130;bottom:10;margin:auto auto;max-width:20%;max-height:20%;object-fit:contain;pointer-events:none}.shaka-spinner-container{display:none}.uc{pointer-events:none}</style>
+</head>
+<body bgcolor='white' style='margin:0'>
+
+<body>
+    <center>
+            <div data-shaka-player-container style='width: 100%; height: 100%'>
+             <video autoplay muted data-shaka-player id="video" poster="https://i.postimg.cc/LXP7342X/1200x600wa.png" style="width:100%; height:100%;"></video>
+        </div>
+    </center>
+    <script> if (confirm("Join For More Links!!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
+async function init() {
+  const videoElement = document.getElementById("video");
+  const videoUI = videoElement.ui;
+  const videoControls = videoUI.getControls();
+  const player = videoControls.getPlayer();
+  
+  window.player = player;
+  window.ui = videoUI;
+
+  const uiConfig = {
+    'enableKeyboardPlaybackControls': true,
+    'seekBarColors': {
+      'base': "rgba(255,255,255,.2)",
+      'buffered': "rgba(255,255,255,.4)",
+      'played': "rgb(255,0,0)"
+    }
+  };
+
+  videoUI.configure(uiConfig);
+  player.configure({
+    'drm': {
+      'clearKeys': {
+        '60c0d9b41475e01db4ffb91ed557fbcc': "36ee40e58948ca15e3caba8d47b8f34b"
+      }
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    const video = document.querySelector("video");
+    let currentVolume = videoElement.volume;
+
+    switch (event.key) {
+      case 'f':
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          video.requestFullscreen();
+        }
+        event.preventDefault();
+        break;
+
+      case " ":
+        if (videoElement.paused) {
+          videoElement.play();
+        } else {
+          videoElement.pause();
+        }
+        event.preventDefault();
+        break;
+
+      case "ArrowUp":
+        event.preventDefault();
+        if (currentVolume < 1) {
+          try {
+            videoElement.volume = Math.min(currentVolume + 0.05, 1);
+          } catch (error) {
+            videoElement.volume = 1;
+          }
+        }
+        break;
+
+      case "ArrowDown":
+        event.preventDefault();
+        if (currentVolume > 0) {
+          try {
+            videoElement.volume = Math.max(currentVolume - 0.05, 0);
+          } catch (error) {
+            videoElement.volume = 0;
+          }
+        }
+        break;
+
+      case 'm':
+        event.preventDefault();
+        videoElement.muted = !videoElement.muted;
+        break;
+
+      default:
+        break;
+    }
+  });
+
+  player.addEventListener("error", onPlayerErrorEvent);
+  videoControls.addEventListener("error", onUIErrorEvent);
+
+  try {
+    await player.load("https://live.ll.ww.aiv-cdn.net/OTTB/lhr-nitro/live/clients/dash/enc/gesdwrdncn/out/v1/79e752f1eccd4e18b6a8904a0bc01f2d/cenc.mpd");
+    console.log("The video has now been loaded!");
+  } catch (error) {
+    onPlayerError(error);
+  }
+}
+
+function onPlayerErrorEvent(event) {
+  onPlayerError(event.detail);
+}
+
+function onPlayerError(error) {
+  console.error("Error code", error.code, "object", error);
+}
+
+function onUIErrorEvent(event) {
+  onPlayerError(event.detail);
+}
+
+function initFailed() {
+  console.error("Unable to load the UI library!");
+}
+
+document.addEventListener("shaka-ui-loaded", init);
+document.addEventListener("shaka-ui-load-failed", initFailed);
+</script>
+    </body>
+</html><style>
+        body{
+    background-color: #000;
+        }
+    </style>
+</html>
