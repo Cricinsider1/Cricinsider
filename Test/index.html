@@ -29,7 +29,7 @@
             player.configure({
                 drm: {
                     clearKeys: {
-                        '192dd5f0779d5983a3aa18276a9fb719': "b372ee0b282e2bcaad31702289cb338f"
+                        '4283973fc327523f93116bbcc1bc49ba': "7469e028e763ba913ec10c6d6387e9bc"
                     }
                 }
             });
@@ -54,7 +54,7 @@
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://mpd.allsport.games/api/bpweb7.akamaized.net/bpk-tv/irdeto_com_Channel_1852/output/manifest.mpd");
+                await player.load("https://rftv.wtf/ch.mpd?id=53");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error); 
