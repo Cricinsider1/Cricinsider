@@ -29,7 +29,7 @@
             player.configure({
                 drm: {
                     clearKeys: {
-                        '44dd9cd370b08a868ead115fe84ecfde': "bff19ab0a51cf14e848389b152913fd0"
+                        '192dd5f0779d5983a3aa18276a9fb719': "b372ee0b282e2bcaad31702289cb338f"
                     }
                 }
             });
@@ -54,7 +54,7 @@
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://ottb.live.cf.ww.aiv-cdn.net/dub-nitro/live/clients/dash/enc/bmnelo5c7a/out/v1/3ce2cdc4589f46189322bd3717c77957/cenc.mpd");
+                await player.load("https://mpd.allsport.games/api/bpweb7.akamaized.net/bpk-tv/irdeto_com_Channel_1852/output/manifest.mpd");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error); 
