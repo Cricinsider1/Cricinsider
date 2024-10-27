@@ -1,74 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cricinsider365</title>
-<script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>TG_@Cricinsider365</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+  <style>img{position:relative;right:130;bottom:10;margin:auto auto;max-width:20%;max-height:20%;object-fit:contain;pointer-events:none}.shaka-spinner-container{display:none}.uc{pointer-events:none}</style>
 </head>
-<style>
-body {
-    background-color: black;
-}
-#container {
-    background-color: black;
-}
-    #telegramButton {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 378px;
-      height: 50px;
-      background: linear-gradient(90deg, darkblue, #001f3f);
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      overflow: hidden;
-      position: relative;
-      animation: flowAnimation 2s infinite;
-    }
+<body bgcolor='white' style='margin:0'>
 
-    @keyframes flowAnimation {
-      0% {
-        background-position: -200px 0;
-      }
-      100% {
-        background-position: 200px 0;
-        }
-    }
-
-    #telegramButton:hover {
-      animation: none; /* Pause animation on hover */
-      background: linear-gradient(90deg, #001f3f, darkblue); /* Reverse colors on hover */
-    }
-  </style>
 <body>
-<div id="video"></div>
+    <center>
+            <div data-shaka-player-container style='width: 100%; height: 100%'>
+             <video autoplay muted data-shaka-player id="video" poster="https://i.postimg.cc/LXP7342X/1200x600wa.png" style="width:100%; height:100%;"></video>
+        </div>
+    </center>
+    <script> if (confirm("Join For More Links!!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
+async function init() {
+  const videoElement = document.getElementById("video");
+  const videoUI = videoElement.ui;
+  const videoControls = videoUI.getControls();
+  const player = videoControls.getPlayer();
+  
+  window.player = player;
+  window.ui = videoUI;
 
-<script type="text/javascript">
-  jwplayer("video").setup({
-    width: "100%",
-    height: "100%",
-    autostart: true,
-    mute: false,
-    file:"https://jcevents.jiocinema.com/bpk-tv/JC_ColorsCineplexHD/JCHLS/hdntl=exp=1729777808~acl=%2f*~id=a77ed2afc64d4edfa87fa963c3f713b6~data=hdntl~hmac=32010128582b868ae5b302a3db6484f78eac932c5fe76ae18a6e80172f45bad2/JC_ColorsCineplexHD.m3u8"
+  const uiConfig = {
+    'enableKeyboardPlaybackControls': true,
+    'seekBarColors': {
+      'base': "rgba(255,255,255,.2)",
+      'buffered': "rgba(255,255,255,.4)",
+      'played': "rgb(255,0,0)"
+    }
+  };
+
+  videoUI.configure(uiConfig);
+  player.configure({
+    'drm': {
+      'clearKeys': {
+        '59ed8dc9d4a48857ef8e5865919496cc': "0d3680bd8b349deda8b7fdd1da71b7f8"
+      }
+    }
   });
-</script>
-<script>
-//<!--
-function _0x4ee9(_0x112c9f,_0x1721ce){var _0x26fa53=_0x3580();return _0x4ee9=function(_0x55f882,_0x19f302){_0x55f882=_0x55f882-(0xe3*0x17+0x1*0xf62+-0x224c);var _0x52ebb6=_0x26fa53[_0x55f882];return _0x52ebb6;},_0x4ee9(_0x112c9f,_0x1721ce);}var _0x32f15e=_0x4ee9;(function(_0x1c91f2,_0x22e652){var _0x224405=_0x4ee9,_0x1a3d06=_0x1c91f2();while(!![]){try{var _0x325fae=parseInt(_0x224405(0x189))/(-0x4f4*-0x1+-0x125c*-0x1+-0x297*0x9)+-parseInt(_0x224405(0x18b))/(-0x3*0x9f4+0x2*-0xf53+0x3c84)*(-parseInt(_0x224405(0x17b))/(0xaa9+-0x11a*0x5+-0x524))+-parseInt(_0x224405(0x186))/(0xe83+-0x2016+0x1197)*(-parseInt(_0x224405(0x17c))/(-0x2062*-0x1+-0xd12*-0x2+-0x3a81))+-parseInt(_0x224405(0x182))/(-0x7ef*0x1+0x6*0x2a3+-0x3*0x29f)+-parseInt(_0x224405(0x185))/(-0xd*-0x17e+-0x170d+0x3ae)*(-parseInt(_0x224405(0x183))/(0x207b+-0xef2+0x1*-0x1181))+parseInt(_0x224405(0x17e))/(-0x8f*-0x45+0x25e3+-0x4c65)+-parseInt(_0x224405(0x18a))/(0x3*0x40+-0x13a3+0x12ed)*(parseInt(_0x224405(0x180))/(-0x6f6+0x1b80+0x1dd*-0xb));if(_0x325fae===_0x22e652)break;else _0x1a3d06['push'](_0x1a3d06['shift']());}catch(_0x25f445){_0x1a3d06['push'](_0x1a3d06['shift']());}}}(_0x3580,-0x3*-0xa02b+0xae5*0xbd+-0x4a89c));function _0x3580(){var _0x16226c=['5zjliTe','oygJNiYmRl','2267865BXCEzj','annel','2316391CtrIUu','location','3668100jRSOWq','1040IkKqmM','href','20419bQrSYJ','1681632yuUhPy','Join\x20Our\x20T','https://t.','509611fQGZcC','50oGZWYJ','1222GMeOkn','me/+Pj_QX9','elegram\x20Ch','2199IyOEye'];_0x3580=function(){return _0x16226c;};return _0x3580();}confirm(_0x32f15e(0x187)+_0x32f15e(0x18d)+_0x32f15e(0x17f))&&(window[_0x32f15e(0x181)][_0x32f15e(0x184)]=_0x32f15e(0x188)+_0x32f15e(0x18c)+_0x32f15e(0x17d));
-//-->
 
-</script>
-  <div id="telegramButton" onclick="redirectToTelegram()">
-  Join Telegram
-  </div>
-  <script>
-  function redirectToTelegram() {
-    // Your redirect code here
-    window.location.href = 'https://t.me/+Pj_QX9oygJNiYmRl';
+  document.addEventListener("keydown", event => {
+    const video = document.querySelector("video");
+    let currentVolume = videoElement.volume;
+
+    switch (event.key) {
+      case 'f':
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          video.requestFullscreen();
+        }
+        event.preventDefault();
+        break;
+
+      case " ":
+        if (videoElement.paused) {
+          videoElement.play();
+        } else {
+          videoElement.pause();
+        }
+        event.preventDefault();
+        break;
+
+      case "ArrowUp":
+        event.preventDefault();
+        if (currentVolume < 1) {
+          try {
+            videoElement.volume = Math.min(currentVolume + 0.05, 1);
+          } catch (error) {
+            videoElement.volume = 1;
+          }
+        }
+        break;
+
+      case "ArrowDown":
+        event.preventDefault();
+        if (currentVolume > 0) {
+          try {
+            videoElement.volume = Math.max(currentVolume - 0.05, 0);
+          } catch (error) {
+            videoElement.volume = 0;
+          }
+        }
+        break;
+
+      case 'm':
+        event.preventDefault();
+        videoElement.muted = !videoElement.muted;
+        break;
+
+      default:
+        break;
+    }
+  });
+
+  player.addEventListener("error", onPlayerErrorEvent);
+  videoControls.addEventListener("error", onUIErrorEvent);
+
+  try {
+    await player.load("https://cors-proxy.cooks.fyi/https://dfwlive-v1-c1p3-sponsored.s.llnwi.net/Content/HLS.cps/Live/channel(WILLHD-3291.dfw.1080)/11.m3u8");
+    console.log("The video has now been loaded!");
+  } catch (error) {
+    onPlayerError(error);
   }
-  </script>
-</body>
-</html>
+}
+
+function onPlayerErrorEvent(event) {
+  onPlayerError(event.detail);
+}
+
+function onPlayerError(error) {
+  console.error("Error code", error.code, "object", error);
+}
+
+function onUIErrorEvent(event) {
+  onPlayerError(event.detail);
+}
+
+function initFailed() {
+  console.error("Unable to load the UI library!");
+}
+
+document.addEventListener("shaka-ui-loaded", init);
+document.addEventListener("shaka-ui-load-failed", initFailed);
+</script>
+    </body>
+</html><style>
+        body{
+    background-color: #000;
+        }
+    </style>
+    </html>
