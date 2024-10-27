@@ -29,7 +29,7 @@
             player.configure({
                 drm: {
                     clearKeys: {
-                        '00053ac1e9b1231eed3eb4e3540b3ae1': "0f03d8541826af3d9acbac975d751165"
+                        'c18b6aa739be4c0b774605fcfb5d6b68': "e41c3a6f7532b2e3a828d9580124c89d"
                     }
                 }
             });
@@ -54,7 +54,7 @@
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://sky.babel-in.xyz/linear027-ie-dash1-prd-cf.cdn.skycdp.com/016a/Content/DASH_003_720_120/Live/channel(skysportscricket)/manifest_720-120.mpd");
+                await player.load("https://webtvstream.bhtelecom.ba/hls6/as_premium2.mpd");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error); 
