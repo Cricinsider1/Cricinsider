@@ -1,121 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>TG_@Cricinsider365</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" type="image/png" sizes="250x250">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.1.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.1.1/controls.min.css" crossorigin="anonymous" />
-    <style>
-        /* Overflow menu style */
-        .shaka-overflow-menu {
-            background-color: rgb(41, 41, 163);
-            color: rgb(153, 153, 153);
-        }
-
-        .shaka-overflow-menu button:hover {
-            background-color: rgb(45, 45, 45);
-        }
-
-        .shaka-overflow-button-label {
-            color: rgb(245, 245, 245);
-        }
-
-        .shaka-current-selection-span {
-            color: rgb(202, 202, 202);
-        }
-
-        .material-icons-round {
-            color: rgb(230, 230, 230);
-        }
-
-        /* Overflow sub menu style */
-        .shaka-settings-menu {
-            background-color: rgb(35, 35, 35);
-            color: rgb(255, 255, 255);
-        }
-
-        .shaka-settings-menu button {
-            color: rgb(255, 255, 255);
-        }
-
-        .shaka-settings-menu button:hover {
-            background-color: rgb(45, 45, 45);
-        }
-    </style>
+<html>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>TG_@Cricinsider365</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+  <style>img{position:relative;right:130;bottom:10;margin:auto auto;max-width:20%;max-height:20%;object-fit:contain;pointer-events:none}.shaka-spinner-container{display:none}.uc{pointer-events:none}</style>
 </head>
+<body bgcolor='white' style='margin:0'>
 
-<body bgcolor="black" style="margin:0">
+<body>
     <center>
-        <div data-shaka-player-container style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;">
-            <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width:100%; height:100%;"></video>
+            <div data-shaka-player-container style='width: 100%; height: 100%'>
+             <video autoplay muted data-shaka-player id="video" poster="https://i.postimg.cc/LXP7342X/1200x600wa.png" style="width:100%; height:100%;"></video>
         </div>
     </center>
-
-    <script>
-        if (confirm("Join For More Links!!")) {
+    <script> if (confirm("Join For More Links!!")) {
             window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
         }
+async function init() {
+  const videoElement = document.getElementById("video");
+  const videoUI = videoElement.ui;
+  const videoControls = videoUI.getControls();
+  const player = videoControls.getPlayer();
+  
+  window.player = player;
+  window.ui = videoUI;
 
-        async function init() {
-            const video = document.getElementById("video");
-            const ui = video.ui;
-            const controls = ui.getControls();
-            const player = controls.getPlayer();
+  const uiConfig = {
+    'enableKeyboardPlaybackControls': true,
+    'seekBarColors': {
+      'base': "rgba(255,255,255,.2)",
+      'buffered': "rgba(255,255,255,.4)",
+      'played': "rgb(255,0,0)"
+    }
+  };
 
-            player.configure({
-                drm: {
-                    clearKeys: {
-                        'ae26845bd33038a9c0774a0981007294': "63ac662dde310cfb4cc6f9b43b34196d"
-                    }
-                }
-            });
+  videoUI.configure(uiConfig);
+  player.configure({
+    'drm': {
+      'clearKeys': {
+        'ae26845bd33038a9c0774a0981007294': "63ac662dde310cfb4cc6f9b43b34196d"
+      }
+    }
+  });
 
-            ui.configure({
-                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-                volumeBarColors: {
-                    base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                    level: "rgb(0, 255, 0)"     // Green color for the volume level
-                },
-                seekBarColors: {
-                    base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                    buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                    played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
-                }
-            });
+  document.addEventListener("keydown", event => {
+    const video = document.querySelector("video");
+    let currentVolume = videoElement.volume;
 
-            window.player = player;
-            window.ui = ui;
-
-            player.addEventListener("error", onPlayerErrorEvent);
-            controls.addEventListener("error", onUIErrorEvent);
-
-            try {
-                await player.load("https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd");
-                console.log("The video has now been loaded!");
-            } catch (error) {
-                onPlayerError(error);
-            }
+    switch (event.key) {
+      case 'f':
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          video.requestFullscreen();
         }
+        event.preventDefault();
+        break;
 
-        function onPlayerErrorEvent(event) {
-            onPlayerError(event.detail);
+      case " ":
+        if (videoElement.paused) {
+          videoElement.play();
+        } else {
+          videoElement.pause();
         }
+        event.preventDefault();
+        break;
 
-        function onPlayerError(error) {
-            console.error("Error code", error.code, "object", error);
+      case "ArrowUp":
+        event.preventDefault();
+        if (currentVolume < 1) {
+          try {
+            videoElement.volume = Math.min(currentVolume + 0.05, 1);
+          } catch (error) {
+            videoElement.volume = 1;
+          }
         }
+        break;
+
+      case "ArrowDown":
+        event.preventDefault();
+        if (currentVolume > 0) {
+          try {
+            videoElement.volume = Math.max(currentVolume - 0.05, 0);
+          } catch (error) {
+            videoElement.volume = 0;
+          }
+        }
+        break;
+
+      case 'm':
+        event.preventDefault();
+        videoElement.muted = !videoElement.muted;
+        break;
+
+      default:
+        break;
+    }
+  });
+
+  player.addEventListener("error", onPlayerErrorEvent);
+  videoControls.addEventListener("error", onUIErrorEvent);
+
+  try {
+    await player.load("https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd");
+    console.log("The video has now been loaded!");
+  } catch (error) {
+    onPlayerError(error);
+  }
+}
+
+function onPlayerErrorEvent(event) {
+  onPlayerError(event.detail);
+}
+
+function onPlayerError(error) {
+  console.error("Error code", error.code, "object", error);
+}
+
 function onUIErrorEvent(event) {
-            onPlayerError(event.detail);
-        }
-        function initFailed() {
-            console.error("Unable to load the UI library!");
-        }
+  onPlayerError(event.detail);
+}
 
-        document.addEventListener("shaka-ui-loaded", init);
-        document.addEventListener("shaka-ui-load-failed", initFailed);
-    </script>
-</body>
+function initFailed() {
+  console.error("Unable to load the UI library!");
+}
 
-</html>
+document.addEventListener("shaka-ui-loaded", init);
+document.addEventListener("shaka-ui-load-failed", initFailed);
+</script>
+    </body>
+</html><style>
+        body{
+    background-color: #000;
+        }
+    </style>
+    </html>
