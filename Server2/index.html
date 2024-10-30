@@ -1,141 +1,210 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cricinsider365</title>
-  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancode Live Matches</title>
+    <link rel="shortcut icon" href="https://fancode.cricsters.io/fancode.webp">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .bg-dark {
+            background-color: #1e1e1e;
+        }
+        .text-light {
+            color: #ffffff;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        .match-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .match-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .live-border {
+            border: 3px solid #ff4500;
+        }
+        .responsive-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    </style>
+<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
+<body class="bg-dark">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold mb-8 text-center text-light">Fancode Live Matches</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card live-border">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/112010_4596_WIC_LEI_fc-web.jpg" alt="West Indies Academy vs Leeward Islands Hurricanes (CG United Super50 Cup, 2024)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">CG United Super50 Cup, 2024</h2>
+                    <p class="text-gray-400 mb-4">West Indies Academy vs Leeward Islands Hurricanes</p>
+                    <p class="text-sm text-gray-500 mb-6">06:30:00 PM 30-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <a href="play.php?id=112010" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 flex items-center">
+                                <i class="fas fa-play mr-2"></i> Watch
+                            </a>
+                            <a href="play.php?id=112010&amp;adsfree" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300 flex items-center">
+                                <i class="fas fa-ad mr-2"></i> Ad-Free
+                            </a>
+                            <a href="play.php?id=112010&amp;worldwide" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition duration-300 flex items-center">
+                                <i class="fas fa-globe mr-2"></i> Worldwide
+                            </a>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card live-border">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/ECS_Malta_-2024_Old_match-card_3_1729570461562.jpg" alt="Victoria Lions vs MMA Titans (ECS Malta, 2024)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">ECS Malta, 2024</h2>
+                    <p class="text-gray-400 mb-4">Victoria Lions vs MMA Titans</p>
+                    <p class="text-sm text-gray-500 mb-6">07:15:00 PM 30-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <a href="play.php?id=111569" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 flex items-center">
+                                <i class="fas fa-play mr-2"></i> Watch
+                            </a>
+                            <a href="play.php?id=111569&amp;adsfree" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300 flex items-center">
+                                <i class="fas fa-ad mr-2"></i> Ad-Free
+                            </a>
+                            <a href="play.php?id=111569&amp;worldwide" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition duration-300 flex items-center">
+                                <i class="fas fa-globe mr-2"></i> Worldwide
+                            </a>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card live-border">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/108785_4476_POR_LIO_FC-web.jpg" alt="Port vs Lion City Sailors (AFC Champions League Two 2024-25)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">AFC Champions League Two 2024-25</h2>
+                    <p class="text-gray-400 mb-4">Port vs Lion City Sailors</p>
+                    <p class="text-sm text-gray-500 mb-6">05:30:00 PM 30-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <a href="play.php?id=108785" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 flex items-center">
+                                <i class="fas fa-play mr-2"></i> Watch
+                            </a>
+                            <a href="play.php?id=108785&amp;adsfree" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300 flex items-center">
+                                <i class="fas fa-ad mr-2"></i> Ad-Free
+                            </a>
+                            <a href="play.php?id=108785&amp;worldwide" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition duration-300 flex items-center">
+                                <i class="fas fa-globe mr-2"></i> Worldwide
+                            </a>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card live-border">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/111640_4588_BDW_NL_fc-app-1_1730204226599.jpg" alt="Bangladesh Women vs Nepal Women (SAFF Women's Championship)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">SAFF Women's Championship</h2>
+                    <p class="text-gray-400 mb-4">Bangladesh Women vs Nepal Women</p>
+                    <p class="text-sm text-gray-500 mb-6">06:15:00 PM 30-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <a href="play.php?id=111648" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300 flex items-center">
+                                <i class="fas fa-play mr-2"></i> Watch
+                            </a>
+                            <a href="play.php?id=111648&amp;adsfree" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300 flex items-center">
+                                <i class="fas fa-ad mr-2"></i> Ad-Free
+                            </a>
+                            <a href="play.php?id=111648&amp;worldwide" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition duration-300 flex items-center">
+                                <i class="fas fa-globe mr-2"></i> Worldwide
+                            </a>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card ">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/SA-vs-BAN-Old-(1).jpg" alt="South Africa vs Bangladesh (South Africa tour of Bangladesh, 2024)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">South Africa tour of Bangladesh, 2024</h2>
+                    <p class="text-gray-400 mb-4">South Africa vs Bangladesh</p>
+                    <p class="text-sm text-gray-500 mb-6">09:30:00 AM 29-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <span class="text-gray-500">Upcoming Match</span>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card ">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/KCC-T20-Elite-Cup-3rd-Edition_old_01.jpg" alt="Al Hajery Team XI vs Kuwait Emerging Stars (KCC T20 Elite Cup, 2024)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">KCC T20 Elite Cup, 2024</h2>
+                    <p class="text-gray-400 mb-4">Al Hajery Team XI vs Kuwait Emerging Stars</p>
+                    <p class="text-sm text-gray-500 mb-6">10:30:00 PM 30-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <span class="text-gray-500">Upcoming Match</span>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card ">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/Brighton-and-Hove-Albion-VSLiverpool_old_1730282670746.jpg" alt="Brighton and Hove Albion vs Liverpool (Carabao Cup 2024-25)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">Carabao Cup 2024-25</h2>
+                    <p class="text-gray-400 mb-4">Brighton and Hove Albion vs Liverpool</p>
+                    <p class="text-sm text-gray-500 mb-6">01:00:00 AM 31-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <span class="text-gray-500">Upcoming Match</span>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card ">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/Preston-North-End-VS-Arsenal_old_1730282678318.jpg" alt="Preston North End vs Arsenal (Carabao Cup 2024-25)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">Carabao Cup 2024-25</h2>
+                    <p class="text-gray-400 mb-4">Preston North End vs Arsenal</p>
+                    <p class="text-sm text-gray-500 mb-6">01:15:00 AM 31-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <span class="text-gray-500">Upcoming Match</span>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card ">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/Manchester-United-VS--Leicester-City_old_1730282670767.jpg" alt="Manchester United vs Leicester City (Carabao Cup 2024-25)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">Carabao Cup 2024-25</h2>
+                    <p class="text-gray-400 mb-4">Manchester United vs Leicester City</p>
+                    <p class="text-sm text-gray-500 mb-6">01:15:00 AM 31-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <span class="text-gray-500">Upcoming Match</span>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card ">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/Newcastle-United-VS-Chelsea_old_1730283027975.jpg" alt="Newcastle United vs Chelsea (Carabao Cup 2024-25)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">Carabao Cup 2024-25</h2>
+                    <p class="text-gray-400 mb-4">Newcastle United vs Chelsea</p>
+                    <p class="text-sm text-gray-500 mb-6">01:15:00 AM 31-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <span class="text-gray-500">Upcoming Match</span>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card ">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/Aston-Villa-VS-Crystal-Palace_old_1730282670751.jpg" alt="Aston Villa vs Crystal Palace (Carabao Cup 2024-25)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">Carabao Cup 2024-25</h2>
+                    <p class="text-gray-400 mb-4">Aston Villa vs Crystal Palace</p>
+                    <p class="text-sm text-gray-500 mb-6">01:15:00 AM 31-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <span class="text-gray-500">Upcoming Match</span>
+                                            </div>
+                </div>
+            </div>
+                        <div class="bg-dark rounded-lg shadow-lg overflow-hidden match-card ">
+                <img src="https://www.fancode.com/skillup-uploads/cms-media/Tottenham-Hotspur-VS-Manchester-City_old_1730282677531.jpg" alt="Tottenham Hotspur vs Manchester City (Carabao Cup 2024-25)" class="w-full h-64 responsive-img">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold mb-2 text-light">Carabao Cup 2024-25</h2>
+                    <p class="text-gray-400 mb-4">Tottenham Hotspur vs Manchester City</p>
+                    <p class="text-sm text-gray-500 mb-6">01:45:00 AM 31-10-2024</p>
+                    <div class="flex justify-between items-center">
+                                                    <span class="text-gray-500">Upcoming Match</span>
+                                            </div>
+                </div>
+            </div>
+                    </div>
+    </div>
 
-    .jwplayer {
-      position: relative;
-      width: 100%;
-      height: 360px; /* Adjust height as needed */
-    }
-
-    #video-selector {
-      margin: 10px;
-    }
-
-    #language-switch {
-      padding: 10px 20px;
-      background-color: #007bff; /* Blue color, you can change this */
-      color: #fff; /* White text color */
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 10px;
-      transition: background-color 0.3s ease;
-    }
-
-    #language-switch:hover {
-      background-color: #0056b3; /* Darker blue on hover */
-    }
-
-    footer {
-      background-color: #0074d9; /* Background color */
-      text-align: center;
-      padding: 10px;
-      margin-top: auto;
-    }
-
-    #telegram-button {
-      display: inline-block;
-      width: auto;
-      text-align: center;
-      background-color: #0088cc; /* Telegram's brand color */
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-
-    #telegram-button:hover {
-      background-color: #007ab8; /* Darker shade of Telegram's brand color */
-    }
-  </style>
-</head>
-<body>
-  <br>
-  <select id="video-select">
-    <option value="feed_1" selected="">Hindi_Feed 1</option>
-    <option value="feed_2">English_Feed 2</option>
-    <option value="feed_3">Tamil_Feed 3</option>
-    <option value="feed_4">Telgu_Feed 4</option>
-    <option value="feed_5">Bhojpuri_Feed 5</option>
-    <option value="feed_6">Kannada_Feed 6</option>
-    <option value="feed_7">Haryanvi_Feed 7</option>
-    <option value="feed_8">Bengali_Feed 8</option>
-  </select>
-
-  <button id="language-switch">Select Your Feed Here</button>
-
-  <div id="video"></div>
-
-  <footer>
-    <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
-      Join Our Telegram Channel
-    </a>
-  </footer>
-
-  <script>
-    if (confirm("Join Our Telegram Channel For More Live Links")) {
-      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-      var videoSources = {
-        "feed_1": "https://prod-sports-hin-gm.jiocinema.com/hls/live/2100322/hd_akamai_iosmob_avc_hin_indvsnz_261024/master.m3u8",
-        "feed_2": "https://prod-sports-eng-gm.jiocinema.com/hls/live/2100297/hd_akamai_iosmob_avc_eng_indvsnz_261024/master.m3u8",
-        "feed_3": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109711/hd_akamai_iosmob_avc_tam_indvsnz_261024/master.m3u8",
-        "feed_4": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109717/hd_akamai_iosmob_avc_tel_indvsnz_261024/master.m3u8",
-        "feed_5": "https://prod-sports-north-gm.jiocinema.com/hls/live/2109761/hd_akamai_iosmob_avc_bhoj_indvsnz_261024/master.m3u8",
-        "feed_6": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109723/hd_akamai_iosmob_avc_kan_indvsnz_261024/master.m3u8",
-        "feed_7": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109699/hd_akamai_iosmob_avc_odia_indvsnz_261024/master.m3u8",
-"feed_8": "https://prod-sports-north-gm.jiocinema.com/hls/live/2109773/hd_akamai_iosmob_avc_ben_indvsnz_261024/master.m3u8",
-      
-      };
-
-      var playerInstance = jwplayer("video");
-
-      document.getElementById("video-select").addEventListener("change", function() {
-        var selectedValue = this.value;
-        var videoSource = videoSources[selectedValue];
-
-        playerInstance.load([{ file: videoSource }]);
-        playerInstance.play();
-      });
-document.getElementById("language-switch").addEventListener("click", function() {
-        var selectedValue = document.getElementById("video-select").value;
-        var currentIndex = Object.keys(videoSources).indexOf(selectedValue);
-        var nextIndex = (currentIndex + 1) % Object.keys(videoSources).length;
-        var nextLanguage = Object.keys(videoSources)[nextIndex];
-        document.getElementById("video-select").value = nextLanguage;
-
-        var videoSource = videoSources[nextLanguage];
-        playerInstance.load([{ file: videoSource }]);
-        playerInstance.play();
-      });
-
-      var selectedValue = document.getElementById("video-select").value;
-      var videoSource = videoSources[selectedValue];
-
-      playerInstance.setup({
-        autostart: true,
-        mute: false,
-        playlist: [{ file: videoSource }]
-      });
-    });
-  </script>
-</body>
-</html>
+</body></html>
