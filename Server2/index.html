@@ -16,6 +16,64 @@
       max-height: 100%;
     }
 </style>
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .jwplayer {
+      position: relative;
+      width: 100%;
+      height: 360px; /* Adjust height as needed */
+    }
+
+    #video-selector {
+      margin: 10px;
+    }
+
+    #language-switch {
+      padding: 10px 20px;
+      background-color: #007bff; /* Blue color, you can change this */
+      color: #fff; /* White text color */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    #language-switch:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    footer {
+      background-color: #0074d9; /* Background color */
+      text-align: center;
+      padding: 10px;
+      margin-top: auto;
+    }
+
+    #telegram-button {
+      display: inline-block;
+      width: auto;
+      text-align: center;
+      background-color: #0088cc; /* Telegram's brand color */
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    #telegram-button:hover {
+      background-color: #007ab8; /* Darker shade of Telegram's brand color */
+    }
+</style>
 <script>
     if (confirm("Join Our Telegram Channel ")) {
         window.location.href = "https://t.me/+kfJZ4exLottkOTY1";
