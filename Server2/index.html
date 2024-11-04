@@ -40,7 +40,8 @@ async function init() {
   player.configure({
     'drm': {
       'clearKeys': {
-        '69646b755f3130303030303030303030': "e4a2359b05563399f1d9adfce641724a"
+        '1b25a5074c425f38900bfcf18d34dc13': "
+"511ca5156ad823055856a5214ece2a99"
       }
     }
   });
@@ -104,7 +105,7 @@ async function init() {
   videoControls.addEventListener("error", onUIErrorEvent);
 
   try {
-    await player.load("https://cdn08jtedge.indihometv.com/dassdvr/133/beib1/manifest.mpd");
+    await player.load("https://bpcdn.dialog.lk/bpk-tv/Ch120/out/index.mpd");
     console.log("The video has now been loaded!");
   } catch (error) {
     onPlayerError(error);
