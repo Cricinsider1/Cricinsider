@@ -10,7 +10,7 @@
 <body>
   <div id="content"></div>
   <script>
-    const css = `
+    const css = 
       body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -72,10 +72,10 @@
           flex: 1 1 calc(20% - 10px);
         }
       }
-    `;
+    ;
     document.getElementById('dynamic-style').textContent = css;
 
-    document.getElementById('content').innerHTML = `
+    document.getElementById('content').innerHTML = 
       <header>
         Srilanka Vs Newzealand 
       </header>
@@ -96,12 +96,14 @@
       <div class="subheader">
         Multiple Quality Channels
       </div>
+      <div class="channel-list" id="otherChannelList">
+        <div class="channel-item" data-url="http://insiderlive.pages.dev/WillowXtra">TNT 2</div>
+        <div class="channel-item" data-url="http://insiderlive.pages.dev/Tencricket">Ten Sports</div>
         <div class="channel-item" data-url="https://insiderlive.pages.dev/Willow2">Willow HD2</div>
         <div class="channel-item" data-url="https://insiderlive.pages.dev/WillowXtra">Willow Xtra</div>
-     <div class="channel-item" data-url="https://insiderlive.pages.dev/WillowXtra">Willow Xtra</div>
-     <div class="channel-item" data-url="https://insiderlive.pages.dev/WillowXtra">Willow Xtra</div>
       </div>
-    `;
+    ;
+
     const m3u8Links = {
       "StarH": "https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1730920752~acl=%2f*~id=1556784483112233~data=hdntl~hmac=2a6e9c10ab1ebc06a7e1749d8dfa89ee7b8a581c791bda3831b90c6c5168772b/master_3500.m3u8?aka_me_session_id=AAAAAAAAAAAwwStnAAAAAN49COf2BPTjjuvSEalcUttziIRz6g%2fWJt3KL7Yy8T%2f50l6yMXFaPYLMm%2foEiYtN54FL%2fEMf9mQL&aka_media_format_type=hls",
       "StarE": "https://cxh.pages.dev/Star",
@@ -114,9 +116,9 @@
 
       if (selectedChannel) {
         const iframeContainer = document.getElementById('iframe-container');
-        
+
         iframeContainer.innerHTML = '';
-        
+
         const iframe = document.createElement('iframe');
         iframe.src = selectedChannel;
         iframe.allowFullscreen = true;
@@ -125,8 +127,7 @@
         alert("Channel not available");
       }
     }
-
-    document.getElementById('channelList').addEventListener('click', function(e) {
+document.getElementById('channelList').addEventListener('click', function(e) {
       if (e.target.classList.contains('channel-item')) {
         const channelId = e.target.getAttribute('data-channel');
         loadIframe(channelId);
