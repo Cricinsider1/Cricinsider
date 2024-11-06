@@ -1,155 +1,210 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cric Hype</title>
-  <link rel="stylesheet" href="https://cxh.pages.dev/style.css">
-  <style id="dynamic-style"></style>
-</head>
-<body>
-  <div id="content"></div>
-  <script>
-    const css = 
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-      header {
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        padding: 15px 0;
-        font-size: 24px;
-        font-weight: bold;
-      }
-      #iframe-container {
-        width: 100%;
-        max-width: 800px;
-        aspect-ratio: 16 / 9;
-        margin: 20px auto;
-        border: 2px solid #ccc;
-        border-radius: 10px;
-        overflow: hidden;
-      }
-      iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        allowfullscreen;
-      }
-      .channel-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 20px 0;
-      }
-      .channel-item {
-        padding: 15px;
-        background-color: #333;
-        color: #fff;
-        margin: 5px;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
-        flex: 1 1 calc(50% - 10px);
-        box-sizing: border-box;
-      }
-      .channel-item:hover {
-        background-color: #555;
-      }
-      .subheader {
-        text-align: center;
-        font-size: 20px;
-        font-weight: bold;
-        margin: 20px 0;
-      }
-      @media (min-width: 768px) {
-        .channel-item {
-          flex: 1 1 calc(20% - 10px);
-        }
-      }
-    ;
-    document.getElementById('dynamic-style').textContent = css;
-
-    document.getElementById('content').innerHTML = 
-      <header>
-        Women's T20 World Cup Live
-      </header>
-
-      <div id="iframe-container"></div>
-
-      <div class="subheader">
-        Other Channels
-      </div>
-
-      <div class="channel-list" id="channelList">
-        <div class="channel-item" data-channel="StarH">Star Sports Hindi</div>
-        <div class="channel-item" data-channel="StarE">Star Sports English</div>
-        <div class="channel-item" data-channel="SkyC">Sky Sports Cricket</div>
-        <div class="channel-item" data-channel="SkyM">Sky Sports Main</div>
-      </div>
-
-      <div class="subheader">
-        Multiple Quality Channels
-      </div>
-      <div class="channel-list" id="otherChannelList">
-        <div class="channel-item" data-url="https://crichype.xyz/willow">Willow HD</div>
-        <div class="channel-item" data-url="https://crichype.xyz/ptv">PTV Sports</div>
-        <div class="channel-item" data-url="https://crichype.xyz/willow2">Willow HD 2</div>
-        <div class="channel-item" data-url="https://crichype.xyz/ten">TEN Sports</div>
-      </div>
-    ;
-
-    const m3u8Links = {
-      "StarH": "https://brown-karie-37.tiiny.io/sportstv.php?id=starhindi",
-      "StarE": "https://cxh.pages.dev/Star",
-      "SkyC": "https://brown-karie-37.tiiny.io/sportstv.php?id=skyscric",
-      "SkyM": "https://brown-karie-37.tiiny.io/sportstv.php?id=skysme"
-    };
-
-    function loadIframe(channelId) {
-      const selectedChannel = m3u8Links[channelId];
-
-      if (selectedChannel) {
-        const iframeContainer = document.getElementById('iframe-container');
-        
-        iframeContainer.innerHTML = '';
-        
-        const iframe = document.createElement('iframe');
-        iframe.src = selectedChannel;
-        iframe.allowFullscreen = true;
-        iframeContainer.appendChild(iframe);
-      } else {
-        alert("Channel not available");
-      }
-    }
-
-    document.getElementById('channelList').addEventListener('click', function(e) {
-      if (e.target.classList.contains('channel-item')) {
-        const channelId = e.target.getAttribute('data-channel');
-        loadIframe(channelId);
-      }
-    });
-document.getElementById('otherChannelList').addEventListener('click', function(e) {
-      if (e.target.classList.contains('channel-item')) {
-        const url = e.target.getAttribute('data-url');
-        if (url) {
-          const iframeContainer = document.getElementById('iframe-container');
-          iframeContainer.innerHTML = '';
-
-          const iframe = document.createElement('iframe');
-          iframe.src = url;
-          iframe.allowFullscreen = true;
-          iframeContainer.appendChild(iframe);
-        }
-      }
-    });
-
-    loadIframe('StarH');
-  </script>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Live Events</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  margin: 0;
+                  padding: 0;
+                  background-color: #f4f4f4;
+              }
+              header {
+                  background: #333;
+                  color: #fff;
+                  padding: 10px 20px;
+                  text-align: center;
+              }
+              main {
+                  padding: 20px;
+                  max-width: 800px;
+                  margin: auto;
+              }
+              h2, h3 {
+                  color: #333;
+              }
+              ul {
+                  list-style: none;
+                  padding: 0;
+              }
+              li {
+                  background: #fff;
+                  margin: 10px 0;
+                  padding: 15px;
+                  border-radius: 5px;
+                  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+              }
+              img {
+                  max-width: 100%;
+                  height: auto;
+                  border-radius: 5px;
+              }
+              .button {
+                  background: #007bff;
+                  color: #fff;
+                  padding: 10px 15px;
+                  text-decoration: none;
+                  border-radius: 5px;
+                  margin-top: 10px;
+                  display: inline-block;
+                  transition: background 0.3s;
+              }
+              .button:hover {
+                  background: #0056b3;
+              }
+              footer {
+                  text-align: center;
+                  margin-top: 20px;
+                  padding: 10px 0;
+                  background: #333;
+                  color: #fff;
+              }
+          </style>
+      <style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
+      <body>
+          <header>
+              <h1>Live Events</h1>
+          </header>
+          <main>
+              <ul>
+                  
+                          <li>
+                              <h3>England vs West Indies</h3>
+                              <img src="https://www.fancode.com/skillup-uploads/cms-media/England-Tour-of-West-Indies-old-match-card_1729755047624.png" alt="England vs West Indies">
+                              <p><strong>Teams:</strong> England vs West Indies</p>
+                              <p><strong>Status:</strong> LIVE</p>
+                              <p><strong>Event Name:</strong> England tour of West Indies, 2024</p>
+                              <p><strong>Start Time:</strong> 11:30:00 PM 06-11-2024</p>
+                              <a class="button" href="https://aged-feather-c57d.extrapace.workers.dev/?dtv=https://dai.google.com/linear/hls/event/alNNw9OpRh67kd0z-5DD7Q/master.m3u8" target="_blank">Watch Live</a>
+                              <a class="button" href="https://aged-feather-c57d.extrapace.workers.dev/?dtv=https://dai.fancode.com/primary/109442_english_hls_5734ta-di/index.m3u8" target="_blank">Watch Ad-free</a>
+                          </li>
+                      
+                          <li>
+                              <h3>Court 2, Brazil</h3>
+                              <img src="https://www.fancode.com/skillup-uploads/cms-media/Volleyball-Beach-Pro-old-match-card-2-(2).png" alt="Court 2, Brazil">
+                              <p><strong>Teams:</strong> Court 2, Brazil vs Rio de Janerio</p>
+                              <p><strong>Status:</strong> LIVE</p>
+                              <p><strong>Event Name:</strong> Volleyball Beach Pro Tour</p>
+                              <p><strong>Start Time:</strong> 05:30:00 PM 06-11-2024</p>
+                              <a class="button" href="https://aged-feather-c57d.extrapace.workers.dev/?dtv=https://dai.google.com/linear/hls/event/x3FBfb6HQLig_lXgb6zofg/master.m3u8" target="_blank">Watch Live</a>
+                              <a class="button" href="https://aged-feather-c57d.extrapace.workers.dev/?dtv=https://dai.fancode.com/primary/112799_english_hls_8379ta-di/index.m3u8" target="_blank">Watch Ad-free</a>
+                          </li>
+                      
+                          <li>
+                              <h3>Solapur Stars XI vs SDCA</h3>
+                              <img src="https://www.fancode.com/skillup-uploads/cms-media/112315_4608_SSX_SCA_fc-app_fc-web_1730730043357.jpg" alt="Solapur Stars XI vs SDCA">
+                              <p><strong>Teams:</strong> Solapur Stars XI vs SDCA</p>
+                              <p><strong>Status:</strong> UPCOMING</p>
+                              <p><strong>Event Name:</strong> Ecole T20 Cup, 2024</p>
+                              <p><strong>Start Time:</strong> 10:00:00 AM 07-11-2024</p>
+                              
+                              
+                          </li>
+                      
+                          <li>
+                              <h3>Italy vs Tanzania</h3>
+                              <img src="https://images.fancode.com/aig/match/v1/112298_CASACARDS_APP.png" alt="Italy vs Tanzania">
+                              <p><strong>Teams:</strong> Italy vs Tanzania</p>
+                              <p><strong>Status:</strong> UPCOMING</p>
+                              <p><strong>Event Name:</strong> ICC CWC Challenge League B, 2024-26</p>
+                              <p><strong>Start Time:</strong> 12:30:00 PM 07-11-2024</p>
+                              
+                              
+                          </li>
+                      
+                          <li>
+                              <h3>Hong Kong, China vs Bahrain</h3>
+                              <img src="https://images.fancode.com/aig/match/v1/112297_CASACARDS_APP.png" alt="Hong Kong, China vs Bahrain">
+                              <p><strong>Teams:</strong> Hong Kong, China vs Bahrain</p>
+                              <p><strong>Status:</strong> UPCOMING</p>
+                              <p><strong>Event Name:</strong> ICC CWC Challenge League B, 2024-26</p>
+                              <p><strong>Start Time:</strong> 12:30:00 PM 07-11-2024</p>
+                              
+                              
+                          </li>
+                      
+                          <li>
+                              <h3>American University of Malta vs Gzira United</h3>
+                              <img src="https://www.fancode.com/skillup-uploads/cms-media/ECS_Malta_-2024_Old_match-card_4_1729570461042.jpg" alt="American University of Malta vs Gzira United">
+                              <p><strong>Teams:</strong> American University of Malta vs Gzira United</p>
+                              <p><strong>Status:</strong> UPCOMING</p>
+                              <p><strong>Event Name:</strong> ECS Malta, 2024</p>
+                              <p><strong>Start Time:</strong> 01:00:00 PM 07-11-2024</p>
+                              
+                              
+                          </li>
+                      
+                          <li>
+                              <h3>Rajasthan Royals Academy vs Ashtapailu Sports</h3>
+                              <img src="https://www.fancode.com/skillup-uploads/cms-media/112316_4608_RRC_APS_fc-app_fc-web_1730730043379.jpg" alt="Rajasthan Royals Academy vs Ashtapailu Sports">
+                              <p><strong>Teams:</strong> Rajasthan Royals Academy vs Ashtapailu Sports</p>
+                              <p><strong>Status:</strong> UPCOMING</p>
+                              <p><strong>Event Name:</strong> Ecole T20 Cup, 2024</p>
+                              <p><strong>Start Time:</strong> 02:00:00 PM 07-11-2024</p>
+                              
+                              
+                          </li>
+                      
+                          <li>
+                              <h3>American University of Malta vs Victoria Lions</h3>
+                              <img src="https://www.fancode.com/skillup-uploads/cms-media/ECS_Malta_-2024_Old_match-card_1_1729570461679.jpg" alt="American University of Malta vs Victoria Lions">
+                              <p><strong>Teams:</strong> American University of Malta vs Victoria Lions</p>
+                              <p><strong>Status:</strong> UPCOMING</p>
+                              <p><strong>Event Name:</strong> ECS Malta, 2024</p>
+                              <p><strong>Start Time:</strong> 03:00:00 PM 07-11-2024</p>
+                              
+                              
+                          </li>
+                      
+                          <li>
+                              <h3>Gzira United vs Red Stars</h3>
+                              <img src="https://www.fancode.com/skillup-uploads/cms-media/ECS_Malta_-2024_Old_match-card_2_1729570461132.jpg" alt="Gzira United vs Red Stars">
+                              <p><strong>Teams:</strong> Gzira United vs Red Stars</p>
+                              <p><strong>Status:</strong> UPCOMING</p>
+                              <p><strong>Event Name:</strong> ECS Malta, 2024</p>
+                              <p><strong>Start Time:</strong> 05:00:00 PM 07-11-2024</p>
+                              
+                              
+                          </li>
+                      
+                          <li>
+                              <h3>Abu Dhabi vs Fujairah</h3>
+                              <img src="https://www.fancode.com/skillup-uploads/cms-media/Cricket_Fallback_Old_match-card.jpg" alt="Abu Dhabi vs Fujairah">
+                              <p><strong>Teams:</strong> Abu Dhabi vs Fujairah</p>
+                              <p><strong>Status:</strong> UPCOMING</p>
+                              <p><strong>Event Name:</strong> Emirates D20, 2024</p>
+                              <p><strong>Start Time:</strong> 07:00:00 PM 07-11-2024</p>
+                              
+                              
+                          </li>
+                      
+                          <li>
+                              <h3>Victoria Lions vs Red Stars</h3>
+                              <img src="https://www.fancode.com/skillup-uploads/cms-media/ECS_Malta_-2024_Old_match-card_3_1729570461562.jpg" alt="Victoria Lions vs Red Stars">
+                              <p><strong>Teams:</strong> Victoria Lions vs Red Stars</p>
+                              <p><strong>Status:</strong> UPCOMING</p>
+                              <p><strong>Event Name:</strong> ECS Malta, 2024</p>
+                              <p><strong>Start Time:</strong> 07:15:00 PM 07-11-2024</p>
+                              
+                              
+                          </li>
+                      
+                          <li>
+                              <h3>Fireox Unit CC vs Phantom CC</h3>
+                              <img src="https://www.fancode.com/skillup-uploads/cms-media/111805_4593_PHC_FCC_fc-web.jpg" alt="Fireox Unit CC vs Phantom CC">
+                              <p><strong>Teams:</strong> Fireox Unit CC vs Phantom CC</p>
+                              <p><strong>Status:</strong> UPCOMING</p>
+                              <p><strong>Event Name:</strong> Qatar Pro League, 2024</p>
+                              <p><strong>Start Time:</strong> 09:00:00 PM 07-11-2024</p>
+                              
+                              
+                          </li>
+                      
+              </ul>
+          </main>
+          <footer>
+              <p>© 2024 Live Events</p>
+          </footer>
+      
+      
+  </body></html>
