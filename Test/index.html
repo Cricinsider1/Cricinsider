@@ -40,7 +40,8 @@ async function init() {
   player.configure({
     'drm': {
       'clearKeys': {
-        'cd85881fc081568295892fad91043ca1':    "73f8aabbb4f175f5724a8e52c1ec0530"
+        '4301796d6d67374043c4a43c18dff7ea': "
+"96a3dc8766317aa169149a604928ebb6"
       }
     }
   });
@@ -104,7 +105,7 @@ async function init() {
   videoControls.addEventListener("error", onUIErrorEvent);
 
   try {
-    await player.load("https://bpcdncs3.dialog.lk/bpk-token/2ab@2nzwhlurf14mb41el3h4csnpwaplwqe1lgv2ofca/dash/Ch069-video=1381600-1038621869405.dash.mpd");
+    await player.load("https://live2.shoq.com.pk/live/eds/Criclife2/DASH/Criclife2.mpd");
     console.log("The video has now been loaded!");
   } catch (error) {
     onPlayerError(error);
