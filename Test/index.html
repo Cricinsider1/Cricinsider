@@ -67,7 +67,7 @@
             player.configure({
                 drm: {
                     clearKeys: {
-                        '00053ac1e9b1231eed3eb4e3540b3ae1': "0f03d8541826af3d9acbac975d751165"
+                        '4301796d6d67374043c4a43c18dff7ea': "96a3dc8766317aa169149a604928ebb6"
                     }
                 }
             });
@@ -92,7 +92,7 @@
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://crichype.live/script.php/linear007-gb-dash1-prd-ak.cdn.skycdp.com/016a/Content/DASH_003_720_120/Live/channel(skysportscricket)/manifest_720-120.mpd");
+                await player.load("https://live2.shoq.com.pk/live/eds/Criclife2/DASH/Criclife2.mpd");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error);
