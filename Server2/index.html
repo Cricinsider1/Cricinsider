@@ -1,121 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>TG_@Cricinsider365</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png" type="image/png" sizes="250x250">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.1.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.1.1/controls.min.css" crossorigin="anonymous" />
-    <style>
-        /* Overflow menu style */
-        .shaka-overflow-menu {
-            background-color: rgb(41, 41, 163);
-            color: rgb(153, 153, 153);
-        }
-
-        .shaka-overflow-menu button:hover {
-            background-color: rgb(45, 45, 45);
-        }
-
-        .shaka-overflow-button-label {
-            color: rgb(245, 245, 245);
-        }
-
-        .shaka-current-selection-span {
-            color: rgb(202, 202, 202);
-        }
-
-        .material-icons-round {
-            color: rgb(230, 230, 230);
-        }
-
-        /* Overflow sub menu style */
-        .shaka-settings-menu {
-            background-color: rgb(35, 35, 35);
-            color: rgb(255, 255, 255);
-        }
-
-        .shaka-settings-menu button {
-            color: rgb(255, 255, 255);
-        }
-
-        .shaka-settings-menu button:hover {
-            background-color: rgb(45, 45, 45);
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TG_@Cricinsider365</title>
 </head>
-
-<body bgcolor="black" style="margin:0">
-    <center>
-        <div data-shaka-player-container style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;">
-            <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width:100%; height:100%;"></video>
-        </div>
-    </center>
-
+<body>
     <script>
+        document.write(
+            <h1 class="title">Newzealand Tour Of Srilanka 2024</h1>
+            <div class="iframe-container">
+                <iframe id="streamIframe" src="https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731178301~acl=%2f*~id=1556784483112233~data=hdntl~hmac=0d6f9d34a7eb8c0465d3351f643acd13e624329726c093a915f4a7985c362957/master_3500.m3u8" allowfullscreen></iframe>
+            </div>
+            <div class="options">
+                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731314455~acl=%2f*~id=1556784483112233~data=hdntl~hmac=76c27aa48e3fc0b79c58f5fb026e5f70f3b75ab412fe492728c892cbb6f47687/master_3500.m3u8?aka_me_session_id=AAAAAAAAAAAXwzFnAAAAAFjPcY%2fYmjuphctw05qd2v3G0Xoi5%2fGfEtlhlYr%2fA11Rhgtke8NtluF6fLp6PYQkJg8pUskVPimG&aka_media_format_type=hls')">1080p</button>
+                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731314455~acl=%2f*~id=1556784483112233~data=hdntl~hmac=76c27aa48e3fc0b79c58f5fb026e5f70f3b75ab412fe492728c892cbb6f47687/master_2000.m3u8?aka_me_session_id=AAAAAAAAAAAXwzFnAAAAAFjPcY%2fYmjuphctw05qd2v3G0Xoi5%2fGfEtlhlYr%2fA11Rhgtke8NtluF6fLp6PYQkJg8pUskVPimG&aka_media_format_type=hls')">720p</button>
+                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731314455~acl=%2f*~id=1556784483112233~data=hdntl~hmac=76c27aa48e3fc0b79c58f5fb026e5f70f3b75ab412fe492728c892cbb6f47687/master_664.m3u8?aka_me_session_id=AAAAAAAAAAAXwzFnAAAAAFjPcY%2fYmjuphctw05qd2v3G0Xoi5%2fGfEtlhlYr%2fA11Rhgtke8NtluF6fLp6PYQkJg8pUskVPimG&aka_media_format_type=hls')">360p</button>
+                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731314455~acl=%2f*~id=1556784483112233~data=hdntl~hmac=76c27aa48e3fc0b79c58f5fb026e5f70f3b75ab412fe492728c892cbb6f47687/master_412.m3u8?aka_me_session_id=AAAAAAAAAAAXwzFnAAAAAFjPcY%2fYmjuphctw05qd2v3G0Xoi5%2fGfEtlhlYr%2fA11Rhgtke8NtluF6fLp6PYQkJg8pUskVPimG&aka_media_format_type=hls')">240p</button>
+            </div>
+            <div class="join-telegram">
+                <button onclick="window.location.href='https://t.me/+Pj_QX9oygJNiYmRl'">Join Telegram Channel</button>
+            </div>
+        );
+
+        function changeStream(url) {
+            document.getElementById('streamIframe').src = url;
+        }
+
         if (confirm("Join For More Links!!")) {
             window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
         }
 
-        async function init() {
-            const video = document.getElementById("video");
-            const ui = video.ui;
-            const controls = ui.getControls();
-            const player = controls.getPlayer();
-
-            player.configure({
-                drm: {
-                    clearKeys: {
-                        '1b25a5074c425f38900bfcf18d34dc13': "511ca5156ad823055856a5214ece2a99"
-                    }
-                }
-            });
-
-            ui.configure({
-                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-                volumeBarColors: {
-                    base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                    level: "rgb(0, 255, 0)"     // Green color for the volume level
-                },
-                seekBarColors: {
-                    base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                    buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                    played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
-                }
-            });
-
-            window.player = player;
-            window.ui = ui;
-
-            player.addEventListener("error", onPlayerErrorEvent);
-            controls.addEventListener("error", onUIErrorEvent);
-
-            try {
-                await player.load("https://bpcdn.dialog.lk/bpk-tv/Ch120/out/index.mpd");
-                console.log("The video has now been loaded!");
-            } catch (error) {
-                onPlayerError(error);
+        const style = document.createElement('style');
+        style.textContent = 
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background-color: #f3f3f3;
+                margin: 0;
+                padding: 0;
             }
-        }
-
-        function onPlayerErrorEvent(event) {
-            onPlayerError(event.detail);
-        }
-
-        function onPlayerError(error) {
-            console.error("Error code", error.code, "object", error);
-        }
-function onUIErrorEvent(event) {
-            onPlayerError(event.detail);
-        }
-        function initFailed() {
-            console.error("Unable to load the UI library!");
-        }
-
-        document.addEventListener("shaka-ui-loaded", init);
-        document.addEventListener("shaka-ui-load-failed", initFailed);
+            .title {
+                background-color: #000;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 5px;
+                margin: 20px 0;
+                font-size: 1.5em;
+                text-align: center;
+            }
+            .iframe-container {
+                width: 100%;
+                max-width: 500px;
+                aspect-ratio: 16/9;
+                background-color: #000;
+            }
+            iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            .options {
+                margin-top: 15px;
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+                max-width: 500px;
+            }
+            button {
+                padding: 10px 15px;
+                font-size: 1em;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                background-color: #000;
+                color: #fff;
+                transition: background-color 0.3s, color 0.3s;
+            }
+            button:hover {
+                background-color: #fff;
+                color: #000;
+                border: 1px solid #000;
+            }
+            .join-telegram {
+                margin-top: 15px;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                max-width: 500px;
+            }
+        ;
+        document.head.appendChild(style);
     </script>
 </body>
-
 </html>
