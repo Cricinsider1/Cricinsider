@@ -1,66 +1,43 @@
 <!DOCTYPE html><html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TG_@Cricinsider365</title>
-  <link rel="stylesheet" href="https://cxh.pages.dev/style.css">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
 
-    #player {
-      width: 100%;
-      max-width: 100%;
-      height: 56.25vw;
-      max-height: 70vh;
-      position: relative;
-      top: 0;
-      left: 0;
-      border: none;
-    }
+        .iframe-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Hides the top portion of the iframe */
+        }
 
-    @media (max-width: 600px) {
-      #player {
-        height: 60vh;
-      }
-    }
-
-    #telegramBtn {
-      display: block;
-      width: 90%;
-      margin: 20px auto;
-      padding: 15px;
-      text-align: center;
-      background-color: #007bff;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    #telegramBtn:hover {
-      background-color: #0056b3;
-    }
-  </style>
+        #contentFrame {
+            width: 100%;
+            height: 43%;
+            border: none;
+            margin-top: -100px; /* Adjusts how much of the iframe to cut from the top */
+        }
+    </style>
 <style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
+
 <body>
-  <iframe id="player" src="https://crichype.fun/kxp/?token=eyJ1cmwiOiJodHRwczovL3M3LjI0Y3djLmNvbS9jaDIifQ%3D%3D" title="Live match video player" allowfullscreen=""></iframe>
+    <div class="iframe-wrapper">
+        <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="true" scrolling="no" src="https://s7.24cwc.com/ch2/">
+        </iframe>
+    </div>
+    <script>
+        if (confirm("Join Our Telegram Channel @Cricinsider365")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
+    </script>
 
-  <a id="telegramBtn" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">Join Our Telegram Channel</a>
-  <script>var joinTelegram = confirm("Join For More Links!!");
-    if (joinTelegram) {
-        window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-    }
 
-    function welcome() {
-        window.open("https://t.me/+Pj_QX9oygJNiYmRl");
-    }</script>
-<!-- Cloudflare Pages Analytics --><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;89ec3c1c820d4609b4a3643417d2cb06&quot;}"></script><!-- Cloudflare Pages Analytics -->
 
 </body></html>
