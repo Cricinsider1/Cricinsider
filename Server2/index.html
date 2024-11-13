@@ -1,98 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TG_@Cricinsider365</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TG_@Cricinsider365</title>
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
 </head>
 <body>
-    <script>
-        document.write(
-            <h1 class="title">Newzealand Tour Of Srilanka 2024</h1>
-            <div class="iframe-container">
-                <iframe id="streamIframe" src="https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731178301~acl=%2f*~id=1556784483112233~data=hdntl~hmac=0d6f9d34a7eb8c0465d3351f643acd13e624329726c093a915f4a7985c362957/master_3500.m3u8" allowfullscreen></iframe>
-            </div>
-            <div class="options">
-                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731314455~acl=%2f*~id=1556784483112233~data=hdntl~hmac=76c27aa48e3fc0b79c58f5fb026e5f70f3b75ab412fe492728c892cbb6f47687/master_3500.m3u8?aka_me_session_id=AAAAAAAAAAAXwzFnAAAAAFjPcY%2fYmjuphctw05qd2v3G0Xoi5%2fGfEtlhlYr%2fA11Rhgtke8NtluF6fLp6PYQkJg8pUskVPimG&aka_media_format_type=hls')">1080p</button>
-                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731314455~acl=%2f*~id=1556784483112233~data=hdntl~hmac=76c27aa48e3fc0b79c58f5fb026e5f70f3b75ab412fe492728c892cbb6f47687/master_2000.m3u8?aka_me_session_id=AAAAAAAAAAAXwzFnAAAAAFjPcY%2fYmjuphctw05qd2v3G0Xoi5%2fGfEtlhlYr%2fA11Rhgtke8NtluF6fLp6PYQkJg8pUskVPimG&aka_media_format_type=hls')">720p</button>
-                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731314455~acl=%2f*~id=1556784483112233~data=hdntl~hmac=76c27aa48e3fc0b79c58f5fb026e5f70f3b75ab412fe492728c892cbb6f47687/master_664.m3u8?aka_me_session_id=AAAAAAAAAAAXwzFnAAAAAFjPcY%2fYmjuphctw05qd2v3G0Xoi5%2fGfEtlhlYr%2fA11Rhgtke8NtluF6fLp6PYQkJg8pUskVPimG&aka_media_format_type=hls')">360p</button>
-                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731314455~acl=%2f*~id=1556784483112233~data=hdntl~hmac=76c27aa48e3fc0b79c58f5fb026e5f70f3b75ab412fe492728c892cbb6f47687/master_412.m3u8?aka_me_session_id=AAAAAAAAAAAXwzFnAAAAAFjPcY%2fYmjuphctw05qd2v3G0Xoi5%2fGfEtlhlYr%2fA11Rhgtke8NtluF6fLp6PYQkJg8pUskVPimG&aka_media_format_type=hls')">240p</button>
-            </div>
-            <div class="join-telegram">
-                <button onclick="window.location.href='https://t.me/+Pj_QX9oygJNiYmRl'">Join Telegram Channel</button>
-            </div>
-        );
+  <div id="video"></div>
 
-        function changeStream(url) {
-            document.getElementById('streamIframe').src = url;
-        }
+  <script type="text/javascript">
+    jwplayer("video").setup({
+      width: "100%",
+      height: "100%",
+      autostart: true,
+      mute: false,
+      file: "https://prod-sportsp-south.jiocinema.com/hls/live/2109516/uhd__akamai__ctv__avc__ssaispot__indvssa__odia__m1__131124__a6e29896-58b2-4487-9635-a7fa5a99e517/master.m3u8"
+    });
 
-        if (confirm("Join For More Links!!")) {
-            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-        }
+    if (confirm("Join Our Telegram Channel For More Links")) { 
+      window.location.href = "telegram"; 
+    }
 
-        const style = document.createElement('style');
-        style.textContent = 
-            body {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-family: Arial, sans-serif;
-                background-color: #f3f3f3;
-                margin: 0;
-                padding: 0;
-            }
-            .title {
-                background-color: #000;
-                color: #fff;
-                padding: 10px 20px;
-                border-radius: 5px;
-                margin: 20px 0;
-                font-size: 1.5em;
-                text-align: center;
-            }
-            .iframe-container {
-                width: 100%;
-                max-width: 500px;
-                aspect-ratio: 16/9;
-                background-color: #000;
-            }
-            iframe {
-                width: 100%;
-                height: 100%;
-                border: none;
-            }
-            .options {
-                margin-top: 15px;
-                display: flex;
-                justify-content: space-around;
-                width: 100%;
-                max-width: 500px;
-            }
-            button {
-                padding: 10px 15px;
-                font-size: 1em;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                background-color: #000;
-                color: #fff;
-                transition: background-color 0.3s, color 0.3s;
-            }
-            button:hover {
-                background-color: #fff;
-                color: #000;
-                border: 1px solid #000;
-            }
-            .join-telegram {
-                margin-top: 15px;
-                display: flex;
-                justify-content: center;
-                width: 100%;
-                max-width: 500px;
-            }
-        ;
-        document.head.appendChild(style);
-    </script>
+    const telegramDiv = document.createElement("div");
+    telegramDiv.style.backgroundColor = "#0074d9";
+    telegramDiv.style.textAlign = "center";
+    telegramDiv.style.padding = "10px";
+
+    const telegramLink = document.createElement("a");
+    telegramLink.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+    telegramLink.target = "https://t.me/+Pj_QX9oygJNiYmRl";
+
+    const telegramButton = document.createElement("button");
+    telegramButton.id = "joinTelegramButton";
+    telegramButton.style.backgroundColor = "#fff";
+    telegramButton.style.color = "#0074d9";
+    telegramButton.style.border = "2px solid #0074d9";
+    telegramButton.style.padding = "5px 10px";
+    telegramButton.textContent = "Join Telegram";
+
+    telegramLink.appendChild(telegramButton);
+    telegramDiv.appendChild(telegramLink);
+    document.body.appendChild(telegramDiv);
+  </script>
 </body>
 </html>
