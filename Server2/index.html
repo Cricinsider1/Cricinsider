@@ -31,7 +31,7 @@ body{
             player.configure({
                 drm: {
                     clearKeys: {
-                        '9ecad6c4413f8bdc54712ce6c072a2cf': "442df559c369bdada8ba3abe97811575"
+                        'fe7718fbb3fb4ba78c07cc0f578744e6': "624e24b1843b459fab0a949609416f0d"
                     }
                 }
             });
@@ -56,7 +56,7 @@ body{
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://live4.shoq.com.pk/live/eds/PTV_Sports/DASH/PTV_Sports.mpd");
+                await player.load("https://hs.babel-in.xyz/babel/25/global/babel.mpd");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error); 
