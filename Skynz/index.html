@@ -1,105 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>TG_@Cricinsider365</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TG_@Cricinsider365</title>
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
 </head>
 <body>
-    <script>
-        // Injecting CSS styles into the head
-        const style = document.createElement('style');
-        style.innerHTML = 
-            body {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-family: Arial, sans-serif;
-                background-color: #f3f3f3;
-                margin: 0;
-                padding: 0;
-            }
-            .title {
-                background-color: #000;
-                color: #fff;
-                padding: 10px 20px;
-                border-radius: 5px;
-                margin: 20px 0;
-                font-size: 1.5em;
-                text-align: center;
-            }
-            .iframe-container {
-                width: 100%;
-                max-width: 500px;
-                aspect-ratio: 16/9;
-                background-color: #000;
-            }
-            iframe {
-                width: 100%;
-                height: 100%;
-                border: none;
-            }
-            .options {
-                margin-top: 15px;
-                display: flex;
-                justify-content: space-around;
-                width: 100%;
-                max-width: 500px;
-            }
-            button {
-                padding: 10px 15px;
-                font-size: 1em;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                background-color: #000;
-                color: #fff;
-                transition: background-color 0.3s, color 0.3s;
-            }
-            button:hover {
-                background-color: #fff;
-                color: #000;
-                border: 1px solid #000;
-            }
-            .join-telegram {
-                margin-top: 15px;
-                display: flex;
-                justify-content: center;
-                width: 100%;
-                max-width: 500px;
-            }
-        ;
-        document.head.appendChild(style);
+  <div id="video"></div>
 
-        // Injecting HTML content
-        document.write(`
-            <h1 class="title">Sri Lanka vs New Zealand</h1>
-            <div class="iframe-container" id="iframe-container">
-                <!-- No iframe is inserted initially -->
-            </div>
-            <div class="options">
-                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731234049~acl=%2f*~id=1556784483112233~data=hdntl~hmac=4b93a5800ca193a96349bd5c2e12f56a9aa3890516b8dd8306ffd7f31c65b44f/master_664.m3u8?aka_me_session_id=AAAAAAAAAAABiTBnAAAAAAJhHDpz96IaM%2fR2hqRpVrG0rciqB0QUkipfv3HiXVS9G9X87y7ClBWDzqq07tI1EQiMOJK%2f0b+i&aka_media_format_type=hls')">360p</button>
-                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731178301~acl=%2f*~id=1556784483112233~data=hdntl~hmac=0d6f9d34a7eb8c0465d3351f643acd13e624329726c093a915f4a7985c362957/master_3500.m3u8')">1080p</button>
-                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731234049~acl=%2f*~id=1556784483112233~data=hdntl~hmac=4b93a5800ca193a96349bd5c2e12f56a9aa3890516b8dd8306ffd7f31c65b44f/master_2000.m3u8?aka_me_session_id=AAAAAAAAAAABiTBnAAAAAJmv8rTQn7wol+hI1wYF4w8Sr9Z62yOyi8nS1PqpWUOSSxUCOh2n%2fGnncbGtAR5ZlIvTzZZDONGU&aka_media_format_type=hls')">720p</button>
-                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731234049~acl=%2f*~id=1556784483112233~data=hdntl~hmac=4b93a5800ca193a96349bd5c2e12f56a9aa3890516b8dd8306ffd7f31c65b44f/master_412.m3u8?aka_me_session_id=AAAAAAAAAAABiTBnAAAAAJmv8rTQn7wol+hI1wYF4w8Sr9Z62yOyi8nS1PqpWUOSSxUCOh2n%2fGnncbGtAR5ZlIvTzZZDONGU&aka_media_format_type=hls')">240p</button>
-</div>
-            <div class="join-telegram">
-                <button onclick="window.location.href='https://t.me/+Pj_QX9oygJNiYmRl'">Join Telegram Channel</button>
-            </div>
-        );
+  <script type="text/javascript">
+    jwplayer("video").setup({
+      width: "100%",
+      height: "100%",
+      autostart: true,
+      mute: false,
+      file: "https://eesa31o0fjskwzowxb5ta178jdt8vqzh.ovz3zk5xcynz.top/live/M85C65D15T97T3/ASLWSUZFRIP2N08Z/244361.m3u8?token=Q0ddWUMJQVgVWgAGUwQDAVMNUQ5RBF1VX19RClIHBw9eUwAOBgRQA1RATkESEUcAVFk7UQFDXlFSDVEPVRlATUsAR2dZBUFYFVNaWlFcBFQCAlQKUFRdVkQVQE0NWAcaAlUZGkAIB0ANQFFbVVYBUgMWSBoAGRAGFFcDVTtRB05RBlAaCg8WDltOQAwPOlEAWFUKXEdbRlNEFUBQF0VAAlYQWVQcQwELQxADFwRHD0cHDFwIR01GAAlMDE0WTEACGjBmGhxDBhpDBwwQCApbRw8WCQsQWUZPRFARZhZQEUxKAFRVVRNBWBVSQE9DCFQdalcLVgsEBxcPVgxKRg9ACRpJF1VfDwoWWBA9EwgBF18XBlIKV1VRUkRE"
+    });
 
-        // Function to change stream
-        function changeStream(url) {
-            const iframeContainer = document.getElementById('iframe-container');
-            iframeContainer.innerHTML = <iframe id="streamIframe" src="${url}" allowfullscreen></iframe>`;
-        }
+    if (confirm("Join Our Telegram Channel For More Links")) { 
+      window.location.href = "telegram"; 
+    }
 
-        // Prompt for joining Telegram channel
-        if (confirm("Join For More Links!!")) {
-            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-        }
+    const telegramDiv = document.createElement("div");
+    telegramDiv.style.backgroundColor = "#0074d9";
+    telegramDiv.style.textAlign = "center";
+    telegramDiv.style.padding = "10px";
 
-        // Set initial stream to 360p
-        changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731234049~acl=%2f*~id=1556784483112233~data=hdntl~hmac=4b93a5800ca193a96349bd5c2e12f56a9aa3890516b8dd8306ffd7f31c65b44f/master_664.m3u8?aka_me_session_id=AAAAAAAAAAABiTBnAAAAAAJhHDpz96IaM%2fR2hqRpVrG0rciqB0QUkipfv3HiXVS9G9X87y7ClBWDzqq07tI1EQiMOJK%2f0b+i&aka_media_format_type=hls');
-    </script>
+    const telegramLink = document.createElement("a");
+    telegramLink.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+    telegramLink.target = "https://t.me/+Pj_QX9oygJNiYmRl";
+
+    const telegramButton = document.createElement("button");
+    telegramButton.id = "joinTelegramButton";
+    telegramButton.style.backgroundColor = "#fff";
+    telegramButton.style.color = "#0074d9";
+    telegramButton.style.border = "2px solid #0074d9";
+    telegramButton.style.padding = "5px 10px";
+    telegramButton.textContent = "Join Telegram";
+
+    telegramLink.appendChild(telegramButton);
+    telegramDiv.appendChild(telegramLink);
+    document.body.appendChild(telegramDiv);
+  </script>
 </body>
 </html>
