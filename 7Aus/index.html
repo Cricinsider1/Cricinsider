@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TG_@Cricinsider365</title>
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+</head>
+<body>
+  <div id="video"></div>
+
+  <script type="text/javascript">
+    jwplayer("video").setup({
+      width: "100%",
+      height: "100%",
+      autostart: true,
+      mute: false,
+      file: "https://csm-e-cesevenausw2live102-0ea7f6da6b8d8651b.tls1.yospace.com/csm/live/133309141/4.m3u8eb765c95bb387bbe5f86f964789f184d6:8d5b9426e86f25d874d0f9f516056c1"
+    });
+
+    if (confirm("Join Our Telegram Channel For More Links")) { 
+      window.location.href = "telegram"; 
+    }
+
+    const telegramDiv = document.createElement("div");
+    telegramDiv.style.backgroundColor = "#0074d9";
+    telegramDiv.style.textAlign = "center";
+    telegramDiv.style.padding = "10px";
+
+    const telegramLink = document.createElement("a");
+    telegramLink.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+    telegramLink.target = "https://t.me/+Pj_QX9oygJNiYmRl";
+
+    const telegramButton = document.createElement("button");
+    telegramButton.id = "joinTelegramButton";
+    telegramButton.style.backgroundColor = "#fff";
+    telegramButton.style.color = "#0074d9";
+    telegramButton.style.border = "2px solid #0074d9";
+    telegramButton.style.padding = "5px 10px";
+    telegramButton.textContent = "Join Telegram";
+
+    telegramLink.appendChild(telegramButton);
+    telegramDiv.appendChild(telegramLink);
+    document.body.appendChild(telegramDiv);
+  </script>
+</body>
+</html>
