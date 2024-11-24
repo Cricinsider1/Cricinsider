@@ -1,20 +1,138 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TG_@Cricinsider365</title>
-  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cricinsider365</title>
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .jwplayer {
+      position: relative;
+      width: 100%;
+      height: 360px; /* Adjust height as needed */
+    }
+
+    #video-selector {
+      margin: 10px;
+    }
+
+    #language-switch {
+      padding: 10px 20px;
+      background-color: #007bff; /* Blue color, you can change this */
+      color: #fff; /* White text color */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    #language-switch:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    footer {
+      background-color: #0074d9; /* Background color */
+      text-align: center;
+      padding: 10px;
+      margin-top: auto;
+    }
+
+    #telegram-button {
+      display: inline-block;
+      width: auto;
+      text-align: center;
+      background-color: #0088cc; /* Telegram's brand color */
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    #telegram-button:hover {
+      background-color: #007ab8; /* Darker shade of Telegram's brand color */
+    }
+  </style>
 </head>
 <body>
-  <div id="video"></div>
+  <br>
+  <select id="video-select">
+    <option value="feed_1" selected="">Hindi_Feed 1</option>
+    <option value="feed_2">English_Feed 2</option>
+    <option value="feed_3">Tamil_Feed 3</option>
+    <option value="feed_4">Telgu_Feed 4</option>
+    <option value="feed_5">Kannada_Feed 6</option>
+    <option value="feed_6">Bengali_Feed 8</option>
+  </select>
 
-  <script type="text/javascript">
-  //<!--
-const _0x34874e=_0xec8c;(function(_0x57902d,_0x7c2960){const _0x5a8dd5=_0xec8c,_0x191939=_0x57902d();while(!![]){try{const _0x2f3b96=parseInt(_0x5a8dd5(0x1d9))/(-0x1*-0x2173+-0x1*0x1253+0x1*-0xf1f)+-parseInt(_0x5a8dd5(0x1da))/(0x1a62+-0x16eb*0x1+-0x375)*(-parseInt(_0x5a8dd5(0x1b3))/(-0x4f0+-0x17*-0x1b0+-0x1*0x21dd))+parseInt(_0x5a8dd5(0x1ad))/(0x3a7+-0x7*-0x2bb+-0x7*0x340)*(-parseInt(_0x5a8dd5(0x1a1))/(0x26df+-0x201c+-0x6be))+-parseInt(_0x5a8dd5(0x1dd))/(-0x1*0x187a+-0xf31+0x469*0x9)+parseInt(_0x5a8dd5(0x1a2))/(-0x944*-0x4+0x473+-0x297c)*(parseInt(_0x5a8dd5(0x19e))/(0x24cc+0x2da*0x1+-0x279e))+-parseInt(_0x5a8dd5(0x1a9))/(-0x1064+-0x101*-0x10+0x5d)+parseInt(_0x5a8dd5(0x1c3))/(0x1b7e+-0x59e*-0x2+-0x26b*0x10)*(parseInt(_0x5a8dd5(0x1c5))/(-0x1*0xcfb+0x1*-0x1ec5+0x2bcb));if(_0x2f3b96===_0x7c2960)break;else _0x191939['push'](_0x191939['shift']());}catch(_0x4115bf){_0x191939['push'](_0x191939['shift']());}}}(_0x345e,-0xd*-0x3ab7+-0x104d66+-0x1*-0x16cae3),jwplayer(_0x34874e(0x1d2))[_0x34874e(0x1b5)]({'width':_0x34874e(0x1cb),'height':_0x34874e(0x1cb),'autostart':!![],'mute':![],'file':_0x34874e(0x1cc)+_0x34874e(0x1c1)+_0x34874e(0x1bf)+_0x34874e(0x1a3)+_0x34874e(0x1a7)+_0x34874e(0x1ba)+_0x34874e(0x1c9)+_0x34874e(0x1b0)+_0x34874e(0x1ca)+_0x34874e(0x1ce)+_0x34874e(0x1a4)+_0x34874e(0x1de)+_0x34874e(0x1a6)+_0x34874e(0x1d4)+_0x34874e(0x1ac)+_0x34874e(0x1e0)+_0x34874e(0x1c2)+_0x34874e(0x1d3)+_0x34874e(0x1b4)+_0x34874e(0x1c8)+_0x34874e(0x1bc)+'pd'}));confirm(_0x34874e(0x1dc)+_0x34874e(0x1c6)+_0x34874e(0x1c0)+_0x34874e(0x1c4))&&(window[_0x34874e(0x1db)][_0x34874e(0x1b9)]=_0x34874e(0x1aa));function _0x345e(){const _0x1c46ec=['ram','ZpMb448I.m','10px','center','dn.ru/cmaf','annel\x20For\x20','vsd231.okc','8666709896','2291090PyUKLH','More\x20Links','99TCNZwz','elegram\x20Ch','target','896167.zKI','/expires/1','22/srcIp/2','100%','https://vk','amButton','23.177.172','appendChil','button','oygJNiYmRl','video','167/get/da','e/13/srcAg','div','padding','style','https://t.','451408lUbjZW','40304fvdnMI','location','Join\x20Our\x20T','2247576lxQufh','.136.22.54','createElem','DROID/mid/','textConten','textAlign','body','24OdlUaD','Color','me/+Pj_QX9','5dQnEJE','1735867ijhbOs','/735952752','.9/urls/45','border','/clientTyp','0999/sig/R','joinTelegr','10134756SOFbXx','telegram','2px\x20solid\x20','/CHROME_AN','4946672ADrzIh','#fff','background','7324717582','color','5px\x2010px','15AvfikO','sh_8666709','setup','Join\x20Teleg','ent','#0074d9','href','MCSXwjHih8'];_0x345e=function(){return _0x1c46ec;};return _0x345e();}function _0xec8c(_0x41f569,_0x241695){const _0x50d4cd=_0x345e();return _0xec8c=function(_0x58a121,_0x372f1a){_0x58a121=_0x58a121-(-0x92*-0x29+-0x1*0x25c6+0x1002);let _0x41064e=_0x50d4cd[_0x58a121];return _0x41064e;},_0xec8c(_0x41f569,_0x241695);}const telegramDiv=document[_0x34874e(0x1df)+_0x34874e(0x1b7)](_0x34874e(0x1d5));telegramDiv[_0x34874e(0x1d7)][_0x34874e(0x1af)+_0x34874e(0x19f)]=_0x34874e(0x1b8),telegramDiv[_0x34874e(0x1d7)][_0x34874e(0x1e2)]=_0x34874e(0x1be),telegramDiv[_0x34874e(0x1d7)][_0x34874e(0x1d6)]=_0x34874e(0x1bd);const telegramLink=document[_0x34874e(0x1df)+_0x34874e(0x1b7)]('a');telegramLink[_0x34874e(0x1b9)]=_0x34874e(0x1d8)+_0x34874e(0x1a0)+_0x34874e(0x1d1),telegramLink[_0x34874e(0x1c7)]=_0x34874e(0x1d8)+_0x34874e(0x1a0)+_0x34874e(0x1d1);const telegramButton=document[_0x34874e(0x1df)+_0x34874e(0x1b7)](_0x34874e(0x1d0));telegramButton['id']=_0x34874e(0x1a8)+_0x34874e(0x1cd),telegramButton[_0x34874e(0x1d7)][_0x34874e(0x1af)+_0x34874e(0x19f)]=_0x34874e(0x1ae),telegramButton[_0x34874e(0x1d7)][_0x34874e(0x1b1)]=_0x34874e(0x1b8),telegramButton[_0x34874e(0x1d7)][_0x34874e(0x1a5)]=_0x34874e(0x1ab)+_0x34874e(0x1b8),telegramButton[_0x34874e(0x1d7)][_0x34874e(0x1d6)]=_0x34874e(0x1b2),telegramButton[_0x34874e(0x1e1)+'t']=_0x34874e(0x1b6)+_0x34874e(0x1bb),telegramLink[_0x34874e(0x1cf)+'d'](telegramButton),telegramDiv[_0x34874e(0x1cf)+'d'](telegramLink),document[_0x34874e(0x1e3)][_0x34874e(0x1cf)+'d'](telegramDiv);
-//-->
+  <button id="language-switch">Select Your Feed Here</button>
 
-  </script>
+  <div id="video"></div>
+
+  <footer>
+    <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
+      Join Our Telegram Channel
+    </a>
+  </footer>
+
+  <script>
+    if (confirm("Join Our Telegram Channel For More Live Links")) {
+      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var videoSources = {
+        "feed_1": "https://prod-sports-hin-cf.jiocinema.com/hls/live/2112604/hd_akamai_iosmob_avc_hin_ipl_auction_241124/master.m3u8",
+        "feed_2": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112586/hd_akamai_iosmob_avc_eng_ipl_auction_241124/master.m3u8",
+        "feed_3": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109711/hd_akamai_iosmob_avc_tam_indvsnz_031124/master.m3u8",
+        "feed_4": "https://prod-sports-south-cf.jiocinema.com/hls/live/2109711/hd_akamai_iosmob_avc_tam_ipl_auction_241124/master.m3u8",
+        "feed_5": "https://prod-sports-south-cf.jiocinema.com/hls/live/2109717/hd_akamai_iosmob_avc_tel_ipl_auction_241124/master.m3u8",
+        "feed_6": "https://prod-sports-south-cf.jiocinema.com/hls/live/2109723/hd_akamai_iosmob_avc_kan_ipl_auction_241124/master.m3u8",
+        "feed_7": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109699/hd_akamai_iosmob_avc_odia_indvsnz_031124/master.m3u8",
+"feed_8": "https://prod-sports-north-cf.jiocinema.com/hls/live/2109773/hd_akamai_iosmob_avc_ben_ipl_auction_241124/master.m3u8",
+      
+      };
+
+      var playerInstance = jwplayer("video");
+
+      document.getElementById("video-select").addEventListener("change", function() {
+        var selectedValue = this.value;
+        var videoSource = videoSources[selectedValue];
+playerInstance.load([{ file: videoSource }]);
+        playerInstance.play();
+      });
+document.getElementById("language-switch").addEventListener("click", function() {
+        var selectedValue = document.getElementById("video-select").value;
+        var currentIndex = Object.keys(videoSources).indexOf(selectedValue);
+        var nextIndex = (currentIndex + 1) % Object.keys(videoSources).length;
+        var nextLanguage = Object.keys(videoSources)[nextIndex];
+        document.getElementById("video-select").value = nextLanguage;
+
+        var videoSource = videoSources[nextLanguage];
+        playerInstance.load([{ file: videoSource }]);
+        playerInstance.play();
+      });
+
+      var selectedValue = document.getElementById("video-select").value;
+      var videoSource = videoSources[selectedValue];
+
+      playerInstance.setup({
+        autostart: true,
+        mute: false,
+        playlist: [{ file: videoSource }]
+      });
+    });
+  </script>
 </body>
 </html>
