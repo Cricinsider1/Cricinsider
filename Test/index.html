@@ -1,104 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sri Lanka vs New Zealand Live Stream</title>
-</head>
-<body>
+    <title>Astro Cricket ~ @Cricinsider365</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+      }
+
+      #player {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player"></div>
+    <script src="//ssl.p.jwpcdn.com/player/v/8.25.1/jwplayer.js"></script>
     <script>
-        document.write(`
-            <h1 class="title">Sri Lanka vs New Zealand</h1>
-            <div class="iframe-container">
-                <iframe id="streamIframe" src="https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731178301~acl=%2f*~id=1556784483112233~data=hdntl~hmac=0d6f9d34a7eb8c0465d3351f643acd13e624329726c093a915f4a7985c362957/master_3500.m3u8" allowfullscreen></iframe>
-            </div>
-            <div class="options">
-                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731178301~acl=%2f*~id=1556784483112233~data=hdntl~hmac=0d6f9d34a7eb8c0465d3351f643acd13e624329726c093a915f4a7985c362957/master_3500.m3u8')">Stream 1</button>
-                <button onclick="changeStream('https://example.com/stream2.m3u8')">Stream 2</button>
-                <button onclick="changeStream('https://example.com/stream3.m3u8')">Stream 3</button>
-                <button onclick="changeStream('https://example.com/stream4.m3u8')">Stream 4</button>
-            </div>
-            <div class="join-telegram">
-                <button onclick="window.location.href='https://telegram.me/crichype'">Join Telegram Channel</button>
-            </div>
-        `);
 
-        function changeStream(url) {
-            document.getElementById('streamIframe').src = url;
-        }
+      if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
+         window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
+      }
 
-        if (confirm("Join For More Links!!")) {
-            window.location.href = "https://telegram.me/crichype";
-        }
+      jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
 
-        const style = document.createElement('style');
-        style.textContent = `
-            body {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-family: Arial, sans-serif;
-                background-color: #f3f3f3;
-                margin: 0;
-                padding: 0;
-            }
-            .title {
-                background-color: #000;
-                color: #fff;
-                padding: 10px 20px;
-                border-radius: 5px;
-                margin: 20px 0;
-                font-size: 1.5em;
-                text-align: center;
-            }
-            .iframe-container {
-                width: 100%;
-                max-width: 500px;
-                aspect-ratio: 16/9;
-                background-color: #000;
-            }
-            iframe {
-                width: 100%;
-                height: 100%;
-                border: none;
-            }
-            .options {
-                margin-top: 15px;
-                display: flex;
-                justify-content: space-around;
-                width: 100%;
-                max-width: 500px;
-            }
-            button {
-                padding: 10px 15px;
-                font-size: 1em;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                background-color: #000;
-                color: #fff;
-                transition: background-color 0.3s, color 0.3s;
-            }
-            button:hover {
-                background-color: #fff;
-                color: #000;
-                border: 1px solid #000;
-            }
-            .join-telegram {
-                margin-top: 15px;
-                display: flex;
-                justify-content: center;
-                width: 100%;
-                max-width: 500px;
-            }
-        `;
-        document.head.appendChild(style);
+      window.onload = function () {
+        var playerInstance = jwplayer("player");
+        var source = {
+          "file": "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd",
+          "default": true,
+          onXhrOpen: function (xhr, url) {
+            xhr.setRequestHeader(
+              'Authorization',
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3bXZlciI6Miwid21pZGZtdCI6ImFzY2lpIiwid21pZHR5cCI6MSwid21rZXl2ZXIiOjEsIndtaWRsZW4iOjUxMiwid21pZCI6IlpHVXpNVGxtWXpRdFptUTBaaTAwTlRZNUxUazRNMkl0T0RnMU5tVXlaakl5T0dGaCIsIndtb3BpZCI6MzIsImV4cCI6MTczMjYzODA5NiwiaWF0IjoxNzMyMDM0MDk2fQ.hfLfoYSRa0zpHdkeNeAmbk2SE6d-HocfxoejPpqqvlE'
+            );
+          }
+        };
+        source.type = "dash";
+        source.drm = {
+          "clearkey": {
+            "keyId": "a8eb0f152c6e429ca7a53f399aadf257",
+            "key": "c593c2eeea62742285b99e4d87b1c84a"
+          }
+        };
+        playerInstance.setup({
+          playlist: [{
+            "sources": [source]
+          }],
+          width: "100%",
+          aspectratio: "16:9",
+          stretching: 'exactfit',
+          autostart: true,
+          cast: {
+            appid: 'CC1AD845'
+          }
+        });
+      };
+
+
+
     </script>
-<script>
-// alert('Join Our Telegram For Latest update')
-         if (confirm("Join Our Telegram Channel @cric_streaming") == true) {
-         window.open("https://telegram.me/cric_streaming/", '_blank');
-     }
-</script>
-</body>
+  </body>
 </html>
