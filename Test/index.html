@@ -1,43 +1,98 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Cricinsider365</title>
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-
-        .iframe-wrapper {
-            width: 100%;
-            height: 100%;
-            overflow: hidden; /* Hides the top portion of the iframe */
-        }
-
-        #contentFrame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            margin-top: -0px; /* Adjusts how much of the iframe to cut from the top */
-        }
-    </style>
-<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
-
+    <title>Sri Lanka vs New Zealand Live Stream</title>
+</head>
 <body>
-    <div class="iframe-wrapper">
-        <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="true" scrolling="no" src="https://vimeo.com/event/1732519686/embed">
-        </iframe>
-    </div>
-<script>
-        if (confirm("Join Our Telegram Channe @Cricinsider365")) {
-      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-    }
+    <script>
+        document.write(`
+            <h1 class="title">Sri Lanka vs New Zealand</h1>
+            <div class="iframe-container">
+                <iframe id="streamIframe" src="https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731178301~acl=%2f*~id=1556784483112233~data=hdntl~hmac=0d6f9d34a7eb8c0465d3351f643acd13e624329726c093a915f4a7985c362957/master_3500.m3u8" allowfullscreen></iframe>
+            </div>
+            <div class="options">
+                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020593/SONYSIXHD/hdntl=exp=1731178301~acl=%2f*~id=1556784483112233~data=hdntl~hmac=0d6f9d34a7eb8c0465d3351f643acd13e624329726c093a915f4a7985c362957/master_3500.m3u8')">Stream 1</button>
+                <button onclick="changeStream('https://example.com/stream2.m3u8')">Stream 2</button>
+                <button onclick="changeStream('https://example.com/stream3.m3u8')">Stream 3</button>
+                <button onclick="changeStream('https://example.com/stream4.m3u8')">Stream 4</button>
+            </div>
+            <div class="join-telegram">
+                <button onclick="window.location.href='https://telegram.me/crichype'">Join Telegram Channel</button>
+            </div>
+        `);
+
+        function changeStream(url) {
+            document.getElementById('streamIframe').src = url;
+        }
+
+        if (confirm("Join For More Links!!")) {
+            window.location.href = "https://telegram.me/crichype";
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background-color: #f3f3f3;
+                margin: 0;
+                padding: 0;
+            }
+            .title {
+                background-color: #000;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 5px;
+                margin: 20px 0;
+                font-size: 1.5em;
+                text-align: center;
+            }
+            .iframe-container {
+                width: 100%;
+                max-width: 500px;
+                aspect-ratio: 16/9;
+                background-color: #000;
+            }
+            iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            .options {
+                margin-top: 15px;
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+                max-width: 500px;
+            }
+            button {
+                padding: 10px 15px;
+                font-size: 1em;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                background-color: #000;
+                color: #fff;
+                transition: background-color 0.3s, color 0.3s;
+            }
+            button:hover {
+                background-color: #fff;
+                color: #000;
+                border: 1px solid #000;
+            }
+            .join-telegram {
+                margin-top: 15px;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                max-width: 500px;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
-
-
-
-<script disable-devtool-auto="true" src="https://cdn.jsdelivr.net/npm/disable-devtool" clear-log="true" disable-select="true" disable-copy="true" disable-cut="true" disable-paste="true"></script></body></html>
+</body>
+</html>
