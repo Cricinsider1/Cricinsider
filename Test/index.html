@@ -1,48 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TG_@Cricinsider365</title>
-  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
-</head>
-<body>
-  <div id="video"></div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Cricket ~ @Cricinsider365</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+      }
 
-  <script type="text/javascript">
-    jwplayer("video").setup({
-      width: "100%",
-      height: "100%",
-      autostart: true,
-      mute: false,
-      file: "https://dai.fancode.com/primary/112356_english_hls_5567ta-no/index.m3u8"
-    });
+      #player {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player"></div>
+    <script src="//ssl.p.jwpcdn.com/player/v/8.25.1/jwplayer.js"></script>
+    <script>
 
-    if (confirm("Join Our Telegram Channel For More Links")) { 
-      window.location.href = "telegram"; 
-    }
+      if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
+         window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
+      }
 
-    const telegramDiv = document.createElement("div");
-    telegramDiv.style.backgroundColor = "#0074d9";
-    telegramDiv.style.textAlign = "center";
-    telegramDiv.style.padding = "10px";
+      jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
 
-    const telegramLink = document.createElement("a");
-    telegramLink.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-    telegramLink.target = "https://t.me/+Pj_QX9oygJNiYmRl";
+      window.onload = function () {
+        var playerInstance = jwplayer("player");
+        var source = {
+          "file": "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd",
+          "default": true,
+          onXhrOpen: function (xhr, url) {
+            xhr.setRequestHeader(
+              'Authorization',
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3bXZlciI6Miwid21pZGZtdCI6ImFzY2lpIiwid21pZHR5cCI6MSwid21rZXl2ZXIiOjEsIndtaWRsZW4iOjUxMiwid21pZCI6IlpHVXpNVGxtWXpRdFptUTBaaTAwTlRZNUxUazRNMkl0T0RnMU5tVXlaakl5T0dGaCIsIndtb3BpZCI6MzIsImV4cCI6MTczMjYzODA5NiwiaWF0IjoxNzMyMDM0MDk2fQ.hfLfoYSRa0zpHdkeNeAmbk2SE6d-HocfxoejPpqqvlE'
+            );
+          }
+        };
+        source.type = "dash";
+        source.drm = {
+          "clearkey": {
+            "keyId": "a8eb0f152c6e429ca7a53f399aadf257",
+            "key": "c593c2eeea62742285b99e4d87b1c84a"
+          }
+        };
+        playerInstance.setup({
+          playlist: [{
+            "sources": [source]
+          }],
+          width: "100%",
+          aspectratio: "16:9",
+          stretching: 'exactfit',
+          autostart: true,
+          cast: {
+            appid: 'CC1AD845'
+          }
+        });
+      };
 
-    const telegramButton = document.createElement("button");
-    telegramButton.id = "joinTelegramButton";
-    telegramButton.style.backgroundColor = "#fff";
-    telegramButton.style.color = "#0074d9";
-    telegramButton.style.border = "2px solid #0074d9";
-    telegramButton.style.padding = "5px 10px";
-    telegramButton.textContent = "Join Telegram";
 
-    telegramLink.appendChild(telegramButton);
-    telegramDiv.appendChild(telegramLink);
-    document.body.appendChild(telegramDiv);
-  </script>
-</body>
+
+    </script>
+  </body>
 </html>
