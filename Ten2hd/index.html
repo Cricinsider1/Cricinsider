@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Cricinsider365</title>
+</head>
+<body>
+    <script>
+        document.write(`
+            <h1 class="title">ENGLAND Vs NEWZEALAND</h1>
+            <div class="iframe-container">
+                <iframe id="streamIframe" src="https://tataplaymt.slivcdn.com/hls/live/2020434/TEN2HD/hdntl=exp=1732900756~acl=%2f*~id=1556784483112233~data=hdntl~hmac=eb2aba129da4094b61bc50de5cdf51c65b923a384d3bf5538187e4d2950dd598/master_3500.m3u8" allowfullscreen></iframe>
+            </div>
+            <div class="options">
+                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020434/TEN2HD/hdntl=exp=1732900756~acl=%2f*~id=1556784483112233~data=hdntl~hmac=eb2aba129da4094b61bc50de5cdf51c65b923a384d3bf5538187e4d2950dd598/master_3500.m3u8')">1080p</button>
+                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020434/TEN2HD/hdntl=exp=1732900756~acl=%2f*~id=1556784483112233~data=hdntl~hmac=eb2aba129da4094b61bc50de5cdf51c65b923a384d3bf5538187e4d2950dd598/master_2000.m3u8')">720p</button>
+                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020434/TEN2HD/hdntl=exp=1732900761~acl=%2f*~id=1556784483112233~data=hdntl~hmac=ca0ada2f12f648ed43813e5361d59398c25825aaafa485ea7407c8bb6d5b380f/master_664.m3u8')">360p</button>
+                <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2020434/TEN2HD/hdntl=exp=1732900761~acl=%2f*~id=1556784483112233~data=hdntl~hmac=ca0ada2f12f648ed43813e5361d59398c25825aaafa485ea7407c8bb6d5b380f/master_412.m3u8')">240p</button>
+            </div>
+            <div class="join-telegram">
+                <button onclick="window.location.href='https://t.me/+Pj_QX9oygJNiYmRl'">Join Telegram Channel</button>
+            </div>
+        `);
+
+        function changeStream(url) {
+            document.getElementById('streamIframe').src = url;
+        }
+
+        if (confirm("Join For More Links!!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                background-color: #f3f3f3;
+                margin: 0;
+                padding: 0;
+            }
+            .title {
+                background-color: #000;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 5px;
+                margin: 20px 0;
+                font-size: 1.5em;
+                text-align: center;
+            }
+            .iframe-container {
+                width: 100%;
+                max-width: 500px;
+                aspect-ratio: 16/9;
+                background-color: #000;
+            }
+            iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            .options {
+                margin-top: 15px;
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
+                max-width: 500px;
+            }
+            button {
+                padding: 10px 15px;
+                font-size: 1em;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                background-color: #000;
+                color: #fff;
+                transition: background-color 0.3s, color 0.3s;
+            }
+            button:hover {
+                background-color: #fff;
+                color: #000;
+                border: 1px solid #000;
+            }
+            .join-telegram {
+                margin-top: 15px;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                max-width: 500px;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
