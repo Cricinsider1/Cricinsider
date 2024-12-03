@@ -31,7 +31,7 @@ body{
             player.configure({
                 drm: {
                     clearKeys: {
-                        'b6045efd2889ce05f4800e2f7ac0d3ee': "abf072f537b8f4872be45f971ba24503"
+                        '00208c93f4358213b52220898b962385': "8ae6063167228e350dd132d4a1573102"
                     }
                 }
             });
@@ -56,7 +56,7 @@ body{
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://cricmax.starzplayarabia.com/out/v1/6a04831479eb46efaaf840eb558371ef/index.mpd");
+                await player.load("https://akam.stream.peacocktv.com/Content/CMAF_CTR-4s/Live/channel(vc106wh3yw)/master.mpd");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error); 
