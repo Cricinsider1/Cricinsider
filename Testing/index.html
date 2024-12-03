@@ -31,7 +31,7 @@ body{
             player.configure({
                 drm: {
                     clearKeys: {
-                        '00208c93f4358213b52220898b962385': "8ae6063167228e350dd132d4a1573102"
+                        'b9e69652984f5d3ba16ada75794c9d42': "ba35f32093f5da7352d8aaead4712b8e"
                     }
                 }
             });
@@ -56,7 +56,7 @@ body{
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://akam.stream.peacocktv.com/Content/CMAF_CTR-4s/Live/channel(vc106wh3yw)/master.mpd");
+                await player.load("https://mhdsports.nl/miniproxie.php/https://linear-novi.stvacdn.spectrum.com/LIVE/5248/bpk-tv/10364/drm/manifest.mpd");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error); 
