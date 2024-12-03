@@ -1,71 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
+<html>
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astro Cricket ~ @Cricinsider365</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #000;
-        color: #fff;
-      }
+    <meta name="referrer" content="no-referrer"> <title>TG_@Cricinsider365</title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+  <style>img{position:relative;right:130;bottom:10;margin:auto auto;max-width:20%;max-height:20%;object-fit:contain;pointer-events:none}.shaka-spinner-container{display:none}.uc{pointer-events:none}
+body{
+    background-color: #000;
+        }
+</style>
+</head>
+<body bgcolor='white' style='margin:0'>
 
-      #player {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="player"></div>
-    <script src="//ssl.p.jwpcdn.com/player/v/8.25.1/jwplayer.js"></script>
+<body>
+<body bgcolor="black" style="margin: 0;">
+    <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+        <video autoplay muted data-shaka-player id=video poster=https://cxh.pages.dev/L.jpg style=width:100%;height:100%></video>
+    </div>
     <script>
+       if (confirm("Join For More Links!!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
 
-      if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
-         window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
-      }
+        async function init() {
+            const video = document.getElementById("video");
+            const ui = video.ui;
+            const controls = ui.getControls();
+            const player = controls.getPlayer();
 
-      jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
+            player.configure({
+                drm: {
+                    clearKeys: {
+                        '252a671825ba31ec8433f978c32ccf6d': "ee560759ecc8d2274df2e63fcef56915"
+                    }
+                }
+            });
 
-      window.onload = function () {
-        var playerInstance = jwplayer("player");
-        var source = {
-          "file": "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd",
-          "default": true,
-          onXhrOpen: function (xhr, url) {
-            xhr.setRequestHeader(
-              'Authorization',
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3bXZlciI6Miwid21pZGZtdCI6ImFzY2lpIiwid21pZHR5cCI6MSwid21rZXl2ZXIiOjEsIndtaWRsZW4iOjUxMiwid21pZCI6Ik9EZ3pZV1U0TW1RdE1qazBNeTAwWW1NMkxXSTBNakl0WmpGallqQTBaRFE0WmpNeSIsIndtb3BpZCI6MzIsImV4cCI6MTczMzI5NTg1MSwiaWF0IjoxNzMyNjkxODUxfQ.eW_r1jPEUERV2j9EFnAp2cFGrwZIS2VFLEywv6A8XEI'
-            );
-          }
-        };
-        source.type = "dash";
-        source.drm = {
-          "clearkey": {
-            "keyId": "a8eb0f152c6e429ca7a53f399aadf257",
-            "key": "c593c2eeea62742285b99e4d87b1c84a"
-          }
-        };
-        playerInstance.setup({
-          playlist: [{
-            "sources": [source]
-          }],
-          width: "100%",
-          aspectratio: "16:9",
-          stretching: 'exactfit',
-          autostart: true,
-          cast: {
-            appid: 'CC1AD845'
-          }
-        });
-      };
+            ui.configure({
+                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+                volumeBarColors: {
+                    base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                    level: "rgb(0, 255, 0)"     // Green color for the volume level
+                },
+                seekBarColors: {
+                    base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                    buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                    played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+                }
+            });
 
+            window.player = player;
+            window.ui = ui;
 
+            player.addEventListener("error", onPlayerErrorEvent);
+            controls.addEventListener("error", onUIErrorEvent);
 
-    </script>
-  </body>
+            try {
+                await player.load("https://fsly.stream.peacocktv.com/Content/CMAF_OL1-CTR-4s/Live/channel(usa-west)/master.mpd");
+                console.log("The video has now been loaded!");
+            } catch (error) {
+                onPlayerError(error); 
+            }
+        }
+
+        function onPlayerErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
+
+        function onPlayerError(error) {
+            console.error("Error code", error.code, "object", error);
+        }
+
+        function onUIErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
+
+        function initFailed() {
+            console.error("Unable to load the UI library!");
+        }
+
+        document.addEventListener("shaka-ui-loaded", init);
+        document.addEventListener("shaka-ui-load-failed", initFailed);
+    
+</script>
+    </body>
 </html>
