@@ -1,106 +1,71 @@
-<!DOCTYPE html><html lang="en"><head>
-  <meta charset="UTF-8">
-  <title>Star Sports 1 HD</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #000;
-    }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Cricket ~ @Cricinsider365</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+      }
 
-    #iframe-container {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
-    }
+      #player {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="player"></div>
+    <script src="//ssl.p.jwpcdn.com/player/v/8.25.1/jwplayer.js"></script>
+    <script>
 
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 10px;
-    }
+      if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
+         window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
+      }
 
-    #popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
+      jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
 
-    .popup-content {
-      background-color: #222;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      width: 300px;
-    }
-
-    .popup-content h2 {
-      margin: 0 0 10px;
-      color: #ff0000;
-    }
-
-    .popup-content p {
-      margin: 0 0 20px;
-    }
-
-    .popup-content button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .popup-content .join-btn {
-      background-color: #ff0000;
-      color: white;
-    }
-
-    .popup-content .close-btn {
-      background-color: #555;
-      color: white;
-    }
-  </style>
-<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
-<body>
-  <div id="iframe-container">
-    <iframe src="https://fancode-live.extratvteam.workers.dev/" allowfullscreen=""></iframe>
-  </div>
-
-  <div id="popup" style="display: none;">
-    <div class="popup-content">
-      <h2>Support Us!</h2>
-      <p>Join our Telegram channel @Cricinsider365 for Live Links.</p>
-      <button class="join-btn" onclick="window.open('https://t.me/+Pj_QX9oygJNiYmRl', '_blank')">Join Now</button>
-      <button class="close-btn" onclick="closePopup()">Already Joined</button>
-    </div>
-  </div>
-
-  <script>
-    function closePopup() {
-      const popup = document.getElementById('popup');
-      popup.style.display = 'none';
-    }
-  </script>
-
-<script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+      window.onload = function () {
+        var playerInstance = jwplayer("player");
+        var source = {
+          "file": "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd",
+          "default": true,
+          onXhrOpen: function (xhr, url) {
+            xhr.setRequestHeader(
+              'Authorization',
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3bXZlciI6Miwid21pZGZtdCI6ImFzY2lpIiwid21pZHR5cCI6MSwid21rZXl2ZXIiOjEsIndtaWRsZW4iOjUxMiwid21pZCI6Ik9EZ3pZV1U0TW1RdE1qazBNeTAwWW1NMkxXSTBNakl0WmpGallqQTBaRFE0WmpNeSIsIndtb3BpZCI6MzIsImV4cCI6MTczMzI5NTg1MSwiaWF0IjoxNzMyNjkxODUxfQ.eW_r1jPEUERV2j9EFnAp2cFGrwZIS2VFLEywv6A8XEI'
+            );
+          }
+        };
+        source.type = "dash";
+        source.drm = {
+          "clearkey": {
+            "keyId": "a8eb0f152c6e429ca7a53f399aadf257",
+            "key": "c593c2eeea62742285b99e4d87b1c84a"
+          }
+        };
+        playerInstance.setup({
+          playlist: [{
+            "sources": [source]
+          }],
+          width: "100%",
+          aspectratio: "16:9",
+          stretching: 'exactfit',
+          autostart: true,
+          cast: {
+            appid: 'CC1AD845'
+          }
+        });
+      };
 
 
-</body></html>
+
+    </script>
+  </body>
+</html>
