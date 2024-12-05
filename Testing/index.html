@@ -1,106 +1,29 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
-  <title>Star Sports 1 HD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astro Cricket - @criccoder</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
       background-color: #000;
+      color: #fff;
     }
-
-    #iframe-container {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
-    }
-
-    iframe {
+    #player {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 10px;
-    }
-
-    #popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .popup-content {
-      background-color: #222;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      width: 300px;
-    }
-
-    .popup-content h2 {
-      margin: 0 0 10px;
-      color: #ff0000;
-    }
-
-    .popup-content p {
-      margin: 0 0 20px;
-    }
-
-    .popup-content button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .popup-content .join-btn {
-      background-color: #ff0000;
-      color: white;
-    }
-
-    .popup-content .close-btn {
-      background-color: #555;
-      color: white;
+      width: 100% !important;
+      height: 100% !important;
     }
   </style>
-<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
+</head>
 <body>
-  <div id="iframe-container">
-    <iframe src="skdevl.php?&e=.m3u8" allowfullscreen=""></iframe>
-  </div>
-
-  <div id="popup" style="display: none;">
-    <div class="popup-content">
-      <h2>Support Us!</h2>
-      <p>Join our Telegram channel @Cricinsider365 for Live Links.</p>
-      <button class="join-btn" onclick="window.open('https://t.me/+Pj_QX9oygJNiYmRl', '_blank')">Join Now</button>
-      <button class="close-btn" onclick="closePopup()">Already Joined</button>
-    </div>
-  </div>
-
+  <div id="player"></div>
+  <script src="//ssl.p.jwpcdn.com/player/v/8.25.1/jwplayer.js"></script>
   <script>
-    function closePopup() {
-      const popup = document.getElementById('popup');
-      popup.style.display = 'none';
-    }
-  </script>
-
-<script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
-
-
-</body></html>
+(jwplayer,_0x146ad7[_0x3fe119(0xac)])[_0x3fe119(0xdf)]({'playlist':[{'sources':[{'file':_0x146ad7[_0x3fe119(0xd3)],'default':!![],'type':_0x146ad7[_0x3fe119(0xf2)],'drm':{'clearkey':{'keyId':_0x146ad7[_0x3fe119(0xea)],'key':_0x146ad7[_0x3fe119(0xe7)]}},'onXhrOpen':function(_0x30bb3a){var _0x153439=_0x3fe119;_0x30bb3a[_0x153439(0xb9)+_0x153439(0x107)](_0x146ad7[_0x153439(0xd2)],_0x146ad7[_0x153439(0x103)]);}}]}],'width':_0x146ad7[_0x3fe119(0x101)],'height':_0x146ad7[_0x3fe119(0x101)],'aspectratio':_0x146ad7[_0x3fe119(0x100)],'autostart':!![],'cast':{'appid':_0x146ad7[_0x3fe119(0xcb)]}});if(_0x146ad7[_0x3fe119(0xae)](confirm,_0x146ad7[_0x3fe119(0xc7)]))window[_0x3fe119(0xd9)][_0x3fe119(0xe3)]=_0x146ad7[_0x3fe119(0xcc)];});function _0x237b(){var _0x1df3fa=['kOycS','GGr7bdjo','R00wTkdZMy','552492OqAgci','1488537ftHFnv','d21pZGZtdC','location','d21rZXl2ZX','10RXwecu','th2Pm9AWgM','xNV1kzTVRB','Join\x20Our\x20T','setup','V4cCI6MTcz','7262541vbCICR','ZCI6MzIsIm','href','.mpd','NzMzMzgxOD','wiaWF0Ijox','Tyiqy','ZlciI6Miwi','y.cloudfro','szFno','100%','pJM05ETmta','9e4d87b1c8','I6ImFzY2lp','O/cYH8CI0H','Authorizat','aWRsZW4iOj','MFlcc','Iiwid21pZH','criccoder','https://d1','62742285b9','a8eb0f152c','dE5qTTVNeT','yws6emo43n','446990gPYfFw','ion','key','15150950lHYYzq','IsIndtb3Bp','onload','zAsLR','nByuF','UxMiwid21p','NRbTb','player','6e429ca7a5','Mzk4NTgzNC','Header','3f399aadf2','mOYHH','whynJ','M0fQ.o7cWB','HcMdz','R5cCI6MSwi','RXlZbUl0Tn','nt.net/CH5','IiOjEsIndt','PndCdB9-j-','SEY-hlhjcI','elegram\x20Ch','tK17QNb+4+','XSuP4qMl+9','5cCI6IkpXV','setRequest','hbGciOiJIU','CC1AD845','zI1NiIsInR','16:9','84KXdvxn','dash','CJ9.eyJ3bX','7eZexPy','AwTjJJMExX','ZCI6Ik9HWm','ccoder','19538xqUcAd','4089896vEIkfj','zSejZ','hiC-8D_geu','legram.me/','/masterCH5','lMrFx','LyjxN','https://te','c593c2eeea','annel\x20@cri','RNKDFPBI','Bearer\x20eyJ','JXwkU'];_0x237b=function(){return _0x1df3fa;};return _0x237b();}
+</script>
+</body>
+</html>
