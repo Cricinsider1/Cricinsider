@@ -1,71 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cricinsider365</title>
-<script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
-</head>
-<style>
-body {
-    background-color: black;
-}
-#container {
-    background-color: black;
-}
-    #telegramButton {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 378px;
-      height: 50px;
-      background: linear-gradient(90deg, darkblue, #001f3f);
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      overflow: hidden;
-      position: relative;
-      animation: flowAnimation 2s infinite;
-    }
-
-    @keyframes flowAnimation {
-      0% {
-        background-position: -200px 0;
-      }
-      100% {
-        background-position: 200px 0;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer"> <title>TG_@Cricinsider365</title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+  <style>img{position:relative;right:130;bottom:10;margin:auto auto;max-width:20%;max-height:20%;object-fit:contain;pointer-events:none}.shaka-spinner-container{display:none}.uc{pointer-events:none}
+body{
+    background-color: #000;
         }
-    }
+</style>
+</head>
+<body bgcolor='white' style='margin:0'>
 
-    #telegramButton:hover {
-      animation: none; /* Pause animation on hover */
-      background: linear-gradient(90deg, #001f3f, darkblue); /* Reverse colors on hover */
-    }
-  </style>
 <body>
-<div id="video"></div>
+<body bgcolor="black" style="margin: 0;">
+    <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+        <video autoplay muted data-shaka-player id=video poster=https://cxh.pages.dev/L.jpg style=width:100%;height:100%></video>
+    </div>
+    <script>
+       if (confirm("Join For More Links!!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
 
-<script type="text/javascript">
-  jwplayer("video").setup({
-    width: "100%",
-    height: "100%",
-    autostart: true,
-    mute: false,
-    file:"https://pstvplaylive.online/ps_sports/ps_play.m3u8?id=SlvNZ"
-  });
+        async function init() {
+            const video = document.getElementById("video");
+            const ui = video.ui;
+            const controls = ui.getControls();
+            const player = controls.getPlayer();
+
+            player.configure({
+                drm: {
+                    clearKeys: {
+                        '776b0606478afa90b8427d6e4d5366c5': "7c4adeab5939a21cff82195ba8d0e966"
+                    }
+                }
+            });
+
+            ui.configure({
+                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+                volumeBarColors: {
+                    base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                    level: "rgb(0, 255, 0)"     // Green color for the volume level
+                },
+                seekBarColors: {
+                    base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                    buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                    played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+                }
+            });
+
+            window.player = player;
+            window.ui = ui;
+
+            player.addEventListener("error", onPlayerErrorEvent);
+            controls.addEventListener("error", onUIErrorEvent);
+
+            try {
+                await player.load("https://play.pftv.ws/star4k/index.mpd?token=516af52acbbcbfa82dd69451ea5c5e22c3a3ffb6-452c54dd296d6c275f28bae6e13c9da4-1733508400-1733497600&remote=223.185.38.126");
+                console.log("The video has now been loaded!");
+            } catch (error) {
+                onPlayerError(error); 
+            }
+        }
+
+        function onPlayerErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
+
+        function onPlayerError(error) {
+            console.error("Error code", error.code, "object", error);
+        }
+
+        function onUIErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
+
+        function initFailed() {
+            console.error("Unable to load the UI library!");
+        }
+
+        document.addEventListener("shaka-ui-loaded", init);
+        document.addEventListener("shaka-ui-load-failed", initFailed);
+    
 </script>
-<script>
-if(confirm("Join Our Telegram Channel")) { window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl" }
-</script>
-  <div id="telegramButton" onclick="redirectToTelegram()">
-  Join Telegram
-  </div>
-  <script>
-  function redirectToTelegram() {
-    // Your redirect code here
-    window.location.href = 'https://t.me/+Pj_QX9oygJNiYmRl';
-  }
-  </script>
-</body>
+    </body>
 </html>
