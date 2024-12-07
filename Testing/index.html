@@ -1,87 +1,50 @@
-<html>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer"> <title>TG_@Cricinsider365</title></title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
-  <style>img{position:relative;right:130;bottom:10;margin:auto auto;max-width:20%;max-height:20%;object-fit:contain;pointer-events:none}.shaka-spinner-container{display:none}.uc{pointer-events:none}
-body{
-    background-color: #000;
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <title>Embedded Iframe Player</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
         }
-</style>
-</head>
-<body bgcolor='white' style='margin:0'>
 
+        .video-embed-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 0px;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-embed-container iframe,
+        .video-embed-container object,
+        .video-embed-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <!-- Disable automatic popups -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Disable popup by preventing new window creation
+            window.open = function() {
+                console.log("Popup blocked!");
+                return null;
+            };
+        });
+    </script>
+<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
 <body>
-<body bgcolor="black" style="margin: 0;">
-    <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-        <video autoplay muted data-shaka-player id=video poster=https://cxh.pages.dev/L.jpg style=width:100%;height:100%></video>
+    <!-- Video Embed Container -->
+    <div class="video-embed-container">
+        <!-- Use the sanitized URL in the iframe -->
+        <iframe class="responsive-embed-item" src="" marginheight="0" marginwidth="0" scrolling="no" frameborder="0" sandbox="allow-scripts allow-same-origin" allowfullscreen="true" allow="encrypted-media"></iframe>
     </div>
-    <script>
-       if (confirm("Join For More Links!!")) {
-            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-        }
 
-        async function init() {
-            const video = document.getElementById("video");
-            const ui = video.ui;
-            const controls = ui.getControls();
-            const player = controls.getPlayer();
-
-            player.configure({
-                drm: {
-                    clearKeys: {
-                        '776b0606478afa90b8427d6e4d5366c5': "7c4adeab5939a21cff82195ba8d0e966"
-                    }
-                }
-            });
-
-            ui.configure({
-                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-                volumeBarColors: {
-                    base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                    level: "rgb(0, 255, 0)"     // Green color for the volume level
-                },
-                seekBarColors: {
-                    base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                    buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                    played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
-                }
-            });
-
-            window.player = player;
-            window.ui = ui;
-
-            player.addEventListener("error", onPlayerErrorEvent);
-            controls.addEventListener("error", onUIErrorEvent);
-
-            try {
-                await player.load("https://play.pftv.ws/star4k/index.mpd?token=516af52acbbcbfa82dd69451ea5c5e22c3a3ffb6-452c54dd296d6c275f28bae6e13c9da4-1733508400-1733497600&remote=223.185.38.126");
-                console.log("The video has now been loaded!");
-            } catch (error) {
-                onPlayerError(error); 
-            }
-        }
-
-        function onPlayerErrorEvent(event) {
-            onPlayerError(event.detail);
-        }
-
-        function onPlayerError(error) {
-            console.error("Error code", error.code, "object", error);
-        }
-
-        function onUIErrorEvent(event) {
-            onPlayerError(event.detail);
-        }
-
-        function initFailed() {
-            console.error("Unable to load the UI library!");
-        }
-
-        document.addEventListener("shaka-ui-loaded", init);
-        document.addEventListener("shaka-ui-load-failed", initFailed);
-    
-</script>
-    </body>
-</html>
+</body></html>
