@@ -31,7 +31,7 @@ body{
             player.configure({
                 drm: {
                     clearKeys: {
-                        'e31a5a81caff5d07ea2411a571fc2e59': "96c5ef69479732ae734f962748c19729"
+                        '776b0606478afa90b8427d6e4d5366c5': "7c4adeab5939a21cff82195ba8d0e966"
                     }
                 }
             });
@@ -56,7 +56,7 @@ body{
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://live.ll.ww.aiv-cdn.net/OTTB/lhr-nitro/live/clients/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd");
+                await player.load("https://play.pftv.ws/foxhindi/index.mpd?token=6a5e4eb5bc1f6c6747f7b9dd7c0b889f5947e5db-8cf09e81a2acb34ffd2011d7c5020d32-1733564239-1733553439&ip=223.185.38.126");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error); 
