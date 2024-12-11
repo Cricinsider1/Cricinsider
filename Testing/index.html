@@ -3,23 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="icon.png">
-    <title>iOS-Compatible Page</title>
+    <title>DRM Protected Video</title>
+    <script>
+        // Prevent the page from being loaded in an iframe
+        if (window.top !== window.self) {
+            window.top.location = window.self.location;
+        }
+    </script>
 </head>
 <body>
-    <h1>Welcome to the iOS-Compatible Page</h1>
-    <p>This page works seamlessly on iOS devices.</p>
-    <video playsinline controls>
-        <source src="https://vkvsd55.okcdn.ru/cmaf/7443308808935/sig/HLdYuX6aRnc/srcIp/65.2.48.122/urls/45.136.22.88/expires/1734354015965/clientType/13/srcAg/CHROME/fromCache/1/mid/9109154376679/id/7443308808935/get/COfXpJ-OiQIQ6AcYBTIICgYIgAoQ0AU6BAjE2AJaBggDEAIoF2ICCBg0gziq4THGSw/track.m3u8" type="video/mp4">
+    <h1>DRM-Protected Video</h1>
+    <video id="drm-video" controls width="640" height="360">
         Your browser does not support the video tag.
     </video>
-<script>
-// alert('Join Our Telegram For Latest update')
-         if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
-         window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
-     }
-</script>
+
+    <script>
+        // DRM Initialization
+        const video = document.getElementById('drm-video');
+        const licenseServerURL = 'https://your-license-server.com/license'; // Replace with your DRM license server
+        const contentURL = 'https://your-cdn.com/protected-video.mpd'; // URL of the DRM-protected content
+
+        if (!video || !window.MediaKeys) {
+            alert('Your browser does not support DRM playback.');
+        } else {
+            initializeDRM();
+        }
+
+        async function initializeDRM() {
+            try {
+                // Specify key system (e.g., Widevine for Chrome, PlayReady for Edge)
+                const keySystem = 'com.widevine.alpha'; // Use 'com.microsoft.playready' for PlayReady
+                const config = [{ initDataTypes: ['cenc'], videoCapabilities: [{ contentType: 'video/mp4; codecs="avc1.42E01E"' }] }];
+
+                // Request MediaKeys
+                const mediaKeys = await navigator.requestMediaKeySystemAccess(keySystem, config);
+                const keySession = await mediaKeys.createMediaKeys();
+                await video.setMediaKeys(keySession);
+
+                // Fetch and process license
+                video.addEventListener('encrypted', async (event) => {
+                    const license = await fetchLicense(event.initData, licenseServerURL);
+                    await keySession.update(license);
+                });
+
+                // Load and play video
+                video.src = contentURL;
+                await video.play();
+            } catch (error) {
+                console.error('Error initializing DRM:', error);
+            }
+        }
+
+        async function fetchLicense(initData, licenseServerURL) {
+            const response = await fetch(licenseServerURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/octet-stream' },
+                body: initData
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch license from server.');
+            }
+            return response.arrayBuffer();
+        }
+    </script>
 </body>
 </html>
