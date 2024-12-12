@@ -18,28 +18,28 @@
     <div id="matches-container">Loading live matches...</div>
 
     <script>
-        const playlistUrl = "https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_Live.m3u";
-
+    const playlistUrl = "https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_Live.m3u";
         const fetchLiveMatches = async () => {
-            try {
-                const response = await fetch(playlistUrl, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "text/plain",
-                        "User-Agent": "Mozilla/5.0"
-                    }
-                });
-                if (!response.ok) throw new Error("Failed to fetch playlist");
-                const text = await response.text();
-                console.log("Fetched Playlist Text:", text); // Debug log
-                const matches = parseM3UPlaylist(text);
-                console.log("Parsed Matches:", matches); // Debug log
-                displayMatches(matches);
-            } catch (error) {
-                console.error(error);
-                document.getElementById("matches-container").innerText = `Error: ${error.message}`;
+    try {
+        const response = await fetch(playlistUrl, {
+            method: "GET",
+            headers: {
+                "Content-Type": "text/plain",
+                "User-Agent": "Mozilla/5.0"
             }
-        };
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const text = await response.text();
+        console.log("Playlist Content:", text);
+        const matches = parseM3UPlaylist(text);
+        displayMatches(matches);
+    } catch (error) {
+        console.error("Fetch error:", error);
+        document.getElementById("matches-container").innerText = `Error: ${error.message}`;
+    }
+};
 
         const parseM3UPlaylist = (text) => {
             const matches = [];
