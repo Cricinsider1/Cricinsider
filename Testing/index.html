@@ -3,77 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FanCode Live Matches</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
-        h1 { text-align: center; }
-        .match-container { margin: 20px auto; padding: 15px; max-width: 600px; background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
-        .match-banner { width: 100%; height: auto; border-radius: 8px; }
-        .watch-button { display: block; text-align: center; margin-top: 10px; padding: 10px; background: #ff5722; color: #fff; text-decoration: none; border-radius: 5px; }
-        .watch-button:hover { background: #e64a19; }
-    </style>
+    <title>DRM Video Player</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/3.2.1/shaka-player.compiled.js"></script>
 </head>
 <body>
-    <h1>FanCode Live Matches</h1>
-    <div id="matches-container">Loading live matches...</div>
-
+    <video id="video" controls></video>
+    
     <script>
-    const playlistUrl = "https://github.com/byte-capsule/FanCode-Hls-Fetcher/blob/main/Fancode_hls_m3u8.Json";
-        const fetchLiveMatches = async () => {
-    try {
-        const response = await fetch(playlistUrl, {
-            method: "GET",
-            headers: {
-                "Content-Type": "text/plain",
-                "User-Agent": "Mozilla/5.0"
-            }
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const text = await response.text();
-        console.log("Playlist Content:", text);
-        const matches = parseM3UPlaylist(text);
-        displayMatches(matches);
-    } catch (error) {
-        console.error("Fetch error:", error);
-        document.getElementById("matches-container").innerText = `Error: ${error.message}`;
-    }
-};
+        // Initialize Shaka Player
+        function initializePlayer() {
+            const video = document.getElementById('video');
+            const player = new shaka.Player(video);
 
-        const parseM3UPlaylist = (text) => {
-            const matches = [];
-            const lines = text.split("\n");
-            for (let i = 0; i < lines.length; i++) {
-                if (lines[i].startsWith("#EXTINF")) {
-                    const details = lines[i].split(",")[1]?.trim() || "Unknown Match";
-                    const streamUrl = lines[i + 1]?.trim();
-                    if (streamUrl && streamUrl.startsWith("http")) {
-                        matches.push({ title: details, streamUrl });
+            // Define the ClearKey license
+            const clearKeyLicense = {
+                'keySystem': 'org.w3.clearkey',
+                'license': {
+                    'keys': [
+                        {
+                            'kid': 'ae26845bd33038a9c0774a0981007294',
+                            'key': '63ac662dde310cfb4cc6f9b43b34196d',
+                        }
+                    ]
+                }
+            };
+
+            // Add DRM configuration
+            player.configure({
+                drm: {
+                    clearKey: {
+                        'license': clearKeyLicense.license
                     }
                 }
-            }
-            return matches;
-        };
-
-        const displayMatches = (matches) => {
-            const container = document.getElementById("matches-container");
-            container.innerHTML = ""; // Clear previous content
-            matches.forEach(match => {
-                const matchDiv = document.createElement("div");
-                matchDiv.classList.add("match-container");
-                matchDiv.innerHTML = `
-                    <img src="https://via.placeholder.com/600x300?text=${encodeURIComponent(match.title)}" 
-                         alt="${match.title}" class="match-banner">
-                    <strong>${match.title}</strong>
-                    <a href="${match.streamUrl}" target="_blank" class="watch-button">Watch Live</a>
-                `;
-                container.appendChild(matchDiv);
             });
-        };
 
-        fetchLiveMatches();
-        setInterval(fetchLiveMatches, 30000); // Update every 30 seconds
+            // Load the MPD file
+            player.load('https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd')
+                .then(function () {
+                    console.log('Video loaded successfully');
+                })
+                .catch(function (error) {
+                    console.error('Error loading video:', error);
+                });
+        }
+
+        // Start player once the page has loaded
+        window.onload = function () {
+            initializePlayer();
+        };
     </script>
 </body>
 </html>
