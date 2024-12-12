@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CricketSparx</title>
@@ -74,28 +72,21 @@
             border: 1px solid white;
         }
 
-        /* Settings Popup */
-        #settings-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 10000;
-            text-align: center;
+        /* Quality Selector */
+        #quality-selector {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        #settings-popup button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
+        #quality-selector select {
+            padding: 5px;
+            border: 1px solid white;
             border-radius: 5px;
-            cursor: pointer;
+            background-color: black;
+            color: white;
+            font-size: 16px;
+            margin-right: 10px; /* Space between dropdown and button */
         }
 
         /* Telegram Join Button */
@@ -109,7 +100,7 @@
             cursor: pointer;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.0/dist/hls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.0/dist/hls.min.js"></script><style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection">
 </head>
 <body>
 
@@ -125,22 +116,15 @@
 
 <!-- Video Streaming Section -->
 <div id="streaming-container">
-    <video id="videoPlayer" controls="" src=""></video>
+    <video id="videoPlayer" controls="" src="blob:https://cricketsparx.github.io/48067179-fb2b-4433-85b8-dfe0216ddbaa"></video>
     <div id="quality-selector">
-        <!-- Settings Button -->
-        <button id="settings-button" onclick="toggleSettings()">Settings</button>
+        <label for="quality">Select Quality: </label>
+        <select id="quality" onchange="changeQuality()">
+            <option value="-1" selected="">Auto</option>
+        <option value="0">144p</option><option value="1">360p</option><option value="2">480p</option><option value="3">540p</option><option value="4">720p</option><option value="5">1080p</option></select>
         <!-- Telegram Join Button -->
         <button id="telegram-button" onclick="joinTelegram()">Join Telegram</button>
     </div>
-</div>
-
-<!-- Settings Popup -->
-<div id="settings-popup">
-    <p>Select Quality:</p>
-    <select id="quality" onchange="changeQuality()">
-        <option value="-1" selected="">Auto</option>
-    </select>
-    <button onclick="closeSettings()">Close</button>
 </div>
 
 <script>
@@ -206,19 +190,11 @@
     function joinTelegram() {
         window.open('https://t.me/CricketSparx', '_blank');
     }
-
-    // Toggle Settings Popup
-    function toggleSettings() {
-        const settingsPopup = document.getElementById('settings-popup');
-        settingsPopup.style.display = settingsPopup.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // Close Settings Popup
-    function closeSettings() {
-        const settingsPopup = document.getElementById('settings-popup');
-        settingsPopup.style.display = 'none';
-    }
 </script>
 
-</body>
-</html>
+
+
+</body></html>
+
+
+Select Quality Button convert Into Setting button button 
