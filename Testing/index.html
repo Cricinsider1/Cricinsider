@@ -14,6 +14,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
         }
         [data-shaka-player-container] {
@@ -36,16 +37,19 @@
             z-index: 1000;
             display: none;
         }
-        #qualitySelector {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 5px 10px;
+        #joinTelegramBtn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0088cc;
             color: white;
+            font-size: 16px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
+            text-align: center;
+        }
+        #joinTelegramBtn:hover {
+            background-color: #006699;
         }
     </style>
 </head>
@@ -53,8 +57,10 @@
     <div id="spinner">Loading...</div>
     <div data-shaka-player-container>
         <video autoplay muted data-shaka-player id="video"></video>
-        <div id="qualitySelector" onclick="showQualityOptions()">Quality</div>
     </div>
+
+    <!-- Join Telegram Button -->
+    <button id="joinTelegramBtn" onclick="joinTelegram()">Join Telegram</button>
 
     <script>
         let player;
@@ -116,27 +122,8 @@
             alert(`Playback error: ${error.message}`);
         }
 
-        function showQualityOptions() {
-            const tracks = player.getVariantTracks();
-            const qualityOptions = tracks.map(track => ({
-                label: `${track.height}p`,
-                id: track.id
-            }));
-
-            let qualityMenu = "Select Quality:\n";
-            qualityOptions.forEach((option, index) => {
-                qualityMenu += `${index + 1}. ${option.label}\n`;
-            });
-
-            const selection = prompt(qualityMenu);
-
-            if (selection && !isNaN(selection) && selection > 0 && selection <= qualityOptions.length) {
-                const trackId = qualityOptions[selection - 1].id;
-                player.selectVariantTrack(tracks.find(track => track.id === trackId), true);
-                console.log(`Selected quality: ${qualityOptions[selection - 1].label}`);
-            } else {
-                console.log("No valid quality selected.");
-            }
+        function joinTelegram() {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl"; // Replace with your Telegram group link
         }
 
         // Initialize player when the Shaka UI is ready
