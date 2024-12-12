@@ -11,10 +11,8 @@
       font-family: Arial, sans-serif;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      background-color: #f4f4f4;
-      justify-content: center;
       align-items: center;
+      background-color: #f4f4f4;
     }
 
     .title-column {
@@ -71,21 +69,34 @@
       background-color: #0056b3; /* Darker blue on hover */
     }
 
-    #language-switch {
+    #language-switch, #telegram-button {
       padding: 15px 30px;
-      background-color: #28a745; /* Green color */
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin: 20px 0;
       font-size: 18px;
       transition: background-color 0.3s ease;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin: 10px 0;
+    }
+
+    #language-switch {
+      background-color: #28a745; /* Green color */
     }
 
     #language-switch:hover {
       background-color: #218838; /* Darker green on hover */
+    }
+
+    #telegram-button {
+      background-color: #0088cc; /* Telegram's brand color */
+      text-decoration: none;
+      text-align: center;
+    }
+
+    #telegram-button:hover {
+      background-color: #007ab8; /* Darker shade of Telegram's brand color */
     }
 
     footer {
@@ -95,31 +106,11 @@
       margin-top: auto;
       color: #fff;
     }
-
-    #telegram-button {
-      display: inline-block;
-      width: auto;
-      text-align: center;
-      background-color: #0088cc; /* Telegram's brand color */
-      color: #fff;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 5px;
-      font-size: 18px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    #telegram-button:hover {
-      background-color: #007ab8; /* Darker shade of Telegram's brand color */
-    }
   </style>
 </head>
 <body>
   <div class="title-column">
-    <h1>TG_@Cricinsider365-</h1>
+    <h1>Cricinsider365 - Live Cricket Streams</h1>
   </div>
 
   <div class="jwplayer" id="video"></div>
@@ -136,11 +127,13 @@
   </div>
 
   <button id="language-switch">Select Your Feed Here</button>
+  
+  <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
+    Join Our Telegram Channel
+  </a>
 
   <footer>
-    <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
-      Join Our Telegram Channel
-    </a>
+    &copy; 2024 Cricinsider365 - All rights reserved.
   </footer>
 
   <script>
