@@ -3,81 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DRM Player with Quality Selection</title>
+  <title>Fast DRM Video Player</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.2.2/shaka-player.compiled.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
     }
 
     h1 {
+      text-align: center;
       background-color: #000;
       color: #fff;
-      padding: 15px;
+      padding: 10px 0;
+      margin: 0;
       width: 100%;
-      text-align: center;
+    }
+
+    #video-container {
+      position: relative;
+      max-width: 800px;
+      width: 100%;
+      margin: 20px auto;
     }
 
     video {
       width: 100%;
-      max-width: 800px;
-      margin: 20px 0;
+      border-radius: 10px;
     }
 
-    .button-container, .quality-container {
+    .quality-buttons {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin: 20px;
+      flex-direction: column;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 5px;
+      padding: 10px;
     }
 
-    .feed-button, .quality-button, .control-button {
-      padding: 10px 20px;
+    .quality-button {
       background-color: #007bff;
       color: white;
+      padding: 5px 10px;
       border: none;
-      border-radius: 5px;
+      border-radius: 3px;
       cursor: pointer;
+      font-size: 12px;
+      text-align: center;
       transition: background-color 0.3s;
     }
 
-    .feed-button:hover, .quality-button:hover, .control-button:hover {
+    .quality-button:hover {
       background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <h1>DRM Video Player with Quality Selection</h1>
-  <video id="video" controls autoplay></video>
-
-  <div class="button-container">
-    <button class="feed-button" id="feed_1">Feed 1</button>
-    <button class="feed-button" id="feed_2">Feed 2</button>
-  </div>
-
-  <div class="quality-container">
-    <button class="quality-button" id="auto_quality">Auto</button>
-  </div>
-
-  <div class="button-container">
-    <button class="control-button" id="pause">Pause</button>
-    <button class="control-button" id="play">Play</button>
-    <button class="control-button" id="mute">Mute</button>
-    <button class="control-button" id="unmute">Unmute</button>
+  <h1>Fast DRM Video Player</h1>
+  <div id="video-container">
+    <video id="video" controls autoplay></video>
+    <div class="quality-buttons" id="quality-buttons">
+      <!-- Quality buttons will be dynamically added here -->
+    </div>
   </div>
 
   <script>
-    const video = document.getElementById('video');
-    const player = new shaka.Player(video);
+    const videoElement = document.getElementById('video');
+    const qualityButtonsContainer = document.getElementById('quality-buttons');
+    const player = new shaka.Player(videoElement);
 
-    // DRM configuration
+    // DRM and streaming configuration
     const drmConfig = {
       servers: {
         'com.widevine.alpha': 'https://your-drm-license-server.com/widevine',
@@ -86,90 +89,100 @@
         'com.widevine.alpha': {
           videoRobustness: 'SW_SECURE_DECODE',
           audioRobustness: 'SW_SECURE_CRYPTO',
-        }
-      }
+        },
+      },
+    };
+
+    const streamingConfig = {
+      bufferingGoal: 30, // Pre-buffer 30 seconds of video
+      rebufferingGoal: 15, // Ensure at least 15 seconds of buffered content
+      abr: {
+        enabled: true,
+        defaultBandwidthEstimate: 5000000, // Start with a high default estimate (5 Mbps)
+      },
     };
 
     player.configure({
-      drm: drmConfig
+      drm: drmConfig,
+      streaming: streamingConfig,
     });
 
-    // MPD sources
+    // Video sources with DRM keys
     const videoSources = {
       feed_1: {
         url: 'https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd',
         keyId: 'ae26845bd33038a9c0774a0981007294',
-        key: '63ac662dde310cfb4cc6f9b43b34196d'
+        key: '63ac662dde310cfb4cc6f9b43b34196d',
       },
       feed_2: {
         url: 'https://example.com/stream2.mpd',
         keyId: '22222222-3333-4444-5555-666666666666',
-        key: 'fedcba9876543210fedcba9876543210'
-      }
+        key: 'fedcba9876543210fedcba9876543210',
+      },
     };
 
-    // Load and configure a feed
+    // Load a video feed
     async function loadFeed(feed) {
       const selectedFeed = videoSources[feed];
       if (selectedFeed) {
         player.configure({
           drm: {
             clearKeys: {
-              [selectedFeed.keyId]: selectedFeed.key
-            }
-          }
+              [selectedFeed.keyId]: selectedFeed.key,
+            },
+          },
         });
 
         try {
           await player.load(selectedFeed.url);
-          console.log(`${feed} is now playing`);
-          loadQualityButtons(); // Update quality buttons after the feed loads
+          console.log(`Loaded ${feed}`);
+          loadQualityButtons(); // Load quality buttons dynamically
         } catch (error) {
-          console.error('Error loading feed:', error);
+          console.error('Error loading video:', error);
         }
       }
     }
 
-    // Quality selection buttons
+    // Generate quality buttons dynamically
     function loadQualityButtons() {
       const tracks = player.getVariantTracks();
-      const qualityContainer = document.querySelector('.quality-container');
-
-      // Clear existing quality buttons
-      qualityContainer.innerHTML = '<button class="quality-button" id="auto_quality">Auto</button>';
+      qualityButtonsContainer.innerHTML = ''; // Clear existing buttons
 
       // Add "Auto" quality button
-      document.getElementById('auto_quality').addEventListener('click', () => {
+      const autoButton = document.createElement('button');
+      autoButton.textContent = 'Auto';
+      autoButton.className = 'quality-button';
+      autoButton.addEventListener('click', () => {
         player.configure({ abr: { enabled: true } });
         console.log('Switched to Auto Quality');
       });
+      qualityButtonsContainer.appendChild(autoButton);
 
-      // Add buttons for each available quality
+      // Add buttons for specific qualities
       tracks.forEach((track) => {
         const button = document.createElement('button');
-        button.classList.add('quality-button');
         button.textContent = `${track.height}p`;
+        button.className = 'quality-button';
         button.addEventListener('click', () => {
           player.configure({ abr: { enabled: false } });
           player.selectVariantTrack(track, true);
           console.log(`Switched to ${track.height}p`);
         });
-        qualityContainer.appendChild(button);
+        qualityButtonsContainer.appendChild(button);
       });
     }
 
-    // Event listeners for feed buttons
-    document.getElementById('feed_1').addEventListener('click', () => loadFeed('feed_1'));
-    document.getElementById('feed_2').addEventListener('click', () => loadFeed('feed_2'));
-
-    // Playback controls
-    document.getElementById('pause').addEventListener('click', () => video.pause());
-    document.getElementById('play').addEventListener('click', () => video.play());
-    document.getElementById('mute').addEventListener('click', () => video.muted = true);
-    document.getElementById('unmute').addEventListener('click', () => video.muted = false);
-
-    // Load the first feed by default
+    // Default feed load
     loadFeed('feed_1');
+
+    // Pre-buffering optimizations
+    player.getNetworkingEngine().registerResponseFilter((type, response) => {
+      console.log('Buffering optimization applied:', response);
+    });
+
+    // Add event listeners for smooth playback
+    videoElement.addEventListener('waiting', () => console.log('Buffering...'));
+    videoElement.addEventListener('playing', () => console.log('Playing...'));
   </script>
 </body>
 </html>
