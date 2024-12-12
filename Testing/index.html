@@ -22,7 +22,13 @@
 
         const fetchLiveMatches = async () => {
             try {
-                const response = await fetch(playlistUrl);
+                const response = await fetch(playlistUrl, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "text/plain",
+                        "User-Agent": "Mozilla/5.0"
+                    }
+                });
                 if (!response.ok) throw new Error("Failed to fetch playlist");
                 const text = await response.text();
                 console.log("Fetched Playlist Text:", text); // Debug log
@@ -30,6 +36,7 @@
                 console.log("Parsed Matches:", matches); // Debug log
                 displayMatches(matches);
             } catch (error) {
+                console.error(error);
                 document.getElementById("matches-container").innerText = `Error: ${error.message}`;
             }
         };
