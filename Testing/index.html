@@ -13,7 +13,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       background-color: #87CEEB; /* Lightning Blue */
+      min-height: 100vh; /* Ensure full height */
     }
 
     .title-column {
@@ -24,12 +26,12 @@
       width: 100%;
       padding: 15px;
       margin-bottom: 20px;
+      text-align: center;
     }
 
     .title-column h1 {
       font-size: 24px;
       color: #fff; /* White text for the title */
-      text-align: center;
       margin: 0;
     }
 
@@ -39,14 +41,19 @@
       max-width: 800px;
       height: 360px;
       background-color: #000; /* Black background for the video frame */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .feed-buttons {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       margin: 20px;
       width: 100%;
+      max-width: 800px;
       background-color: #000; /* Black background for the feed buttons column */
       padding: 20px;
       border-radius: 10px;
@@ -64,6 +71,7 @@
       font-size: 18px;
       transition: background-color 0.3s ease;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
     }
 
     .feed-button:hover {
@@ -80,6 +88,7 @@
       transition: background-color 0.3s ease;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       margin: 10px 0;
+      text-align: center;
     }
 
     #language-switch {
@@ -106,6 +115,7 @@
       padding: 20px;
       margin-top: auto;
       color: #fff;
+      width: 100%;
     }
   </style>
 </head>
