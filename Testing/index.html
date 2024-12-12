@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cricinsider365</title>
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #87CEEB; /* Lightning Blue */
+    }
+
+    .title-column {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000; /* Black background for the title column */
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .title-column h1 {
+      font-size: 24px;
+      color: #fff; /* White text for the title */
+      text-align: center;
+      margin: 0;
+    }
+
+    .jwplayer {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 360px;
+      background-color: #000; /* Black background for the video frame */
+    }
+
+    .feed-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+      width: 100%;
+      background-color: #000; /* Black background for the feed buttons column */
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .feed-button {
+      padding: 15px 30px;
+      background-color: #007bff; /* Blue color */
+      color: #fff; /* White text */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+      width: 80%;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .feed-button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    #language-switch, #telegram-button {
+      padding: 15px 30px;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin: 10px 0;
+    }
+
+    #language-switch {
+      background-color: #28a745; /* Green color */
+    }
+
+    #language-switch:hover {
+      background-color: #218838; /* Darker green on hover */
+    }
+
+    #telegram-button {
+      background-color: #0088cc; /* Telegram's brand color */
+      text-decoration: none;
+      text-align: center;
+    }
+
+    #telegram-button:hover {
+      background-color: #007ab8; /* Darker shade of Telegram's brand color */
+    }
+
+    footer {
+      background-color: #0074d9; /* Footer background color */
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="title-column">
+    <h1>Cricinsider365 - Live Cricket Streams</h1>
+  </div>
+
+  <div class="jwplayer" id="video"></div>
+
+  <div class="feed-buttons">
+    <button class="feed-button" id="feed_1">Feed 1</button>
+    <button class="feed-button" id="feed_2">Feed 2</button>
+    <button class="feed-button" id="feed_3">Feed 3</button>
+    <button class="feed-button" id="feed_4">Feed 4</button>
+    <button class="feed-button" id="feed_5">Feed 5</button>
+    <button class="feed-button" id="feed_6">Feed 6</button>
+    <button class="feed-button" id="feed_7">Feed 7</button>
+    <button class="feed-button" id="feed_8">Feed 8</button>
+  </div>
+
+  <button id="language-switch">Select Your Feed Here</button>
+  
+  <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
+    Join Our Telegram Channel
+  </a>
+
+  <footer>
+    &copy; 2024 Cricinsider365 - All rights reserved.
+  </footer>
+
+  <script>
+    if (confirm("Join Our Telegram Channel For More Live Links")) {
+      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var videoSources = {
+        "feed_1": "https://vipgoodlive-tvs.creativehub.sbs/Sky_Sports_Cricket_Live_TV/index.m3u8",
+        "feed_2": "https://dai.fancode.com/primary/106717_english_hls_4358ta-no/index.m3u8",
+        "feed_3": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2100311/uhd_akamai_ctv_avc_eng_olympic_feed3_270724/index.m3u8",
+        "feed_4": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112593/uhd_akamai_ctv_avc_eng_olympic_feed4_270724/index.m3u8",
+        "feed_5": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112593/uhd_akamai_ctv_avc_eng_olympic_feed5_270724/index.m3u8",
+        "feed_6": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112594/uhd_akamai_ctv_avc_eng_olympic_feed6_270724/index.m3u8",
+        "feed_7": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112594/uhd_akamai_ctv_avc_eng_olympic_feed7_270724/index.m3u8",
+        "feed_8": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112595/uhd_akamai_ctv_avc_eng_olympic_feed9_270724/index.m3u8"
+      };
+
+      var playerInstance = jwplayer("video");
+
+      document.getElementById("feed_1").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_1"] }]).play();
+      });
+
+      document.getElementById("feed_2").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_2"] }]).play();
+      });
+
+      document.getElementById("feed_3").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_3"] }]).play();
+      });
+
+      document.getElementById("feed_4").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_4"] }]).play();
+      });
+
+      document.getElementById("feed_5").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_5"] }]).play();
+      });
+
+      document.getElementById("feed_6").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_6"] }]).play();
+      });
+
+      document.getElementById("feed_7").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_7"] }]).play();
+      });
+
+      document.getElementById("feed_8").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_8"] }]).play();
+      });
+
+      playerInstance.setup({
+        autostart: true,
+        playlist: [{ file: videoSources["feed_1"] }]
+      });
+    });
+  </script>
+</body>
+</html>
