@@ -25,7 +25,8 @@
                 <h1 style="color: red;">Video playback is blocked in iframe. Please access directly.</h1>
             </div>`;
         console.error("Iframe detected. Video playback is blocked.");
-        throw new Error("Iframe embedding detected.");
+        // Stop further script execution
+        throw new Error("Iframe embedding detected. Stopping script execution.");
     }
 </script>
 
