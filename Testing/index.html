@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DRM with Key ID and Key</title>
+  <title>DRM Player with Quality Selection</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.2.2/shaka-player.compiled.js"></script>
   <style>
     body {
@@ -30,7 +30,7 @@
       margin: 20px 0;
     }
 
-    .button-container {
+    .button-container, .quality-container {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -38,7 +38,7 @@
       margin: 20px;
     }
 
-    .feed-button {
+    .feed-button, .quality-button, .control-button {
       padding: 10px 20px;
       background-color: #007bff;
       color: white;
@@ -48,24 +48,36 @@
       transition: background-color 0.3s;
     }
 
-    .feed-button:hover {
+    .feed-button:hover, .quality-button:hover, .control-button:hover {
       background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <h1>DRM Streams with Key ID and Key</h1>
+  <h1>DRM Video Player with Quality Selection</h1>
   <video id="video" controls autoplay></video>
+
   <div class="button-container">
     <button class="feed-button" id="feed_1">Feed 1</button>
     <button class="feed-button" id="feed_2">Feed 2</button>
   </div>
-  
+
+  <div class="quality-container">
+    <button class="quality-button" id="auto_quality">Auto</button>
+  </div>
+
+  <div class="button-container">
+    <button class="control-button" id="pause">Pause</button>
+    <button class="control-button" id="play">Play</button>
+    <button class="control-button" id="mute">Mute</button>
+    <button class="control-button" id="unmute">Unmute</button>
+  </div>
+
   <script>
     const video = document.getElementById('video');
     const player = new shaka.Player(video);
 
-    // DRM configuration with license server and advanced settings
+    // DRM configuration
     const drmConfig = {
       servers: {
         'com.widevine.alpha': 'https://your-drm-license-server.com/widevine',
@@ -82,29 +94,28 @@
       drm: drmConfig
     });
 
-    // MPD sources with Key ID and Key
+    // MPD sources
     const videoSources = {
       feed_1: {
         url: 'https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd',
-        keyId: 'ae26845bd33038a9c0774a0981007294', // Key ID for Feed 1
-        key: '63ac662dde310cfb4cc6f9b43b34196d' // Corresponding Key for Feed 1
+        keyId: 'ae26845bd33038a9c0774a0981007294',
+        key: '63ac662dde310cfb4cc6f9b43b34196d'
       },
       feed_2: {
         url: 'https://example.com/stream2.mpd',
-        keyId: '22222222-3333-4444-5555-666666666666', // Key ID for Feed 2
-        key: 'fedcba9876543210fedcba9876543210' // Corresponding Key for Feed 2
+        keyId: '22222222-3333-4444-5555-666666666666',
+        key: 'fedcba9876543210fedcba9876543210'
       }
     };
 
-    // Configure the DRM player for static key usage
+    // Load and configure a feed
     async function loadFeed(feed) {
       const selectedFeed = videoSources[feed];
       if (selectedFeed) {
-        // Configure static keys
         player.configure({
           drm: {
             clearKeys: {
-              [selectedFeed.keyId]: selectedFeed.key // Key ID : Key
+              [selectedFeed.keyId]: selectedFeed.key
             }
           }
         });
@@ -112,17 +123,52 @@
         try {
           await player.load(selectedFeed.url);
           console.log(`${feed} is now playing`);
+          loadQualityButtons(); // Update quality buttons after the feed loads
         } catch (error) {
           console.error('Error loading feed:', error);
         }
       }
     }
 
-    // Attach event listeners to buttons
+    // Quality selection buttons
+    function loadQualityButtons() {
+      const tracks = player.getVariantTracks();
+      const qualityContainer = document.querySelector('.quality-container');
+
+      // Clear existing quality buttons
+      qualityContainer.innerHTML = '<button class="quality-button" id="auto_quality">Auto</button>';
+
+      // Add "Auto" quality button
+      document.getElementById('auto_quality').addEventListener('click', () => {
+        player.configure({ abr: { enabled: true } });
+        console.log('Switched to Auto Quality');
+      });
+
+      // Add buttons for each available quality
+      tracks.forEach((track) => {
+        const button = document.createElement('button');
+        button.classList.add('quality-button');
+        button.textContent = `${track.height}p`;
+        button.addEventListener('click', () => {
+          player.configure({ abr: { enabled: false } });
+          player.selectVariantTrack(track, true);
+          console.log(`Switched to ${track.height}p`);
+        });
+        qualityContainer.appendChild(button);
+      });
+    }
+
+    // Event listeners for feed buttons
     document.getElementById('feed_1').addEventListener('click', () => loadFeed('feed_1'));
     document.getElementById('feed_2').addEventListener('click', () => loadFeed('feed_2'));
 
-    // Initialize the player with the first feed
+    // Playback controls
+    document.getElementById('pause').addEventListener('click', () => video.pause());
+    document.getElementById('play').addEventListener('click', () => video.play());
+    document.getElementById('mute').addEventListener('click', () => video.muted = true);
+    document.getElementById('unmute').addEventListener('click', () => video.muted = false);
+
+    // Load the first feed by default
     loadFeed('feed_1');
   </script>
 </body>
