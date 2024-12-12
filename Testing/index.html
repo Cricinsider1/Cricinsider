@@ -1,110 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<title>TG_@Cricinsider365</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M3U8 Player with Telegram Join Button</title>
+  <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet">
+  <style>
     body {
-        background-color: #000;
-        color: white;
-        text-align: center;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        overflow: hidden;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f4f4f9;
     }
-    #video-container {
-        display: none; /* Hidden by default until iframe detection is confirmed */
+    .container {
+      max-width: 800px;
+      margin: 20px;
+      text-align: center;
     }
-</style>
-<script>
-    // Detect iframe embedding
-    function blockIframe() {
-        if (window.top !== window.self) {
-            document.body.innerHTML = `
-                <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: black;">
-                    <h1 style="color: red;">Video playback is blocked in iframe. Please access directly.</h1>
-                </div>`;
-            console.error("Iframe detected. Blocking video playback.");
-            // Stop further execution
-            throw new Error("Iframe embedding detected. Stopping script execution.");
-        } else {
-            document.getElementById("video-container").style.display = "block";
-        }
+    .telegram-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      color: #fff;
+      background-color: #0088cc;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
     }
-
-    // Run iframe detection
-    blockIframe();
-</script>
+    .telegram-button:hover {
+      background-color: #007ab8;
+    }
+  </style>
 </head>
 <body>
-<div id="video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-    <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width:100%; height:100%;"></video>
-</div>
-
-<script>
-    async function init() {
-        const video = document.getElementById("video");
-        const ui = video.ui;
-        const controls = ui.getControls();
-        const player = controls.getPlayer();
-
-        player.configure({
-            drm: {
-                clearKeys: {
-                    'e31a5a81caff5d07ea2411a571fc2e59': "96c5ef69479732ae734f962748c19729"
-                }
-            }
-        });
-
-        ui.configure({
-            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-            volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)",
-                level: "rgb(0, 255, 0)"
-            },
-            seekBarColors: {
-                base: "rgb(255, 0, 0)",
-                buffered: "rgb(255, 255, 0)",
-                played: "rgba(0, 128, 128, 1)"
-            }
-        });
-
-        window.player = player;
-        window.ui = ui;
-
-        player.addEventListener("error", onPlayerErrorEvent);
-        controls.addEventListener("error", onUIErrorEvent);
-
-        try {
-            await player.load("https://live.ll.ww.aiv-cdn.net/OTTB/lhr-nitro/live/clients/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd");
-            console.log("The video has now been loaded!");
-        } catch (error) {
-            onPlayerError(error); 
-        }
-    }
-
-    function onPlayerErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
-
-    function onPlayerError(error) {
-        console.error("Error code", error.code, "object", error);
-    }
-
-    function onUIErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
-
-    function initFailed() {
-        console.error("Unable to load the UI library!");
-    }
-
-    document.addEventListener("shaka-ui-loaded", init);
-    document.addEventListener("shaka-ui-load-failed", initFailed);
-</script>
+  <div class="container">
+    <h1>M3U8 Video Player</h1>
+    <video id="videoPlayer" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="360">
+      <source src="https://hastycast.live/hls/eJmauBDCIf.m3u8?st=Xg0EIkGinb5mJ9UoW7ghY7Ly3-tfasU85nNXI-tjroI&e=1734036428" type="application/x-mpegURL">
+      Your browser does not support the video tag.
+    </video>
+    <a href="https://t.me/yourchannel" class="telegram-button" target="_blank">Join Us on Telegram</a>
+  </div>
+  <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
 </body>
 </html>
