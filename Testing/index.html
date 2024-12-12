@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>Fast DRM Player</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
+    <title>Professional DRM Player</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
     <style>
         body {
             background-color: black;
             margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
         }
         [data-shaka-player-container] {
             position: absolute;
@@ -20,7 +22,35 @@
             height: 100%;
             object-fit: cover;
         }
-        .spinner {
+        .button-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 9999;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            border: none;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn-play1 { background-color: #007bff; }
+        .btn-play1:hover { background-color: #0056d6; }
+        .btn-play2 { background-color: #28a745; }
+        .btn-play2:hover { background-color: #218838; }
+        .btn-play3 { background-color: #ffc107; }
+        .btn-play3:hover { background-color: #e0a800; }
+        .btn-restart { background-color: #dc3545; }
+        .btn-restart:hover { background-color: #c82333; }
+        .btn-mute { background-color: #6c757d; }
+        .btn-mute:hover { background-color: #5a6268; }
+        #spinner {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -28,16 +58,26 @@
             color: white;
             font-size: 20px;
             z-index: 1000;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="spinner" id="spinner">Loading...</div>
+    <div id="spinner">Loading...</div>
     <div data-shaka-player-container>
         <video autoplay muted data-shaka-player id="video"></video>
     </div>
-
+    <div class="button-container">
+        <button class="btn-play1" onclick="playStream('https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd')">Play Stream 1</button>
+        <button class="btn-play2" onclick="playStream('https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd')">Play Stream 2</button>
+        <button class="btn-play3" onclick="playStream('https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd')">Play Stream 3</button>
+        <button class="btn-restart" onclick="restartVideo()">Restart Video</button>
+        <button class="btn-mute" onclick="toggleMute()">Toggle Mute</button>
+    </div>
     <script>
+        let isMuted = true;
+        let currentStream = null;
+
         async function initPlayer() {
             const spinner = document.getElementById("spinner");
             const video = document.getElementById("video");
@@ -45,9 +85,10 @@
             const controls = ui.getControls();
             const player = controls.getPlayer();
 
-            spinner.style.display = "block"; // Show spinner during initialization
+            // Show spinner while loading
+            spinner.style.display = "block";
 
-            // Configure DRM for Widevine and Clear Key
+            // Configure DRM and streaming settings
             player.configure({
                 drm: {
                     servers: {
@@ -58,35 +99,69 @@
                     },
                 },
                 streaming: {
-                    rebufferingGoal: 5, // Buffer 5 seconds ahead
-                    bufferingGoal: 10, // Keep a 10-second buffer
+                    rebufferingGoal: 3, // 3 seconds of buffer before rebuffering
+                    bufferingGoal: 6, // 6 seconds of buffer to minimize interruptions
                     retryParameters: {
-                        maxAttempts: 3,
-                        baseDelay: 1000,
-                        backoffFactor: 2,
-                        fuzzFactor: 0.5
+                        maxAttempts: 5,
+                        baseDelay: 500,
+                        backoffFactor: 1.5,
+                        fuzzFactor: 0.3
                     }
                 },
                 abr: {
                     enabled: true,
-                    defaultBandwidthEstimate: 5000000, // 5 Mbps for faster start
+                    defaultBandwidthEstimate: 3000000, // 3 Mbps for fast start
                 }
             });
 
-            // Handle player errors
+            // Handle errors
             player.addEventListener("error", onPlayerError);
 
-            // Load video stream
+            // Load a default stream
             try {
-                await player.load("https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd"); // Replace with your MPD URL
-                console.log("Stream loaded successfully!");
+                await player.load("https://path-to-default-stream.mpd"); // Replace with your default MPD URL
+                console.log("Default stream loaded!");
             } catch (error) {
                 onPlayerError(error);
             } finally {
-                spinner.style.display = "none"; // Hide spinner after loading
+                spinner.style.display = "none"; // Hide spinner
             }
 
-            console.log("Player initialized for fast playback.");
+            console.log("Player initialized successfully.");
+        }
+
+        async function playStream(url) {
+            if (!window.player) {
+                alert("Player is not initialized yet!");
+                return;
+            }
+
+            const spinner = document.getElementById("spinner");
+            spinner.style.display = "block"; // Show spinner while switching streams
+
+            currentStream = url;
+            try {
+                await window.player.load(url);
+                console.log(`Stream loaded: ${url}`);
+            } catch (error) {
+                onPlayerError(error);
+            } finally {
+                spinner.style.display = "none"; // Hide spinner after stream loads
+            }
+        }
+
+        function restartVideo() {
+            const video = document.getElementById("video");
+            video.currentTime = 0;
+            video.play();
+            console.log("Video restarted.");
+        }
+
+        function toggleMute() {
+            const video = document.getElementById("video");
+            isMuted = !isMuted;
+            video.muted = isMuted;
+            console.log(`Mute toggled. Is muted: ${isMuted}`);
         }
 
         function onPlayerError(error) {
@@ -94,7 +169,6 @@
             alert(`Playback error: ${error.message}`);
         }
 
-        // Initialize player on load
         document.addEventListener("shaka-ui-loaded", initPlayer);
     </script>
 </body>
