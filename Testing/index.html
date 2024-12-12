@@ -3,62 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Matches</title>
+    <title>FanCode Live Matches</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
             margin: 0;
             padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
         }
         .match-container {
-            margin: 10px 0;
+            margin: 20px auto;
             padding: 15px;
-            border: 1px solid #ccc;
+            max-width: 600px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             background-color: #fff;
-            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .match-title {
-            font-size: 1.2em;
-            font-weight: bold;
+        .match-banner {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .match-info {
+            margin: 10px 0;
+        }
+        .watch-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff5722;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .watch-button:hover {
+            background-color: #e64a19;
         }
     </style>
 </head>
 <body>
-    <h1>Live Matches</h1>
+    <h1>FanCode Live Matches</h1>
     <div id="matches-container">Loading live matches...</div>
 
     <script>
         const fetchLiveMatches = async () => {
-            const url = "https://fancode-live.extratvteam.workers.dev/.json"; // Your API or playlist URL
+            const playlistUrl = "https://github.com/byte-capsule/FanCode-Hls-Fetcher/blob/main/Fancode_Live.m3u"; // Replace with actual URL
             try {
-                const response = await fetch(url);
+                const response = await fetch(playlistUrl);
                 if (!response.ok) {
-                    throw new Error("Failed to fetch live matches");
+                    throw new Error("Failed to fetch playlist");
                 }
-                const data = await response.json(); // Assuming the API returns JSON data
-                updateMatches(data);
+                const text = await response.text(); // Assuming M3U playlist format
+                const matches = parseM3UPlaylist(text);
+                displayMatches(matches);
             } catch (error) {
                 document.getElementById("matches-container").innerText = `Error: ${error.message}`;
             }
         };
 
-        const updateMatches = (matches) => {
+        const parseM3UPlaylist = (text) => {
+            const matches = [];
+            const lines = text.split("\n");
+            for (let i = 0; i < lines.length; i++) {
+                if (lines[i].startsWith("#EXTINF")) {
+                    const details = lines[i].split(",")[1];
+                    const streamUrl = lines[i + 1];
+                    matches.push({ title: details, streamUrl });
+                }
+            }
+            return matches;
+        };
+
+        const displayMatches = (matches) => {
             const container = document.getElementById("matches-container");
-            container.innerHTML = ""; // Clear previous matches
+            container.innerHTML = ""; // Clear previous content
             matches.forEach(match => {
                 const matchDiv = document.createElement("div");
                 matchDiv.classList.add("match-container");
                 matchDiv.innerHTML = `
-                    <div class="match-title">${match.title}</div>
-                    <div>Start Time: ${match.start_time}</div>
-                    <div>Status: ${match.status}</div>
+                    <img src="https://via.placeholder.com/600x300?text=${encodeURIComponent(match.title)}" 
+                         alt="${match.title}" 
+                         class="match-banner">
+                    <div class="match-info">
+                        <strong>${match.title}</strong>
+                    </div>
+                    <a href="${match.streamUrl}" target="_blank" class="watch-button">Watch Live</a>
                 `;
                 container.appendChild(matchDiv);
             });
         };
 
-        // Fetch live matches every 30 seconds
+        // Fetch and update matches every 30 seconds
         fetchLiveMatches();
         setInterval(fetchLiveMatches, 30000);
     </script>
