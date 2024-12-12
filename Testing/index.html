@@ -1,133 +1,166 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
-    <title>DRM Video Player</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
-    <style>
-        body {
-            background-color: black;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
-        }
-        [data-shaka-player-container] {
-            position: relative;
-            width: 80%;
-            max-width: 800px;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            border: 2px solid #00f;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        #spinner {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 20px;
-            z-index: 1000;
-            display: none;
-        }
-        #joinTelegramBtn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #0088cc;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-        }
-        #joinTelegramBtn:hover {
-            background-color: #006699;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cricinsider365</title>
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .jwplayer {
+      position: relative;
+      width: 100%;
+      height: 360px; /* Adjust height as needed */
+      background-color: #000;
+    }
+
+    #video-selector {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #video-selector:hover {
+      border-color: #007bff;
+    }
+
+    #language-switch {
+      padding: 15px 30px;
+      background-color: #007bff; /* Blue color */
+      color: #fff; /* White text */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 20px 0;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #language-switch:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    footer {
+      background-color: #0074d9; /* Footer background color */
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+      color: #fff;
+    }
+
+    #telegram-button {
+      display: inline-block;
+      width: auto;
+      text-align: center;
+      background-color: #0088cc; /* Telegram's brand color */
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #telegram-button:hover {
+      background-color: #007ab8; /* Darker shade of Telegram's brand color */
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-    <div id="spinner">Loading...</div>
-    <div data-shaka-player-container>
-        <video autoplay muted data-shaka-player id="video"></video>
-    </div>
+  <h1>Cricinsider365 - Live Cricket Streams</h1>
 
-    <!-- Join Telegram Button -->
-    <button id="joinTelegramBtn" onclick="joinTelegram()">Join Telegram</button>
+  <select id="video-select">
+    <option value="feed_1" selected>Feed 1</option>
+    <option value="feed_2">Feed 2</option>
+    <option value="feed_3">Feed 3</option>
+    <option value="feed_4">Feed 4</option>
+    <option value="feed_5">Feed 5</option>
+    <option value="feed_6">Feed 6</option>
+    <option value="feed_7">Feed 7</option>
+    <option value="feed_8">Feed 8</option>
+  </select>
 
-    <script>
-        let player;
+  <button id="language-switch">Select Your Feed Here</button>
 
-        async function initPlayer() {
-            const spinner = document.getElementById("spinner");
-            const video = document.getElementById("video");
-            const ui = video.ui;
-            const controls = ui.getControls();
-            player = controls.getPlayer();
+  <div id="video"></div>
 
-            // Show spinner while initializing
-            spinner.style.display = "block";
+  <footer>
+    <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
+      Join Our Telegram Channel
+    </a>
+  </footer>
 
-            // Configure DRM and streaming settings
-            player.configure({
-                drm: {
-                    servers: {
-                        'com.widevine.alpha': 'https://widevine-license-server-url.com' // Replace with your license server
-                    },
-                    clearKeys: {
-                        'ae26845bd33038a9c0774a0981007294': '63ac662dde310cfb4cc6f9b43b34196d' // Replace with your keys
-                    },
-                },
-                streaming: {
-                    rebufferingGoal: 3, // Minimal buffering
-                    bufferingGoal: 6, // Maintain a 6-second buffer
-                    retryParameters: {
-                        maxAttempts: 5,
-                        baseDelay: 500,
-                        backoffFactor: 1.5,
-                        fuzzFactor: 0.3
-                    }
-                },
-                abr: {
-                    enabled: true,
-                    defaultBandwidthEstimate: 3000000 // Fast start (3 Mbps)
-                }
-            });
+  <script>
+    if (confirm("Join Our Telegram Channel For More Live Links")) {
+      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+    }
 
-            // Handle player errors
-            player.addEventListener("error", onPlayerError);
+    document.addEventListener("DOMContentLoaded", function() {
+      var videoSources = {
+        "feed_1": "https://vipgoodlive-tvs.creativehub.sbs/Sky_Sports_Cricket_Live_TV/index.m3u8",
+        "feed_2": "https://dai.fancode.com/primary/106717_english_hls_4358ta-no/index.m3u8",
+        "feed_3": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2100311/uhd_akamai_ctv_avc_eng_olympic_feed3_270724/index.m3u8",
+        "feed_4": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112593/uhd_akamai_ctv_avc_eng_olympic_feed4_270724/index.m3u8",
+        "feed_5": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112593/uhd_akamai_ctv_avc_eng_olympic_feed5_270724/index.m3u8",
+        "feed_6": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112594/uhd_akamai_ctv_avc_eng_olympic_feed6_270724/index.m3u8",
+        "feed_7": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112594/uhd_akamai_ctv_avc_eng_olympic_feed7_270724/index.m3u8",
+        "feed_8": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112595/uhd_akamai_ctv_avc_eng_olympic_feed9_270724/index.m3u8"
+      };
 
-            // Load video stream
-            try {
-                await player.load("https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd"); // Replace with your MPD URL
-                console.log("Video loaded successfully!");
-            } catch (error) {
-                onPlayerError(error);
-            } finally {
-                spinner.style.display = "none"; // Hide spinner after loading
-            }
+      var playerInstance = jwplayer("video");
 
-            console.log("Player initialized successfully.");
-        }
+      document.getElementById("video-select").addEventListener("change", function() {
+        var selectedValue = this.value;
+        var videoSource = videoSources[selectedValue];
+        playerInstance.load([{ file: videoSource }]);
+        playerInstance.play();
+      });
 
-        function onPlayerError(error) {
-            console.error("Player error:", error);
-            alert(`Playback error: ${error.message}`);
-        }
+      document.getElementById("language-switch").addEventListener("click", function() {
+        var selectedValue = document.getElementById("video-select").value;
+        var currentIndex = Object.keys(videoSources).indexOf(selectedValue);
+        var nextIndex = (currentIndex + 1) % Object.keys(videoSources).length;
+        var nextLanguage = Object.keys(videoSources)[nextIndex];
+        document.getElementById("video-select").value = nextLanguage;
 
-        function joinTelegram() {
-            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl"; // Replace with your Telegram group link
-        }
+        var videoSource = videoSources[nextLanguage];
+        playerInstance.load([{ file: videoSource }]);
+        playerInstance.play();
+      });
 
-        // Initialize player when the Shaka UI is ready
-        document.addEventListener("shaka-ui-loaded", initPlayer);
-    </script>
+      var selectedValue = document.getElementById("video-select").value;
+      var videoSource = videoSources[selectedValue];
+
+      playerInstance.setup({
+        autostart: true,
+        mute: false,
+        playlist: [{ file: videoSource }]
+      });
+    });
+  </script>
 </body>
 </html>
