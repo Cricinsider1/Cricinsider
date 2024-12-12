@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,16 +21,23 @@
     .uc { pointer-events: none; }
     body {
         background-color: #000;
+        color: white;
+        text-align: center;
+        font-family: Arial, sans-serif;
     }
 </style>
 </head>
 <body bgcolor="black" style="margin: 0;">
 
 <script>
-    // Prevent the page from being embedded in an iframe
+    // Block iframe embedding and display a specific message
     if (window.top !== window.self) {
-        document.body.innerHTML = "<h1 style='color: red; text-align: center;'>Embedding in iframes is not allowed.</h1>";
+        document.body.innerHTML = `
+            <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: black;">
+                <h1 style="color: red;">Iframe embedding is not allowed.</h1>
+            </div>`;
         console.error("This page cannot be embedded in an iframe.");
+        throw new Error("Iframe embedding detected.");
     }
 </script>
 
