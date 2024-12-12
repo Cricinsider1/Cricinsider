@@ -3,68 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRM Protected Video</title>
-    <script>
-        // Prevent the page from being loaded in an iframe
-        if (window.top !== window.self) {
-            window.top.location = window.self.location;
+    <meta name="referrer" content="no-referrer">
+    <title>DRM Protected Player</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
         }
-    </script>
+        .shaka-spinner-container {
+            display: none;
+        }
+        [data-shaka-player-container] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
-    <h1>DRM-Protected Video</h1>
-    <video id="drm-video" controls width="640" height="360">
-        Your browser does not support the video tag.
-    </video>
-
+    <div data-shaka-player-container>
+        <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg"></video>
+    </div>
     <script>
-        // DRM Initialization
-        const video = document.getElementById('drm-video');
-        const licenseServerURL = 'https://your-license-server.com/license'; // Replace with your DRM license server
-        const contentURL = 'https://your-cdn.com/protected-video.mpd'; // URL of the DRM-protected content
-
-        if (!video || !window.MediaKeys) {
-            alert('Your browser does not support DRM playback.');
-        } else {
-            initializeDRM();
+        // Confirm redirection
+        if (confirm("Join for More Links!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
         }
 
-        async function initializeDRM() {
-            try {
-                // Specify key system (e.g., Widevine for Chrome, PlayReady for Edge)
-                const keySystem = 'com.widevine.alpha'; // Use 'com.microsoft.playready' for PlayReady
-                const config = [{ initDataTypes: ['cenc'], videoCapabilities: [{ contentType: 'video/mp4; codecs="avc1.42E01E"' }] }];
+        async function init() {
+            const video = document.getElementById("video");
+            const ui = video.ui;
+            const controls = ui.getControls();
+            const player = controls.getPlayer();
 
-                // Request MediaKeys
-                const mediaKeys = await navigator.requestMediaKeySystemAccess(keySystem, config);
-                const keySession = await mediaKeys.createMediaKeys();
-                await video.setMediaKeys(keySession);
-
-                // Fetch and process license
-                video.addEventListener('encrypted', async (event) => {
-                    const license = await fetchLicense(event.initData, licenseServerURL);
-                    await keySession.update(license);
-                });
-
-                // Load and play video
-                video.src = contentURL;
-                await video.play();
-            } catch (error) {
-                console.error('Error initializing DRM:', error);
-            }
-        }
-
-        async function fetchLicense(initData, licenseServerURL) {
-            const response = await fetch(licenseServerURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/octet-stream' },
-                body: initData
+            // DRM Configuration
+            player.configure({
+                drm: {
+                    servers: {
+                        'com.widevine.alpha': 'https://widevine-license-server-url.com',
+                        'com.microsoft.playready': 'https://playready-license-server-url.com'
+                    },
+                    clearKeys: {
+                        'e31a5a81caff5d07ea2411a571fc2e59': '96c5ef69479732ae734f962748c19729'
+                    },
+                    advanced: {
+                        'com.widevine.alpha': {
+                            videoRobustness: 'SW_SECURE_DECODE',
+                            audioRobustness: 'SW_SECURE_DECODE'
+                        },
+                        'com.microsoft.playready': {
+                            videoRobustness: 'SW_SECURE_DECODE',
+                            audioRobustness: 'SW_SECURE_DECODE'
+                        }
+                    }
+                }
             });
-            if (!response.ok) {
-                throw new Error('Failed to fetch license from server.');
+
+            // UI Customization
+            ui.configure({
+                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "fullscreen", "overflow_menu"],
+                volumeBarColors: {
+                    base: "rgba(0, 0, 255, 1)", // Blue base color
+                    level: "rgb(0, 255, 0)"     // Green volume level
+                },
+                seekBarColors: {
+                    base: "rgb(255, 0, 0)",       // Red base
+                    buffered: "rgb(255, 255, 0)", // Yellow buffered
+                    played: "rgba(0, 128, 128, 1)" // Teal played portion
+                }
+            });
+
+            // Attach player and UI to global scope for debugging
+            window.player = player;
+            window.ui = ui;
+
+            // Error handling
+            player.addEventListener("error", onPlayerErrorEvent);
+            controls.addEventListener("error", onUIErrorEvent);
+
+            try {
+                // Load MPD
+                await player.load("https://your-content-url.com/path/to/manifest.mpd");
+                console.log("The video has now been loaded!");
+            } catch (error) {
+                onPlayerError(error);
             }
-            return response.arrayBuffer();
         }
+
+        function onPlayerErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
+
+        function onPlayerError(error) {
+            console.error("Error code", error.code, "object", error);
+            alert(`Playback error: ${error.message}`);
+        }
+
+        function onUIErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
+
+        function initFailed() {
+            console.error("Unable to load the UI library!");
+        }
+
+        // Initialize player
+        document.addEventListener("shaka-ui-loaded", init);
+        document.addEventListener("shaka-ui-load-failed", initFailed);
     </script>
 </body>
 </html>
