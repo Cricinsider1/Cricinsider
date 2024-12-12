@@ -4,16 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>DRM Protected Player</title>
+    <title>Enhanced DRM Player</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
     <style>
         body {
             background-color: black;
             margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
         }
-        .shaka-spinner-container {
-            display: none;
+        .button-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 9999;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #0066ff;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056d6;
         }
         [data-shaka-player-container] {
             position: absolute;
@@ -29,19 +47,30 @@
     <div data-shaka-player-container>
         <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg"></video>
     </div>
-    <script>
-        // Confirm redirection
-        if (confirm("Join for More Links!")) {
-            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-        }
 
-        async function init() {
+    <div class="button-container">
+        <button onclick="playStream('https://fsly.stream.peacocktv.com/Content/CMAF_OL1-CTR-4s/Live/channel(usa-west)/master.mpd')">Play Stream 1</button>
+        <button onclick="playStream('https://fsly.stream.peacocktv.com/Content/CMAF_OL1-CTR-4s/Live/channel(usa-west)/master.mpd')">Play Stream 2</button>
+        <button onclick="playStream('https://fsly.stream.peacocktv.com/Content/CMAF_OL1-CTR-4s/Live/channel(usa-west)/master.mpd')">Play Stream 3</button>
+        <button onclick="restartVideo()">Restart Video</button>
+        <button onclick="toggleMute()">Toggle Mute</button>
+    </div>
+
+    <script>
+        let isMuted = true;
+        let currentStream = null;
+
+        async function initPlayer() {
             const video = document.getElementById("video");
             const ui = video.ui;
             const controls = ui.getControls();
             const player = controls.getPlayer();
 
-            // DRM Configuration
+            // Global access
+            window.player = player;
+            window.ui = ui;
+
+            // Default DRM Configuration
             player.configure({
                 drm: {
                     servers: {
@@ -49,72 +78,56 @@
                         'com.microsoft.playready': 'https://playready-license-server-url.com'
                     },
                     clearKeys: {
-                        'e31a5a81caff5d07ea2411a571fc2e59': '96c5ef69479732ae734f962748c19729'
-                    },
-                    advanced: {
-                        'com.widevine.alpha': {
-                            videoRobustness: 'SW_SECURE_DECODE',
-                            audioRobustness: 'SW_SECURE_DECODE'
-                        },
-                        'com.microsoft.playready': {
-                            videoRobustness: 'SW_SECURE_DECODE',
-                            audioRobustness: 'SW_SECURE_DECODE'
-                        }
+                        '252a671825ba31ec8433f978c32ccf6d': 'ee560759ecc8d2274df2e63fcef56915'
                     }
                 }
             });
 
-            // UI Customization
-            ui.configure({
-                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "fullscreen", "overflow_menu"],
-                volumeBarColors: {
-                    base: "rgba(0, 0, 255, 1)", // Blue base color
-                    level: "rgb(0, 255, 0)"     // Green volume level
-                },
-                seekBarColors: {
-                    base: "rgb(255, 0, 0)",       // Red base
-                    buffered: "rgb(255, 255, 0)", // Yellow buffered
-                    played: "rgba(0, 128, 128, 1)" // Teal played portion
-                }
-            });
+            player.addEventListener("error", onPlayerError);
+            controls.addEventListener("error", onUIError);
 
-            // Attach player and UI to global scope for debugging
-            window.player = player;
-            window.ui = ui;
+            console.log("Player initialized. Ready to load streams.");
+        }
 
-            // Error handling
-            player.addEventListener("error", onPlayerErrorEvent);
-            controls.addEventListener("error", onUIErrorEvent);
+        async function playStream(url) {
+            if (!window.player) {
+                alert("Player is not initialized yet!");
+                return;
+            }
 
+            currentStream = url;
             try {
-                // Load MPD
-                await player.load("https://your-content-url.com/path/to/manifest.mpd");
-                console.log("The video has now been loaded!");
+                await window.player.load(url);
+                console.log(`Stream loaded: ${url}`);
             } catch (error) {
                 onPlayerError(error);
             }
         }
 
-        function onPlayerErrorEvent(event) {
-            onPlayerError(event.detail);
+        function restartVideo() {
+            const video = document.getElementById("video");
+            video.currentTime = 0;
+            video.play();
+            console.log("Video restarted.");
+        }
+
+        function toggleMute() {
+            const video = document.getElementById("video");
+            isMuted = !isMuted;
+            video.muted = isMuted;
+            console.log(`Mute toggled. Is muted: ${isMuted}`);
         }
 
         function onPlayerError(error) {
-            console.error("Error code", error.code, "object", error);
+            console.error("Player error:", error);
             alert(`Playback error: ${error.message}`);
         }
 
-        function onUIErrorEvent(event) {
-            onPlayerError(event.detail);
+        function onUIError(event) {
+            console.error("UI error:", event.detail);
         }
 
-        function initFailed() {
-            console.error("Unable to load the UI library!");
-        }
-
-        // Initialize player
-        document.addEventListener("shaka-ui-loaded", init);
-        document.addEventListener("shaka-ui-load-failed", initFailed);
+        document.addEventListener("shaka-ui-loaded", initPlayer);
     </script>
 </body>
 </html>
