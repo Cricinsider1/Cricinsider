@@ -1,188 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fast DRM Video Player</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.2.2/shaka-player.compiled.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    h1 {
-      text-align: center;
-      background-color: #000;
-      color: #fff;
-      padding: 10px 0;
-      margin: 0;
-      width: 100%;
-    }
-
-    #video-container {
-      position: relative;
-      max-width: 800px;
-      width: 100%;
-      margin: 20px auto;
-    }
-
-    video {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    .quality-buttons {
-      position: absolute;
-      right: 10px;
-      bottom: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 5px;
-      padding: 10px;
-    }
-
-    .quality-button {
-      background-color: #007bff;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 12px;
-      text-align: center;
-      transition: background-color 0.3s;
-    }
-
-    .quality-button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>TG_@Cricinsider365</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+        }
+        .feed-buttons {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+        .feed-buttons button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .feed-buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-  <h1>Fast DRM Video Player</h1>
-  <div id="video-container">
-    <video id="video" controls autoplay></video>
-    <div class="quality-buttons" id="quality-buttons">
-      <!-- Quality buttons will be dynamically added here -->
+    <div class="feed-buttons">
+        <button onclick="switchStream('https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd', {'key_id1': 'ae26845bd33038a9c0774a0981007294', 'key_id2': '63ac662dde310cfb4cc6f9b43b34196d'})">Feed 1</button>
+        <button onclick="switchStream('https://stream2.mpd', {'key_id3': 'key_value3', 'key_id4': 'key_value4'})">Feed 2</button>
+        <button onclick="switchStream('https://stream3.mpd', {'key_id5': 'key_value5', 'key_id6': 'key_value6'})">Feed 3</button>
     </div>
-  </div>
+    <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+        <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width:100%;height:100%;"></video>
+    </div>
+    <script>
+        let player, ui;
 
-  <script>
-    const videoElement = document.getElementById('video');
-    const qualityButtonsContainer = document.getElementById('quality-buttons');
-    const player = new shaka.Player(videoElement);
+        async function init() {
+            const video = document.getElementById("video");
+            ui = video.ui;
+            const controls = ui.getControls();
+            player = controls.getPlayer();
 
-    // DRM and streaming configuration
-    const drmConfig = {
-      servers: {
-        'com.widevine.alpha': 'https://your-drm-license-server.com/widevine',
-      },
-      advanced: {
-        'com.widevine.alpha': {
-          videoRobustness: 'SW_SECURE_DECODE',
-          audioRobustness: 'SW_SECURE_CRYPTO',
-        },
-      },
-    };
+            ui.configure({
+                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+                volumeBarColors: {
+                    base: "rgba(0, 0, 255, 1)",
+                    level: "rgb(0, 255, 0)"
+                },
+                seekBarColors: {
+                    base: "rgb(255, 0, 0)",
+                    buffered: "rgb(255, 255, 0)",
+                    played: "rgba(0, 128, 128, 1)"
+                }
+            });
 
-    const streamingConfig = {
-      bufferingGoal: 30, // Pre-buffer 30 seconds of video
-      rebufferingGoal: 15, // Ensure at least 15 seconds of buffered content
-      abr: {
-        enabled: true,
-        defaultBandwidthEstimate: 5000000, // Start with a high default estimate (5 Mbps)
-      },
-    };
+            window.player = player;
 
-    player.configure({
-      drm: drmConfig,
-      streaming: streamingConfig,
-    });
+            player.addEventListener("error", onPlayerErrorEvent);
 
-    // Video sources with DRM keys
-    const videoSources = {
-      feed_1: {
-        url: 'https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd',
-        keyId: 'ae26845bd33038a9c0774a0981007294',
-        key: '63ac662dde310cfb4cc6f9b43b34196d',
-      },
-      feed_2: {
-        url: 'https://example.com/stream2.mpd',
-        keyId: '22222222-3333-4444-5555-666666666666',
-        key: 'fedcba9876543210fedcba9876543210',
-      },
-    };
-
-    // Load a video feed
-    async function loadFeed(feed) {
-      const selectedFeed = videoSources[feed];
-      if (selectedFeed) {
-        player.configure({
-          drm: {
-            clearKeys: {
-              [selectedFeed.keyId]: selectedFeed.key,
-            },
-          },
-        });
-
-        try {
-          await player.load(selectedFeed.url);
-          console.log(`Loaded ${feed}`);
-          loadQualityButtons(); // Load quality buttons dynamically
-        } catch (error) {
-          console.error('Error loading video:', error);
+            try {
+                // Load the default stream
+                await player.load("https://stream1.mpd");
+                console.log("Default video stream loaded!");
+            } catch (error) {
+                console.error("Error loading default stream:", error);
+            }
         }
-      }
-    }
 
-    // Generate quality buttons dynamically
-    function loadQualityButtons() {
-      const tracks = player.getVariantTracks();
-      qualityButtonsContainer.innerHTML = ''; // Clear existing buttons
+        function onPlayerErrorEvent(event) {
+            console.error("Player error:", event.detail);
+        }
 
-      // Add "Auto" quality button
-      const autoButton = document.createElement('button');
-      autoButton.textContent = 'Auto';
-      autoButton.className = 'quality-button';
-      autoButton.addEventListener('click', () => {
-        player.configure({ abr: { enabled: true } });
-        console.log('Switched to Auto Quality');
-      });
-      qualityButtonsContainer.appendChild(autoButton);
+        async function switchStream(mpdUrl, drmKeys) {
+            try {
+                player.configure({
+                    drm: {
+                        clearKeys: drmKeys // Pass the key object for this stream
+                    }
+                });
 
-      // Add buttons for specific qualities
-      tracks.forEach((track) => {
-        const button = document.createElement('button');
-        button.textContent = `${track.height}p`;
-        button.className = 'quality-button';
-        button.addEventListener('click', () => {
-          player.configure({ abr: { enabled: false } });
-          player.selectVariantTrack(track, true);
-          console.log(`Switched to ${track.height}p`);
-        });
-        qualityButtonsContainer.appendChild(button);
-      });
-    }
+                await player.load(mpdUrl);
+                console.log(`Switched to stream: ${mpdUrl} with keys:`, drmKeys);
+            } catch (error) {
+                console.error("Error switching streams:", error);
+            }
+        }
 
-    // Default feed load
-    loadFeed('feed_1');
+        function initFailed() {
+            console.error("Unable to load the UI library!");
+        }
 
-    // Pre-buffering optimizations
-    player.getNetworkingEngine().registerResponseFilter((type, response) => {
-      console.log('Buffering optimization applied:', response);
-    });
-
-    // Add event listeners for smooth playback
-    videoElement.addEventListener('waiting', () => console.log('Buffering...'));
-    videoElement.addEventListener('playing', () => console.log('Playing...'));
-  </script>
+        document.addEventListener("shaka-ui-loaded", init);
+        document.addEventListener("shaka-ui-load-failed", initFailed);
+    </script>
 </body>
 </html>
