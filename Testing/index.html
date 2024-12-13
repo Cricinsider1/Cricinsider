@@ -1,25 +1,79 @@
 <!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fox 501</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script><style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection">
-
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@criccoder</title>
+  <link rel="stylesheet" href="https://cxh.pages.dev/style.css">
+<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
 <body>
-    <div class="player-container">
-        <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" allow="encrypted-media" allowfullscreen="true" src="http://insiderlive.pages.dev/Testing">
-        </iframe>
-    </div>
 
-    <div id="popup" style="display: none;">
-        <div class="popup-content">
-          <h2>Support Us!</h2>
-          <p>Join Our Telegram Channel Cricket Nation.</p>
-          <button class="join-btn" onclick="window.open('https://t.me/+Tg8fmhoegLA2ZDM1', '_blank')">Join Now</button>
-          <button class="close-btn" onclick="closePopup()">Already Joined</button>
-        </div>
-      </div>
+<!-- Fullscreen Video CSS -->
+<style>
+  #player {
+    position: absolute;
+    width: 100% !important;
+    height: 100% !important;
+  }
+</style>
+
+<!-- Player -->
+<div id="player"></div>
+<script src="https://cdn.jwplayer.com/libraries/KB5zFt7A.js"></script>
+
+<script>
+  // Video stream configurations (without token)
+  const videoConfigs = {
+    "1": {
+      url: "https://vkvsd63.okcdn.ru/cmaf/7443308808935/sig/BT8V7s3Ni4g/srcIp/3.7.253.57/urls/45.136.21.84/expires/1734386859441/clientType/13/srcAg/CHROME/fromCache/1/mid/9109154376679/id/7443308808935/get/dash_9109154376679.FR5QsSfmxmU.mpd"  // M3U8 stream URL (HLS)
+    },
+    "2": {
+      url: "https://jcevents.jiocinema.com/bpk-tv/Sports18_Khel_voot_MOB/Fallback/hdntl=exp=1734168713~acl=%2F*~id=a994fc0e9f1cff9606c11bea9507deae~data=hdntl~hmac=429fe3f535270523eeb250a0baeda791c56d5327d1a863d4d95c614d5571041c/index.m3u8"  // Example M3U8 URL
+    },
+    "3": {
+      url: "https://prod-sports-eng-cf.jiocinema.com/hls/live/2100307/hd_akamai_merged_avc_eng_cricket_m9_131224/master.m3u8"  // Example M3U8 URL
+    },
+    "4": {
+      url: "https://jiotvbpklive.cdn.jio.com/bpk-tv/IDCDemo_IPL23_Sports18_MOB/Fallback/IDCDemo_IPL23_Sports18.m3u8"  // Example M3U8 URL
+    },
+    "5": {
+      url: "https://prod-sports-eng-cf.jiocinema.com/hls/live/2100307/hd_akamai_merged_avc_eng_cricket_m9_131224/master.m3u8"  // Example M3U8 URL
+    }
+  };
+
+  // Get the query parameter 'id' from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const streamId = urlParams.get('id');  // Extract 'id' parameter from URL
+
+  // Check if the 'id' parameter exists and is valid
+  const videoConfig = videoConfigs[streamId];
+
+  if (videoConfig) {
+    // Initialize JW Player with the selected stream
+    jwplayer("player").setup({
+      file: videoConfig.url, // M3U8 stream URL
+      width: "100%",  // Player width
+      height: "100%", // Player height
+      autostart: true, // Autoplay when ready
+      controls: true,  // Enable player controls (play, pause, volume, etc.)
+    });
+  } else {
+    // If the stream ID is invalid or missing, use the default stream (first one) or display an error
+    alert('Invalid or missing stream ID. Please specify a valid "id" in the URL.');
+    // Optionally redirect to a default stream or show a message to the user
+    jwplayer("player").setup({
+      file: videoConfigs["1"].url, // Load the default stream (1)
+      width: "100%",
+      height: "100%",
+      autostart: true,
+      controls: true,
+    });
+  }
+
+  // Optionally show a confirmation link for Telegram
+  if (confirm("Join Our Telegram Channel @criccoder")) { 
+    window.location.href = "https://telegram.me/criccoder"; 
+  }
+</script>
+
 
 
 </body></html>
