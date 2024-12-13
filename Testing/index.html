@@ -1,250 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html>
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CricketSparx</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            height: 100vh;
+    <meta name="referrer" content="no-referrer"> <title>TG_@Cricinsider365</title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+  <style>img{position:relative;right:130;bottom:10;margin:auto auto;max-width:20%;max-height:20%;object-fit:contain;pointer-events:none}.shaka-spinner-container{display:none}.uc{pointer-events:none}
+body{
+    background-color: #000;
         }
-
-        /* Full-Screen Popup */
-        #popup {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            color: white;
-            z-index: 9999;
-            text-align: center;
-        }
-
-        #popup button {
-            margin: 10px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        #join-now {
-            background-color: #007bff;
-            color: white;
-        }
-
-        #already-joined {
-            background-color: #28a745;
-            color: white;
-        }
-
-        /* Header */
-        #header {
-            font-size: 28px;
-            font-weight: bold;
-            margin: 20px 0;
-            text-align: center;
-            color: white;
-        }
-
-        /* Video Container */
-        #streaming-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            text-align: center;
-        }
-
-        video {
-            width: 100%;
-            height: auto;
-            border: 1px solid white;
-        }
-
-        /* Settings Button */
-        #settings-button {
-            margin: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Settings Modal */
-        #settings-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #222;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
-            z-index: 10000;
-            text-align: center;
-            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
-        }
-
-        #settings-modal select {
-            padding: 10px;
-            width: 100%;
-            border: 1px solid white;
-            border-radius: 5px;
-            background-color: black;
-            color: white;
-            font-size: 16px;
-        }
-
-        #settings-modal button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        /* Telegram Join Button */
-        #telegram-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.0/dist/hls.min.js"></script>
+</style>
 </head>
+<body bgcolor='white' style='margin:0'>
+
 <body>
+<body bgcolor="black" style="margin: 0;">
+    <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+        <video autoplay muted data-shaka-player id=video poster=https://cxh.pages.dev/L.jpg style=width:100%;height:100%></video>
+    </div>
+    <script>
+       if (confirm("Join For More Links!!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
 
-<!-- Full-Screen Popup -->
-<div id="popup">
-    <p>Join our Telegram channel <a href="https://t.me/CricketSparx" target="_blank" style="color: lightblue; text-decoration: none;">@CricketSparx</a> for more links!</p>
-    <button id="join-now" onclick="joinNow()">Join Now</button>
-    <button id="already-joined" onclick="closePopup()">Already Joined</button>
-</div>
+        async function init() {
+            const video = document.getElementById("video");
+            const ui = video.ui;
+            const controls = ui.getControls();
+            const player = controls.getPlayer();
 
-<!-- Header -->
-<div id="header">CricketSparx</div>
-
-<!-- Video Streaming Section -->
-<div id="streaming-container">
-    <video id="videoPlayer" controls></video>
-    <button id="settings-button" onclick="openSettings()">Settings</button>
-</div>
-
-<!-- Settings Modal -->
-<div id="settings-modal">
-    <label for="quality">Select Quality:</label>
-    <select id="quality" onchange="changeQuality()">
-        <option value="-1">Auto</option>
-    </select>
-    <button onclick="closeSettings()">Close</button>
-</div>
-
-<!-- Telegram Join Button -->
-<button id="telegram-button" onclick="joinTelegram()">Join Telegram</button>
-
-<script>
-    const video = document.getElementById('videoPlayer');
-    const qualitySelector = document.getElementById('quality');
-    const settingsModal = document.getElementById('settings-modal');
-    const hls = new Hls();
-
-    // Function to get URL parameter
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
-
-    // Get HLS URL from query parameter
-    const hlsUrl = getQueryParam('url');
-
-    if (hlsUrl) {
-        // Initialize HLS.js
-        if (Hls.isSupported()) {
-            hls.loadSource(hlsUrl);
-            hls.attachMedia(video);
-
-            // Populate Quality Levels
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                const levels = hls.levels;
-                levels.forEach((level, index) => {
-                    const option = document.createElement('option');
-                    option.value = index;
-                    option.textContent = `${level.height}p`;
-                    qualitySelector.appendChild(option);
-                });
+            player.configure({
+                drm: {
+                    clearKeys: {
+                        'ae26845bd33038a9c0774a0981007294': "63ac662dde310cfb4cc6f9b43b34196d"
+                    }
+                }
             });
 
-            // Handle Quality Change
-            function changeQuality() {
-                const quality = parseInt(qualitySelector.value);
-                if (quality === -1) {
-                    hls.currentLevel = -1; // Auto Quality
-                } else {
-                    hls.currentLevel = quality; // Set selected quality
+            ui.configure({
+                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+                volumeBarColors: {
+                    base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                    level: "rgb(0, 255, 0)"     // Green color for the volume level
+                },
+                seekBarColors: {
+                    base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                    buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                    played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
                 }
+            });
+
+            window.player = player;
+            window.ui = ui;
+
+            player.addEventListener("error", onPlayerErrorEvent);
+            controls.addEventListener("error", onUIErrorEvent);
+
+            try {
+                await player.load("https://cors-proxy.cooks.fyi/https://dfwlive-v1-c1p3-sponsored.s.llnwi.net/Content/HLS.cps/Live/channel(WILLHD-3291.dfw.1080)/index.m3u8");
+                console.log("The video has now been loaded!");
+            } catch (error) {
+                onPlayerError(error); 
             }
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            // Native HLS Support (e.g., Safari)
-            video.src = hlsUrl;
         }
-    } else {
-        alert("No URL provided. Please add '?url=your_hls_link.m3u8' to the URL.");
-    }
 
-    // Open Settings Modal
-    function openSettings() {
-        settingsModal.style.display = 'block';
-    }
+        function onPlayerErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
 
-    // Close Settings Modal
-    function closeSettings() {
-        settingsModal.style.display = 'none';
-    }
+        function onPlayerError(error) {
+            console.error("Error code", error.code, "object", error);
+        }
 
-    // Function to handle "Join Now" button
-    function joinNow() {
-        window.open('https://t.me/+Pj_QX9oygJNiYmRl', '_blank');
-    }
+        function onUIErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
 
-    // Function to close the popup
-    function closePopup() {
-        const popup = document.getElementById('popup');
-        popup.style.display = 'none';
-    }
+        function initFailed() {
+            console.error("Unable to load the UI library!");
+        }
 
-    // Function to open Telegram channel
-    function joinTelegram() {
-        window.open('https://t.me/+Pj_QX9oygJNiYmRl', '_blank');
-    }
+        document.addEventListener("shaka-ui-loaded", init);
+        document.addEventListener("shaka-ui-load-failed", initFailed);
+    
 </script>
-
-</body>
+    </body>
 </html>
