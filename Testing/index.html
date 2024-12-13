@@ -31,7 +31,7 @@ body{
             player.configure({
                 drm: {
                     clearKeys: {
-                        'ae26845bd33038a9c0774a0981007294': "63ac662dde310cfb4cc6f9b43b34196d"
+                        'e31a5a81caff5d07ea2411a571fc2e59': "96c5ef69479732ae734f962748c19729"
                     }
                 }
             });
@@ -56,7 +56,7 @@ body{
             controls.addEventListener("error", onUIErrorEvent);
 
             try {
-                await player.load("https://cors-proxy.cooks.fyi/https://dfwlive-v1-c1p3-sponsored.s.llnwi.net/Content/HLS.cps/Live/channel(WILLHD-3291.dfw.1080)/index.m3u8");
+                await player.load("https://live.ll.ww.aiv-cdn.net/OTTB/lhr-nitro/live/clients/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd");
                 console.log("The video has now been loaded!");
             } catch (error) {
                 onPlayerError(error); 
