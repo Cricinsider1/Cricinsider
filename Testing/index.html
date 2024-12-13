@@ -1,72 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plyr with Quality Selector</title>
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
-  <style>
-    #quality-control {
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Links</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --button-bg: #4CAF50;
+            --button-hover-bg: #45a049;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --button-bg: #1E88E5;
+            --button-hover-bg: #1565C0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #link-container div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #link-container img {
+            width: 350px;
+            max-width: 100%;
+        }
+
+        .watch-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .watch-button:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        .theme-toggle {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--button-hover-bg);
+        }
+    </style>
 </head>
 <body>
-  <video id="player" controls crossorigin playsinline></video>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
+    <div id="link-container"></div>
 
-  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const video = document.getElementById('player');
-      const source = 'your-hls-stream-url.m3u8'; // Replace with your HLS stream URL
+    <script>
+        // Fetch M3U file and parse content
+        async function fetchAndDisplayLinks(apiUrl) {
+            try {
+                const response = await fetch(apiUrl);
+                const text = await response.text();
 
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(source);
-        hls.attachMedia(video);
+                const lines = text.split('\n');
+                const container = document.getElementById("link-container");
 
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          // Initialize Plyr
-          const player = new Plyr(video, {
-            controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen'],
-            settings: ['quality'], // Add quality in settings menu
-          });
+                let description = "";
+                let logoUrl = "";
 
-          // Add qualities to Plyr settings
-          const qualities = hls.levels.map((level, index) => ({
-            label: level.height + 'p',
-            value: index,
-          }));
+                lines.forEach(line => {
+                    line = line.trim();
 
-          // Include an "Auto" option for adaptive streaming
-          qualities.unshift({ label: 'Auto', value: -1 });
+                    if (line.startsWith("#EXTINF")) {
+                        const logoMatch = line.match(/tvg-logo="(.*?)"/);
+                        logoUrl = logoMatch ? logoMatch[1] : "";
 
-          // Hook into the Plyr quality change event
-          player.on('qualitychange', (event) => {
-            const quality = event.detail.value;
-            hls.currentLevel = quality === -1 ? -1 : quality;
-          });
+                        const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
+                        description = descriptionMatch ? descriptionMatch[1].trim() : "";
+                    } else if (line.startsWith("http")) {
+                        const linkContainer = document.createElement("div");
 
-          // Set initial quality menu
-          player.config.quality = {
-            default: -1, // Default to auto
-            options: qualities.map(q => q.value),
-            forced: true,
-            onChange: (quality) => {
-              hls.currentLevel = quality;
-            },
-          };
+                        if (logoUrl) {
+                            const logoImg = document.createElement("img");
+                            logoImg.src = logoUrl;
+                            logoImg.alt = "Logo";
+                            linkContainer.appendChild(logoImg);
+                        }
 
-          // Expose the player globally for debugging
-          window.player = player;
-        });
-      } else {
-        // If HLS is not supported
-        video.src = source;
-        const player = new Plyr(video);
-      }
-    });
-  </script>
+                        if (description) {
+                            const descriptionElem = document.createElement("p");
+                            descriptionElem.textContent = description;
+                            linkContainer.appendChild(descriptionElem);
+                        }
+
+                        const button = document.createElement("a");
+                        button.href = linkPrefix + encodeURIComponent(line);
+                        button.target = "_blank";
+                        button.textContent = "Click to Watch";
+                        button.className = "watch-button";
+                        linkContainer.appendChild(button);
+
+                        container.appendChild(linkContainer);
+
+                        description = "";
+                        logoUrl = "";
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching M3U file:", error);
+            }
+        }
+
+        // URL of your M3U API endpoint
+        const apiUrl = "https://your-api-endpoint.com/m3u"; // Replace with your API URL
+        const linkPrefix = "http://Insiderlive.pages.dev/Stream?videoUrl=";
+
+        // Call the function to fetch and display the data
+        fetchAndDisplayLinks(apiUrl);
+
+        // Theme toggle function
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute("data-theme");
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", newTheme);
+        }
+    </script>
 </body>
 </html>
