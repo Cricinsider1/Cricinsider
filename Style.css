@@ -1,26 +1,35 @@
+  color: var(--bg-red);
+}
+
 /*
+Toltips mais perto da barra, alterar cores e remover sombras.
+*/
+.jwplayer.jw-skin-netflix .jw-controlbar .jw-tooltip {
+  box-shadow: none;
+}
 
-Skin Netflix v2.0.5
-Created by: Gabriel Almeida
-Buy Me a Coffee: https://bit.ly/3NlkAGU
+.jwplayer.jw-skin-netflix .jw-controlbar .jw-tooltip.jw-open {
+  border-radius: 0.3rem;
+  color: var(--bg-black);
+}
 
-Ocean Skin For JW Player8
-https://bit.ly/3kVPdo9
+.jwplayer.jw-skin-netflix .jw-controlbar .jw-tooltip .jw-text {
+  background-color: var(--bg-black);
+  border-radius: 0.3rem;
+}
 
-changelog:
-  v2.0.7
-  Fix - JWPlayer 8.27.1
+.jwplayer.jw-skin-netflix .jw-controlbar .jw-text {
+  color: var(--bg-white);
+}
 
-  v2.0.6
-  Added - Forward 10 Seconds
+.jwplayer.jw-skin-netflix .jw-time-tip .jw-text {
+  color: var(--bg-black);
+}
 
-  v2.0.5
-  New - Netflix Buffer .jw-svg-icon-buffer
-  New - Background Color .jw-tooltip-sharing
-  New - Background Color .jw-tooltip-audioTracks
-  New - SVG Icon .jw-svg-icon-audio-tracks
-  New - SVG Icon .jw-svg-icon-pip-on
-  New - SVG Icon .jw-svg-icon-pip-off
-  Added - ADBlock Modal
-  Test - JWPlayer8 JavaScript API
+.jwplayer.jw-skin-netflix .jw-volume-tip {
+  margin-bottom: -4rem;
+}
+
+/*
+Tooltip timeslider e botões de qualidade e legenda.
 */
