@@ -1,79 +1,107 @@
-<!DOCTYPE html><html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@Cricinsider365</title>
-  <link rel="stylesheet" href="http://insiderlive.pages.dev/Style.css">
-<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
-<body>
-
-<!-- Fullscreen Video CSS -->
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>TG_@Cricinsider365</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
 <style>
-  #player {
-    position: absolute;
-    width: 100% !important;
-    height: 100% !important;
-  }
-</style>
-
-<!-- Player -->
-<div id="player"></div>
-<script src="https://cdn.jwplayer.com/libraries/KB5zFt7A.js"></script>
-
-<script>
-  // Video stream configurations (without token)
-  const videoConfigs = {
-    "1": {
-      url: "https://vkvsd63.okcdn.ru/cmaf/7443308808935/sig/BT8V7s3Ni4g/srcIp/3.7.253.57/urls/45.136.21.84/expires/1734386859441/clientType/13/srcAg/CHROME/fromCache/1/mid/9109154376679/id/7443308808935/get/dash_9109154376679.FR5QsSfmxmU.mpd"  // M3U8 stream URL (HLS)
-    },
-    "2": {
-      url: "https://vkvsd55.okcdn.ru/cmaf/7443308808935/sig/HLdYuX6aRnc/srcIp/65.2.48.122/urls/45.136.22.88/expires/1734354015965/clientType/13/srcAg/CHROME/fromCache/1/mid/9109154376679/id/7443308808935/get/hls_9109154376679.FR5QsSfmxmU.m3u8"  // Example M3U8 URL
-    },
-    "3": {
-      url: "https://vkvsd55.okcdn.ru/cmaf/7443308808935/sig/7t23epCOIig/expires/1734214202316/srcIp/13.200.39.102/urls/45.136.22.88/clientType/13/srcAg/CHROME/mid/9109154376679/get/hls_9109154376679.FR5QsSfmxmU.m3u8"  // Example M3U8 URL
-    },
-    "4": {
-      url: "https://jiotvbpklive.cdn.jio.com/bpk-tv/IDCDemo_IPL23_Sports18_MOB/Fallback/IDCDemo_IPL23_Sports18.m3u8"  // Example M3U8 URL
-    },
-    "5": {
-      url: "https://prod-sports-eng-cf.jiocinema.com/hls/live/2100307/hd_akamai_merged_avc_eng_cricket_m9_131224/master.m3u8"  // Example M3U8 URL
+    img { 
+        position: relative; 
+        right: 130px; 
+        bottom: 10px; 
+        margin: auto auto; 
+        max-width: 20%; 
+        max-height: 20%; 
+        object-fit: contain; 
+        pointer-events: none;
     }
-  };
+    .shaka-spinner-container { display: none; }
+    .uc { pointer-events: none; }
+    body {
+        background-color: #000;
+    }
+    .logo {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+        max-width: 150px;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body bgcolor="black" style="margin: 0;">
+    <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+        <!-- Logo -->
+        <img src="https://i.ibb.co/1rpNh3s/Tensports.jpg" alt="Logo" class="logo">
+        <!-- Video Player -->
+        <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width: 100%; height: 100%;"></video>
+    </div>
+    <script>
+        if (confirm("Join For More Links!!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
 
-  // Get the query parameter 'id' from the URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const streamId = urlParams.get('id');  // Extract 'id' parameter from URL
+        async function init() {
+            const video = document.getElementById("video");
+            const ui = video.ui;
+            const controls = ui.getControls();
+            const player = controls.getPlayer();
 
-  // Check if the 'id' parameter exists and is valid
-  const videoConfig = videoConfigs[streamId];
+            player.configure({
+                drm: {
+                    clearKeys: {
+                        'e31a5a81caff5d07ea2411a571fc2e59': "96c5ef69479732ae734f962748c19729"
+                    }
+                }
+            });
 
-  if (videoConfig) {
-    // Initialize JW Player with the selected stream
-    jwplayer("player").setup({
-      file: videoConfig.url, // M3U8 stream URL
-      width: "100%",  // Player width
-      height: "100%", // Player height
-      autostart: true, // Autoplay when ready
-      controls: true,  // Enable player controls (play, pause, volume, etc.)
-    });
-  } else {
-    // If the stream ID is invalid or missing, use the default stream (first one) or display an error
-    alert('Invalid or missing stream ID. Please specify a valid "id" in the URL.');
-    // Optionally redirect to a default stream or show a message to the user
-    jwplayer("player").setup({
-      file: videoConfigs["1"].url, // Load the default stream (1)
-      width: "100%",
-      height: "100%",
-      autostart: true,
-      controls: true,
-    });
-  }
+            ui.configure({
+                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+                volumeBarColors: {
+                    base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                    level: "rgb(0, 255, 0)"     // Green color for the volume level
+                },
+                seekBarColors: {
+                    base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                    buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                    played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+                }
+            });
 
-  // Optionally show a confirmation link for Telegram
-  if (confirm("Join Our Telegram Channel @Cricinsider365")) { 
-    window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl"; 
-  }
-</script>
+            window.player = player;
+            window.ui = ui;
 
+            player.addEventListener("error", onPlayerErrorEvent);
+            controls.addEventListener("error", onUIErrorEvent);
 
+            try {
+                await player.load("https://live.ll.ww.aiv-cdn.net/OTTB/lhr-nitro/live/clients/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd");
+                console.log("The video has now been loaded!");
+            } catch (error) {
+                onPlayerError(error); 
+            }
+        }
 
-</body></html>
+        function onPlayerErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
+
+        function onPlayerError(error) {
+            console.error("Error code", error.code, "object", error);
+        }
+
+        function onUIErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
+
+        function initFailed() {
+            console.error("Unable to load the UI library!");
+        }
+
+        document.addEventListener("shaka-ui-loaded", init);
+        document.addEventListener("shaka-ui-load-failed", initFailed);
+    </script>
+</body>
+</html>
