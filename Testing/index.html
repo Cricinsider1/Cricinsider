@@ -2,69 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DRM MPD Stream with Keys</title>
-  <link rel="stylesheet" href="https://cxh.pages.dev/style.css">
+  <title>TG - @Cricinsider365</title>
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+  <style>
+    /* Styling the body */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    /* Styling the video container */
+    #video {
+      width: 100%;
+      height: calc(100vh - 60px);
+      background-color: #000;
+    }
+
+    /* Styling the Telegram section */
+    .telegram-container {
+      background-color: #0074d9;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Styling the Join Telegram button */
+    .telegram-container button {
+      background-color: white;
+      color: #0074d9;
+      border: 2px solid white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .telegram-container button:hover {
+      background-color: #005bb5;
+      color: white;
+      border: 2px solid #005bb5;
+    }
+  </style>
 </head>
 <body>
+  <div id="video"></div>
 
-<!-- Video Player -->
-<div id="player"></div>
-<script src="https://cdn.jwplayer.com/libraries/KB5zFt7A.js"></script>
+  <div class="telegram-container">
+    <p style="margin: 0; font-size: 18px;">Join Our Telegram Channel for More Updates</p>
+    <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
+      <button id="joinTelegramButton">Join Telegram</button>
+    </a>
+  </div>
 
-<script>
-  // Video stream configurations with ClearKey DRM
-  const videoConfigs = {
-    "1": {
-      url: "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd", // MPD file URL
-      drm: {
-        clearkey: {
-          keys: {
-            // Provide Key ID and Key as a JSON object
-            "ae26845bd33038a9c0774a0981007294": "63ac662dde310cfb4cc6f9b43b34196d",
-          },
-        },
-      },
-    },
-    "2": {
-      url: "https://example.com/path/to/another/drm-protected.mpd",
-      drm: {
-        clearkey: {
-          keys: {
-            "87654321876543218765432187654321": "fedcbafedcbafedcbafedcbafedcbafe",
-          },
-        },
-      },
-    },
-  };
+  <script>
+    // Function to get video URL from the domain
+    function getVideoUrlFromDomain() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('videoUrl');
+    }
 
-  // Get the query parameter 'id' from the URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const streamId = urlParams.get('id');
-
-  // Check if the 'id' parameter exists and is valid
-  const videoConfig = videoConfigs[streamId];
-
-  if (videoConfig) {
-    // Initialize JW Player with the selected DRM stream
-    jwplayer("player").setup({
-      file: videoConfig.url, // MPD file URL
+    // Set up JW Player
+    jwplayer("video").setup({
       width: "100%",
       height: "100%",
       autostart: true,
-      controls: true,
-      drm: {
-        clearkey: {
-          keyids: Object.keys(videoConfig.drm.clearkey.keys), // Extract Key IDs
-          keys: videoConfig.drm.clearkey.keys, // Pass Key ID-Key pairs
-        },
-      },
+      mute: false,
+      file: getVideoUrlFromDomain()
     });
-  } else {
-    // If the stream ID is invalid or missing, display an error or load a default stream
-    alert('Invalid or missing stream ID. Please specify a valid "id" in the URL.');
-  }
-</script>
 
+    // Prompt for Telegram channel
+    if (confirm("Join Our Telegram Channel @Cricinsider365 For More Links")) {
+      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+    }
+  </script>
 </body>
 </html>
