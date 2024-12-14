@@ -1,87 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TG - @Cricinsider365</title>
-  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
-  <style>
-    /* Styling the body */
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>TG_@Cricinsider365</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+<style>
+    img {
+        position: relative;
+        right: 130px;
+        bottom: 10px;
+        margin: auto auto;
+        max-width: 20%;
+        max-height: 20%;
+        object-fit: contain;
+        pointer-events: none;
+    }
+    .shaka-spinner-container {
+        display: none;
+    }
+    .uc {
+        pointer-events: none;
+    }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+        background-color: #000;
     }
-
-    /* Styling the video container */
-    #video {
-      width: 100%;
-      height: calc(100vh - 60px);
-      background-color: #000;
-    }
-
-    /* Styling the Telegram section */
-    .telegram-container {
-      background-color: #0074d9;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-
-    /* Styling the Join Telegram button */
-    .telegram-container button {
-      background-color: white;
-      color: #0074d9;
-      border: 2px solid white;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .telegram-container button:hover {
-      background-color: #005bb5;
-      color: white;
-      border: 2px solid #005bb5;
-    }
-  </style>
+</style>
 </head>
-<body>
-  <div id="video"></div>
+<body bgcolor='white' style='margin:0'>
+<body bgcolor="black" style="margin: 0;">
+    <script>
+        // Restrict iframe embedding
+        if (window.top !== window.self) {
+            window.addEventListener('DOMContentLoaded', function() {
+                document.body.innerHTML = '<div id="message">Ab to copy mat kar chutiye By @skdevl</div>';
+            });
+        }
+    </script>
+    <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+        <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width:100%;height:100%"></video>
+    </div>
+    <script>
+        if (confirm("Join For More Links!!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
 
-  <div class="telegram-container">
-    <p style="margin: 0; font-size: 18px;">Join Our Telegram Channel for More Updates</p>
-    <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
-      <button id="joinTelegramButton">Join Telegram</button>
-    </a>
-  </div>
+        async function init() {
+            const video = document.getElementById("video");
+            const ui = video.ui;
+            const controls = ui.getControls();
+            const player = controls.getPlayer();
 
-  <script>
-    // Function to get video URL from the domain
-    function getVideoUrlFromDomain() {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get('videoUrl');
-    }
+            player.configure({
+                drm: {
+                    clearKeys: {
+                        '59ed8dc9d4a48857ef8e5865919496cc': "0d3680bd8b349deda8b7fdd1da71b7f8"
+                    }
+                }
+            });
 
-    // Set up JW Player
-    jwplayer("video").setup({
-      width: "100%",
-      height: "100%",
-      autostart: true,
-      mute: false,
-      file: getVideoUrlFromDomain()
-    });
+            ui.configure({
+                controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+                volumeBarColors: {
+                    base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                    level: "rgb(0, 255, 0)"     // Green color for the volume level
+                },
+                seekBarColors: {
+                    base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                    buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                    played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+                }
+            });
 
-    // Prompt for Telegram channel
-    if (confirm("Join Our Telegram Channel @Cricinsider365 For More Links")) {
-      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-    }
-  </script>
+            window.player = player;
+            window.ui = ui;
+
+            player.addEventListener("error", onPlayerErrorEvent);
+            controls.addEventListener("error", onUIErrorEvent);
+
+            try {
+                await player.load("https://cors-anywhere.ammoapps.com/https://dfwlive-v1-c1p3-sponsored.akamaized.net/Content/HLS.cps/Live/channel(WILLHD-3291.dfw.1080)/index.m3u8");
+                console.log("The video has now been loaded!");
+            } catch (error) {
+                onPlayerError(error); 
+            }
+        }
+
+        function onPlayerErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
+
+        function onPlayerError(error) {
+            console.error("Error code", error.code, "object", error);
+        }
+
+        function onUIErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
+
+        function initFailed() {
+            console.error("Unable to load the UI library!");
+        }
+
+        document.addEventListener("shaka-ui-loaded", init);
+        document.addEventListener("shaka-ui-load-failed", initFailed);
+    </script>
 </body>
 </html>
