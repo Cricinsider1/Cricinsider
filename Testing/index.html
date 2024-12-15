@@ -57,7 +57,7 @@
             }
         });
 
-        // Configure UI: Add overflow menu and move playback speed inside it
+        // Configure UI: Add Overflow Menu and Language Options
         ui.configure({
             controlPanelElements: [
                 "play_pause", 
@@ -71,7 +71,9 @@
                 "overflow_menu"      // Add Overflow Menu button
             ],
             overflowMenuButtons: [
-                "playback_rate"      // Move Playback Speed into the Overflow Menu
+                "playback_rate",      // Move Playback Speed into Overflow Menu
+                "audio_languages",    // Add audio language selection
+                "text_languages"      // Add subtitle language selection
             ],
             volumeBarColors: {
                 base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
