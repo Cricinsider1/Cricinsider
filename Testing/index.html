@@ -6,43 +6,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
 <style>
-    img {
-        position: relative;
-        right: 130px;
-        bottom: 10px;
-        margin: auto auto;
-        max-width: 20%;
-        max-height: 20%;
-        object-fit: contain;
-        pointer-events: none;
+    body {
+        background-color: #000;
     }
     .shaka-spinner-container {
         display: none;
     }
-    .uc {
-        pointer-events: none;
-    }
-    body {
-        background-color: #000;
-    }
 </style>
-<body bgcolor="black" style="margin: 0;">
-<script>
-    // Restrict iframe embedding
-    if (window.top !== window.self) {
-        window.addEventListener('DOMContentLoaded', function () {
-            document.body.innerHTML = '<div id="message">Ab to copy mat kar chutiye By @skdevl</div>';
-        });
-    }
-</script>
+<body style="margin: 0;">
+
 <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width:100%;height:100%"></video>
 </div>
-<script>
-    if (confirm("Join For More Links!!")) {
-        window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-    }
 
+<script>
     async function init() {
         const video = document.getElementById("video");
         const ui = video.ui;
@@ -57,32 +34,30 @@
             }
         });
 
-        // Configure UI: Add Overflow Menu and Language Options
+        // Configure UI: Add Overflow Menu dynamically
         ui.configure({
             controlPanelElements: [
-                "play_pause", 
-                "mute", 
-                "volume", 
-                "spacer", 
-                "time_and_duration", 
-                "picture_in_picture", // PiP button on main screen
-                "quality", 
-                "fullscreen", 
-                "overflow_menu"      // Add Overflow Menu button
+                "play_pause",
+                "mute",
+                "volume",
+                "spacer",
+                "time_and_duration",
+                "picture_in_picture",
+                "quality",
+                "fullscreen",
+                "overflow_menu"
             ],
             overflowMenuButtons: [
-                "playback_rate",      // Move Playback Speed into Overflow Menu
-                "audio_languages",    // Add audio language selection
-                "text_languages"      // Add subtitle language selection
+                "playback_rate" // Add playback rate by default
             ],
             volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                level: "rgb(0, 255, 0)"     // Green color for the volume level
+                base: "rgba(0, 0, 255, 1)",
+                level: "rgb(0, 255, 0)"
             },
             seekBarColors: {
-                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+                base: "rgb(255, 0, 0)",
+                buffered: "rgb(255, 255, 0)",
+                played: "rgba(0, 128, 128, 1)"
             }
         });
 
@@ -95,8 +70,32 @@
         try {
             await player.load("https://ssc-1-enc.edgenextcdn.net/out/v1/c696e4819b55414388a1a487e8a45ca1/index.mpd");
             console.log("The video has now been loaded!");
+            
+            // Dynamically update the Overflow Menu with available tracks
+            updateOverflowMenu(player, ui);
+
         } catch (error) {
             onPlayerError(error);
+        }
+    }
+
+    // Dynamically add audio and text language tracks to the Overflow Menu
+    function updateOverflowMenu(player, ui) {
+        const audioTracks = player.getVariantTracks(); // Get available audio tracks
+        const textTracks = player.getTextTracks();    // Get available subtitle tracks
+
+        // Add audio language options
+        if (audioTracks.length > 0) {
+            ui.configure({
+                overflowMenuButtons: ui.getConfiguration().overflowMenuButtons.concat("audio_languages")
+            });
+        }
+
+        // Add subtitle language options
+        if (textTracks.length > 0) {
+            ui.configure({
+                overflowMenuButtons: ui.getConfiguration().overflowMenuButtons.concat("text_languages")
+            });
         }
     }
 
