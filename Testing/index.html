@@ -25,6 +25,16 @@
     body {
         background-color: #000;
     }
+    .shaka-pip-button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 5px;
+    }
+    .shaka-pip-button:hover {
+        color: yellow;
+    }
 </style>
 </head>
 <body style="margin: 0;">
@@ -59,9 +69,10 @@
                     "volume", 
                     "spacer", 
                     "time_and_duration", 
-                    "picture_in_picture", // Add custom PiP button
-                    "overflow_menu",
-                    "fullscreen"
+                    "quality", 
+                    "picture_in_picture", // Add PiP button
+                    "fullscreen", 
+                    "overflow_menu"
                 ],
                 volumeBarColors: {
                     base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
