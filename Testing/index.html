@@ -1,122 +1,139 @@
 <html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
+<meta name="referrer" content="no-referrer"> 
 <title>TG_@Cricinsider365</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>    
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
 <style>
-    body {
-        background-color: #000;
+    img {
+        position: relative;
+        right: 130;
+        bottom: 10;
+        margin: auto auto;
+        max-width: 20%;
+        max-height: 20%;
+        object-fit: contain;
+        pointer-events: none;
     }
     .shaka-spinner-container {
         display: none;
     }
+    .uc {
+        pointer-events: none;
+    }
+    body {
+        background-color: #000;
+    }
 </style>
+</head>
 <body style="margin: 0;">
+    <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+        <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width: 100%; height: 100%;"></video>
+    </div>
+    <script>
+        if (confirm("Join For More Links!!")) {
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        }
 
-<div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-    <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width:100%;height:100%"></video>
-</div>
+        async function init() {
+            const video = document.getElementById("video");
+            const ui = video.ui;
+            const controls = ui.getControls();
+            const player = controls.getPlayer();
 
-<script>
-    async function init() {
-        const video = document.getElementById("video");
-        const ui = video.ui;
-        const controls = ui.getControls();
-        const player = controls.getPlayer();
-
-        player.configure({
-            drm: {
-                clearKeys: {
-                    'd84c325f36814f39bbe59080272b10c3': "550727de4c96ef1ecff874905493580f"
+            // Configure DRM settings
+            player.configure({
+                drm: {
+                    clearKeys: {
+                        'e31a5a81caff5d07ea2411a571fc2e59': "96c5ef69479732ae734f962748c19729"
+                    }
                 }
-            }
-        });
+            });
 
-        // Configure UI: Add Overflow Menu dynamically
-        ui.configure({
-            controlPanelElements: [
-                "play_pause",
-                "mute",
-                "volume",
-                "spacer",
-                "time_and_duration",
+            // Configure the UI elements
+            ui.configure({
+                controlPanelElements: [
+                    "play_pause", 
+                    "mute", 
+                    "volume", 
+                    "spacer", 
+                    "time_and_duration", 
+                    "picture_in_picture", // Add custom PiP button
+                    "overflow_menu",
+                    "fullscreen"
+                ],
+                volumeBarColors: {
+                    base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                    level: "rgb(0, 255, 0)"     // Green color for the volume level
+                },
+                seekBarColors: {
+                    base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                    buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                    played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+                }
+            });
+
+            // Add PiP Button functionality
+            const pipButton = new shaka.ui.Element.Factory(
                 "picture_in_picture",
-                "quality",
-                "fullscreen",
-                "overflow_menu"
-            ],
-            overflowMenuButtons: [
-                "playback_rate" // Add playback rate by default
-            ],
-            volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)",
-                level: "rgb(0, 255, 0)"
-            },
-            seekBarColors: {
-                base: "rgb(255, 0, 0)",
-                buffered: "rgb(255, 255, 0)",
-                played: "rgba(0, 128, 128, 1)"
+                class extends shaka.ui.Element {
+                    constructor(parent, controls) {
+                        super(parent, controls);
+                        this.button_ = document.createElement("button");
+                        this.button_.classList.add("shaka-pip-button");
+                        this.button_.textContent = "PiP";
+                        this.parent.appendChild(this.button_);
+                        this.button_.addEventListener("click", this.onPipClick_.bind(this));
+                    }
+
+                    async onPipClick_() {
+                        if (document.pictureInPictureElement) {
+                            await document.exitPictureInPicture();
+                        } else {
+                            await video.requestPictureInPicture();
+                        }
+                    }
+                }
+            );
+
+            ui.configure({
+                customElements: ["picture_in_picture"]
+            });
+
+            // Handle Player and UI events
+            window.player = player;
+            window.ui = ui;
+
+            player.addEventListener("error", onPlayerErrorEvent);
+            controls.addEventListener("error", onUIErrorEvent);
+
+            try {
+                await player.load("https://live.ll.ww.aiv-cdn.net/OTTB/lhr-nitro/live/clients/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd");
+                console.log("The video has now been loaded!");
+            } catch (error) {
+                onPlayerError(error); 
             }
-        });
-
-        window.player = player;
-        window.ui = ui;
-
-        player.addEventListener("error", onPlayerErrorEvent);
-        controls.addEventListener("error", onUIErrorEvent);
-
-        try {
-            await player.load("https://ssc-1-enc.edgenextcdn.net/out/v1/c696e4819b55414388a1a487e8a45ca1/index.mpd");
-            console.log("The video has now been loaded!");
-            
-            // Dynamically update the Overflow Menu with available tracks
-            updateOverflowMenu(player, ui);
-
-        } catch (error) {
-            onPlayerError(error);
-        }
-    }
-
-    // Dynamically add audio and text language tracks to the Overflow Menu
-    function updateOverflowMenu(player, ui) {
-        const audioTracks = player.getVariantTracks(); // Get available audio tracks
-        const textTracks = player.getTextTracks();    // Get available subtitle tracks
-
-        // Add audio language options
-        if (audioTracks.length > 0) {
-            ui.configure({
-                overflowMenuButtons: ui.getConfiguration().overflowMenuButtons.concat("audio_languages")
-            });
         }
 
-        // Add subtitle language options
-        if (textTracks.length > 0) {
-            ui.configure({
-                overflowMenuButtons: ui.getConfiguration().overflowMenuButtons.concat("text_languages")
-            });
+        function onPlayerErrorEvent(event) {
+            onPlayerError(event.detail);
         }
-    }
 
-    function onPlayerErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
+        function onPlayerError(error) {
+            console.error("Error code", error.code, "object", error);
+        }
 
-    function onPlayerError(error) {
-        console.error("Error code", error.code, "object", error);
-    }
+        function onUIErrorEvent(event) {
+            onPlayerError(event.detail);
+        }
 
-    function onUIErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
+        function initFailed() {
+            console.error("Unable to load the UI library!");
+        }
 
-    function initFailed() {
-        console.error("Unable to load the UI library!");
-    }
-
-    document.addEventListener("shaka-ui-loaded", init);
-    document.addEventListener("shaka-ui-load-failed", initFailed);
-</script>
+        document.addEventListener("shaka-ui-loaded", init);
+        document.addEventListener("shaka-ui-load-failed", initFailed);
+    </script>
 </body>
 </html>
