@@ -57,7 +57,7 @@
             }
         });
 
-        // Updated: Remove overflow_menu and configure buttons
+        // Configure UI: Add overflow menu and move playback speed inside it
         ui.configure({
             controlPanelElements: [
                 "play_pause", 
@@ -65,10 +65,13 @@
                 "volume", 
                 "spacer", 
                 "time_and_duration", 
-                "picture_in_picture", // Add PiP button
-                "playback_rate",      // Add Playback Speed button
+                "picture_in_picture", // PiP button on main screen
                 "quality", 
-                "fullscreen"
+                "fullscreen", 
+                "overflow_menu"      // Add Overflow Menu button
+            ],
+            overflowMenuButtons: [
+                "playback_rate"      // Move Playback Speed into the Overflow Menu
             ],
             volumeBarColors: {
                 base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
