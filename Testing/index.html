@@ -1,126 +1,260 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@Cricinsider365</title>
-  <link rel="stylesheet" href="http://insiderlive.pages.dev/Style.css">
-  <style type="text/css">
-    * { user-select: auto !important; -webkit-user-select: auto !important; }
-  </style>
-  <input type="hidden" id="inject_idm_text_selection">
-</head>
-<body>
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="assets/style.css">
 
-<!-- Fullscreen Video CSS -->
-<style>
-  #player {
-    position: absolute;
-    width: 100% !important;
-    height: 100% !important;
+
+
+    <style>
+ body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px;
+            position: relative;
+        }
+
+        #player {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .video-wrapper iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .info-box {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #80808080;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .info-box .logo {
+            width: 80px; /* Adjust size as needed */
+            height: 80px; /* Adjust size as needed */
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .info-box .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .info-box .info-content {
+            flex-grow: 1;
+        }
+        .info-box .info-content h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .info-box .info-content p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            color: #555;
+        }
+        .info-box .info-content a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .info-box .info-content a:hover {
+            background-color: #0056b3;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 350px;
+            height: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1000; /* Ensure it's on top of other content */
+            background: #fff; /* Ensure the chat box has a white background */
+            overflow: hidden; /* Prevent content overflow */
+        }
+        .chat-container iframe {
+            width: 100%;
+            height: calc(100% - 40px); /* Adjust height to accommodate the close button */
+            border: none;
+            border-radius: 8px 8px 0 0; /* Rounded corners on the top */
+        }
+        .chat-close {
+            width: 40px;
+            height: 40px;
+            background-color: #f44336; /* Red background */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+            z-index: 1001; /* Ensure it's above other content */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .chat-close:before {
+            content: '×'; /* Unicode multiplication sign */
+            font-size: 24px;
+        }
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1001; /* Ensure it's above the chat box */
+            user-select: none; /* Prevent text selection during drag */
+        }
+        .chat-toggle:after {
+            content: "Chat";
+            font-size: 14px;
+        }
+        .chat-toggle.open:after {
+            content: "Close";
+        }
+        .telegram-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1001; /* Ensure it's above other content */
+        }
+        .telegram-link img {
+            width: 50px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .video-wrapper {
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+            .video-wrapper iframe {
+                height: 250px; /* Adjust height for small screens */
+            }
+            .info-box {
+                width: calc(100% - 40px);
+                font-size: 14px; /* Adjust font size for small screens */
+                flex-direction: column; /* Stack logo and content vertically */
+                align-items: center; /* Center items */
+                gap: 10px; /* Reduce gap between logo and content */
+                padding: 10px; /* Reduce padding */
+                box-sizing: border-box; /* Ensure padding does not affect width */
+            }
+            .info-box .logo {
+                width: 60px; /* Adjust size for small screens */
+                height: 60px; /* Adjust size for small screens */
+            }
+            .info-box .info-content {
+                text-align: center; /* Center text on small screens */
+            }
+            .chat-container {
+                width: calc(100% - 40px);
+                height: 400px;
+            }
+            .chat-toggle {
+                bottom: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            .telegram-link {
+                bottom: 10px;
+                left: 10px;
+            }
+            .telegram-link img {
+                width: 40px;
+            }
+        }
+
+
+
+/* Counter Widget Positioning */
+
+.info-box i {
+    margin-right: 4px;
+    font-size: 10px;
   }
-</style>
 
-<!-- Player -->
-<div id="player"></div>
-<script src="https://cdn.jsdelivr.net/npm/shaka-player@3.0.0/dist/shaka-player.compiled.js"></script>
+  
+#counter-container span {
+    margin-left: 2px;
+}
 
-<script>
-  // Video stream configurations (with MPD URLs and DRM keys)
-  const videoConfigs = {
-    "1": {
-      url: "https://example.com/stream1.mpd",  // Example MPD stream URL
-      drm: {
-        keyId: "4a267ba09b3a43969364ee77f76dd622",  // Key ID for stream 1
-        key: "5b00d4341e90b3022b5e57139ae8ab16"   // Key for stream 1
-      }
-    },
-    "2": {
-      url: "https://cors-anywhere.ammoapps.com/https://dfwlive-v1-c1p3-sponsored.akamaized.net/Content/HLS.cps/Live/channel(WILLHD-3291.dfw.1080)/index.m3u8",  // Example MPD stream URL
-      drm: {
-        keyId: "59ed8dc9d4a48857ef8e5865919496cc",  // Key ID for stream 2
-        key: "0d3680bd8b349deda8b7fdd1da71b7f8"   // Key for stream 2
-      }
-    },
-    "3": {
-      url: "https://example.com/stream3.mpd",  // Example MPD stream URL
-      drm: {
-        keyId: "5d2b847f7e54b3f0a3f729e4e2de9d88",  // Key ID for stream 3
-        key: "2e9bb9a39b7d2c3ba1b0809ee53b06b2"   // Key for stream 3
-      }
-    },
-    "4": {
-      url: "https://example.com/stream4.mpd",  // Example MPD stream URL
-      drm: {
-        keyId: "9b4ab1e7c739ab392089f2b3d26798f9",  // Key ID for stream 4
-        key: "52a43c3f2e7d88e129283bf2310b9c9a"   // Key for stream 4
-      }
-    },
-    "5": {
-      url: "https://example.com/stream5.mpd",  // Example MPD stream URL
-      drm: {
-        keyId: "c48f73e8e3a7d1f0ac5575a2f4b7b6e2",  // Key ID for stream 5
-        key: "aff37220fbb4e745a287ea0f68e6b0f1"   // Key for stream 5
-      }
+        #counter-container {
+            position: absolute;
+            top: -19px; /* Adjust for top padding */
+            right: 10px; /* Adjust for right padding */
+            z-index: 10; /* Ensure the widget is on top */
+            font-size: 12px;
+            gap: 4px;
+           
+        }
+
+/* Prevent links and styles from appearing */
+    #counter-container a {
+        pointer-events: none; /* Disable link clicks */
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Inherit text color */
     }
-  };
 
-  // Get the query parameter 'id' from the URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const streamId = urlParams.get('id');  // Extract 'id' parameter from URL
+    #counter-container span {
+        color: inherit; /* Make sure text has the same color */
+        font-weight: bold; /* Avoid bold styles */
+    }
 
-  // Check if the 'id' parameter exists and is valid
-  const videoConfig = videoConfigs[streamId];
-
-  if (videoConfig) {
-    // Initialize Shaka Player with the selected stream and DRM configuration
-    const player = new shaka.Player(document.getElementById('player'));
-
-    // Configure DRM
-    player.configure({
-      drm: {
-        clearKeys: {
-          [videoConfig.drm.keyId]: videoConfig.drm.key // Set the DRM key for the selected stream
-        }
-      }
-    });
-
-    // Load the MPD stream URL
-    player.load(videoConfig.url).then(() => {
-      console.log("Stream loaded successfully with DRM!");
-    }).catch(error => {
-      console.error("Error loading the stream:", error);
-    });
-  } else {
-    // If the stream ID is invalid or missing, use the default stream (first one) or display an error
-    alert('Invalid or missing stream ID. Please specify a valid "id" in the URL.');
-    const defaultConfig = videoConfigs["1"];
-
-    // Initialize Shaka Player with the default stream
-    const player = new shaka.Player(document.getElementById('player'));
-
-    // Configure DRM for default stream
-    player.configure({
-      drm: {
-        clearKeys: {
-          [defaultConfig.drm.keyId]: defaultConfig.drm.key // Set the DRM key for the default stream
-        }
-      }
-    });
-
-    // Load the default MPD stream URL
-    player.load(defaultConfig.url).then(() => {
-      console.log("Default stream loaded successfully with DRM!");
-    }).catch(error => {
-      console.error("Error loading the default stream:", error);
-    });
-  }
-
-  // Optionally show a confirmation link for Telegram
-  if (confirm("Join Our Telegram Channel @Cricinsider365")) {
-    window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-  }
-</script>
-
-</body>
-</html>
+    </style>
+<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"><style media="screen">.jwplayer.jw-flag-time-slider-above .jw-vpaid-non-linear{bottom:66px}.jwplayer.jw-breakpoint-7 .jw-vpaid-non-linear{bottom:132px}.jwplayer.jw-flag-user-inactive:not(.jw-state-paused) .jw-vpaid-non-linear{bottom:.5em}.jwplayer .jw-vpaid-non-linear{bottom:60px}.jwplayer .jw-vpaid-iframe{border:0;width:100%;height:100%;position:absolute;overflow:hidden}.jwplayer .jw-plugin-vast.jw-plugin{top:0;width:100%;pointer-events:none}.jwplayer .jw-plugin-vast.jw-plugin *{pointer-events:all}.jwplayer .jw-plugin-vast .jw-ad-icon-container{position:absolute;display:none;pointer-events:all;cursor:pointer}.jwplayer .jw-plugin-vast .jw-ad-icon-container.jw-ad-icon-active{display:block}.jwplayer .jw-plugin-vast .jw-ad-icon-container iframe{pointer-events:none;border:none;height:100%;width:100%;margin:0}.jw-plugin-vast.jw-vast-nonlinear-active .jw-banner{opacity:1}.jw-plugin-vast.jw-vast-nonlinear-active .jw-vast-nonlinear-close-button{margin:0 auto;opacity:.75}.jw-plugin-vast.jw-vast-nonlinear-active:hover .jw-vast-nonlinear-close-button{opacity:1}.jw-plugin-vast.jw-vast-nonlinear-collapsed .jw-vast-nonlinear-open-button{margin:0 auto;opacity:.5}.jw-plugin-vast.jw-vast-nonlinear-collapsed .jw-banner,.jw-plugin-vast.jw-vast-nonlinear-collapsed .jw-vast-nonlinear-close-button{opacity:0}.jw-plugin-vast.jw-vast-nonlinear-collapsed:hover .jw-vast-nonlinear-open-button{opacity:1}.jw-plugin-vast.jw-vast-nonlinear-collapsed:hover .jw-vast-nonlinear-close-button{opacity:0}.jw-plugin-vast .jw-vast-nonlinear-close-button,.jw-plugin-vast .jw-vast-nonlinear-open-button{position:absolute;right:0;bottom:0;left:0;display:block;margin:auto;width:18px;height:18px;cursor:pointer;opacity:0;transition:opacity .2s ease}.jw-plugin-vast .jw-vast-nonlinear-close-button{transform:rotate(45deg)}</style><style>.jw-reset{text-align:left;direction:ltr}.jw-reset,.jw-reset-text{color:inherit;background-color:transparent;padding:0;margin:0;float:none;font-family:Arial,Helvetica,sans-serif;font-size:1em;line-height:1em;list-style:none;text-transform:none;vertical-align:baseline;border:0;font-variant:inherit;font-stretch:inherit;-webkit-tap-highlight-color:rgba(255,255,255,0)}.jw-overlays,body .jw-error,body .jwplayer.jw-state-error{height:100%;width:100%}.jw-title{position:absolute;top:0}.jw-overlays{top:0;position:absolute;left:0}.jw-overlays{position:absolute;bottom:0;right:0}.jw-background-color{background:rgba(0,0,0,.4)}.jw-text{color:rgba(255,255,255,.8)}.jw-knob{color:rgba(255,255,255,.8);background-color:#fff}.jw-button-color{color:rgba(255,255,255,.8)}:not(.jw-flag-touch) .jw-button-color:not(.jw-logo-button):focus,:not(.jw-flag-touch) .jw-button-color:not(.jw-logo-button):hover{color:#fff}.jw-toggle{color:#fff}.jw-toggle.jw-off{color:rgba(255,255,255,.8)}.jw-toggle.jw-off:focus{color:#fff}.jw-toggle:focus{outline:0}:not(.jw-flag-touch) .jw-toggle.jw-off:hover{color:#fff}.jw-rail{background:rgba(255,255,255,.3)}.jw-buffer{background:rgba(255,255,255,.3)}.jw-progress{background:#f2f2f2}.jw-time-tip,.jw-volume-tip{border:0}.jw-slider-volume.jw-volume-tip.jw-background-color.jw-slider-vertical{background:0 0}.jw-skip{padding:.5em;outline:0}.jw-skip .jw-skip-icon,.jw-skip .jw-skiptext{color:rgba(255,255,255,.8)}.jw-skip.jw-skippable:focus .jw-skip-icon,.jw-skip.jw-skippable:hover .jw-skip-icon{color:#fff}.jw-icon-cast google-cast-launcher{--connected-color:#fff;--disconnected-color:rgba(255, 255, 255, 0.8)}.jw-icon-cast google-cast-launcher:focus{outline:0}.jw-icon-cast google-cast-launcher.jw-off{--connected-color:rgba(255, 255, 255, 0.8)}.jw-icon-cast:focus google-cast-launcher{--connected-color:#fff;--disconnected-color:#fff}.jw-icon-cast:hover google-cast-launcher{--connected-color:#fff;--disconnected-color:#fff}.jw-nextup-container{bottom:2.5em;padding:5px .5em}.jw-nextup{border-radius:0}.jw-color-active{color:#fff;stroke:#fff;border-color:#fff}:not(.jw-flag-touch) .jw-color-active-hover:focus,:not(.jw-flag-touch) .jw-color-active-hover:hover{color:#fff;stroke:#fff;border-color:#fff}.jw-color-inactive{color:rgba(255,255,255,.8);stroke:rgba(255,255,255,.8);border-color:rgba(255,255,255,.8)}:not(.jw-flag-touch) .jw-color-inactive-hover:hover{color:rgba(255,255,255,.8);stroke:rgba(255,255,255,.8);border-color:rgba(255,255,255,.8)}.jw-option{color:rgba(255,255,255,.8)}.jw-option.jw-active-option{color:#fff;background-color:rgba(255,255,255,.1)}:not(.jw-flag-touch) .jw-option:hover{color:#fff}.jwplayer{width:100%;font-size:16px;position:relative;display:block;min-height:0;overflow:hidden;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;outline:0}.jwplayer *{box-sizing:inherit}.jwplayer.jw-tab-focus:focus{outline:solid 2px #4d90fe}.jwplayer.jw-flag-aspect-mode{height:auto!important}.jwplayer.jw-flag-aspect-mode .jw-aspect{display:block}.jwplayer .jw-aspect{display:none}.jw-overlays{pointer-events:none;cursor:auto}.jw-media,.jw-preview{position:absolute;width:100%;height:100%;top:0;left:0;bottom:0;right:0}.jw-media{overflow:hidden;cursor:pointer}.jw-captions,.jw-preview,.jw-title{pointer-events:none}.jw-logo,.jw-media{pointer-events:all}.jw-wrapper{background-color:#000;position:absolute;top:0;left:0;right:0;bottom:0}.jw-hidden-accessibility{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.jw-contract-trigger::before{content:"";overflow:hidden;width:200%;height:200%;display:block;position:absolute;top:0;left:0}.jwplayer .jw-media video{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;margin:auto;background:0 0;-webkit-tap-highlight-color:transparent;-webkit-focus-ring-color:transparent;outline:0}.jwplayer .jw-media video::-webkit-media-controls-start-playback-button{display:none}.jwplayer.jw-stretch-uniform .jw-media video{object-fit:contain}.jwplayer.jw-stretch-none .jw-media video{object-fit:none}.jwplayer.jw-stretch-fill .jw-media video{object-fit:cover}.jwplayer.jw-stretch-exactfit .jw-media video{object-fit:fill}.jw-preview{position:absolute;display:none;opacity:1;visibility:visible;width:100%;height:100%;background:#000 no-repeat 50% 50%}.jw-error .jw-preview,.jwplayer .jw-preview{background-size:contain}.jw-stretch-none .jw-preview{background-size:auto auto}.jw-stretch-fill .jw-preview{background-size:cover}.jw-stretch-exactfit .jw-preview{background-size:100% 100%}.jw-title{display:none;padding-top:20px;width:100%;z-index:1}.jw-title-primary,.jw-title-secondary{color:#fff;padding-left:20px;padding-right:20px;padding-bottom:.5em;overflow:hidden;text-overflow:ellipsis;direction:unset;white-space:nowrap;width:100%}.jw-title-primary{font-size:1.625em}.jw-breakpoint-2 .jw-title-primary,.jw-breakpoint-3 .jw-title-primary{font-size:1.5em}.jw-flag-small-player .jw-title-primary{font-size:1.25em}.jw-flag-small-player .jw-title-secondary,.jw-title-secondary:empty{display:none}.jw-captions{position:absolute;width:100%;height:100%;text-align:center;display:none;letter-spacing:normal;word-spacing:normal;text-transform:none;text-indent:0;text-decoration:none;pointer-events:none;overflow:hidden;top:0}.jw-captions.jw-captions-enabled{display:block}.jw-captions-window{display:none;padding:.25em;border-radius:.25em}.jw-captions-window.jw-captions-window-active{display:inline-block}.jw-captions-text{display:inline-block;color:#fff;background-color:#000;word-wrap:normal;word-break:normal;white-space:pre-line;font-style:normal;font-weight:400;text-align:center;text-decoration:none}.jw-text-track-display{font-size:inherit;line-height:1.5em;padding:0 .2em .1em}.jw-text-track-cue{background-color:rgba(0,0,0,.5);color:#fff}.jwplayer video::-webkit-media-controls{display:none;justify-content:flex-start}.jwplayer video::-webkit-media-text-track-display{min-width:-webkit-min-content}.jwplayer video::cue{background-color:rgba(0,0,0,.5)}.jwplayer video::-webkit-media-controls-panel-container{display:none}.jwplayer.jw-flag-media-audio.jw-state-playing .jw-captions,.jwplayer.jw-state-playing:not(.jw-flag-user-inactive):not(.jw-flag-controls-hidden) .jw-captions,.jwplayer:not(.jw-flag-controls-hidden):not(.jw-state-playing) .jw-captions{max-height:calc(100% - 60px)}.jwplayer.jw-flag-media-audio.jw-state-playing:not(.jw-flag-ios-fullscreen) video::-webkit-media-text-track-container,.jwplayer.jw-state-playing:not(.jw-flag-user-inactive):not(.jw-flag-controls-hidden):not(.jw-flag-ios-fullscreen) video::-webkit-media-text-track-container,.jwplayer:not(.jw-flag-controls-hidden):not(.jw-state-playing):not(.jw-flag-ios-fullscreen) video::-webkit-media-text-track-container{max-height:calc(100% - 60px)}.jw-logo{position:absolute;margin:20px;cursor:pointer;pointer-events:all;background-repeat:no-repeat;background-size:contain;top:auto;right:auto;left:auto;bottom:auto;outline:0}.jw-logo.jw-tab-focus:focus{outline:solid 2px #4d90fe}.jw-flag-audio-player .jw-logo{display:none}.jw-logo-top-right{top:0;right:0}.jw-logo-top-left{top:0;left:0}.jw-logo-bottom-left{left:0}.jw-logo-bottom-right{right:0}.jw-logo-bottom-left,.jw-logo-bottom-right{bottom:44px;transition:bottom 150ms cubic-bezier(0,.25,.25,1)}.jw-state-idle .jw-logo{z-index:1}.jw-state-setup .jw-wrapper{background-color:inherit}.jw-state-setup .jw-controls,.jw-state-setup .jw-controls-backdrop,.jw-state-setup .jw-logo{visibility:hidden}span.jw-break{display:block}body .jw-error,body .jwplayer.jw-state-error{background-color:#333;color:#fff;font-size:16px;display:table;opacity:1;position:relative}body .jw-error .jw-display,body .jwplayer.jw-state-error .jw-display{display:none}body .jw-error .jw-media,body .jwplayer.jw-state-error .jw-media{cursor:default}body .jw-error .jw-preview,body .jwplayer.jw-state-error .jw-preview{background-color:#333}body .jw-error .jw-error-msg,body .jwplayer.jw-state-error .jw-error-msg{background-color:#000;border-radius:2px;display:flex;flex-direction:row;align-items:stretch;padding:20px}body .jw-error .jw-error-msg .jw-icon,body .jwplayer.jw-state-error .jw-error-msg .jw-icon{height:30px;width:30px;margin-right:20px;flex:0 0 auto;align-self:center}body .jw-error .jw-error-msg .jw-icon:empty,body .jwplayer.jw-state-error .jw-error-msg .jw-icon:empty{display:none}body .jw-error .jw-error-msg .jw-info-container,body .jwplayer.jw-state-error .jw-error-msg .jw-info-container{margin:0;padding:0}body .jw-error:not(.jw-flag-audio-player).jw-breakpoint-2 .jw-error-msg,body .jw-error:not(.jw-flag-audio-player).jw-flag-small-player .jw-error-msg,body .jwplayer.jw-state-error:not(.jw-flag-audio-player).jw-breakpoint-2 .jw-error-msg,body .jwplayer.jw-state-error:not(.jw-flag-audio-player).jw-flag-small-player .jw-error-msg{flex-direction:column}body .jw-error:not(.jw-flag-audio-player).jw-breakpoint-2 .jw-error-msg .jw-error-text,body .jw-error:not(.jw-flag-audio-player).jw-flag-small-player .jw-error-msg .jw-error-text,body .jwplayer.jw-state-error:not(.jw-flag-audio-player).jw-breakpoint-2 .jw-error-msg .jw-error-text,body .jwplayer.jw-state-error:not(.jw-flag-audio-player).jw-flag-small-player .jw-error-msg .jw-error-text{text-align:center}body .jw-error:not(.jw-flag-audio-player).jw-breakpoint-2 .jw-error-msg .jw-icon,body .jw-error:not(.jw-flag-audio-player).jw-flag-small-player .jw-error-msg .jw-icon,body .jwplayer.jw-state-error:not(.jw-flag-audio-player).jw-breakpoint-2 .jw-error-msg .jw-icon,body .jwplayer.jw-state-error:not(.jw-flag-audio-player).jw-flag-small-player .jw-error-msg .jw-icon{flex:.5 0 auto;margin-right:0;margin-bottom:20px}.jwplayer.jw-state-error.jw-breakpoint-2 .jw-error-msg .jw-break,.jwplayer.jw-state-error.jw-flag-audio-player .jw-error-msg .jw-break,.jwplayer.jw-state-error.jw-flag-small-player .jw-error-msg .jw-break{display:inline}.jwplayer.jw-state-error.jw-breakpoint-2 .jw-error-msg .jw-break:before,.jwplayer.jw-state-error.jw-flag-audio-player .jw-error-msg .jw-break:before,.jwplayer.jw-state-error.jw-flag-small-player .jw-error-msg .jw-break:before{content:" "}.
