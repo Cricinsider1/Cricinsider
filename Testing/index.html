@@ -1,191 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Stream</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css">
-    <style>
-        /* Center the video player on the screen */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000;
-            font-family: Arial, sans-serif;
-        }
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>TG_@Cricinsider365</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+<style>
+    img {
+        position: relative;
+        right: 130;
+        bottom: 10;
+        margin: auto auto;
+        max-width: 20%;
+        max-height: 20%;
+        object-fit: contain;
+        pointer-events: none
+    }
 
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            font-size: 18px;
-        }
+    .shaka-spinner-container {
+        display: none
+    }
 
-        #player-container {
-            width: 80%;
-            max-width: 1280px;
-            aspect-ratio: 16 / 9;
-        }
+    .uc {
+        pointer-events: none
+    }
 
-        video {
-            width: 100%;
-            display: block;
-        }
-
-        /* Style controls section */
-        .controls {
-            width: 80%;
-            max-width: 1280px;
-            display: flex;
-            justify-content: space-between;
-            background-color: #333;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .controls button {
-            background: none;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .controls button:hover {
-            background: #444;
-            border-radius: 4px;
-        }
-    </style>
+    body {
+        background-color: #000;
+    }
+</style>
 </head>
-<body>
-    <!-- Loading screen -->
-    <div class="loading" id="loading">
-        Loading video, please wait...
-    </div>
 
-    <!-- Video container -->
-    <div id="player-container">
-        <video id="player" playsinline style="display: none;">
-            <!-- Fallback message -->
-            <p>Your browser does not support the video tag. Please upgrade your browser.</p>
-        </video>
-    </div>
+<body bgcolor='white' style='margin:0'>
+    <body bgcolor="black" style="margin: 0;">
+        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+            <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width:100%;height:100%"></video>
+        </div>
+        <script>
+    async function init() {
+        // Extract the 'id' parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const streamId = urlParams.get('id'); // Extract 'id' parameter from URL
+        console.log("Stream ID:", streamId);
 
-    <!-- Video controls below the player -->
-    <div class="controls" id="custom-controls" style="display: none;">
-        <button id="play-pause">Play</button>
-        <button id="mute-unmute">Mute</button>
-        <button id="fullscreen">Fullscreen</button>
-        <button id="quality">Quality: Auto</button>
-    </div>
+        const video = document.getElementById("video");
+        const ui = video.ui;
+        const controls = ui.getControls();
+        const player = controls.getPlayer();
 
-    <!-- Plyr and HLS.js scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.polyfilled.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-        const video = document.getElementById('player');
-        const loading = document.getElementById('loading');
-        const controls = document.getElementById('custom-controls');
+        const keysConfig = {
+            'e31a5a81caff5d07ea2411a571fc2e59': { key: "96c5ef69479732ae734f962748c19729", slot: "slot1" },
+            'key1id': { key: "key1value", slot: "slot2" },
+            'key2id': { key: "key2value", slot: "slot3" },
+            'key3id': { key: "key3value", slot: "slot4" },
+            'key4id': { key: "key4value", slot: "slot5" },
+            'key5id': { key: "key5value", slot: "slot6" },
+            'key6id': { key: "key6value", slot: "slot7" },
+            'key7id': { key: "key7value", slot: "slot8" },
+            'key8id': { key: "key8value", slot: "slot9" },
+            'key9id': { key: "key9value", slot: "slot10" },
+            'key10id': { key: "key10value", slot: "slot11" }
+        };
 
-        // HLS Stream URL
-        const videoSource = "https://vkvsd233.okcdn.ru/cmaf/7443308808935/sig/7DUOWSPtmYs/srcIp/13.126.10.149/expires/1734683291348/clientType/13/srcAg/CHROME/fromCache/1/mid/9109154376679/id/7443308808935/get/hls_9109154376679.FR5QsSfmxmU.m3u8";
+        const clearKeys = {};
+        Object.keys(keysConfig).forEach(keyID => {
+            clearKeys[keyID] = keysConfig[keyID].key;
+        });
 
-        let hls;
-        let qualityOptions = ['Auto']; // Default quality options
+        player.configure({
+            drm: { clearKeys }
+        });
 
-        if (Hls.isSupported()) {
-            hls = new Hls();
-            hls.loadSource(videoSource);
-            hls.attachMedia(video);
+        ui.configure({
+            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+            volumeBarColors: {
+                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                level: "rgb(0, 255, 0)"     // Green color for the volume level
+            },
+            seekBarColors: {
+                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+            }
+        });
 
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                // Populate quality options
-                qualityOptions = hls.levels.map((level, index) => `${level.height}p`);
-                qualityOptions.unshift('Auto'); // Add "Auto" option at the start
+        // Define individual MPDs with their unique streamId
+        const mpdUrls = [
+            { streamId: "url1", url: "https://live.ll.ww.aiv-cdn.net/OTTB/lhr-nitro/live/clients/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd" },
+            { streamId: "url2", url: "https://example.com/mpd2.mpd" },
+            { streamId: "url3", url: "https://example.com/mpd3.mpd" },
+            { streamId: "url4", url: "https://example.com/mpd4.mpd" },
+            { streamId: "url5", url: "https://example.com/mpd5.mpd" },
+            { streamId: "url6", url: "https://example.com/mpd6.mpd" },
+            { streamId: "url7", url: "https://example.com/mpd7.mpd" },
+            { streamId: "url8", url: "https://example.com/mpd8.mpd" },
+            { streamId: "url9", url: "https://example.com/mpd9.mpd" },
+            { streamId: "url10", url: "https://example.com/mpd10.mpd" }
+        ];
 
-                // Show video and controls
-                video.style.display = 'block';
-                loading.style.display = 'none';
-                controls.style.display = 'flex';
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = videoSource;
-            video.style.display = 'block';
-            loading.style.display = 'none';
-            controls.style.display = 'flex';
+        // Find the MPD with the corresponding streamId
+        const selectedMpd = mpdUrls.find(mpd => mpd.streamId === streamId);
 
-            video.addEventListener('loadedmetadata', () => {
-                video.play();
-            });
-        } else {
-            loading.innerText = "Your browser does not support HLS streaming.";
+        window.player = player;
+        window.ui = ui;
+
+        try {
+            if (selectedMpd) {
+                console.log(`Loading MPD for stream ID: ${streamId}`);
+                await player.load(selectedMpd.url);
+                console.log("Stream loaded successfully!");
+            } else {
+                console.error("Stream ID not found or invalid.");
+            }
+        } catch (error) {
+            console.error("Error loading stream:", error);
         }
+    }
 
-        // Custom control buttons
-        const playPauseButton = document.getElementById('play-pause');
-        const muteUnmuteButton = document.getElementById('mute-unmute');
-        const fullscreenButton = document.getElementById('fullscreen');
-        const qualityButton = document.getElementById('quality');
-
-        // Play/Pause
-        playPauseButton.addEventListener('click', () => {
-            if (video.paused) {
-                video.play();
-                playPauseButton.innerText = 'Pause';
-            } else {
-                video.pause();
-                playPauseButton.innerText = 'Play';
-            }
-        });
-
-        // Mute/Unmute
-        muteUnmuteButton.addEventListener('click', () => {
-            video.muted = !video.muted;
-            muteUnmuteButton.innerText = video.muted ? 'Unmute' : 'Mute';
-        });
-
-        // Fullscreen
-        fullscreenButton.addEventListener('click', () => {
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            } else if (video.webkitRequestFullscreen) {
-                video.webkitRequestFullscreen();
-            } else if (video.mozRequestFullScreen) {
-                video.mozRequestFullScreen();
-            } else if (video.msRequestFullscreen) {
-                video.msRequestFullscreen();
-            }
-        });
-
-        // Quality
-        let currentQualityIndex = 0; // Default to "Auto"
-        qualityButton.addEventListener('click', () => {
-            currentQualityIndex = (currentQualityIndex + 1) % qualityOptions.length;
-            const selectedQuality = qualityOptions[currentQualityIndex];
-
-            qualityButton.innerText = `Quality: ${selectedQuality}`;
-            if (selectedQuality === 'Auto') {
-                hls.currentLevel = -1; // Auto
-            } else {
-                hls.currentLevel = currentQualityIndex - 1;
-            }
-        });
-    </script>
-</body>
-</html>
+    document.addEventListener("shaka-ui-loaded", init);
+    document.addEventListener("shaka-ui-load-failed", () => console.error("Unable to load the UI library!"));
+</script>
