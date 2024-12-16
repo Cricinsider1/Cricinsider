@@ -4,85 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cm</title>
-    
+    <title>Video Player</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css">
-    
     <style>
-        body, html {
+        html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        .tg-banner {
-            position: absolute;
-            top: 16px;
-            left: 20px;
-            background: linear-gradient(135deg, #1da1f2, #0077b5);
-            border-radius: 12px;
-            padding: 16px 22px;
-            display: flex;
-            align-items: center;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-        }
-
-        .tg-banner:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .tg-icon {
-            width: 36px;
-            height: 36px;
-            margin-right: 12px;
-            border-radius: 50%;
-            border: 2px solid white;
-            background-color: #ffffff40;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .tg-icon img {
-            width: 24px;
-            height: 24px;
-        }
-
-        html {
-            font-family: sans-serif;
-            background: #000;
-        }
-
-        .plyr {
-            height: 100%;
-            width: 100%;
-        }
-
-        :root {
-            --plyr-color-main: #d9230f;
+            background-color: #000;
         }
 
         .loading {
@@ -93,81 +23,59 @@
             height: 100%;
             background: #000;
             z-index: 9999;
-        }
-
-        .loading-text {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            text-align: center;
-            width: 100%;
-            height: 100px;
-            line-height: 100px;
-        }
-
-        .loading-text span {
-            display: inline-block;
-            margin: 0 5px;
-            color: #00b3ff;
-            font-family: 'Quattrocento Sans', sans-serif;
-        }
-
-        @keyframes blur-text {
-            0% {
-                filter: blur(0px);
-            }
-            100% {
-                filter: blur(4px);
-            }
-        }
-
-        .loading-text span:nth-child(n) {
-            filter: blur(0px);
-            animation: blur-text 1.5s linear alternate infinite;
-        }
-
-        .plyr__video-wrapper::before {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 10;
-            content: '';
-            height: 35px;
-            width: 35px;
-            background-size: 35px auto, auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-family: Arial, sans-serif;
         }
     </style>
 </head>
 <body>
-    <!-- Telegram banner -->
-    <div class="tg-banner" onclick="window.location.href='https://t.me/sports_live_linkss';">
-        <div class="tg-icon">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
-        </div>
-        Join @sport match
+    <!-- Loading screen -->
+    <div class="loading" id="loading">
+        Loading video, please wait...
     </div>
 
-    <!-- Video Player -->
-    <div tabindex="0" class="plyr plyr--full-ui">
-        <div class="plyr__video-wrapper">
-            <video autoplay="" crossorigin="" playsinline="" src="blob:https://ss56.vercel.app/b7b9c6b9-e765-4af6-ad52-0628fc6dd75c">
-                <source type="application/vnd.apple.mpegurl" src="https://vkvsd233.okcdn.ru/cmaf/7443308808935/sig/7DUOWSPtmYs/srcIp/13.126.10.149/expires/1734683291348/clientType/13/srcAg/CHROME/fromCache/1/mid/9109154376679/id/7443308808935/get/hls_9109154376679.FR5QsSfmxmU.m3u8">
-            </video>
-            <div class="plyr__poster"></div>
-            <div class="plyr__captions"></div>
-        </div>
-    </div>
+    <!-- Video player -->
+    <video id="player" controls autoplay style="width: 100%; height: 100%; display: none;">
+        <!-- Fallback message for unsupported browsers -->
+        <p>Your browser does not support the video tag. Please upgrade your browser.</p>
+    </video>
 
-    <!-- Loading Screen -->
-    <div class="loading">
-        <div class="loading-text">
-            <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
-        </div>
-    </div>
+    <!-- Plyr and HLS.js scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.polyfilled.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        // Video element
+        const video = document.getElementById('player');
+        const loading = document.getElementById('loading');
 
-    <noscript>You must enable JavaScript to see this text.</noscript>
+        // HLS video source
+        const videoSource = "https://vkvsd233.okcdn.ru/cmaf/7443308808935/sig/7DUOWSPtmYs/srcIp/13.126.10.149/expires/1734683291348/clientType/13/srcAg/CHROME/fromCache/1/mid/9109154376679/id/7443308808935/get/hls_9109154376679.FR5QsSfmxmU.m3u8";
+
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(videoSource);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.style.display = 'block'; // Show the video
+                loading.style.display = 'none'; // Hide loading screen
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSource;
+            video.style.display = 'block';
+            loading.style.display = 'none';
+            video.addEventListener('loadedmetadata', function () {
+                video.play();
+            });
+        } else {
+            loading.innerText = "Your browser does not support HLS streaming.";
+        }
+
+        // Initialize Plyr for better UI
+        const player = new Plyr(video);
+    </script>
 </body>
 </html>
