@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Video Player</title>
+    <title>Video Stream</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css">
     <style>
         html, body {
@@ -12,6 +11,9 @@
             padding: 0;
             width: 100%;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: #000;
         }
 
@@ -28,6 +30,19 @@
             align-items: center;
             color: #fff;
             font-family: Arial, sans-serif;
+            font-size: 18px;
+        }
+
+        #player-container {
+            width: 80%;
+            max-width: 1280px;
+            aspect-ratio: 16 / 9;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
     </style>
 </head>
@@ -37,45 +52,77 @@
         Loading video, please wait...
     </div>
 
-    <!-- Video player -->
-    <video id="player" controls autoplay style="width: 100%; height: 100%; display: none;">
-        <!-- Fallback message for unsupported browsers -->
-        <p>Your browser does not support the video tag. Please upgrade your browser.</p>
-    </video>
+    <!-- Video container -->
+    <div id="player-container">
+        <video id="player" controls playsinline style="display: none;">
+            <!-- Fallback message -->
+            <p>Your browser does not support the video tag. Please upgrade your browser.</p>
+        </video>
+    </div>
 
     <!-- Plyr and HLS.js scripts -->
     <script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.polyfilled.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
-        // Video element
         const video = document.getElementById('player');
         const loading = document.getElementById('loading');
 
-        // HLS video source
+        // HLS Stream URL
         const videoSource = "https://vkvsd233.okcdn.ru/cmaf/7443308808935/sig/7DUOWSPtmYs/srcIp/13.126.10.149/expires/1734683291348/clientType/13/srcAg/CHROME/fromCache/1/mid/9109154376679/id/7443308808935/get/hls_9109154376679.FR5QsSfmxmU.m3u8";
 
         if (Hls.isSupported()) {
             const hls = new Hls();
             hls.loadSource(videoSource);
             hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.style.display = 'block'; // Show the video
-                loading.style.display = 'none'; // Hide loading screen
-                video.play();
+
+            // Once the manifest is loaded
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                // Dynamically fetch quality levels
+                const qualityLevels = hls.levels.map((level, index) => ({
+                    label: `${level.height}p`,
+                    value: index,
+                }));
+
+                const autoQuality = { label: "Auto", value: -1 };
+                const allQualities = [autoQuality, ...qualityLevels];
+
+                // Initialize Plyr
+                const player = new Plyr(video, {
+                    settings: ['quality'],
+                    quality: {
+                        default: -1, // Auto
+                        options: allQualities.map(q => q.value),
+                        forced: true,
+                        onChange: (quality) => {
+                            if (quality === -1) {
+                                hls.currentLevel = -1; // Auto
+                            } else {
+                                hls.currentLevel = quality;
+                            }
+                        },
+                    },
+                });
+
+                // Update quality UI when switching
+                hls.on(Hls.Events.LEVEL_SWITCHED, () => {
+                    player.quality = hls.currentLevel;
+                });
+
+                // Show video and hide loader
+                video.style.display = 'block';
+                loading.style.display = 'none';
             });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            // Native HLS support (e.g., Safari)
             video.src = videoSource;
             video.style.display = 'block';
             loading.style.display = 'none';
-            video.addEventListener('loadedmetadata', function () {
+            video.addEventListener('loadedmetadata', () => {
                 video.play();
             });
         } else {
             loading.innerText = "Your browser does not support HLS streaming.";
         }
-
-        // Initialize Plyr for better UI
-        const player = new Plyr(video);
     </script>
 </body>
 </html>
