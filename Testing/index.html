@@ -1,160 +1,126 @@
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<title>TG_@Cricinsider365</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
-<style>
-    img {
-        position: relative;
-        right: 130;
-        bottom: 10;
-        margin: auto auto;
-        max-width: 20%;
-        max-height: 20%;
-        object-fit: contain;
-        pointer-events: none
-    }
-
-    .shaka-spinner-container {
-        display: none
-    }
-
-    .uc {
-        pointer-events: none
-    }
-
-    body {
-        background-color: #000;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@Cricinsider365</title>
+  <link rel="stylesheet" href="http://insiderlive.pages.dev/Style.css">
+  <style type="text/css">
+    * { user-select: auto !important; -webkit-user-select: auto !important; }
+  </style>
+  <input type="hidden" id="inject_idm_text_selection">
 </head>
+<body>
 
-<body bgcolor='white' style='margin:0'>
-    <body bgcolor="black" style="margin: 0;">
-        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-            <video autoplay muted data-shaka-player id="video" poster="https://cxh.pages.dev/L.jpg" style="width:100%;height:100%"></video>
-        </div>
-        <script>
-    async function init() {
-        // Extract the 'id' parameter from the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const streamId = urlParams.get('id'); // Extract 'id' parameter from URL
-        console.log("Stream ID:", streamId);
+<!-- Fullscreen Video CSS -->
+<style>
+  #player {
+    position: absolute;
+    width: 100% !important;
+    height: 100% !important;
+  }
+</style>
 
-        const video = document.getElementById("video");
-        const ui = video.ui;
-        const controls = ui.getControls();
-        const player = controls.getPlayer();
+<!-- Player -->
+<div id="player"></div>
+<script src="https://cdn.jsdelivr.net/npm/shaka-player@3.0.0/dist/shaka-player.compiled.js"></script>
 
-        // Define DRM keys and key slots with corresponding key IDs and keys
-        const drmKeysConfig = {
-            '1f52934d28a25c51a5dd577a650dcece': {
-                key: "323a46b02a31172c2475406e56fd3be6",
-                keySlot: "slot1"
-            },
-            'keyid2': {
-                key: "8f55d1f4c76e826a79d517372d36bc31",
-                keySlot: "slot2"
-            },
-            'keyid3': {
-                key: "6f33e1d48b0b69ae6370edbb920849d4",
-                keySlot: "slot3"
-            },
-            'keyid4': {
-                key: "a3d07cf175fe4e658bd6fd4ea4f703ab",
-                keySlot: "slot4"
-            },
-            'keyid5': {
-                key: "9a1db58231b241d38ac971d2fbd8b8db",
-                keySlot: "slot5"
-            },
-            'keyid6': {
-                key: "f0e7bd98d9ed8b2225a1e8db9a5f98ac",
-                keySlot: "slot6"
-            },
-            'keyid7': {
-                key: "b9db69ca2a7e3cd04c848a126dbced14",
-                keySlot: "slot7"
-            },
-            'keyid8': {
-                key: "d987e48e74f93b98a9482e1a5f72b5c0",
-                keySlot: "slot8"
-            },
-            'keyid9': {
-                key: "f88907b2a2d9bcab1e73e5e2cd3675fc",
-                keySlot: "slot9"
-            },
-            'keyid10': {
-                key: "af6eeb3ba5c56c6b0f178d1cb4c8c7be",
-                keySlot: "slot10"
-            },
-            'keyid11': {
-                key: "f0b3b6d7a13e5bffae4d98d24a859404",
-                keySlot: "slot11"
-            },
-            'keyid12': {
-                key: "7b93e591d6ed9a37a7c7ff86b6a063c7",
-                keySlot: "slot12"
-            }
-        };
-
-        // Configure DRM keys for Shaka Player
-        player.configure({
-            drm: {
-                clearKeys: drmKeysConfig
-            }
-        });
-
-        // Define MPD URLs with their unique stream IDs
-        const mpdUrls = [
-            { streamId: "url1", url: "https://linear05-playback.sooka.my/CH2/masterCH2.mpd" },
-            { streamId: "url2", url: "https://cors-anywhere.ammoapps.com/https://dfwlive-v1-c1p3-sponsored.akamaized.net/Content/HLS.cps/Live/channel(WILLXT-3292.dfw.1080)/index.m3u8" },
-            { streamId: "url3", url: "https://example.com/mpd3.mpd" },
-            { streamId: "url4", url: "https://example.com/mpd4.mpd" },
-            { streamId: "url5", url: "https://example.com/mpd5.mpd" },
-            { streamId: "url6", url: "https://example.com/mpd6.mpd" },
-            { streamId: "url7", url: "https://example.com/mpd7.mpd" },
-            { streamId: "url8", url: "https://example.com/mpd8.mpd" },
-            { streamId: "url9", url: "https://example.com/mpd9.mpd" },
-            { streamId: "url10", url: "https://example.com/mpd10.mpd" },
-            { streamId: "url11", url: "https://example.com/mpd11.mpd" },
-            { streamId: "url12", url: "https://example.com/mpd12.mpd" }
-        ];
-
-        // Match the selected MPD based on the stream ID
-        const selectedMpd = mpdUrls.find(mpd => mpd.streamId === streamId);
-
-        ui.configure({
-            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-            volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                level: "rgb(0, 255, 0)"     // Green color for the volume level
-            },
-            seekBarColors: {
-                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
-            }
-        });
-
-        window.player = player;
-        window.ui = ui;
-
-        try {
-            if (selectedMpd) {
-                console.log(`Loading MPD for stream ID: ${streamId}`);
-                await player.load(selectedMpd.url);
-                console.log("Stream loaded successfully!");
-            } else {
-                console.error("Stream ID not found or invalid.");
-            }
-        } catch (error) {
-            console.error("Error loading stream:", error);
-        }
+<script>
+  // Video stream configurations (with MPD URLs and DRM keys)
+  const videoConfigs = {
+    "1": {
+      url: "https://example.com/stream1.mpd",  // Example MPD stream URL
+      drm: {
+        keyId: "4a267ba09b3a43969364ee77f76dd622",  // Key ID for stream 1
+        key: "5b00d4341e90b3022b5e57139ae8ab16"   // Key for stream 1
+      }
+    },
+    "2": {
+      url: "https://cors-anywhere.ammoapps.com/https://dfwlive-v1-c1p3-sponsored.akamaized.net/Content/HLS.cps/Live/channel(WILLHD-3291.dfw.1080)/index.m3u8",  // Example MPD stream URL
+      drm: {
+        keyId: "59ed8dc9d4a48857ef8e5865919496cc",  // Key ID for stream 2
+        key: "0d3680bd8b349deda8b7fdd1da71b7f8"   // Key for stream 2
+      }
+    },
+    "3": {
+      url: "https://example.com/stream3.mpd",  // Example MPD stream URL
+      drm: {
+        keyId: "5d2b847f7e54b3f0a3f729e4e2de9d88",  // Key ID for stream 3
+        key: "2e9bb9a39b7d2c3ba1b0809ee53b06b2"   // Key for stream 3
+      }
+    },
+    "4": {
+      url: "https://example.com/stream4.mpd",  // Example MPD stream URL
+      drm: {
+        keyId: "9b4ab1e7c739ab392089f2b3d26798f9",  // Key ID for stream 4
+        key: "52a43c3f2e7d88e129283bf2310b9c9a"   // Key for stream 4
+      }
+    },
+    "5": {
+      url: "https://example.com/stream5.mpd",  // Example MPD stream URL
+      drm: {
+        keyId: "c48f73e8e3a7d1f0ac5575a2f4b7b6e2",  // Key ID for stream 5
+        key: "aff37220fbb4e745a287ea0f68e6b0f1"   // Key for stream 5
+      }
     }
+  };
 
-    document.addEventListener("shaka-ui-loaded", init);
-    document.addEventListener("shaka-ui-load-failed", () => console.error("Unable to load the UI library!"));
+  // Get the query parameter 'id' from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const streamId = urlParams.get('id');  // Extract 'id' parameter from URL
+
+  // Check if the 'id' parameter exists and is valid
+  const videoConfig = videoConfigs[streamId];
+
+  if (videoConfig) {
+    // Initialize Shaka Player with the selected stream and DRM configuration
+    const player = new shaka.Player(document.getElementById('player'));
+
+    // Configure DRM
+    player.configure({
+      drm: {
+        clearKeys: {
+          [videoConfig.drm.keyId]: videoConfig.drm.key // Set the DRM key for the selected stream
+        }
+      }
+    });
+
+    // Load the MPD stream URL
+    player.load(videoConfig.url).then(() => {
+      console.log("Stream loaded successfully with DRM!");
+    }).catch(error => {
+      console.error("Error loading the stream:", error);
+    });
+  } else {
+    // If the stream ID is invalid or missing, use the default stream (first one) or display an error
+    alert('Invalid or missing stream ID. Please specify a valid "id" in the URL.');
+    const defaultConfig = videoConfigs["1"];
+
+    // Initialize Shaka Player with the default stream
+    const player = new shaka.Player(document.getElementById('player'));
+
+    // Configure DRM for default stream
+    player.configure({
+      drm: {
+        clearKeys: {
+          [defaultConfig.drm.keyId]: defaultConfig.drm.key // Set the DRM key for the default stream
+        }
+      }
+    });
+
+    // Load the default MPD stream URL
+    player.load(defaultConfig.url).then(() => {
+      console.log("Default stream loaded successfully with DRM!");
+    }).catch(error => {
+      console.error("Error loading the default stream:", error);
+    });
+  }
+
+  // Optionally show a confirmation link for Telegram
+  if (confirm("Join Our Telegram Channel @Cricinsider365")) {
+    window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+  }
 </script>
+
+</body>
+</html>
