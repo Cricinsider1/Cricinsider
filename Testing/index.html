@@ -104,52 +104,69 @@
         // Dynamic JSON URL (can be changed for any host)
         const JSON_URL = 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json';
 
-        // Fetch JSON and generate cards
-        async function generateHtmlFromJson(url) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Failed to fetch JSON data.');
-
-                const jsonData = await response.json();
-                if (!jsonData.matches || !Array.isArray(jsonData.matches)) {
-                    console.error('Invalid JSON format');
-                    return;
-                }
-
-                const listContainer = document.getElementById('listContainer');
-                jsonData.matches.forEach(match => {
-                    if (!match.match_id || !match.banner || !match.match_name || !match.event_catagory) return;
-
-                    const card = document.createElement('div');
-                    card.classList.add('card');
-                    card.innerHTML = `
-                        <a href="play.html?id=${match.match_id}">
-                            <img src="${match.banner}" alt="${match.match_name}">
-                            <h2>${match.match_name}</h2>
-                            <p>${match.event_catagory}</p>
-                        </a>
-                    `;
-                    listContainer.appendChild(card);
-                });
-            } catch (error) {
-                console.error('Error loading data:', error);
-            }
+        // Function to generate HTML from JSON data
+async function generateHtmlFromJson(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
         }
 
-        // Filter matches based on search input
-        document.getElementById('searchInput').addEventListener('input', function () {
-            const query = this.value.toLowerCase();
-            const cards = document.querySelectorAll('.card');
+        const jsonData = await response.json();
+        if (!jsonData || !Array.isArray(jsonData.matches)) {
+            console.error('No valid JSON data available');
+            return;
+        }
 
-            cards.forEach(card => {
-                const title = card.querySelector('h2').textContent.toLowerCase();
-                const category = card.querySelector('p').textContent.toLowerCase();
-                card.style.display = title.includes(query) || category.includes(query) ? 'block' : 'none';
-            });
+        const listContainer = document.getElementById('listContainer');
+        const linkPrefix = "https://shz.al/~insiderlive_Stream.html?videoUrl="; // Prefix to add before each link
+
+        jsonData.matches.forEach(function(item) {
+            if (!item.match_id || !item.banner || !item.match_name || !item.event_catagory) {
+                console.warn('Missing data in item:', item);
+                return;
+            }
+
+            const anchor = document.createElement('a');
+            anchor.href = `${linkPrefix}play.html?id=${item.match_id}`; // URL for each match with prefix
+
+            const cardDiv = document.createElement('div');
+            cardDiv.classList.add('box1'); // Add the appropriate class
+
+            const card = document.createElement('div');
+            card.classList.add('card', 'w-40', 'bg-gray-100', 'rounded-xl', 'bg-base-100', 'shadow-lg', 'h-48', 'mb-4', 'flex', 'flex-col');
+
+            const image = document.createElement('img');
+            image.src = item.banner; // Banner image for the match
+            image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
+            image.alt = item.match_name || 'Match image'; // Add alt text for accessibility
+
+            const title = document.createElement('h2');
+            title.classList.add('text-center', 'text-sm', 'font-bold');
+            title.textContent = item.match_name; // Match title
+
+            const description = document.createElement('div');
+            description.classList.add('mb-5', 'opacity-100');
+            const descriptionText = document.createElement('p');
+            descriptionText.classList.add('text-xs', 'text-center');
+            descriptionText.textContent = item.event_catagory; // Event category
+
+            description.appendChild(title);
+            description.appendChild(descriptionText);
+
+            card.appendChild(image);
+            card.appendChild(description);
+            anchor.appendChild(card);
+            cardDiv.appendChild(anchor);
+            listContainer.appendChild(cardDiv);
         });
+    } catch (error) {
+        console.error('Error fetching or parsing JSON:', error);
+    }
+}
 
-        // Initialize the page
-        generateHtmlFromJson(JSON_URL);
+// Call the function with the URL of your JSON data
+generateHtmlFromJson('https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json');
     </script>
 </body>
 
