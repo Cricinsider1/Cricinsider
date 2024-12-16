@@ -1,282 +1,156 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TG_@Cricinsider365</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dynamic FC</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --button-bg: #4CAF50;
-            --button-hover-bg: #45a049;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #ffffff;
-            --button-bg: #1E88E5;
-            --button-hover-bg: #1565C0;
-        }
-
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: Arial, sans-serif;
             margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #1F0C50;
+            color: #fff;
+        }
+
+        header {
+            background-color: #0D012F;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        .site-title {
+            font-family: 'Gloock', serif;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        #searchInput {
+            margin: 20px auto;
+            width: 90%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        #listContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
             padding: 20px;
         }
 
-        /* Style the container to center-align content */
-        #link-container div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
+        .card {
+            background: #fff;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             text-align: center;
+            overflow: hidden;
+            transition: transform 0.2s;
         }
 
-        /* Adjust the logo image size */
-        #link-container img {
-            width: 350px;
-            max-width: 100%;
+        .card:hover {
+            transform: translateY(-5px);
         }
 
-        /* Button styling */
-        .watch-button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 10px;
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .card h2 {
             font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            margin: 10px 0;
+            font-weight: bold;
         }
 
-        .watch-button:hover {
-            background-color: var(--button-hover-bg);
-        }
-
-        /* Toggle button styling */
-        .theme-toggle {
-            margin-bottom: 20px;
-            padding: 10px 20px;
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--button-hover-bg);
+        .card p {
+            font-size: 14px;
+            color: #777;
         }
     </style>
-<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
+</head>
+
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
-    <div id="link-container"><div><img src="https://www.fancode.com/skillup-uploads/cms-media/Bangladesh-tour-of-West-Indies-ODI--old-match-card.png" alt="Logo"><p>group-title="Cricket", West Indies vs Bangladesh (Bangladesh tour of West Indies, 2024)</p><a href="http://Insiderlive.pages.dev/Stream?videoUrl=https%3A%2F%2Fdai.google.com%2Flinear%2Fhls%2Fevent%2FqH6T413WRemL0BlwPzJLow%2Fmaster.m3u8" target="_blank" class="watch-button">Click to Watch</a></div><div><img src="https://www.fancode.com/skillup-uploads/cms-media/114635_4684_ESP-W_GER-W_fc-web.jpg" alt="Logo"><p>group-title="Cricket", Germany Women vs Spain Women (European Cricket Championship-W, 2024)</p><a href="http://Insiderlive.pages.dev/Stream?videoUrl=https%3A%2F%2Fdai.google.com%2Flinear%2Fhls%2Fevent%2FWkHlQzL7TqK1-Kim1KN0GQ%2Fmaster.m3u8" target="_blank" class="watch-button">Click to Watch</a></div><div><img src="https://www.fancode.com/skillup-uploads/cms-media/SB-Memorial-Cup-old-match-card-op-2.png" alt="Logo"><p>group-title="Cricket", Vishal Brothers vs Nirwana (SB Memorial Cup)</p><a href="http://Insiderlive.pages.dev/Stream?videoUrl=https%3A%2F%2Fdai.google.com%2Flinear%2Fhls%2Fevent%2FGSUBkDUjRbm0n4_gKYJUtg%2Fmaster.m3u8" target="_blank" class="watch-button">Click to Watch</a></div><div><img src="https://images.fancode.com/aig/match/v3/115089_CASACARDS_APP.png" alt="Logo"><p>group-title="Volleyball", Trentino Itas vs Shahdab Yazd (Men's Club World Champs 2024)</p><a href="http://Insiderlive.pages.dev/Stream?videoUrl=https%3A%2F%2Fdai.google.com%2Flinear%2Fhls%2Fevent%2FrNFYS68LSb2Ma3ygso4fTA%2Fmaster.m3u8" target="_blank" class="watch-button">Click to Watch</a></div></div>
-// Prefix to add before each link
-        const linkPrefix = "http://Insiderlive.pages.dev/Stream?videoUrl=";
+    <header>
+        <div class="logo">
+            <img src="https://images.fancode.com/eyJrZXkiOiJza2lsbHVwLXVwbG9hZHMvZmMtd2ViLWxvZ28vZmNfbG9nb193aGl0ZV9iZy5zdmciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiY29udGFpbiIsImJhY2tncm91bmQiOiJ0cmFuc3BhcmVudCIsIndpZHRoIjoyNjAsImhlaWdodCI6ODB9fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9" alt="Logo">
+            <h1 class="site-title">Dynamic FC</h1>
+        </div>
+    </header>
 
-// Function to get URL parameter by name
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-        var results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
+    <input type="text" id="searchInput" placeholder="Search for matches...">
 
-    // Function to initialize the video player
-    function initializePlayer(videoData) {
-        const videoLink = videoData.stream_link;
-        document.getElementById('player').style.display = 'none';
-        const videoWrapper = document.getElementById('videoWrapper');
-        const videoIframe = document.getElementById('videoIframe');
+    <div id="listContainer"></div>
 
-        // If the link is an HLS link
-        if (videoLink.includes(".m3u8")) {
-            videoIframe.style.display = 'none';
-            document.getElementById('player').style.display = '';
-            const playerInstance = jwplayer("player").setup({
-                title: videoData.match_name,
-                description: "VaathalaTV", // Sample description
-                image: videoData.banner,
-                aspectratio: '16:9',
-                width: '100%',
-                mute: false,
-                key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
-                autostart: true,
-                skin: {
-                    name: "netflix"
-                },
-                logo: {
-                    file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                    link: "https://telegram.me/vaathala1"
-                },
-                captions: {
-                    color: "#FFF",
-                    fontSize: 14,
-                    backgroundOpacity: 0,
-                    edgeStyle: "raised"
-                },
-                playlist: [{
-                    sources: [{
-                        file: videoLink,
-                        type: "hls" // Set type to "mpd" for DASH stream
-                    }]
-                }],
-                sharing: {
-                    sites: ['facebook', 'twitter']
+    <script>
+        // Dynamic JSON URL (can be changed for any host)
+        const JSON_URL = 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json';
+
+        // Fetch JSON and generate cards
+        async function generateHtmlFromJson(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch JSON data.');
+
+                const jsonData = await response.json();
+                if (!jsonData.matches || !Array.isArray(jsonData.matches)) {
+                    console.error('Invalid JSON format');
+                    return;
                 }
-            });
 
-            // Add custom download button
-            const iconPath = ""; // Define your icon path here
-            const tooltipText = "Download Video";
-            const buttonId = "download-video-button";
-            playerInstance.addButton(iconPath, tooltipText, buttonClickAction, buttonId);
+                const listContainer = document.getElementById('listContainer');
+                jsonData.matches.forEach(match => {
+                    if (!match.match_id || !match.banner || !match.match_name || !match.event_catagory) return;
 
-            function buttonClickAction() {
-                const playlistItem = playerInstance.getPlaylistItem();
-                const anchor = document.createElement("a");
-                anchor.setAttribute("href", playlistItem.file);
-                anchor.setAttribute("download", playlistItem.file.split("/").pop());
-                anchor.style.display = "none";
-                document.body.appendChild(anchor);
-                anchor.click();
-                document.body.removeChild(anchor);
-            }
-
-            // Forward 10 seconds button
-            playerInstance.on("ready", function () {
-                const playerContainer = playerInstance.getContainer();
-                const rewindContainer = playerContainer.querySelector(".jw-display-icon-rewind");
-                const forwardContainer = rewindContainer.cloneNode(true);
-                const forwardDisplayButton = forwardContainer.querySelector(".jw-icon-rewind");
-                forwardDisplayButton.style.transform = "scaleX(-1)";
-                forwardDisplayButton.setAttribute("aria-label", "Forward 10 Seconds");
-                const nextContainer = playerContainer.querySelector(".jw-display-icon-next");
-                nextContainer.parentNode.insertBefore(forwardContainer, nextContainer);
-
-                // Hide default next button
-                playerContainer.querySelector(".jw-display-icon-next").style.display = "none";
-// Add onclick handler for forward button
-                forwardDisplayButton.onclick = function () {
-                    playerInstance.seek(playerInstance.getPosition() + 10);
-                };
-            });
-        }
-    }
-
-    // Fetch and load video data from JSON
-    const matchId = getUrlParameter('id');
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const data = JSON.parse(xhr.responseText);
-                const videoData = data.matches.find(match => match.match_id == matchId);
-                if (videoData) {
-                    initializePlayer(videoData);
-                } else {
-                    console.error('Video data not found for ID: ' + matchId);
-                }
-            } else {
-                console.error('Failed to load video data. Status code: ' + xhr.status);
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    card.innerHTML = `
+                        <a href="play.html?id=${match.match_id}">
+                            <img src="${match.banner}" alt="${match.match_name}">
+                            <h2>${match.match_name}</h2>
+                            <p>${match.event_catagory}</p>
+                        </a>
+                    `;
+                    listContainer.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error loading data:', error);
             }
         }
-    };
-    xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
-    xhr.send();
-</script>
 
+        // Filter matches based on search input
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const query = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
 
-        <script>
-    // Chat toggle functionality
-    document.getElementById('chatToggle').addEventListener('click', function() {
-        const chatBox = document.getElementById('chatBox');
-        const chatToggle = document.getElementById('chatToggle');
-        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-            chatBox.style.display = 'block';
-            chatToggle.classList.add('open');
-        } else {
-            chatBox.style.display = 'none';
-            chatToggle.classList.remove('open');
-        }
-    });
-
-    document.getElementById('chatClose').addEventListener('click', function() {
-        const chatBox = document.getElementById('chatBox');
-        chatBox.style.display = 'none';
-        document.getElementById('chatToggle').classList.remove('open');
-    });
-
-    // Draggable chat toggle logic
-    const chatToggle = document.getElementById('chatToggle');
-    let isDragging = false;
-    let offsetX, offsetY;
-
-    chatToggle.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
-        offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            document.removeEventListener('mousemove', handleMouseMove);
+            cards.forEach(card => {
+                const title = card.querySelector('h2').textContent.toLowerCase();
+                const category = card.querySelector('p').textContent.toLowerCase();
+                card.style.display = title.includes(query) || category.includes(query) ? 'block' : 'none';
+            });
         });
-    });
 
-    function handleMouseMove(e) {
-        if (isDragging) {
-            chatToggle.style.left = `${e.clientX - offsetX}px`;
-            chatToggle.style.top = `${e.clientY - offsetY}px`;
-        }
-    }
-</script>
-
-
-<script type="text/javascript">
-        function refreshViews() {
-            // Find and remove the existing counter (if any)
-            const counterContainer = document.getElementById("counter-container");
-
-            // Clear previous counter content
-            counterContainer.innerHTML = '';
-
-       // Create and append the arrow icon
-        const arrowIcon = document.createElement('i');
-        arrowIcon.classList.add('fas', 'fa-arrow-up');
-        arrowIcon.style.color = 'white';  // Add any style you want
-        arrowIcon.style.marginRight = '4px';  // Apply margin-right directly
-        arrowIcon.style.fontSize = '10px';   // Apply font-size directly
-
-        // Add the arrow icon to the container
-        counterContainer.appendChild(arrowIcon);
-
-            // Add new counter script
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = "//widget.supercounters.com/ssl/online_t.js";
-            counterContainer.appendChild(script);
-
-            // Initialize the new counter
-            const initScript = document.createElement('script');
-            initScript.type = 'text/javascript';
-            initScript.innerHTML = 'sc_online_t(1703136, "Views", "f0f0f0");';
-            counterContainer.appendChild(initScript);
-        }
-
-        // Refresh the Views number every 20 seconds (20000 milliseconds)
-        setInterval(refreshViews, 20000);
+        // Initialize the page
+        generateHtmlFromJson(JSON_URL);
     </script>
+</body>
 
-
-
-
-</body></html>
+</html>
