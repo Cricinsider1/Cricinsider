@@ -1,165 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astro Cricket ~ @Cricinsider365</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cm</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css">
+    
     <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #000;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 100vh;
-        overflow: hidden;
-        position: relative;
-      }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
 
-      body::before,
-      body::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 50%;
-        background: linear-gradient(135deg, #00008B, #0000CD);
-        opacity: 0.2;
-        animation: waveAnimation 5s ease-in-out infinite;
-        z-index: -1;
-      }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
 
-      body::before {
-        top: 0;
-      }
+        .tg-banner {
+            position: absolute;
+            top: 16px;
+            left: 20px;
+            background: linear-gradient(135deg, #1da1f2, #0077b5);
+            border-radius: 12px;
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
 
-      body::after {
-        bottom: 0;
-      }
+        .tg-banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
 
-      @keyframes waveAnimation {
-        0% { transform: translateX(0) scaleY(1); }
-        50% { transform: translateX(-50%) scaleY(1.2); }
-        100% { transform: translateX(0) scaleY(1); }
-      }
+        .tg-icon {
+            width: 36px;
+            height: 36px;
+            margin-right: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            background-color: #ffffff40;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
 
-      #player {
-        width: 80%;
-        height: 50vh;
-        background-color: #000;
-        border: 5px solid #fff;
-        border-radius: 10px;
-        z-index: 1;
-      }
+        .tg-icon img {
+            width: 24px;
+            height: 24px;
+        }
 
-      .join-telegram-btn {
-        background-color: #0088cc;
-        color: #fff;
-        font-size: 16px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 20px;
-      }
+        html {
+            font-family: sans-serif;
+            background: #000;
+        }
 
-      .join-telegram-btn:hover {
-        background-color: #006e98;
-      }
+        .plyr {
+            height: 100%;
+            width: 100%;
+        }
 
-      .join-telegram-btn a {
-        color: #fff;
-        text-decoration: none;
-      }
+        :root {
+            --plyr-color-main: #d9230f;
+        }
+
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+        }
+
+        .loading-text {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            width: 100%;
+            height: 100px;
+            line-height: 100px;
+        }
+
+        .loading-text span {
+            display: inline-block;
+            margin: 0 5px;
+            color: #00b3ff;
+            font-family: 'Quattrocento Sans', sans-serif;
+        }
+
+        @keyframes blur-text {
+            0% {
+                filter: blur(0px);
+            }
+            100% {
+                filter: blur(4px);
+            }
+        }
+
+        .loading-text span:nth-child(n) {
+            filter: blur(0px);
+            animation: blur-text 1.5s linear alternate infinite;
+        }
+
+        .plyr__video-wrapper::before {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            content: '';
+            height: 35px;
+            width: 35px;
+            background-size: 35px auto, auto;
+        }
     </style>
-  </head>
-  <body>
-    <div id="player"></div>
-    <button class="join-telegram-btn">
-      <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">Join Our Telegram Channel</a>
-    </button>
+</head>
+<body>
+    <!-- Telegram banner -->
+    <div class="tg-banner" onclick="window.location.href='https://t.me/sports_live_linkss';">
+        <div class="tg-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
+        </div>
+        Join @sport match
+    </div>
 
-    <script src="//ssl.p.jwpcdn.com/player/v/8.25.1/jwplayer.js"></script>
-    <script>
-      if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
-        window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
-      }
+    <!-- Video Player -->
+    <div tabindex="0" class="plyr plyr--full-ui">
+        <div class="plyr__video-wrapper">
+            <video autoplay="" crossorigin="" playsinline="" src="blob:https://ss56.vercel.app/b7b9c6b9-e765-4af6-ad52-0628fc6dd75c">
+                <source type="application/vnd.apple.mpegurl" src="https://vkvsd233.okcdn.ru/cmaf/7443308808935/sig/7DUOWSPtmYs/srcIp/13.126.10.149/expires/1734683291348/clientType/13/srcAg/CHROME/fromCache/1/mid/9109154376679/id/7443308808935/get/hls_9109154376679.FR5QsSfmxmU.m3u8">
+            </video>
+            <div class="plyr__poster"></div>
+            <div class="plyr__captions"></div>
+        </div>
+    </div>
 
-      jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
+    <!-- Loading Screen -->
+    <div class="loading">
+        <div class="loading-text">
+            <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
+        </div>
+    </div>
 
-      window.onload = function () {
-        var playerInstance = jwplayer("player");
-        var source = {
-          file: "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd",
-          type: "dash",
-          drm: {
-            clearkey: {
-              keyId: "a8eb0f152c6e429ca7a53f399aadf257",
-              key: "c593c2eeea62742285b99e4d87b1c84a"
-            }
-          },
-          default: true,
-          onXhrOpen: function (xhr, url) {
-            xhr.setRequestHeader('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3bXZlciI6Miwid21pZGZtdCI6ImFzY2lpIiwid21pZHR5cCI6MSwid21rZXl2ZXIiOjEsIndtaWRsZW4iOjUxMiwid21pZCI6IlkyUmpNemxtTkRjdFpHSXdNUzAwT0RnMkxUZzBOakl0TkRBMU1EYzRaRGcwTWpReiIsIndtb3BpZCI6MzIsImV4cCI6MTczNDY1MjA0NSwiaWF0IjoxNzM0MDQ4MDQ1fQ.ewmvAOCyexwkZy2RTV6ZBo4izJBHLr685BEirvPThSM');
-          }
-        };
-
-        // Player setup
-        playerInstance.setup({
-          playlist: [{ sources: [source] }],
-          width: "100%",
-          aspectratio: "16:9",
-          stretching: 'uniform',
-          autostart: true,
-          cast: { appid: 'CC1AD845' }
-        });
-
-        // Add PiP button
-        playerInstance.addButton(
-          "https://cdn-icons-png.flaticon.com/512/1828/1828926.png", // Icon URL
-          "Picture-in-Picture", // Tooltip
-          function () {
-            const videoElement = document.querySelector("video");
-            if (videoElement.requestPictureInPicture) {
-              videoElement.requestPictureInPicture();
-            } else {
-              alert("Picture-in-Picture is not supported on this browser.");
-            }
-          },
-          "pip-button" // Unique button ID
-        );
-
-        // Add Playback Speed button
-        playerInstance.addButton(
-          "https://cdn-icons-png.flaticon.com/512/1828/1828925.png", // Icon URL
-          "Playback Speed", // Tooltip
-          function () {
-            const currentRate = playerInstance.getPlaybackRate();
-            const rates = [0.5, 1, 1.5, 2];
-            const nextRate = rates[(rates.indexOf(currentRate) + 1) % rates.length];
-            playerInstance.setPlaybackRate(nextRate);
-            alert("Playback Speed: " + nextRate + "x");
-          },
-          "playback-speed-button" // Unique button ID
-        );
-
-        // Listen for fullscreen events
-        playerInstance.on('fullscreen', function (event) {
-          const player = document.getElementById("player");
-          if (event.fullscreen) {
-            player.style.width = "100%";
-            player.style.height = "100%";
-            player.classList.add("fullscreen");
-          } else {
-            player.style.width = "80%";
-            player.style.height = "50vh";
-            player.classList.remove("fullscreen");
-          }
-        });
-      };
-    </script>
-  </body>
+    <noscript>You must enable JavaScript to see this text.</noscript>
+</body>
 </html>
