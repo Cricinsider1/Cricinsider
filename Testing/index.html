@@ -2,146 +2,133 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SPORTS STREAMING LIVE</title>
-    <link rel="icon" href="https://i.ibb.co/cC6ZdC9/Join-Telegram-cric-streaming.jpg" type="image/png" sizes="48x48">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Channel Slots</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        /* General Body Styling */
         body {
-            background: #eaedf2;
-            font-family: 'Roboto', sans-serif;
+            background-color: black; /* Dark background */
+            color: white; /* Light text for contrast */
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center; /* Centers text globally */
         }
 
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 10px;
+        /* Channel Grid Container */
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive grid */
+            gap: 15px; /* Space between grid items */
+            padding: 20px; /* Padding around the grid */
+            max-width: 1200px; /* Maximum grid width */
+            margin: auto; /* Center the grid */
         }
 
+        /* Channel Slot Styling */
         .tvv-item {
-            position: relative;
-            flex: 1 1 calc(20% - 20px);
-            max-width: 120px;
-            margin: 10px;
-            background: white;
-            border: 1px solid green;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 3px 2px 2px black;
-            transition: all 0.3s ease;
+            background-color: #1e1e1e; /* Slightly lighter black for cards */
+            border: 2px solid #333; /* Subtle border */
+            border-radius: 10px; /* Rounded corners */
+            padding: 10px; /* Space inside each slot */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+            cursor: pointer; /* Pointer cursor on hover */
         }
 
-        .tvv-thumb img {
-            width: 100%;
+        /* Image Styling */
+        .tvv-item img {
+            width: 100%; /* Full width image */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 5px; /* Rounded image corners */
+            margin-bottom: 8px;
         }
 
+        /* Channel Name Styling */
         .tvv-name {
-            text-align: center;
-            font-size: 12px;
             font-weight: bold;
-            padding: 5px;
-            background: linear-gradient(to bottom left, #15b4ff, #fff);
+            font-size: 1rem; /* Adjust font size */
+            color: white; /* White text */
+            text-transform: capitalize; /* Capitalize channel names */
         }
 
+        /* Hover Effects */
         .tvv-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.05); /* Slight zoom effect */
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3); /* Glow effect */
+            border-color: white; /* Highlight border */
         }
 
-        .custom-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            font-weight: 700;
-            font-size: 20px;
-            background: linear-gradient(135deg, #15b4ff, #000);
-            color: white;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .custom-btn:hover {
-            background: linear-gradient(135deg, #15b4ff, #333);
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+            .channel-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+            }
         }
     </style>
 </head>
 <body>
-    <button class="custom-btn">CRIC STREAMING LIVE WEB</button>
-    <div class="container">
-        <a href="https://telegram.me/cric_streaming" class="tvv-item">
-            <div class="tvv-thumb"><img src="https://i.ibb.co/cC6ZdC9/Join-Telegram-cric-streaming.jpg" alt="Telegram Join"></div>
-            <div class="tvv-name">TELEGRAM JOIN</div>
+    <h1>TV Channel Slots</h1>
+
+    <!-- Channel Slots Container -->
+    <div class="channel-grid">
+        <!-- Channel Slot 1 -->
+        <a href="https://example.com/channel1" class="tvv-item">
+            <img src="https://via.placeholder.com/150" alt="Channel 1">
+            <div class="tvv-name">Channel 1</div>
         </a>
-        <a href="https://cricstreaming.github.io/Starhin" class="tvv-item">
-            <div class="tvv-thumb"><img src="https://img.hotstar.com/image/upload/sources/r1/cms/prod/7198/597198-h.jpg" alt="Star Hindi"></div>
-            <div class="tvv-name">Star Hindi</div>
+
+        <!-- Channel Slot 2 -->
+        <a href="https://example.com/channel2" class="tvv-item">
+            <img src="https://via.placeholder.com/150" alt="Channel 2">
+            <div class="tvv-name">Channel 2</div>
         </a>
-<a href="https://example.com/channel1">
-    <div class="tvv-item">
-        <img class="loading" src="https://via.placeholder.com/100" style="height:90px">
-        <div class="tvv-name">Channel Name 1</div>
-    </div>
-</a>
-<a href="http://insiderlive.pages.dev/Tnt1">
-    <div class="tvv-item">
-        <img class="loading" src="https://i.postimg.cc/LXP7342X/1200x600wa.png" style="height:90px">
-        <div class="tvv-name">TNT 1</div>
-    </div>
-</a>
-<a href="https://example.com/channel3">
-    <div class="tvv-item">
-        <img class="loading" src="https://via.placeholder.com/100" style="height:90px">
-        <div class="tvv-name">Channel Name 3</div>
-    </div>
-</a>
-<a href="https://example.com/channel4">
-    <div class="tvv-item">
-        <img class="loading" src="https://via.placeholder.com/100" style="height:90px">
-        <div class="tvv-name">Channel Name 4</div>
-    </div>
-</a>
-<a href="https://example.com/channel5">
-    <div class="tvv-item">
-        <img class="loading" src="https://via.placeholder.com/100" style="height:90px">
-        <div class="tvv-name">Channel Name 5</div>
-    </div>
-</a>
-<a href="https://example.com/channel6">
-    <div class="tvv-item">
-        <img class="loading" src="https://via.placeholder.com/100" style="height:90px">
-        <div class="tvv-name">Channel Name 6</div>
-    </div>
-</a>
-<a href="https://example.com/channel7">
-    <div class="tvv-item">
-        <img class="loading" src="https://via.placeholder.com/100" style="height:90px">
-        <div class="tvv-name">Channel Name 7</div>
-    </div>
-</a>
-<a href="https://example.com/channel8">
-    <div class="tvv-item">
-        <img class="loading" src="https://via.placeholder.com/100" style="height:90px">
-        <div class="tvv-name">Channel Name 8</div>
-    </div>
-</a>
-<a href="https://example.com/channel9">
-    <div class="tvv-item">
-        <img class="loading" src="https://via.placeholder.com/100" style="height:90px">
-        <div class="tvv-name">Channel Name 9</div>
-    </div>
-</a>
-<a href="https://example.com/channel10">
-    <div class="tvv-item">
-        <img class="loading" src="https://via.placeholder.com/100" style="height:90px">
-        <div class="tvv-name">Channel Name 10</div>
-    </div>
-</a>
-        <!-- Add more tvv-item blocks here -->
+
+        <!-- Channel Slot 3 -->
+        <a href="https://example.com/channel3" class="tvv-item">
+            <img src="https://via.placeholder.com/150" alt="Channel 3">
+            <div class="tvv-name">Channel 3</div>
+        </a>
+
+        <!-- Channel Slot 4 -->
+        <a href="https://example.com/channel4" class="tvv-item">
+            <img src="https://via.placeholder.com/150" alt="Channel 4">
+            <div class="tvv-name">Channel 4</div>
+        </a>
+
+        <!-- Channel Slot 5 -->
+        <a href="https://example.com/channel5" class="tvv-item">
+            <img src="https://via.placeholder.com/150" alt="Channel 5">
+            <div class="tvv-name">Channel 5</div>
+        </a>
+
+        <!-- Channel Slot 6 -->
+        <a href="https://example.com/channel6" class="tvv-item">
+            <img src="https://via.placeholder.com/150" alt="Channel 6">
+            <div class="tvv-name">Channel 6</div>
+        </a>
+
+        <!-- Channel Slot 7 -->
+        <a href="https://example.com/channel7" class="tvv-item">
+            <img src="https://via.placeholder.com/150" alt="Channel 7">
+            <div class="tvv-name">Channel 7</div>
+        </a>
+
+        <!-- Channel Slot 8 -->
+        <a href="https://example.com/channel8" class="tvv-item">
+            <img src="https://via.placeholder.com/150" alt="Channel 8">
+            <div class="tvv-name">Channel 8</div>
+        </a>
+
+        <!-- Channel Slot 9 -->
+        <a href="https://example.com/channel9" class="tvv-item">
+            <img src="https://via.placeholder.com/150" alt="Channel 9">
+            <div class="tvv-name">Channel 9</div>
+        </a>
+
+        <!-- Channel Slot 10 -->
+        <a href="https://example.com/channel10" class="tvv-item">
+            <img src="https://via.placeholder.com/150" alt="Channel 10">
+            <div class="tvv-name">Channel 10</div>
+        </a>
     </div>
 </body>
 </html>
