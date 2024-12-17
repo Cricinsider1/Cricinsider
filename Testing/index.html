@@ -7,66 +7,94 @@
     <style>
         /* General Body Styling */
         body {
-            background-color: black; /* Dark background */
+            background: linear-gradient(135deg, #0d0d0d, #1f1f1f, #121212); /* Dark gradient background */
             color: white; /* Light text for contrast */
             margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center; /* Centers text globally */
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+
+        /* Header Box Styling */
+        .title-box {
+            background: linear-gradient(135deg, #1a73e8, #004aad, #3b8dff); /* Weaving blue gradient */
+            color: white;
+            border-radius: 15px; /* Rounded corners */
+            padding: 15px 25px; /* Padding for box */
+            display: inline-block; /* Center box width to content */
+            margin: 20px auto; /* Spacing around the box */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+            text-transform: uppercase; /* Capitalized text */
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7); /* Glow effect */
         }
 
         /* Channel Grid Container */
         .channel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive grid */
-            gap: 15px; /* Space between grid items */
-            padding: 20px; /* Padding around the grid */
-            max-width: 1200px; /* Maximum grid width */
-            margin: auto; /* Center the grid */
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
         }
 
         /* Channel Slot Styling */
         .tvv-item {
-            background-color: #1e1e1e; /* Slightly lighter black for cards */
-            border: 2px solid #333; /* Subtle border */
-            border-radius: 10px; /* Rounded corners */
-            padding: 10px; /* Space inside each slot */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
-            cursor: pointer; /* Pointer cursor on hover */
+            background: linear-gradient(145deg, #252525, #2f2f2f);
+            border: 1px solid #444;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: white;
         }
 
         /* Image Styling */
         .tvv-item img {
-            width: 100%; /* Full width image */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 5px; /* Rounded image corners */
-            margin-bottom: 8px;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
 
         /* Channel Name Styling */
         .tvv-name {
             font-weight: bold;
-            font-size: 1rem; /* Adjust font size */
-            color: white; /* White text */
-            text-transform: capitalize; /* Capitalize channel names */
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Hover Effects */
         .tvv-item:hover {
-            transform: scale(1.05); /* Slight zoom effect */
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3); /* Glow effect */
-            border-color: white; /* Highlight border */
+            transform: scale(1.08);
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
+            border-color: #ffffff;
+            background: linear-gradient(135deg, #2a2a2a, #3d3d3d);
         }
 
         /* Responsive Adjustments */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .channel-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .channel-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <h1>TV Channel Slots</h1>
+    <!-- Title Box -->
+    <div class="title-box">
+        TV Channel Slots
+    </div>
 
     <!-- Channel Slots Container -->
     <div class="channel-grid">
