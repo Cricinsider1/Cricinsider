@@ -7,8 +7,8 @@
     <style>
         /* General Body Styling */
         body {
-            background: linear-gradient(135deg, #0d0d0d, #1f1f1f, #121212); /* Dark gradient background */
-            color: white; /* Light text for contrast */
+            background: linear-gradient(135deg, #0d0d0d, #1f1f1f, #121212);
+            color: white;
             margin: 0;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
@@ -16,18 +16,40 @@
 
         /* Header Box Styling */
         .title-box {
-            background: linear-gradient(135deg, #1a73e8, #004aad, #3b8dff); /* Weaving blue gradient */
+            background: linear-gradient(135deg, #1a73e8, #004aad, #3b8dff);
             color: white;
-            border-radius: 15px; /* Rounded corners */
-            padding: 15px 25px; /* Padding for box */
-            display: inline-block; /* Center box width to content */
-            margin: 20px auto; /* Spacing around the box */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
-            text-transform: uppercase; /* Capitalized text */
+            border-radius: 15px;
+            padding: 15px 25px;
+            display: inline-block;
+            margin: 20px auto 10px; /* Space around the box */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
             font-size: 1.8rem;
             font-weight: bold;
             letter-spacing: 1px;
-            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7); /* Glow effect */
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);
+        }
+
+        /* Telegram Button Styling */
+        .telegram-button {
+            background: linear-gradient(135deg, #0088cc, #005f9e); /* Telegram blue gradient */
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px; /* Rounded button */
+            padding: 12px 25px;
+            display: inline-block;
+            margin-top: 15px; /* Space below the title box */
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 10px rgba(0, 136, 204, 0.4);
+        }
+
+        .telegram-button:hover {
+            transform: scale(1.08);
+            box-shadow: 0px 6px 20px rgba(0, 136, 204, 0.7);
+            background: linear-gradient(135deg, #005f9e, #0088cc);
         }
 
         /* Channel Grid Container */
@@ -96,6 +118,11 @@
         TV Channel Slots
     </div>
 
+    <!-- Join Telegram Button -->
+    <a href="https://t.me/yourtelegramchannel" class="telegram-button" target="_blank">
+        Join Telegram
+    </a>
+
     <!-- Channel Slots Container -->
     <div class="channel-grid">
         <!-- Channel Slot 1 -->
@@ -154,7 +181,7 @@
 
         <!-- Channel Slot 10 -->
         <a href="http://insiderlive.pages.dev/FancodeW" class="tvv-item">
-            <img src="https://i.postimg.cc/4xBfDwSH/FAncode.jpg" alt="Channel 10">
+            <img src="https://via.placeholder.com/150" alt="Channel 10">
             <div class="tvv-name">Fancode 24/7</div>
         </a>
     </div>
