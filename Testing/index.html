@@ -2,33 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HLS M3U8 Player</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SPORTS STREAMING LIVE</title>
+    <link rel="icon" href="https://i.ibb.co/cC6ZdC9/Join-Telegram-cric-streaming.jpg" type="image/png" sizes="48x48">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #eaedf2;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 10px;
+        }
+
+        .tvv-item {
+            position: relative;
+            flex: 1 1 calc(20% - 20px);
+            max-width: 120px;
+            margin: 10px;
+            background: white;
+            border: 1px solid green;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 3px 2px 2px black;
+            transition: all 0.3s ease;
+        }
+
+        .tvv-thumb img {
+            width: 100%;
+        }
+
+        .tvv-name {
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px;
+            background: linear-gradient(to bottom left, #15b4ff, #fff);
+        }
+
+        .tvv-item:hover {
+            transform: scale(1.05);
+        }
+
+        .custom-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            font-size: 20px;
+            background: linear-gradient(135deg, #15b4ff, #000);
+            color: white;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .custom-btn:hover {
+            background: linear-gradient(135deg, #15b4ff, #333);
+        }
+    </style>
 </head>
 <body>
-    <video id="hls-player" width="640" height="360" controls></video>
-    
-    <!-- hls.js Script -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-        var video = document.getElementById('hls-player');
-        var videoSrc = 'https://livecrichdtv.pages.dev/hindic7';
-        
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource(videoSrc);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = videoSrc;
-            video.addEventListener('loadedmetadata', function () {
-                video.play();
-            });
-        } else {
-            alert("Your browser does not support HLS streaming.");
-        }
-    </script>
+    <button class="custom-btn">CRIC STREAMING LIVE WEB</button>
+    <div class="container">
+        <a href="https://telegram.me/cric_streaming" class="tvv-item">
+            <div class="tvv-thumb"><img src="https://i.ibb.co/cC6ZdC9/Join-Telegram-cric-streaming.jpg" alt="Telegram Join"></div>
+            <div class="tvv-name">TELEGRAM JOIN</div>
+        </a>
+        <a href="https://cricstreaming.github.io/Starhin" class="tvv-item">
+            <div class="tvv-thumb"><img src="https://img.hotstar.com/image/upload/sources/r1/cms/prod/7198/597198-h.jpg" alt="Star Hindi"></div>
+            <div class="tvv-name">Star Hindi</div>
+        </a>
+        <!-- Add more tvv-item blocks here -->
+    </div>
 </body>
 </html>
