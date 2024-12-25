@@ -1,43 +1,45 @@
+<!DOCTYPE html>
 <html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<title>TG_@Cricinsider365</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
-<style>
-    body {
-        background-color: #000;
-        margin: 0;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>TG_@Cricinsider365</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #000;
+            margin: 0;
+        }
 
-    /* Container for video and logo */
-    .video-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-    }
+        /* Container for video and logo */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
 
-    /* Style for the logo */
-    .logo {
-        position: absolute;
-        top: 10px; /* Adjust vertical position */
-        left: 10px; /* Adjust horizontal position */
-        z-index: 1; /* Ensure the logo appears above the video */
-        max-width: 120px; /* Set maximum width for the logo */
-        max-height: 120px; /* Set maximum height for the logo */
-        pointer-events: none; /* Prevent interference with video controls */
-    }
+        /* Style for the logo */
+        .logo {
+            position: absolute;
+            top: 10px; /* Adjust vertical position */
+            left: 10px; /* Adjust horizontal position */
+            z-index: 1; /* Ensure the logo appears above the video */
+            max-width: 120px;
+            max-height: 120px;
+            pointer-events: none;
+        }
 
-    .shaka-spinner-container {
-        display: none;
-    }
+        .shaka-spinner-container {
+            display: none;
+        }
 
-    .uc {
-        pointer-events: none;
-    }
-</style>
+        .uc {
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,15 +58,12 @@
     // Restrict iframe embedding
     if (window.top !== window.self) {
         window.addEventListener('DOMContentLoaded', function() {
-            // Clear the existing content
             document.body.innerHTML = '';
 
-            // Add custom message
             const messageDiv = document.createElement('div');
             messageDiv.id = 'message';
             messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
 
-            // Style the message
             messageDiv.style.color = '#fff';
             messageDiv.style.backgroundColor = '#000';
             messageDiv.style.position = 'fixed';
@@ -77,7 +76,6 @@
             messageDiv.style.fontFamily = 'Arial, sans-serif';
             messageDiv.style.fontSize = '20px';
 
-            // Append the message to the body
             document.body.appendChild(messageDiv);
         });
     }
@@ -88,27 +86,50 @@
         const controls = ui.getControls();
         const player = controls.getPlayer();
 
+        // DRM Configuration with ClearKeys
         player.configure({
             drm: {
                 clearKeys: {
                     'a8eb0f152c6e429ca7a53f399aadf257': "c593c2eeea62742285b99e4d87b1c84a"
                 }
+            },
+            streaming: {
+                retryParameters: {
+                    maxAttempts: 3,
+                    timeout: 8000
+                }
+            },
+            manifest: {
+                retryParameters: {
+                    maxAttempts: 3,
+                    timeout: 8000
+                }
             }
         });
 
+        // UI Configuration
         ui.configure({
             controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
             volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                level: "rgb(0, 255, 0)"     // Green color for the volume level
+                base: "rgba(0, 0, 255, 1)",
+                level: "rgb(0, 255, 0)"
             },
             seekBarColors: {
-                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+                base: "rgb(255, 0, 0)",
+                buffered: "rgb(255, 255, 0)",
+                played: "rgba(0, 128, 128, 1)"
             }
         });
-window.player = player;
+        
+        // Add Bearer Token to Network Requests
+        player.getNetworkingEngine().registerRequestFilter(function(type, request) {
+            if (type == shaka.net.NetworkingEngine.RequestType.MANIFEST ||
+                type == shaka.net.NetworkingEngine.RequestType.SEGMENT) {
+                request.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3bXZlciI6Miwid21pZGZtdCI6ImFzY2lpIiwid21pZHR5cCI6MSwid21rZXl2ZXIiOjEsIndtaWRsZW4iOjUxMiwid21pZCI6Ik9UWm1NVE5sWXpRdFpqQTVNaTAwTmpJMUxXRXhNelF0TkdKaFpERmpOR014TlRZMSIsIndtb3BpZCI6MzIsImV4cCI6MTczNTcwMTM4OSwiaWF0IjoxNzM1MDk3Mzg5fQ.5TOjKpMo2bRXLYeqruFTJ7Oqfvj_HBQrg9skFpcBN3E';
+            }
+        });
+
+        window.player = player;
         window.ui = ui;
 
         player.addEventListener("error", onPlayerErrorEvent);
@@ -122,6 +143,7 @@ window.player = player;
         }
     }
 
+    // Handle Player Errors
     function onPlayerErrorEvent(event) {
         onPlayerError(event.detail);
     }
@@ -147,5 +169,3 @@ window.player = player;
     </script>
 </body>
 </html>
-
-Why this Mpd and keys not loading stream in after the host in GitHub repository 
