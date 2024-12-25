@@ -1,104 +1,174 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join Telegram Popup</title>
-    <style>
-        /* Popup container */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 320px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            text-align: center;
-            z-index: 1000;
-        }
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>TG_@Cricinsider365</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+<style>
+    body {
+        background-color: #000;
+        margin: 0;
+    }
 
-        /* Popup header */
-        .popup-header {
-            background-color: #0088cc;
-            color: white;
-            padding: 15px;
-            font-size: 20px;
-            font-weight: bold;
-            border-radius: 10px 10px 0 0;
-        }
+    /* Container for video and logo */
+    .video-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+    }
 
-        /* Popup body */
-        .popup-body {
-            padding: 20px;
-            font-size: 16px;
-            color: #333;
-        }
+    /* Style for the logo */
+    .logo {
+        position: absolute;
+        top: 10px; /* Adjust vertical position */
+        left: 10px; /* Adjust horizontal position */
+        z-index: 1; /* Ensure the logo appears above the video */
+        max-width: 120px; /* Set maximum width for the logo */
+        max-height: 120px; /* Set maximum height for the logo */
+        pointer-events: none; /* Prevent interference with video controls */
+    }
 
-        /* Buttons */
-        .popup-btn {
-            margin: 10px 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
+    .shaka-spinner-container {
+        display: none;
+    }
 
-        .join-btn {
-            background-color: #0088cc;
-            color: white;
-        }
-
-        .join-btn:hover {
-            background-color: #005f8c;
-        }
-
-        .cancel-btn {
-            background-color: #ddd;
-            color: #333;
-        }
-
-        .cancel-btn:hover {
-            background-color: #bbb;
-        }
-    </style>
+    .uc {
+        pointer-events: none;
+    }
+</style>
 </head>
+
 <body>
+    <!-- Video container -->
+    <div class="video-container">
+        <!-- Logo inside the video -->
+        <img src="https://i.ibb.co/fMKnFg3/1000003992-removebg-preview.png" alt="Logo" class="logo">
 
-<!-- Popup HTML -->
-<div id="telegramPopup" class="popup">
-    <div class="popup-header">
-        📢 Join Us on Telegram!
+        <!-- Video player -->
+        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            <video autoplay muted data-shaka-player id="video" poster="https://i.ibb.co/x7jXd29/In-Shot-20241215-002653932.jpg" style="width:100%; height:100%;"></video>
+        </div>
     </div>
-    <div class="popup-body">
-        Stay updated with the latest news and exclusive content.  
-        Click below to join now!  
-    </div>
-    <button class="popup-btn join-btn" onclick="joinTelegram()">Join Now</button>
-    <button class="popup-btn cancel-btn" onclick="closePopup()">Maybe Later</button>
-</div>
 
-<script>
-    // Show the popup after 5 seconds
-    setTimeout(function () {
-        document.getElementById("telegramPopup").style.display = "block";
-    }, 5000);
+    <script>
+    // Restrict iframe embedding
+    if (window.top !== window.self) {
+        window.addEventListener('DOMContentLoaded', function() {
+            // Clear the existing content
+            document.body.innerHTML = '';
 
-    // Function to handle join button
-    function joinTelegram() {
-        window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
-        closePopup();
+            // Add custom message
+            const messageDiv = document.createElement('div');
+            messageDiv.id = 'message';
+            messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
+
+            // Style the message
+            messageDiv.style.color = '#fff';
+            messageDiv.style.backgroundColor = '#000';
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '50%';
+            messageDiv.style.left = '50%';
+            messageDiv.style.transform = 'translate(-50%, -50%)';
+            messageDiv.style.padding = '20px';
+            messageDiv.style.borderRadius = '10px';
+            messageDiv.style.textAlign = 'center';
+            messageDiv.style.fontFamily = 'Arial, sans-serif';
+            messageDiv.style.fontSize = '20px';
+
+            // Append the message to the body
+            document.body.appendChild(messageDiv);
+        });
     }
 
-    // Close popup
-    function closePopup() {
-        document.getElementById("telegramPopup").style.display = "none";
-    }
-</script>
+    async function init() {
+        const video = document.getElementById("video");
+        const ui = video.ui;
+        const controls = ui.getControls();
+        const player = controls.getPlayer();
 
+        player.configure({
+            drm: {
+                clearKeys: {
+                    'e31a5a81caff5d07ea2411a571fc2e59': "96c5ef69479732ae734f962748c19729"
+                }
+            }
+        });
+
+        ui.configure({
+            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+            volumeBarColors: {
+                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                level: "rgb(0, 255, 0)"     // Green color for the volume level
+            },
+            seekBarColors: {
+                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+            }
+        });
+window.player = player;
+        window.ui = ui;
+
+        player.addEventListener("error", onPlayerErrorEvent);
+        controls.addEventListener("error", onUIErrorEvent);
+
+        try {
+            await player.load("https://live.ll.ww.aiv-cdn.net/OTTB/lhr-nitro/live/clients/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd");
+            console.log("The video has now been loaded!");
+        } catch (error) {
+            onPlayerError(error);
+        }
+    }
+
+    function onPlayerErrorEvent(event) {
+        onPlayerError(event.detail);
+    }
+
+    function onPlayerError(error) {
+        console.error("Error code", error.code, "object", error);
+    }
+
+    function onUIErrorEvent(event) {
+        onPlayerError(event.detail);
+    }
+
+    function initFailed() {
+        console.error("Unable to load the UI library!");
+    }
+
+    document.addEventListener("shaka-ui-loaded", init);
+    document.addEventListener("shaka-ui-load-failed", initFailed);
+
+    // Display a modern pop-up message when the page starts
+      window.addEventListener("load", function() {
+        // Create the popup element
+        var popup = document.createElement("div");
+        popup.className = "popup";
+
+        // Set the popup content
+        popup.innerHTML = `
+          <h2>Support Us!</h2>
+          <p>Join our Telegram channel <br>@thecricsters for more updates.</p>
+          <button id="joinButton">Join Now and support us</button>
+          <button id="closeButton" class="close-btn">Already Joined</button>
+        `;
+
+        // Append the popup to the body
+        document.body.appendChild(popup);
+
+        // Add click event to the Join Now button
+        document.getElementById("joinButton").addEventListener("click", function() {
+          window.location.href = "https://t.me/+uBrjQXMdNqxkOWVl";
+        });
+
+        // Add click event to the Already Joined button to close the popup
+        document.getElementById("closeButton").addEventListener("click", function() {
+          document.body.removeChild(popup);
+        });
+      });
+    }
+    </script>
 </body>
 </html>
