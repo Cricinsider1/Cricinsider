@@ -3,131 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRM Video Player</title>
-    <script src="https://cdn.jwplayer.com/libraries/your-player-library.js"></script>
+    <title>Join Telegram Popup</title>
+    <style>
+        /* Popup container */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        /* Popup header */
+        .popup-header {
+            background-color: #0088cc;
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0;
+        }
+
+        /* Popup body */
+        .popup-body {
+            padding: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Buttons */
+        .popup-btn {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .join-btn {
+            background-color: #0088cc;
+            color: white;
+        }
+
+        .join-btn:hover {
+            background-color: #005f8c;
+        }
+
+        .cancel-btn {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .cancel-btn:hover {
+            background-color: #bbb;
+        }
+    </style>
 </head>
 <body>
 
-<div id="player"></div>
+<!-- Popup HTML -->
+<div id="telegramPopup" class="popup">
+    <div class="popup-header">
+        📢 Join Us on Telegram!
+    </div>
+    <div class="popup-body">
+        Stay updated with the latest news and exclusive content.  
+        Click below to join now!  
+    </div>
+    <button class="popup-btn join-btn" onclick="joinTelegram()">Join Now</button>
+    <button class="popup-btn cancel-btn" onclick="closePopup()">Maybe Later</button>
+</div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
+    // Show the popup after 5 seconds
+    setTimeout(function () {
+        document.getElementById("telegramPopup").style.display = "block";
+    }, 5000);
 
-    const m3u8Url = "https://p-cdn4-a-cg14-linear-cbd46b77.movetv.com/clipslist/22/20241224T102535Z/20241224T122535Z/master_7_3_widevine.m3u8";
-    const streamId = "willow";
-    const encryptedToken = "Mk9ocFR3U1RTVnRZQkNTcER1b2pGaXh3SElIeDBpQlVIV0JLVzkwdWhpOWRheHBjSzJOVTNZMHRiWXhJYlJMVg==";
-
-    // Fetch ClearKey from server
-    async function fetchClearKey(pssh) {
-        try {
-            const response = await fetch("key.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    pssh: pssh,
-                    id: streamId,
-                    token: encryptedToken
-                })
-            });
-
-            if (!response.ok) {
-                console.error("Failed to fetch keys");
-                return null;
-            }
-
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error("Error fetching ClearKey:", error);
-            return null;
-        }
+    // Function to handle join button
+    function joinTelegram() {
+        window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
+        closePopup();
     }
 
-    // Extract PSSH from M3U8
-    async function fetchPSSHFromM3U8(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                console.error("Failed to fetch M3U8");
-                return null;
-            }
-
-            const m3u8Text = await response.text();
-            const sessionKeyTag = m3u8Text.split("\n").find(line => 
-                line.startsWith("#EXT-X-SESSION-KEY") && 
-                line.includes('KEYFORMAT="urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed"')
-            );
-
-            if (!sessionKeyTag) {
-                console.error("No PSSH found in M3U8");
-                return null;
-            }
-
-            const uriMatch = sessionKeyTag.match(/URI="data:text\/plain;base64,([^"]+)"/);
-            if (!uriMatch) {
-                console.error("Invalid PSSH format");
-                return null;
-            }
-
-            return uriMatch[1];
-        } catch (error) {
-            console.error("Error fetching PSSH from M3U8:", error);
-            return null;
-        }
+    // Close popup
+    function closePopup() {
+        document.getElementById("telegramPopup").style.display = "none";
     }
-
-    // Initialize JWPlayer with DRM
-    async function initializePlayer() {
-        try {
-            const pssh = await fetchPSSHFromM3U8(m3u8Url);
-            if (!pssh) {
-                console.error("Failed to extract PSSH");
-                return;
-            }
-
-            const keys = await fetchClearKey(pssh);
-            if (!keys) {
-                console.error("Failed to retrieve decryption keys");
-                return;
-            }
-
-            // JWPlayer setup with ClearKey DRM
-            jwplayer("player").setup({
-                playlist: [
-                    {
-                        sources: [
-                            {
-                                default: true,
-                                type: "dash",
-                                file: m3u8Url,
-                                drm: {
-                                    clearkey: {
-                                        keyId: keys.keyId,
-                                        key: keys.key
-                                    }
-                                },
-                                label: "HD"
-                            }
-                        ]
-                    }
-                ],
-                width: "100%",
-                height: "100%",
-                aspectratio: "16:9",
-                autostart: true
-            });
-
-        } catch (error) {
-            console.error("Error initializing player:", error);
-        }
-    }
-
-    // Start player setup
-    initializePlayer();
-});
 </script>
 
 </body>
