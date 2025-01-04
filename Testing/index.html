@@ -91,7 +91,7 @@
         player.configure({
             drm: {
                 clearKeys: {
-                    'e91f5307312a7307a795a8b0d7cf1521': "a46e01534737e6ecca983c594fd2e458"
+                    '59ed8dc9d4a48857ef8e5865919496cc': "0d3680bd8b349deda8b7fdd1da71b7f8"
                 }
             }
         });
@@ -115,7 +115,7 @@ window.player = player;
         controls.addEventListener("error", onUIErrorEvent);
 
         try {
-            await player.load("https://abgbygkaaaaaaaamcifkjmnimjuj2.1b403fb26b854a79bd7f01df685f46da.emt.cf.ww.aiv-cdn.net/v1/dash/746463508834/willowtvus_live_amzn1_dv_live_csid_277d1d6d-dd2e-457d-ad61-b620c4dd5889_us-east-1_iad_dash_h264_none_stereo/live/clients/dash/enc/fm8ev3oek0/out/v1/82c0edcc3e7b4a1d9e97549da8816c63/cenc.mpd?aws.sessionId=29931f6a-cccc-4ec2-96f9-50d268b2678e&amznDtid=AOAGZA014O5RE&encoding=segmentBase");
+            await player.load("https://cors-anywhere.ammoapps.com/https://dfwlive-v1-c1p3-sponsored.akamaized.net/Content/HLS.cps/Live/channel(WILLHD-3291.dfw.1080)/index.m3u8");
             console.log("The video has now been loaded!");
         } catch (error) {
             onPlayerError(error);
