@@ -65,10 +65,6 @@
             transform: translateY(-5px);
         }
 
-        .telegram-btn:active {
-            transform: translateY(2px);
-        }
-
         /* Box Container */
         .box-container {
             display: flex;
@@ -91,22 +87,6 @@
             overflow: hidden;
         }
 
-        .box:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: skewX(45deg);
-            transition: 0.6s;
-        }
-
-        .box:hover:before {
-            left: 100%;
-        }
-
         .box:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
@@ -123,6 +103,29 @@
 
         .box a:hover {
             color: #ffdd00;
+        }
+
+        /* Watch Live Button */
+        .watch-live-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: #ff4c4c;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid white;
+            border-radius: 30px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s;
+            text-decoration: none;
+        }
+
+        .watch-live-btn:hover {
+            background: white;
+            color: #ff4c4c;
+            transform: translateY(-5px);
         }
 
         /* Responsive Design */
@@ -143,20 +146,6 @@
 
             header p {
                 font-size: 1.3rem;
-            }
-        }
-
-        /* Floating Animation */
-        .box:hover h3 {
-            animation: float 1.5s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-8px);
             }
         }
 
@@ -185,10 +174,25 @@
     </header>
 
     <div class="box-container">
-        <div class="box"><h3><a href="tnt1b.html">IND VS AUS</a></h3></div>
-        <div class="box"><h3><a href="willow.html">SA VS PAK</a></h3></div>
-        <div class="box"><h3><a href="willow.html">BBL</a></h3></div>
-        <div class="box"><h3><a href="tnt.html">NZ VS SL</a></h3></div>
+        <div class="box">
+            <h3><a href="tnt1b.html">IND VS AUS</a></h3>
+            <a href="tnt1b.html" class="watch-live-btn">Watch Live</a>
+        </div>
+
+        <div class="box">
+            <h3><a href="willow.html">SA VS PAK</a></h3>
+            <a href="willow.html" class="watch-live-btn">Watch Live</a>
+        </div>
+
+        <div class="box">
+            <h3><a href="willow.html">BBL</a></h3>
+            <a href="willow.html" class="watch-live-btn">Watch Live</a>
+        </div>
+
+        <div class="box">
+            <h3><a href="tnt.html">NZ VS SL</a></h3>
+            <a href="tnt.html" class="watch-live-btn">Watch Live</a>
+        </div>
     </div>
 </body>
 </html>
