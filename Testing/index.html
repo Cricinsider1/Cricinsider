@@ -41,7 +41,35 @@
             opacity: 0.9;
         }
 
-        /* Navbar and Box Styles */
+        /* Telegram Button */
+        .telegram-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: #0088cc;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s;
+            text-decoration: none;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .telegram-btn:hover {
+            background: #0077b5;
+            transform: translateY(-5px);
+        }
+
+        .telegram-btn:active {
+            transform: translateY(2px);
+        }
+
+        /* Box Container */
         .box-container {
             display: flex;
             flex-wrap: wrap;
@@ -149,6 +177,11 @@
     <header>
         <h1>RadarxTV</h1>
         <p>Watch Live Cricket</p>
+        
+        <!-- Telegram Button -->
+        <a href="https://t.me/joinchat/yourlink" class="telegram-btn" target="_blank">
+            Join Our Telegram
+        </a>
     </header>
 
     <div class="box-container">
