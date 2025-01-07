@@ -1,149 +1,161 @@
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<title>TG_@Cricinsider365</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
-<style>
-    body {
-        background-color: #000;
-        margin: 0;
-    }
-
-    /* Container for video and logo */
-    .video-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-    }
-
-    /* Style for the logo */
-    .logo {
-        position: absolute;
-        top: 10px; /* Adjust vertical position */
-        left: 10px; /* Adjust horizontal position */
-        z-index: 1; /* Ensure the logo appears above the video */
-        max-width: 120px; /* Set maximum width for the logo */
-        max-height: 120px; /* Set maximum height for the logo */
-        pointer-events: none; /* Prevent interference with video controls */
-    }
-
-    .shaka-spinner-container {
-        display: none;
-    }
-
-    .uc {
-        pointer-events: none;
-    }
-</style>
-</head>
-
-<body>
-    <!-- Video container -->
-    <div class="video-container">
-        <!-- Logo inside the video -->
-        <img src="https://i.ibb.co/fMKnFg3/1000003992-removebg-preview.png" alt="Logo" class="logo">
-
-        <!-- Video player -->
-        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-            <video autoplay muted data-shaka-player id="video" poster="https://i.ibb.co/x7jXd29/In-Shot-20241215-002653932.jpg" style="width:100%; height:100%;"></video>
-        </div>
-    </div>
-
-    <script>
-    // Restrict iframe embedding
-    if (window.top !== window.self) {
-        window.addEventListener('DOMContentLoaded', function() {
-            // Clear the existing content
-            document.body.innerHTML = '';
-
-            // Add custom message
-            const messageDiv = document.createElement('div');
-            messageDiv.id = 'message';
-            messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
-
-            // Style the message
-            messageDiv.style.color = '#fff';
-            messageDiv.style.backgroundColor = '#000';
-            messageDiv.style.position = 'fixed';
-            messageDiv.style.top = '50%';
-            messageDiv.style.left = '50%';
-            messageDiv.style.transform = 'translate(-50%, -50%)';
-            messageDiv.style.padding = '20px';
-            messageDiv.style.borderRadius = '10px';
-            messageDiv.style.textAlign = 'center';
-            messageDiv.style.fontFamily = 'Arial, sans-serif';
-            messageDiv.style.fontSize = '20px';
-
-            // Append the message to the body
-            document.body.appendChild(messageDiv);
-        });
-    }
-
-    async function init() {
-        const video = document.getElementById("video");
-        const ui = video.ui;
-        const controls = ui.getControls();
-        const player = controls.getPlayer();
-
-        player.configure({
-            drm: {
-                clearKeys: {
-                    '59ed8dc9d4a48857ef8e5865919496cc': "0d3680bd8b349deda8b7fdd1da71b7f8"
-                }
-            }
-        });
-
-        ui.configure({
-            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-            volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                level: "rgb(0, 255, 0)"     // Green color for the volume level
-            },
-            seekBarColors: {
-                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
-            }
-        });
-window.player = player;
-        window.ui = ui;
-
-        player.addEventListener("error", onPlayerErrorEvent);
-        controls.addEventListener("error", onUIErrorEvent);
-
-        try {
-            await player.load("https://cors-anywhere.ammoapps.com/https://dfwlive-v1-c1p3-sponsored.akamaized.net/Content/HLS.cps/Live/channel(WILLHD-3291.dfw.1080)/index.m3u8");
-            console.log("The video has now been loaded!");
-        } catch (error) {
-            onPlayerError(error);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RadarxTV - Watch Live Cricket</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: white;
+            overflow-x: hidden;
         }
-    }
 
-    function onPlayerErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 70px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+            animation: slideDown 1s ease-out;
+            position: relative;
+            z-index: 1;
+        }
 
-    function onPlayerError(error) {
-        console.error("Error code", error.code, "object", error);
-    }
+        header h1 {
+            font-size: 4rem;
+            margin: 0;
+            background: -webkit-linear-gradient(45deg, #ffdd00, #ff6f61);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
 
-    function onUIErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
+        header p {
+            font-size: 1.7rem;
+            margin-top: 15px;
+            opacity: 0.9;
+        }
 
-    function initFailed() {
-        console.error("Unable to load the UI library!");
-    }
+        /* Navbar and Box Styles */
+        .box-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 50px 20px;
+            gap: 30px;
+        }
 
-    document.addEventListener("shaka-ui-loaded", init);
-    document.addEventListener("shaka-ui-load-failed", initFailed);
+        .box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            flex: 0 0 calc(30% - 40px);
+            cursor: pointer;
+            transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
 
-    if (confirm("Join For More Links!!")) {
-        window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-    }
-    </script>
+        .box:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: skewX(45deg);
+            transition: 0.6s;
+        }
+
+        .box:hover:before {
+            left: 100%;
+        }
+
+        .box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .box a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        .box a:hover {
+            color: #ffdd00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .box {
+                flex: 0 0 calc(45% - 40px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .box {
+                flex: 0 0 calc(100% - 40px);
+            }
+
+            header h1 {
+                font-size: 3rem;
+            }
+
+            header p {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Floating Animation */
+        .box:hover h3 {
+            animation: float 1.5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Header Animation */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>RadarxTV</h1>
+        <p>Watch Live Cricket</p>
+    </header>
+
+    <div class="box-container">
+        <div class="box"><h3><a href="tnt1b.html">IND VS AUS</a></h3></div>
+        <div class="box"><h3><a href="willow.html">SA VS PAK</a></h3></div>
+        <div class="box"><h3><a href="willow.html">BBL</a></h3></div>
+        <div class="box"><h3><a href="tnt.html">NZ VS SL</a></h3></div>
+    </div>
 </body>
 </html>
