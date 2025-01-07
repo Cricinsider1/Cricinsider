@@ -53,7 +53,6 @@
             border: none;
             border-radius: 50px;
             text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
             transition: background 0.3s ease, transform 0.3s;
             text-decoration: none;
@@ -78,12 +77,11 @@
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 15px;
-            padding: 40px 30px;
+            padding: 20px;
             text-align: center;
             flex: 0 0 calc(30% - 40px);
             cursor: pointer;
             transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
-            position: relative;
             overflow: hidden;
         }
 
@@ -99,6 +97,7 @@
             font-size: 1.5rem;
             font-weight: 600;
             display: block;
+            margin-bottom: 15px;
         }
 
         .box a:hover {
@@ -108,24 +107,33 @@
         /* Watch Live Button */
         .watch-live-btn {
             display: inline-block;
-            margin-top: 20px;
-            padding: 12px 30px;
-            background: #ff4c4c;
+            margin-top: 10px;
+            padding: 10px 30px;
+            background: #ff4d4d;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
             border: 2px solid white;
-            border-radius: 30px;
+            border-radius: 50px;
             text-transform: uppercase;
             cursor: pointer;
             transition: background 0.3s ease, transform 0.3s;
             text-decoration: none;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
         }
 
         .watch-live-btn:hover {
             background: white;
-            color: #ff4c4c;
-            transform: translateY(-5px);
+            color: #ff4d4d;
+        }
+
+        /* Match Image */
+        .match-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
         }
 
         /* Responsive Design */
@@ -148,18 +156,6 @@
                 font-size: 1.3rem;
             }
         }
-
-        /* Header Animation */
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 <body>
@@ -175,21 +171,22 @@
 
     <div class="box-container">
         <div class="box">
+            <img src="images/ind-vs-aus.jpg" alt="IND VS AUS" class="match-image">
             <h3><a href="tnt1b.html">IND VS AUS</a></h3>
             <a href="tnt1b.html" class="watch-live-btn">Watch Live</a>
         </div>
-
         <div class="box">
+            <img src="images/sa-vs-pak.jpg" alt="SA VS PAK" class="match-image">
             <h3><a href="willow.html">SA VS PAK</a></h3>
             <a href="willow.html" class="watch-live-btn">Watch Live</a>
         </div>
-
         <div class="box">
+            <img src="images/bbl.jpg" alt="BBL" class="match-image">
             <h3><a href="willow.html">BBL</a></h3>
             <a href="willow.html" class="watch-live-btn">Watch Live</a>
         </div>
-
         <div class="box">
+            <img src="images/nz-vs-sl.jpg" alt="NZ VS SL" class="match-image">
             <h3><a href="tnt.html">NZ VS SL</a></h3>
             <a href="tnt.html" class="watch-live-btn">Watch Live</a>
         </div>
