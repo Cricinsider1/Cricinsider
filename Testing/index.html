@@ -21,9 +21,6 @@
             padding: 70px 20px;
             background: rgba(0, 0, 0, 0.6);
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
-            animation: slideDown 1s ease-out;
-            position: relative;
-            z-index: 1;
         }
 
         header h1 {
@@ -49,19 +46,8 @@
             background: #0088cc;
             color: white;
             font-size: 1.3rem;
-            font-weight: bold;
-            border: none;
             border-radius: 50px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s;
             text-decoration: none;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .telegram-btn:hover {
-            background: #0077b5;
-            transform: translateY(-5px);
         }
 
         /* Box Container */
@@ -75,86 +61,26 @@
 
         .box {
             background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             padding: 20px;
             text-align: center;
             flex: 0 0 calc(30% - 40px);
-            cursor: pointer;
-            transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
-            overflow: hidden;
         }
 
-        .box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .box a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        .box a:hover {
-            color: #ffdd00;
-        }
-
-        /* Watch Live Button */
         .watch-live-btn {
             display: inline-block;
             margin-top: 10px;
             padding: 10px 30px;
             background: #ff4d4d;
             color: white;
-            font-size: 1rem;
-            font-weight: bold;
-            border: 2px solid white;
             border-radius: 50px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s;
             text-decoration: none;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .watch-live-btn:hover {
-            background: white;
-            color: #ff4d4d;
-        }
-
-        /* Match Image */
         .match-image {
             width: 100%;
             height: 180px;
-            object-fit: cover;
             border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .box {
-                flex: 0 0 calc(45% - 40px);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .box {
-                flex: 0 0 calc(100% - 40px);
-            }
-
-            header h1 {
-                font-size: 3rem;
-            }
-
-            header p {
-                font-size: 1.3rem;
-            }
         }
     </style>
 </head>
@@ -162,8 +88,6 @@
     <header>
         <h1>RadarxTV</h1>
         <p>Watch Live Cricket</p>
-        
-        <!-- Telegram Button -->
         <a href="https://t.me/joinchat/yourlink" class="telegram-btn" target="_blank">
             Join Our Telegram
         </a>
@@ -172,23 +96,23 @@
     <div class="box-container">
         <div class="box">
             <img src="https://i.postimg.cc/902j6HXq/IMG-20241014-133414-114.jpg" alt="IND VS AUS" class="match-image">
-            <h3><a href="http://insiderlive.pages.dev/Astro2">IND VS AUS</a></h3>
-            <a href="tnt1b.html" class="watch-live-btn">Watch Live</a>
+            <h3>IND VS AUS</h3>
+            <a href="iframe.html?match=ind-vs-aus" class="watch-live-btn" target="_blank">Watch Live</a>
         </div>
         <div class="box">
             <img src="images/sa-vs-pak.jpg" alt="SA VS PAK" class="match-image">
-            <h3><a href="willow.html">SA VS PAK</a></h3>
-            <a href="willow.html" class="watch-live-btn">Watch Live</a>
+            <h3>SA VS PAK</h3>
+            <a href="iframe.html?match=sa-vs-pak" class="watch-live-btn" target="_blank">Watch Live</a>
         </div>
         <div class="box">
             <img src="images/bbl.jpg" alt="BBL" class="match-image">
-            <h3><a href="willow.html">BBL</a></h3>
-            <a href="willow.html" class="watch-live-btn">Watch Live</a>
+            <h3>BBL</h3>
+            <a href="iframe.html?match=bbl" class="watch-live-btn" target="_blank">Watch Live</a>
         </div>
         <div class="box">
             <img src="images/nz-vs-sl.jpg" alt="NZ VS SL" class="match-image">
-            <h3><a href="tnt.html">NZ VS SL</a></h3>
-            <a href="tnt.html" class="watch-live-btn">Watch Live</a>
+            <h3>NZ VS SL</h3>
+            <a href="iframe.html?match=nz-vs-sl" class="watch-live-btn" target="_blank">Watch Live</a>
         </div>
     </div>
 </body>
