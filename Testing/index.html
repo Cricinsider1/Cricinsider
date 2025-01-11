@@ -26,8 +26,6 @@
       height: 60%;
       max-width: 900px;
       background: #000;
-      border: 2px solid #0074d9;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
       border-radius: 10px;
       margin-top: 20px;
     }
@@ -83,11 +81,8 @@
     .ad-banner img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* Ensure the full image is visible */
-      border: 2px solid #0074d9;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      background: #1e1e1e;
+      object-fit: cover; /* Fully fits the banner without leaving space */
+      border-radius: 0;  /* No border radius */
     }
 
     /* Popup Overlay */
@@ -166,7 +161,7 @@
   <!-- Advertising Banner -->
   <div class="ad-banner">
     <a href="https://example.com" target="_blank">
-      <img src="https://i.postimg.cc/QNQnwRKR/IMG-20241215-133042-416.jpg" alt="Advertise Here">
+      <img src="https://via.placeholder.com/900x120.png?text=Your+Ad+Here" alt="Advertise Here">
     </a>
   </div>
 
