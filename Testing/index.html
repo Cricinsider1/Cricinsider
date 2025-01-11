@@ -3,220 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Cricinsider365</title>
+    <title>CricketSparx</title>
     <style>
-        /* General Body Styling */
         body {
-            background: linear-gradient(135deg, #0d0d0d, #1f1f1f, #121212);
-            color: white;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
             margin: 0;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Full-Screen Popup */
+        #popup {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            color: white;
+            z-index: 9999;
             text-align: center;
         }
 
-        /* Header Box Styling */
-        .title-box {
-            background: linear-gradient(135deg, #1a73e8, #004aad, #3b8dff);
-            color: white;
-            border-radius: 15px;
-            padding: 15px 25px;
-            display: inline-block;
-            margin: 20px auto 10px; /* Space around the box */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            text-transform: uppercase;
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);
-        }
-
-        /* Telegram Button Styling */
-        .telegram-button {
-            background: linear-gradient(135deg, #0088cc, #005f9e); /* Telegram blue gradient */
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: bold;
+        #popup button {
+            margin: 10px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 30px; /* Rounded button */
-            padding: 12px 25px;
-            display: inline-block;
-            margin-top: 15px; /* Space below the title box */
-            transition: all 0.3s ease;
-            box-shadow: 0px 4px 10px rgba(0, 136, 204, 0.4);
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #join-now {
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        #join-now:hover {
+            background-color: #0056b3;
+        }
+        #already-joined {
+            background-color: #28a745;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        #already-joined:hover {
+            background-color: #1e7e34;
         }
 
-        .telegram-button:hover {
-            transform: scale(1.08);
-            box-shadow: 0px 6px 20px rgba(0, 136, 204, 0.7);
-            background: linear-gradient(135deg, #005f9e, #0088cc);
-        }
-
-        /* Channel Grid Container */
-        .channel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        /* Channel Slot Styling */
-        .tvv-item {
-            background: linear-gradient(145deg, #252525, #2f2f2f);
-            border: 1px solid #444;
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none;
+        /* Header */
+        #header {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
             color: white;
         }
 
-        /* Image Styling */
-        .tvv-item img {
+        /* Video Container */
+        #streaming-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        video {
             width: 100%;
             height: auto;
+            border: 2px solid white;
             border-radius: 10px;
-            margin-bottom: 10px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
         }
 
-        /* Channel Name Styling */
-        .tvv-name {
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Hover Effects */
-        .tvv-item:hover {
-            transform: scale(1.08);
-            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
-            border-color: #ffffff;
-            background: linear-gradient(135deg, #2a2a2a, #3d3d3d);
-        }
-
-        /* "Watch Now" Button Styling */
-        .watch-now-button {
-            background: linear-gradient(135deg, #e10600, #f9f9f9);
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: bold;
+        /* Quality Selector (Settings Button) */
+        #settings-button {
+            position: relative;
+            background-color: #333333;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
             border: none;
-            border-radius: 30px; /* Rounded button */
-            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
             display: inline-block;
-            margin-top: 10px; /* Space below the channel slot */
-            transition: all 0.3s ease;
-            box-shadow: 0px 4px 10px rgba(255, 0, 0, 0.3);
+        }
+        #settings-button:hover {
+            background-color: #444444;
         }
 
-        .watch-now-button:hover {
-            transform: scale(1.08);
-            box-shadow: 0px 6px 20px rgba(255, 0, 0, 0.7);
-            background: linear-gradient(135deg, #f9f9f9, #e10600);
+        #dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #222222;
+            border: 1px solid #444;
+            border-radius: 5px;
+            margin-top: 10px;
+            z-index: 10;
+            padding: 10px;
+        }
+        #dropdown-menu select {
+            background-color: black;
+            color: white;
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid white;
+            border-radius: 5px;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .channel-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* Telegram Join Button */
+        #telegram-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
         }
-
-        @media (max-width: 480px) {
-            .channel-grid {
-                grid-template-columns: 1fr;
-            }
+        #telegram-button:hover {
+            background-color: #0056b3;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.0/dist/hls.min.js"></script>
 </head>
 <body>
-    <!-- Title Box -->
-    <div class="title-box">
-        Cricinsider365 Web 24/7
+
+<!-- Full-Screen Popup -->
+<div id="popup">
+    <p>Join our Telegram channel <a href="https://t.me/CricketSparx" target="_blank" style="color: lightblue; text-decoration: none;">@CricketSparx</a> for more links!</p>
+    <button id="join-now" onclick="joinNow()">Join Now</button>
+    <button id="already-joined" onclick="closePopup()">Already Joined</button>
+</div>
+
+<!-- Header -->
+<div id="header">CricketSparx</div>
+
+<!-- Video Streaming Section -->
+<div id="streaming-container">
+    <video id="videoPlayer" controls src="blob:https://cricketsparx.github.io/48067179-fb2b-4433-85b8-dfe0216ddbaa"></video>
+    
+    <!-- Settings Dropdown -->
+    <div id="settings-button" onclick="toggleDropdown()">⚙ Settings</div>
+    <div id="dropdown-menu">
+        <label for="quality">Select Quality:</label>
+        <select id="quality" onchange="changeQuality()">
+            <option value="-1" selected>Auto</option>
+            <option value="0">144p</option>
+            <option value="1">360p</option>
+            <option value="2">480p</option>
+            <option value="3">540p</option>
+            <option value="4">720p</option>
+            <option value="5">1080p</option>
+        </select>
     </div>
+    
+    <!-- Telegram Join Button -->
+    <button id="telegram-button" onclick="joinTelegram()">Join Telegram</button>
+</div>
 
-    <!-- Join Telegram Button -->
-    <a href="https://t.me/yourtelegramchannel" class="telegram-button" target="_blank">
-        Join For More Live Links 
-    </a>
+<script>
+    const video = document.getElementById('videoPlayer');
+    const qualitySelector = document.getElementById('quality');
+    const hls = new Hls();
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    const settingsButton = document.getElementById('settings-button');
 
-    <!-- Channel Slots Container -->
-    <div class="channel-grid">
-        <!-- Channel Slot 1 -->
-        <a href="http://insiderlive.pages.dev/Tnt1" class="tvv-item">
-            <img src="https://i.postimg.cc/LXP7342X/1200x600wa.png" alt="Channel 1">
-            <div class="tvv-name">TNT 1</div>
-            <a href="http://insiderlive.pages.dev/Tnt1" class="watch-now-button">Watch Now</a>
-        </a>
+    // Function to toggle dropdown
+    function toggleDropdown() {
+        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    }
 
-        <!-- Channel Slot 2 -->
-        <a href="http://insiderlive.pages.dev/Tnt2" class="tvv-item">
-            <img src="https://i.postimg.cc/LXP7342X/1200x600wa.png" alt="Channel 2">
-            <div class="tvv-name">TNT 2</div>
-            <a href="http://insiderlive.pages.dev/Tnt2" class="watch-now-button">Watch Now</a>
-        </a>
+    // Function to get the URL parameter
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
 
-        <!-- Channel Slot 3 -->
-        <a href="http://insiderlive.pages.dev/Tnt3" class="tvv-item">
-            <img src="https://i.postimg.cc/LXP7342X/1200x600wa.png" alt="Channel 3">
-            <div class="tvv-name">TNT 3</div>
-            <a href="http://insiderlive.pages.dev/Tnt3" class="watch-now-button">Watch Now</a>
-        </a>
+    // Get HLS URL from query parameter
+    const hlsUrl = getQueryParam('url');
 
-        <!-- Channel Slot 4 -->
-        <a href="http://insiderlive.pages.dev/Tnt4" class="tvv-item">
-            <img src="https://i.postimg.cc/LXP7342X/1200x600wa.png" alt="Channel 4">
-            <div class="tvv-name">TNT 4</div>
-            <a href="http://insiderlive.pages.dev/Tnt4" class="watch-now-button">Watch Now</a>
-        </a>
+    if (hlsUrl) {
+        if (Hls.isSupported()) {
+            hls.loadSource(hlsUrl);
+            hls.attachMedia(video);
 
-        <!-- Channel Slot 5 -->
-        <a href="http://insiderlive.pages.dev/Tnt5" class="tvv-item">
-            <img src="https://i.postimg.cc/LXP7342X/1200x600wa.png" alt="Channel 5">
-            <div class="tvv-name">TNT 5</div>
-            <a href="http://insiderlive.pages.dev/Tnt5" class="watch-now-button">Watch Now</a>
-        </a>
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                const levels = hls.levels;
+                levels.forEach((level, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `${level.height}p`;
+                    qualitySelector.appendChild(option);
+                });
+            });
 
-        <!-- Channel Slot 6 -->
-        <a href="http://insiderlive.pages.dev/Willow" class="tvv-item">
-            <img src="https://i.postimg.cc/QNQnwRKR/IMG-20241215-133042-416.jpg" alt="Channel 6">
-            <div class="tvv-name">Willow Cricket</div>
-            <a href="http://insiderlive.pages.dev/Willow" class="watch-now-button">Watch Now</a>
-        </a>
+            function changeQuality() {
+                const quality = parseInt(qualitySelector.value);
+                hls.currentLevel = quality === -1 ? -1 : quality;
+            }
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = hlsUrl;
+        }
+    } else {
+        alert("No URL provided. Please add '?url=your_hls_link.m3u8' to the URL.");
+    }
 
-        <!-- Channel Slot 7 -->
-        <a href="http://insiderlive.pages.dev/WillowXtra" class="tvv-item">
-            <img src="https://i.postimg.cc/dtXJtWrV/IMG-20241023-022558-071.jpg" alt="Channel 7">
-            <div class="tvv-name">Willow Xtra Cricket</div>
-            <a href="http://insiderlive.pages.dev/WillowXtra" class="watch-now-button">Watch Now</a>
-        </a>
+    function joinNow() {
+        window.open('https://t.me/+Pj_QX9oygJNiYmRl', '_blank');
+    }
 
-        <!-- Channel Slot 8 -->
-        <a href="https://shz.al/~insiderlive_Astro1.html" class="tvv-item">
-            <img src="https://i.postimg.cc/PqPx2cy3/maxresdefault.jpg" alt="Channel 8">
-            <div class="tvv-name">Astro Cricket</div>
-            <a href="https://shz.al/~insiderlive_Astro1.html" class="watch-now-button">Watch Now</a>
-        </a>
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
 
-        <!-- Channel Slot 9 -->
-        <a href="http://insiderlive.pages.dev/Tencricket" class="tvv-item">
-            <img src="https://i.ibb.co/1rpNh3s/Tensports.jpg" alt="Channel 9">
-            <div class="tvv-name">Ten Cricket</div>
-            <a href="http://insiderlive.pages.dev/Tencricket" class="watch-now-button">Watch Now</a>
-        </a>
+    function joinTelegram() {
+        window.open('https://t.me/+Pj_QX9oygJNiYmRl', '_blank');
+    }
 
-        <!-- Channel Slot 10 -->
-        <a href="http://insiderlive.pages.dev/FancodeW" class="tvv-item">
-            <img src="https://i.postimg.cc/4xBfDwSH/FAncode.jpg" alt="Channel 10">
-            <div class="tvv-name">Fancode 24/7</div>
-            <a href="http://insiderlive.pages.dev/FancodeW" class="watch-now-button">Watch Now</a>
-        </a>
-    </div>
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!settingsButton.contains(e.target)) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+</script>
 
 </body>
 </html>
