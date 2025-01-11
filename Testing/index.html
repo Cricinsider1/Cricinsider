@@ -1,247 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CricketSparx</title>
-    <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TG - @Cricinsider365</title>
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(145deg, #1b1b1b, #282828);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+    }
 
-        /* Full-Screen Popup */
-        #popup {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            color: white;
-            z-index: 9999;
-            text-align: center;
-        }
+    /* Video Player */
+    #video {
+      width: 100%;
+      height: 60%;
+      max-width: 900px;
+      background: #000;
+      border: 2px solid #0074d9;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      margin-top: 20px;
+    }
 
-        #popup button {
-            margin: 10px;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        #join-now {
-            background-color: #007bff;
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-        #join-now:hover {
-            background-color: #0056b3;
-        }
-        #already-joined {
-            background-color: #28a745;
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-        #already-joined:hover {
-            background-color: #1e7e34;
-        }
+    /* Telegram Join Section */
+    .join-section {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+      background-color: #0074d9;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
 
-        /* Header */
-        #header {
-            font-size: 32px;
-            font-weight: bold;
-            margin: 20px 0;
-            text-align: center;
-            color: white;
-        }
+    .join-section a {
+      text-decoration: none;
+    }
 
-        /* Video Container */
-        #streaming-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            text-align: center;
-        }
-        video {
-            width: 100%;
-            height: auto;
-            border: 2px solid white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-        }
+    #joinTelegramButton {
+      background-color: #ffffff;
+      color: #0074d9;
+      border: 2px solid #ffffff;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-        /* Quality Selector (Settings Button) */
-        #settings-button {
-            position: relative;
-            background-color: #333333;
-            color: white;
-            font-size: 16px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-            display: inline-block;
-        }
-        #settings-button:hover {
-            background-color: #444444;
-        }
+    #joinTelegramButton:hover {
+      background-color: #005bb5;
+      color: #ffffff;
+      border-color: #005bb5;
+      transform: scale(1.05);
+    }
 
-        #dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #222222;
-            border: 1px solid #444;
-            border-radius: 5px;
-            margin-top: 10px;
-            z-index: 10;
-            padding: 10px;
-        }
-        #dropdown-menu select {
-            background-color: black;
-            color: white;
-            padding: 5px;
-            font-size: 16px;
-            border: 1px solid white;
-            border-radius: 5px;
-        }
+    /* Popup Overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.5s;
+    }
 
-        /* Telegram Join Button */
-        #telegram-button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-        #telegram-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.0/dist/hls.min.js"></script>
+    .popup-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .popup {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      color: #ffffff;
+    }
+
+    .popup h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+      color: #0074d9;
+    }
+
+    .popup a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .popup button {
+      background-color: #0074d9;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .popup button:hover {
+      background-color: #005bb5;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
+  <!-- Video Player -->
+  <div id="video"></div>
 
-<!-- Full-Screen Popup -->
-<div id="popup">
-    <p>Join our Telegram channel <a href="https://t.me/CricketSparx" target="_blank" style="color: lightblue; text-decoration: none;">@CricketSparx</a> for more links!</p>
-    <button id="join-now" onclick="joinNow()">Join Now</button>
-    <button id="already-joined" onclick="closePopup()">Already Joined</button>
-</div>
+  <!-- Telegram Join Section -->
+  <div class="join-section">
+    <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
+      <button id="joinTelegramButton">Join Telegram</button>
+    </a>
+  </div>
 
-<!-- Header -->
-<div id="header">CricketSparx</div>
-
-<!-- Video Streaming Section -->
-<div id="streaming-container">
-    <video id="videoPlayer" controls src="blob:https://cricketsparx.github.io/48067179-fb2b-4433-85b8-dfe0216ddbaa"></video>
-    
-    <!-- Settings Dropdown -->
-    <div id="settings-button" onclick="toggleDropdown()">⚙ Settings</div>
-    <div id="dropdown-menu">
-        <label for="quality">Select Quality:</label>
-        <select id="quality" onchange="changeQuality()">
-            <option value="-1" selected>Auto</option>
-            <option value="0">144p</option>
-            <option value="1">360p</option>
-            <option value="2">480p</option>
-            <option value="3">540p</option>
-            <option value="4">720p</option>
-            <option value="5">1080p</option>
-        </select>
+  <!-- Popup -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+      <h2>Join Our Telegram Channel</h2>
+      <p>Get exclusive links and updates on <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">@Cricinsider365</a>.</p>
+      <button onclick="openTelegram()">Join Now</button>
+      <button onclick="closePopup()">Close</button>
     </div>
-    
-    <!-- Telegram Join Button -->
-    <button id="telegram-button" onclick="joinTelegram()">Join Telegram</button>
-</div>
+  </div>
 
-<script>
-    const video = document.getElementById('videoPlayer');
-    const qualitySelector = document.getElementById('quality');
-    const hls = new Hls();
-    const dropdownMenu = document.getElementById('dropdown-menu');
-    const settingsButton = document.getElementById('settings-button');
-
-    // Function to toggle dropdown
-    function toggleDropdown() {
-        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+  <script type="text/javascript">
+    // Function to get video URL from the domain
+    function getVideoUrlFromDomain() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('videoUrl');
     }
 
-    // Function to get the URL parameter
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
+    // JWPlayer Setup
+    jwplayer("video").setup({
+      width: "100%",
+      height: "100%",
+      autostart: true,
+      mute: false,
+      file: getVideoUrlFromDomain(),
+    });
 
-    // Get HLS URL from query parameter
-    const hlsUrl = getQueryParam('url');
+    // Popup Logic
+    const popupOverlay = document.getElementById('popupOverlay');
 
-    if (hlsUrl) {
-        if (Hls.isSupported()) {
-            hls.loadSource(hlsUrl);
-            hls.attachMedia(video);
-
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                const levels = hls.levels;
-                levels.forEach((level, index) => {
-                    const option = document.createElement('option');
-                    option.value = index;
-                    option.textContent = `${level.height}p`;
-                    qualitySelector.appendChild(option);
-                });
-            });
-
-            function changeQuality() {
-                const quality = parseInt(qualitySelector.value);
-                hls.currentLevel = quality === -1 ? -1 : quality;
-            }
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = hlsUrl;
-        }
-    } else {
-        alert("No URL provided. Please add '?url=your_hls_link.m3u8' to the URL.");
-    }
-
-    function joinNow() {
-        window.open('https://t.me/+Pj_QX9oygJNiYmRl', '_blank');
+    function openTelegram() {
+      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
     }
 
     function closePopup() {
-        document.getElementById('popup').style.display = 'none';
+      popupOverlay.classList.remove('active');
     }
 
-    function joinTelegram() {
-        window.open('https://t.me/+Pj_QX9oygJNiYmRl', '_blank');
-    }
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!settingsButton.contains(e.target)) {
-            dropdownMenu.style.display = 'none';
-        }
-    });
-</script>
-
+    // Show Popup on Page Load
+    window.onload = () => {
+      popupOverlay.classList.add('active');
+    };
+  </script>
 </body>
 </html>
