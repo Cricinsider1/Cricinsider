@@ -68,17 +68,30 @@
       width: 100%;
       max-width: 900px;
       height: 120px;
-      background: #1e1e1e;
-      border: 2px dashed #0074d9;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      color: #ffffff;
       margin-top: 20px;
+    }
+
+    .ad-banner a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .ad-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 2px solid #0074d9;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .ad-banner img:hover {
+      transform: scale(1.05);
     }
 
     /* Popup Overlay */
@@ -156,7 +169,9 @@
 
   <!-- Advertising Banner -->
   <div class="ad-banner">
-    <p>https://i.postimg.cc/QNQnwRKR/IMG-20241215-133042-416.jpg</p>
+    <a href="https://example.com" target="_blank">
+      <img src="https://via.placeholder.com/900x120.png?text=Your+Ad+Here" alt="Advertise Here">
+    </a>
   </div>
 
   <!-- Popup -->
