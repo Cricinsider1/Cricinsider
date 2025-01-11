@@ -20,22 +20,46 @@
       height: 100vh;
     }
 
+    .content-wrapper {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 20px;
+      flex-grow: 1;
+    }
+
     /* Video Player */
     #video {
-      width: 100%;
-      height: 60%;
+      flex: 3;
       max-width: 900px;
+      height: 60%;
       background: #000;
       border: 2px solid #0074d9;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
       border-radius: 10px;
-      margin-top: 20px;
+      margin-right: 20px;
+    }
+
+    /* Advertising Banner */
+    .ad-banner {
+      flex: 1;
+      height: 60%;
+      background: #1e1e1e;
+      border: 2px dashed #0074d9;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffffff;
     }
 
     /* Telegram Join Section */
     .join-section {
       width: 100%;
-      max-width: 900px;
+      max-width: 1200px;
       text-align: center;
       margin-top: 20px;
     }
@@ -126,8 +150,16 @@
   </style>
 </head>
 <body>
-  <!-- Video Player -->
-  <div id="video"></div>
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <!-- Video Player -->
+    <div id="video"></div>
+
+    <!-- Advertising Banner -->
+    <div class="ad-banner">
+      <p>Advertise Here</p>
+    </div>
+  </div>
 
   <!-- Telegram Join Section -->
   <div class="join-section">
