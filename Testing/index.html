@@ -85,6 +85,33 @@
       border-radius: 0;  /* No border radius */
     }
 
+    /* New Button under the Banner */
+    .banner-button {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .banner-button button {
+      background-color: #ff5733;
+      color: #ffffff;
+      border: none;
+      width: 220px;
+      height: 60px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .banner-button button:hover {
+      background-color: #d04e29;
+      transform: scale(1.05);
+    }
+
     /* Popup Overlay */
     .popup-overlay {
       position: fixed;
@@ -163,6 +190,11 @@
     <a href="https://example.com" target="_blank">
       <img src="https://i.postimg.cc/65Nt9f6x/IMG-20250111-190825-847.jpg" alt="Advertise Here">
     </a>
+  </div>
+
+  <!-- New Button under the Banner -->
+  <div class="banner-button">
+    <button onclick="window.location.href='https://example.com'">Learn More</button>
   </div>
 
   <!-- Popup -->
