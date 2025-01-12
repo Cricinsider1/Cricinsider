@@ -23,126 +23,58 @@
     /* Video Player */
     #video {
       width: 100%;
-      height: 60%;
+      height: 40%;
       max-width: 900px;
       background: #000;
       border-radius: 10px;
       margin-top: 20px;
       display: flex;
-      justify-content: center; /* Centers the video player */
-      align-items: center; /* Ensures the video is centered */
+      justify-content: center;
+      align-items: center;
     }
 
-    /* Advertising Banner */
-    .ad-banner {
+    /* Advertisement Slot */
+    #ad-slot {
       width: 100%;
+      height: 40%;
       max-width: 900px;
-      height: 120px;
-      margin-top: 20px;
-    }
-
-    .ad-banner a {
-      display: block;
-      width:  100%;
-      height: 100%;
+      background: #1e1e1e;
       border-radius: 10px;
-      overflow: hidden;
-      text-decoration: none;
-    }
-
-    .ad-banner img {
-      width: 100%;
-      height: 200%;
-      object-fit: cover; /* Fully fits the banner without leaving space */
-      border-radius: 0;  /* No border radius */
-    }
-
-    /* New Button under the Banner */
-    .banner-button {
-      width: 100%;
-      max-width: 900px;
-      text-align: center;
       margin-top: 20px;
-    }
-
-    .banner-button button {
-      background-color: #ff0000; /* Red background */
-      color: #ffffff; /* White text */
-      border: none;
-      width: 220px;
-      height: 60px;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-
-    .banner-button button:hover {
-      background-color: #cc0000; /* Darker red on hover */
-      transform: scale(1.05);
-    }
-
-    /* Popup Overlay */
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 1000;
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0s, opacity 0.5s;
+      position: relative;
     }
 
-    .popup-overlay.active {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .popup {
-      background: #1e1e1e;
-      padding: 30px;
+    #ad-slot img, #ad-slot video {
+      max-width: 100%;
+      max-height: 100%;
       border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      color: #ffffff;
     }
 
-    .popup h2 {
-      margin-bottom: 15px;
-      font-size: 24px;
-      color: #0074d9;
+    /* Controls for Ad Slot */
+    .ad-controls {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      display: flex;
+      gap: 10px;
     }
 
-    .popup a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .popup button {
-      background-color: #0074d9;
+    .ad-controls button {
+      background: #0074d9;
       color: #ffffff;
       border: none;
       padding: 10px 20px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 30px;
+      font-size: 14px;
+      border-radius: 5px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 10px;
+      transition: background 0.3s ease;
     }
 
-    .popup button:hover {
-      background-color: #005bb5;
-      transform: scale(1.05);
+    .ad-controls button:hover {
+      background: #005bb5;
     }
   </style>
 </head>
@@ -150,26 +82,17 @@
   <!-- Video Player -->
   <div id="video"></div>
 
-  <!-- Advertising Banner -->
-  <div class="ad-banner">
-    <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
-      <img src="https://amg01269-amg01269c1-willowtv-us-5479.playouts.now.amagi.tv/playlist/amg01269-willowtvfast-willowplus-willowtvus/playlist.m3u8" alt="Advertise Here">
-    </a>
+  <!-- Advertisement Slot -->
+  <div id="ad-slot">
+    <img id="ad-image" style="display: none;" />
+    <video id="ad-video" controls style="display: none;"></video>
   </div>
 
-  <!-- New Button under the Banner -->
-  <div class="banner-button">
-    <button onclick="window.location.href='https://t.me/+Pj_QX9oygJNiYmRl'">LIVE STREAM CHAMPION TROPHY</button>
-  </div>
-
-  <!-- Popup -->
-  <div class="popup-overlay" id="popupOverlay">
-    <div class="popup">
-      <h2>Join Our Telegram Channel</h2>
-      <p>Get More Live Links <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">@Cricinsider365</a>.</p>
-      <button onclick="openTelegram()">Join Now</button>
-      <button onclick="closePopup()">Close</button>
-    </div>
+  <!-- Controls for Advertisement -->
+  <div class="ad-controls">
+    <button onclick="playAd('https://example.com/sample.m3u8', 'video')">Play M3U8</button>
+    <button onclick="playAd('https://example.com/sample.jpg', 'image')">Show JPG</button>
+    <button onclick="playAd('https://example.com/sample.png', 'image')">Show PNG</button>
   </div>
 
   <script type="text/javascript">
@@ -188,21 +111,24 @@
       file: getVideoUrlFromDomain(),
     });
 
-    // Popup Logic
-    const popupOverlay = document.getElementById('popupOverlay');
+    // Function to handle Ad Slot
+    function playAd(source, type) {
+      const adImage = document.getElementById("ad-image");
+      const adVideo = document.getElementById("ad-video");
 
-    function openTelegram() {
-      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+      // Reset display states
+      adImage.style.display = "none";
+      adVideo.style.display = "none";
+
+      if (type === "image") {
+        adImage.src = source;
+        adImage.style.display = "block";
+      } else if (type === "video") {
+        adVideo.src = source;
+        adVideo.style.display = "block";
+        adVideo.play();
+      }
     }
-
-    function closePopup() {
-      popupOverlay.classList.remove('active');
-    }
-
-    // Show Popup on Page Load
-    window.onload = () => {
-      popupOverlay.classList.add('active');
-    };
   </script>
 </body>
 </html>
