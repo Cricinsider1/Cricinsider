@@ -18,6 +18,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 /* Video Player Container */
@@ -29,6 +30,12 @@ body {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    transition: border 0.3s;
+}
+
+.fullscreen #video {
+    border: none;
+    box-shadow: none;
 }
 
 /* Telegram Button Styling */
@@ -56,16 +63,6 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
     background: linear-gradient(90deg, #001f3f, #1e90ff);
 }
-
-/* Animation for Button */
-@keyframes flowAnimation {
-    0% {
-        background-position: -200px 0;
-    }
-    100% {
-        background-position: 200px 0;
-    }
-}
 </style>
 </head>
 <body>
@@ -80,7 +77,7 @@ body {
 
 <!-- Scripts -->
 <script type="text/javascript">
-    jwplayer("video").setup({
+    const playerInstance = jwplayer("video").setup({
         width: "100%",
         aspectratio: "16:9",
         autostart: true,
@@ -90,9 +87,16 @@ body {
             name: "glow"
         }
     });
-</script>
 
-<script>
+    // Fullscreen event listener
+    playerInstance.on('fullscreen', function(event) {
+        if (event.fullscreen) {
+            document.body.classList.add('fullscreen');
+        } else {
+            document.body.classList.remove('fullscreen');
+        }
+    });
+
     // Redirect function for Telegram button
     function redirectToTelegram() {
         window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
