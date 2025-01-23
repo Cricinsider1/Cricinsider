@@ -91,7 +91,7 @@
         player.configure({
             drm: {
                 clearKeys: {
-                    '7a6d4d7f3bcd494e8f0476a63fc02ed4': "a1dc7f480e943c0bf132a5376c48c854"
+                    'abce624fb959ce222cc184e9285c1f64': "eab8193449f02b34ab1a2fccd50bd039"
                 }
             }
         });
@@ -115,7 +115,7 @@ window.player = player;
         controls.addEventListener("error", onUIErrorEvent);
 
         try {
-            await player.load("https://p-cdn1-a-cg14-linear-cbd46b77.movetv.com/clipslist/22/20250122T000000Z/20250123T000000Z.mpd");
+            await player.load("https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/clients/dash/enc/ig45tpfhia/out/v1/02d9794fc8bd4df0ad0ed586b4ec832e/cenc.mpd");
             console.log("The video has now been loaded!");
         } catch (error) {
             onPlayerError(error);
