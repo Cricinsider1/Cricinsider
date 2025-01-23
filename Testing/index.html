@@ -91,7 +91,7 @@
         player.configure({
             drm: {
                 clearKeys: {
-                    'abce624fb959ce222cc184e9285c1f64': "eab8193449f02b34ab1a2fccd50bd039"
+                    'ae7076b647133606b704d33e4cef5134': "810251515584cf71216d9a2d1ebf04bb"
                 }
             }
         });
@@ -115,7 +115,7 @@ window.player = player;
         controls.addEventListener("error", onUIErrorEvent);
 
         try {
-            await player.load("https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/clients/dash/enc/ig45tpfhia/out/v1/02d9794fc8bd4df0ad0ed586b4ec832e/cenc.mpd");
+            await player.load("https://dj-tm-srvr2.vercel.app/icctv/manifest.mpd?id=ch-hd-04|User-Agent=@DJ-TM&");
             console.log("The video has now been loaded!");
         } catch (error) {
             onPlayerError(error);
