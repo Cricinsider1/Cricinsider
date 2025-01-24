@@ -6,7 +6,7 @@
     <title>@TG_Cricinsider365</title>
     <link rel="icon" href="https://i.ibb.co/3NxnnZ2/Fan-Code-logo-svg.png" type="image/png">
     <style>
-        /* */
+        /* Existing styles... */
         .logo-container {
             background: #000; /* Black background for the logo */
             padding: 15px;
@@ -191,12 +191,39 @@
             text-align: center;
             font-size: 14px;
             color: var(--text-color);
+            padding-top: 20px;
         }
-    </style>
-    <style type="text/css">
-        * {
-            user-select: auto !important;
-            -webkit-user-select: auto !important;
+
+        footer .join-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* New Join Telegram Button in Footer */
+        .join-telegram-footer-btn {
+            text-align: center;
+            padding: 12px 25px;
+            font-size: 18px;
+            background-color: #ffcc00; /* Yellow color */
+            color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        }
+
+        .join-telegram-footer-btn:hover {
+            background-color: #e6b800; /* Darker yellow on hover */
+            transform: scale(1.05); /* Slight scale effect */
+        }
+
+        .join-telegram-footer-btn:active {
+            background-color: #cc9900; /* Even darker on click */
+            transform: scale(0.98); /* Slight shrink effect */
         }
     </style>
 </head>
@@ -205,13 +232,19 @@
         <img src="https://i.postimg.cc/43tfcw1c/Fan-Code-Logo-2022-Fan-Code-Orange-On-Transarent.png" alt="FANCODE MATCHES">
     </div>
 
-    <h1 style="text-align: center;">Fancode Live Events</h1>
+    <h1 style="text-align: center;">FANCODE MATCHES</h1>
 
     <!-- Theme Toggle Button -->
     <input type="checkbox" id="checkboxInput">
     <label for="checkboxInput" class="toggleSwitch"></label>
 
     <div id="link-container"></div>
+
+    <footer>
+        <div class="join-container">
+            <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank" class="join-telegram-footer-btn">Join Telegram</a>
+        </div>
+    </footer>
 
     <script>
         const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
