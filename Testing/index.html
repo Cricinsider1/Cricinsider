@@ -7,28 +7,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-    --bg-color: #121212;
-    --text-color: #ffffff;
-    --button-bg: #1E88E5;
-    --button-hover-bg: #1565C0;
-    --logo-frame-color: #444444;
-    --dot-color: #ffff00;
-    --title-bg: linear-gradient(90deg, #FF5722, #FF9800); /* Orange gradient */
-    --title-text: #ffffff;
-    --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="light"] {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --button-bg: #4CAF50;
-    --button-hover-bg: #45a049;
-    --logo-frame-color: #cccccc;
-    --dot-color: #ff0000;
-    --title-bg: linear-gradient(90deg, #FF5722, #FF9800); /* Orange gradient for light mode */
-    --title-text: #000000;
-    --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --button-bg: #1E88E5;
+            --button-hover-bg: #1565C0;
+            --logo-frame-color: #444444;
+            --dot-color: #ffff00;
+            --title-bg: linear-gradient(90deg, #FF5722, #FF9800); /* Orange gradient */
+            --title-text: #ffffff;
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
 
         [data-theme="light"] {
             --bg-color: #ffffff;
@@ -121,45 +109,78 @@
         }
 
         .watch-button {
-    display: inline-block;
-    padding: 12px 24px;
-    margin-top: 15px;
-    background-color: #FF5722;  /* Bold and warm color */
-    color: white;
-    border: 2px solid #FF5722;  /* Matching border for a clean look */border-radius: 8px;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);  /* Smooth shadow for depth */
-}
+            display: inline-block;
+            padding: 12px 24px;
+            margin-top: 15px;
+            background-color: #FF5722;
+            color: white;
+            border: 2px solid #FF5722;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
 
-.watch-button:hover {
-    background-color: #ffffff;  /* White background on hover */
-    color: #FF5722;  /* Orange text on hover */
-    transform: translateY(-5px);  /* Slight lift effect on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);  /* More pronounced shadow on hover */
-}
+        .watch-button:hover {
+            background-color: #ffffff;
+            color: #FF5722;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
 
-.watch-button:active {
-    transform: translateY(2px);  /* Button presses down slightly when clicked */
-}
+        .watch-button:active {
+            transform: translateY(2px);
+        }
 
-.watch-button span {
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
+        .watch-button span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
 
-.watch-button:hover span {
-    transform: translateX(5px);  /* Subtle text movement on hover */
-}
+        .watch-button:hover span {
+            transform: translateX(5px);
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-button {
+            background-color: var(--button-bg);
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .footer-button:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        .footer-text {
+            margin-top: 10px;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
     <!-- Title Box -->
-    <div class="title-box">FANCODE MATCHES </div>
+    <div class="title-box">FANCODE MATCHES</div>
 
     <!-- Join Telegram Button -->
     <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank" class="telegram-button">Join Our Telegram</a>
@@ -172,6 +193,16 @@
 
     <!-- Links Container -->
     <div id="link-container"></div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <button class="footer-button" onclick="toggleFooterText()">Copyright & Credit</button>
+        <div id="footer-text" class="footer-text" style="display: none;">
+            Important Information<br>
+            We do not own any material or streams here, All content and streams are provided by third-party sites & Belong To Their Respective Owners.<br>
+            API Credit: Toor
+        </div>
+    </div>
 
     <script>
         const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
@@ -227,7 +258,8 @@
         }
 
         fetchAndDisplayLinks();
-function toggleTheme() {
+
+        function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute("data-theme");
             const newTheme = currentTheme === "dark" ? "light" : "dark";
             document.documentElement.setAttribute("data-theme", newTheme);
@@ -242,6 +274,11 @@ function toggleTheme() {
                 sunIcon.style.display = "inline";
                 moonIcon.style.display = "none";
             }
+        }
+
+        function toggleFooterText() {
+            const footerText = document.getElementById("footer-text");
+            footerText.style.display = footerText.style.display === "none" ? "block" : "none";
         }
     </script>
 
