@@ -6,15 +6,15 @@
     <title>Welcome Everyone</title>
     <style>
         :root {
-            --bg-color: #121212; /* Default to dark mode */
+            --bg-color: #121212;
             --text-color: #ffffff;
             --button-bg: #1E88E5;
             --button-hover-bg: #1565C0;
             --logo-frame-color: #444444;
             --dot-color: #ffff00;
-            --title-bg: linear-gradient(90deg, #4CAF50, #1E88E5); /* Gradient background */
-            --title-text: #ffffff; /* White text for title */
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Shadow for title */
+            --title-bg: linear-gradient(90deg, #4CAF50, #1E88E5);
+            --title-text: #ffffff;
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
         [data-theme="light"] {
@@ -24,15 +24,15 @@
             --button-hover-bg: #45a049;
             --logo-frame-color: #cccccc;
             --dot-color: #ff0000;
-            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722); /* Gradient for light mode */
-            --title-text: #000000; /* Dark text for light mode */
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Lighter shadow for light mode */
+            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722);
+            --title-text: #000000;
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -72,24 +72,12 @@
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
 
-        .theme-toggle {
-            margin: 20px;
-            padding: 10px 20px;
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--button-hover-bg);
-        }
-
-        #link-container {
-            padding: 20px;
+        .match-info {
+            text-align: center;
+            font-size: 18px;
+            margin: 10px 0;
+            font-weight: bold;
+            color: var(--text-color);
         }
 
         #link-container div {
@@ -151,6 +139,7 @@
                 const container = document.getElementById("link-container");
 
                 let description = "";
+                let matchTitle = "";
                 let logoUrl = "";
 
                 lines.forEach(line => {
@@ -159,17 +148,24 @@
                     if (line.startsWith("#EXTINF")) {
                         const logoMatch = line.match(/tvg-logo="(.*?)"/);
                         logoUrl = logoMatch ? logoMatch[1] : "";
-                        const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
-                        description = descriptionMatch ? descriptionMatch[1].trim() : "";
+                        const titleMatch = line.match(/#EXTINF.*?,(.*)/);
+                        matchTitle = titleMatch ? titleMatch[1].trim() : "";
                     } else if (line.startsWith("http")) {
                         const linkContainer = document.createElement("div");
+
+                        if (matchTitle) {
+                            const matchInfo = document.createElement("p");
+                            matchInfo.textContent = `Match: ${matchTitle}`;
+                            matchInfo.className = "match-info";
+                            linkContainer.appendChild(matchInfo);
+                        }
 
                         if (logoUrl) {
                             const logoImg = document.createElement("img");
                             logoImg.src = logoUrl;
                             logoImg.alt = "Logo";
-                            logoImg.onclick = () => { 
-                                window.open(linkPrefix + encodeURIComponent(line), '_blank'); 
+                            logoImg.onclick = () => {
+                                window.open(linkPrefix + encodeURIComponent(line), '_blank');
                             };
                             linkContainer.appendChild(logoImg);
                         }
@@ -185,6 +181,7 @@
 
                         description = "";
                         logoUrl = "";
+                        matchTitle = "";
                     }
                 });
             } catch (error) {
