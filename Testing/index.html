@@ -11,7 +11,9 @@
             --button-bg: #1E88E5;
             --button-hover-bg: #1565C0;
             --logo-frame-color: #444444;
-            --dot-color: #ffff00; 
+            --dot-color: #ffff00;
+            --title-bg: #333333; /* Background for title box */
+            --title-text: #ffffff; /* Text color for title box */
         }
 
         [data-theme="light"] {
@@ -20,7 +22,9 @@
             --button-bg: #4CAF50;
             --button-hover-bg: #45a049;
             --logo-frame-color: #cccccc;
-            --dot-color: #ff0000; 
+            --dot-color: #ff0000;
+            --title-bg: #f0f0f0;
+            --title-text: #000000;
         }
 
         body {
@@ -28,6 +32,37 @@
             color: var(--text-color);
             font-family: Arial, sans-serif;
             margin: 0;
+            padding: 0;
+        }
+
+        .title-box {
+            background-color: var(--title-bg);
+            color: var(--title-text);
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            border-bottom: 2px solid var(--logo-frame-color);
+        }
+
+        .theme-toggle {
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        #link-container {
             padding: 20px;
         }
 
@@ -63,27 +98,16 @@
         .watch-button:hover {
             background-color: var(--button-hover-bg);
         }
-
-        .theme-toggle {
-            margin-bottom: 20px;
-            padding: 10px 20px;
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--button-hover-bg);
-        }
     </style>
 </head>
 <body>
+    <!-- Title Box -->
+    <div class="title-box">Welcome to Our Streaming Page</div>
+
+    <!-- Theme Toggle Button -->
     <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
 
+    <!-- Links Container -->
     <div id="link-container"></div>
 
     <script>
@@ -108,11 +132,9 @@
                         logoUrl = logoMatch ? logoMatch[1] : "";
                         const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
                         description = descriptionMatch ? descriptionMatch[1].trim() : "";
-                        // Don't append the description visibly
                     } else if (line.startsWith("http")) {
                         const linkContainer = document.createElement("div");
 
-                        // Add logo if available
                         if (logoUrl) {
                             const logoImg = document.createElement("img");
                             logoImg.src = logoUrl;
@@ -123,7 +145,6 @@
                             linkContainer.appendChild(logoImg);
                         }
 
-                        // Add watch button
                         const button = document.createElement("a");
                         button.href = linkPrefix + encodeURIComponent(line);
                         button.target = "_blank";
@@ -133,7 +154,6 @@
 
                         container.appendChild(linkContainer);
 
-                        // Reset variables for the next entry
                         description = "";
                         logoUrl = "";
                     }
