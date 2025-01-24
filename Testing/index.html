@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sports Events - Live Streams</title>
     <style>
-        /* Root variables for theme colors */
+        /* Theme Variables */
         :root {
-            --bg-color: #121212; /* Default to dark mode */
+            --bg-color: #121212; /* Dark mode */
             --text-color: #ffffff;
             --button-bg: #1E88E5;
             --button-hover-bg: #1565C0;
-            --logo-frame-color: #444444;
+            --logo-border-color: #444444;
             --dot-color: #ffff00; 
         }
 
@@ -20,26 +20,21 @@
             --text-color: #000000;
             --button-bg: #4CAF50;
             --button-hover-bg: #45a049;
-            --logo-frame-color: #cccccc;
+            --logo-border-color: #cccccc;
             --dot-color: #ff0000; 
         }
 
-        /* Global styles */
+        /* Global Styles */
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
+            line-height: 1.6;
         }
 
-        /* Keyframes for logo animation */
-        @keyframes logo-frame-animation {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
-        }
-
-        /* Container styling */
+        /* Container for event links */
         #link-container {
             display: flex;
             flex-wrap: wrap;
@@ -47,25 +42,26 @@
             justify-content: center;
         }
 
-        #link-container div {
+        /* Event block */
+        .event {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
             text-align: center;
+            margin-bottom: 20px;
             position: relative;
         }
 
-        #link-container img {
+        .event img {
             width: 350px;
             max-width: 100%;
-            border: 5px solid var(--logo-frame-color);
-            animation: logo-frame-animation 2s infinite alternate;
+            border: 5px solid var(--logo-border-color);
+            animation: scale-animation 2s infinite alternate;
             cursor: pointer;
         }
 
-        /* Dot animation */
-        #link-container div::before {
+        /* Dot animation around the event logo */
+        .event::before {
             content: "";
             position: absolute;
             top: 0;
@@ -74,10 +70,15 @@
             height: 10px;
             border-radius: 50%;
             background-color: var(--dot-color);
-            animation: dot-animation 3s infinite linear;
+            animation: move-dot 3s infinite linear;
         }
 
-        @keyframes dot-animation {
+        @keyframes scale-animation {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        @keyframes move-dot {
             0% { transform: translateX(0); }
             25% { transform: translateY(100%); }
             50% { transform: translateX(100%); }
@@ -85,7 +86,7 @@
             100% { transform: translateX(0); }
         }
 
-        /* Button styling */
+        /* Watch and Theme Toggle Buttons */
         .watch-button, .theme-toggle {
             display: inline-block;
             padding: 10px 20px;
@@ -104,9 +105,9 @@
             background-color: var(--button-hover-bg);
         }
 
-        /* Responsive enhancements */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            #link-container img {
+            .event img {
                 width: 80%;
             }
         }
@@ -121,13 +122,15 @@
         const linkPrefix = "https://shz.al/inmB.html?videoUrl=";
 
         /**
-         * Fetch and display video links from the M3U file
+         * Fetch and Display Links
          */
         async function fetchAndDisplayLinks() {
             try {
                 const response = await fetch(m3uUrl);
+                if (!response.ok) throw new Error("Failed to fetch the M3U file.");
+                
                 const text = await response.text();
-                const lines = text.split('\n');
+                const lines = text.split("\n");
                 const container = document.getElementById("link-container");
 
                 let description = "";
@@ -136,55 +139,59 @@
                 lines.forEach(line => {
                     line = line.trim();
 
-                    // Parse EXTINF metadata
                     if (line.startsWith("#EXTINF")) {
                         const logoMatch = line.match(/tvg-logo="(.*?)"/);
                         logoUrl = logoMatch ? logoMatch[1] : "";
                         const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
                         description = descriptionMatch ? descriptionMatch[1].trim() : "";
-                    }
-                    // Parse the video link
-                    else if (line.startsWith("http")) {
-                        const linkContainer = document.createElement("div");
-
-                        // Add logo
-                        if (logoUrl) {
-                            const logoImg = document.createElement("img");
-                            logoImg.src = logoUrl;
-                            logoImg.alt = "Event Logo";
-                            logoImg.onclick = () => {
-                                window.open(linkPrefix + encodeURIComponent(line), '_blank');
-                            };
-                            linkContainer.appendChild(logoImg);
-                        }
-
-                        // Add description
-                        if (description) {
-                            const descriptionElem = document.createElement("p");
-                            descriptionElem.textContent = description;
-                            linkContainer.appendChild(descriptionElem);
-                        }
-
-                        // Add watch button
-                        const button = document.createElement("a");
-                        button.href = linkPrefix + encodeURIComponent(line);
-                        button.target = "_blank";
-                        button.textContent = "Click to Watch";
-                        button.className = "watch-button";
-                        linkContainer.appendChild(button);
-
-                        container.appendChild(linkContainer);
+                    } else if (line.startsWith("http")) {
+                        createEventBlock(container, description, logoUrl, line);
                         description = "";
                         logoUrl = "";
                     }
                 });
             } catch (error) {
-                console.error("Error fetching M3U file:", error);
+                console.error("Error:", error.message);
             }
         }
 
         /**
-         * Toggle between light and dark themes
+         * Create and append an event block
+         * @param {HTMLElement} container - Container to append the block
+         * @param {string} description - Event description
+         * @param {string} logoUrl - Event logo URL
+         * @param {string} videoLink - Event video link
+         */
+        function createEventBlock(container, description, logoUrl, videoLink) {
+            const eventDiv = document.createElement("div");
+            eventDiv.className = "event";
+
+            if (logoUrl) {
+                const logoImg = document.createElement("img");
+                logoImg.src = logoUrl;
+                logoImg.alt = "Event Logo";
+                logoImg.onclick = () => window.open(linkPrefix + encodeURIComponent(videoLink), "_blank");
+                eventDiv.appendChild(logoImg);
+            }
+
+            if (description) {
+                const descParagraph = document.createElement("p");
+                descParagraph.textContent = description;
+                eventDiv.appendChild(descParagraph);
+            }
+
+            const watchButton = document.createElement("a");
+            watchButton.href = linkPrefix + encodeURIComponent(videoLink);
+            watchButton.target = "_blank";
+            watchButton.textContent = "Click to Watch";
+            watchButton.className = "watch-button";
+            eventDiv.appendChild(watchButton);
+
+            container.appendChild(eventDiv);
+        }
+
+        /**
+         * Toggle Theme between Light and Dark
          */
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -192,12 +199,12 @@
             document.documentElement.setAttribute("data-theme", newTheme);
         }
 
-        // Fetch video links on page load
+        // Initialize
         fetchAndDisplayLinks();
     </script>
 
     <footer>
-        <p><strong>Disclaimer:</strong> All content and streams are provided by third-party sources and belong to their respective owners.</p>
+        <p><strong>Disclaimer:</strong> All streams are sourced from third-party providers and belong to their respective owners.</p>
         <p>API Credit: drm</p>
     </footer>
 </body>
