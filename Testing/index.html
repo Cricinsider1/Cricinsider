@@ -121,24 +121,41 @@
         }
 
         .watch-button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 10px;
-            background-color: #FF0000;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
+    display: inline-block;
+    padding: 12px 24px;
+    margin-top: 15px;
+    background-color: #FF5722;  /* Bold and warm color */
+    color: white;
+    border: 2px solid #FF5722;  /* Matching border for a clean look */
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);  /* Smooth shadow for depth */
+}
 
-        .watch-button:hover {
-            background-color: #ffffff;
-            color: #FF0000;
-            transform: scale(1.05);
-        }
+.watch-button:hover {
+    background-color: #ffffff;  /* White background on hover */
+    color: #FF5722;  /* Orange text on hover */
+    transform: translateY(-5px);  /* Slight lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);  /* More pronounced shadow on hover */
+}
+
+.watch-button:active {
+    transform: translateY(2px);  /* Button presses down slightly when clicked */
+}
+
+.watch-button span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.watch-button:hover span {
+    transform: translateX(5px);  /* Subtle text movement on hover */
+}
     </style>
 </head>
 <body>
