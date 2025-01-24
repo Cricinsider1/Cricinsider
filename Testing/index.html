@@ -5,27 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome Everyone</title>
     <style>
-        /* Root variables for light and dark themes */
         :root {
             --bg-color: #121212; /* Default to dark mode */
             --text-color: #ffffff;
             --button-bg: #1E88E5;
             --button-hover-bg: #1565C0;
             --logo-frame-color: #444444;
-            --dot-color: #ffff00;
+            --dot-color: #ffff00; 
         }
 
-        /* Light mode theme variables */
         [data-theme="light"] {
             --bg-color: #ffffff;
             --text-color: #000000;
             --button-bg: #4CAF50;
             --button-hover-bg: #45a049;
             --logo-frame-color: #cccccc;
-            --dot-color: #ff0000;
+            --dot-color: #ff0000; 
         }
 
-        /* Base styling */
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -34,54 +31,22 @@
             padding: 20px;
         }
 
-        /* Animation for logos */
-        @keyframes logo-frame-animation {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
-        }
-
-        /* Styling for logo container */
         #link-container div {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-bottom: 20px;
             text-align: center;
-            position: relative;
         }
 
         #link-container img {
             width: 350px;
             max-width: 100%;
             border: 5px solid var(--logo-frame-color);
-            animation: logo-frame-animation 2s infinite alternate;
             cursor: pointer;
         }
 
-        #link-container div::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: var(--dot-color);
-            animation: dot-animation 3s infinite linear;
-        }
-
-        /* Animation for dot */
-        @keyframes dot-animation {
-            0% { transform: translateX(0); }
-            25% { transform: translateY(100%); }
-            50% { transform: translateX(100%); }
-            75% { transform: translateY(0); }
-            100% { transform: translateX(0); }
-        }
-
-        /* Button styles */
-        .watch-button,
-        .theme-toggle {
+        .watch-button {
             display: inline-block;
             padding: 10px 20px;
             margin-top: 10px;
@@ -95,24 +60,36 @@
             transition: background-color 0.3s;
         }
 
-        .watch-button:hover,
+        .watch-button:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        .theme-toggle {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
         .theme-toggle:hover {
             background-color: var(--button-hover-bg);
         }
     </style>
 </head>
 <body>
-    <!-- Theme toggle button -->
     <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
 
-    <!-- Links container -->
     <div id="link-container"></div>
 
     <script>
         const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
         const linkPrefix = "https://shz.al/inmB.html?videoUrl=";
 
-        // Function to fetch and display M3U links
         async function fetchAndDisplayLinks() {
             try {
                 const response = await fetch(m3uUrl);
@@ -131,25 +108,19 @@
                         logoUrl = logoMatch ? logoMatch[1] : "";
                         const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
                         description = descriptionMatch ? descriptionMatch[1].trim() : "";
+                        // Don't append the description visibly
                     } else if (line.startsWith("http")) {
                         const linkContainer = document.createElement("div");
 
                         // Add logo if available
                         if (logoUrl) {
                             const logoImg = document.createElement("img");
-                            logoImg.src = logoUrl; // Only used to load the image
-                            logoImg.alt = "Channel Logo"; // Generic alt text
-                            logoImg.onclick = () => {
-                                window.open(linkPrefix + encodeURIComponent(line), '_blank');
+                            logoImg.src = logoUrl;
+                            logoImg.alt = "Logo";
+                            logoImg.onclick = () => { 
+                                window.open(linkPrefix + encodeURIComponent(line), '_blank'); 
                             };
                             linkContainer.appendChild(logoImg);
-                        }
-
-                        // Add description if available
-                        if (description) {
-                            const descriptionElem = document.createElement("p");
-                            descriptionElem.textContent = description;
-                            linkContainer.appendChild(descriptionElem);
                         }
 
                         // Add watch button
@@ -174,7 +145,6 @@
 
         fetchAndDisplayLinks();
 
-        // Function to toggle between dark and light themes
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute("data-theme");
             const newTheme = currentTheme === "dark" ? "light" : "dark";
@@ -182,9 +152,8 @@
         }
     </script>
 
-    <!-- Important Information Section -->
     <p>Important Information</p>
-    <p>We do not own any material or streams here. All content and streams are provided by third-party sites and belong to their respective owners.</p>
+    <p>We do not own any material or streams here. All content and streams are provided by third-party sites & belong to their respective owners.</p>
     <p>API Credit: drm</p>
 </body>
 </html>
