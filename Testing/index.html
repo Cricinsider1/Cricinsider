@@ -22,7 +22,7 @@
             width: 220px; /* Adjust the logo size */
             height: auto;
         }
-        
+
         :root {
             --bg-color: #121212;
             --text-color: #ffffff;
@@ -123,7 +123,7 @@
             background-color: rgba(0, 0, 0, 0.842);
             background-size: 200%;
         }
-        
+
         .watch-button:hover::before {
             background-position: right;
             transition-duration: 1s;
@@ -133,7 +133,7 @@
             background-position: right;
             transition-duration: 1s;
         }
-        
+
         .watch-button:active {
             transform: scale(0.95);
         }
@@ -192,6 +192,23 @@
             font-size: 14px;
             color: var(--text-color);
         }
+
+        .join-telegram-btn {
+            text-align: center;
+            padding: 12px 25px;
+            font-size: 18px;
+            background-color: #0088CC; /* Telegram blue */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .join-telegram-btn:hover {
+            background-color: #006C8E; /* Darker shade for hover effect */
+        }
     </style>
     <style type="text/css">
         * {
@@ -205,7 +222,8 @@
         <img src="https://i.postimg.cc/43tfcw1c/Fan-Code-Logo-2022-Fan-Code-Orange-On-Transarent.png" alt="FANCODE MATCHES">
     </div>
 
-    <h1 style="text-align: center;">Fancode Live Events</h1>
+    <!-- Join Telegram Button -->
+    <a href="https://t.me/YourTelegramChannel" target="_blank" class="join-telegram-btn">Join Telegram</a>
 
     <!-- Theme Toggle Button -->
     <input type="checkbox" id="checkboxInput">
