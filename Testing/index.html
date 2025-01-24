@@ -107,22 +107,25 @@
             cursor: pointer;
         }
 
+        /* Updated red and white button styles */
         .watch-button {
             display: inline-block;
             padding: 10px 20px;
             margin-top: 10px;
-            background-color: var(--button-bg);
+            background-color: #FF0000;  /* Red background */
             color: white;
             border: none;
             border-radius: 5px;
             text-decoration: none;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;  /* Added transform for smooth hover effect */
         }
 
         .watch-button:hover {
-            background-color: var(--button-hover-bg);
+            background-color: #ffffff;  /* White background on hover */
+            color: #FF0000;  /* Red text on hover */
+            transform: scale(1.05);  /* Slightly scale up the button for better hover effect */
         }
     </style>
 </head>
