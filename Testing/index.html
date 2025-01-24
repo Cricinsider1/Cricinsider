@@ -1,149 +1,204 @@
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<title>TG_@Cricinsider365</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
-<style>
-    body {
-        background-color: #000;
-        margin: 0;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Events - Live Streams</title>
+    <style>
+        /* Root variables for theme colors */
+        :root {
+            --bg-color: #121212; /* Default to dark mode */
+            --text-color: #ffffff;
+            --button-bg: #1E88E5;
+            --button-hover-bg: #1565C0;
+            --logo-frame-color: #444444;
+            --dot-color: #ffff00; 
+        }
 
-    /* Container for video and logo */
-    .video-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-    }
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --button-bg: #4CAF50;
+            --button-hover-bg: #45a049;
+            --logo-frame-color: #cccccc;
+            --dot-color: #ff0000; 
+        }
 
-    /* Style for the logo */
-    .logo {
-        position: absolute;
-        top: 10px; /* Adjust vertical position */
-        left: 10px; /* Adjust horizontal position */
-        z-index: 1; /* Ensure the logo appears above the video */
-        max-width: 120px; /* Set maximum width for the logo */
-        max-height: 120px; /* Set maximum height for the logo */
-        pointer-events: none; /* Prevent interference with video controls */
-    }
+        /* Global styles */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
 
-    .shaka-spinner-container {
-        display: none;
-    }
+        /* Keyframes for logo animation */
+        @keyframes logo-frame-animation {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
 
-    .uc {
-        pointer-events: none;
-    }
-</style>
+        /* Container styling */
+        #link-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        #link-container div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        #link-container img {
+            width: 350px;
+            max-width: 100%;
+            border: 5px solid var(--logo-frame-color);
+            animation: logo-frame-animation 2s infinite alternate;
+            cursor: pointer;
+        }
+
+        /* Dot animation */
+        #link-container div::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--dot-color);
+            animation: dot-animation 3s infinite linear;
+        }
+
+        @keyframes dot-animation {
+            0% { transform: translateX(0); }
+            25% { transform: translateY(100%); }
+            50% { transform: translateX(100%); }
+            75% { transform: translateY(0); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Button styling */
+        .watch-button, .theme-toggle {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .watch-button:hover, .theme-toggle:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        /* Responsive enhancements */
+        @media (max-width: 768px) {
+            #link-container img {
+                width: 80%;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <!-- Video container -->
-    <div class="video-container">
-        <!-- Logo inside the video -->
-        <img src="https://i.ibb.co/fMKnFg3/1000003992-removebg-preview.png" alt="Logo" class="logo">
-
-        <!-- Video player -->
-        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-            <video autoplay muted data-shaka-player id="video" poster="https://i.ibb.co/x7jXd29/In-Shot-20241215-002653932.jpg" style="width:100%; height:100%;"></video>
-        </div>
-    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
+    <div id="link-container"></div>
 
     <script>
-    // Restrict iframe embedding
-    if (window.top !== window.self) {
-        window.addEventListener('DOMContentLoaded', function() {
-            // Clear the existing content
-            document.body.innerHTML = '';
+        const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
+        const linkPrefix = "https://shz.al/inmB.html?videoUrl=";
 
-            // Add custom message
-            const messageDiv = document.createElement('div');
-            messageDiv.id = 'message';
-            messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
+        /**
+         * Fetch and display video links from the M3U file
+         */
+        async function fetchAndDisplayLinks() {
+            try {
+                const response = await fetch(m3uUrl);
+                const text = await response.text();
+                const lines = text.split('\n');
+                const container = document.getElementById("link-container");
 
-            // Style the message
-            messageDiv.style.color = '#fff';
-            messageDiv.style.backgroundColor = '#000';
-            messageDiv.style.position = 'fixed';
-            messageDiv.style.top = '50%';
-            messageDiv.style.left = '50%';
-            messageDiv.style.transform = 'translate(-50%, -50%)';
-            messageDiv.style.padding = '20px';
-            messageDiv.style.borderRadius = '10px';
-            messageDiv.style.textAlign = 'center';
-            messageDiv.style.fontFamily = 'Arial, sans-serif';
-            messageDiv.style.fontSize = '20px';
+                let description = "";
+                let logoUrl = "";
 
-            // Append the message to the body
-            document.body.appendChild(messageDiv);
-        });
-    }
+                lines.forEach(line => {
+                    line = line.trim();
 
-    async function init() {
-        const video = document.getElementById("video");
-        const ui = video.ui;
-        const controls = ui.getControls();
-        const player = controls.getPlayer();
+                    // Parse EXTINF metadata
+                    if (line.startsWith("#EXTINF")) {
+                        const logoMatch = line.match(/tvg-logo="(.*?)"/);
+                        logoUrl = logoMatch ? logoMatch[1] : "";
+                        const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
+                        description = descriptionMatch ? descriptionMatch[1].trim() : "";
+                    }
+                    // Parse the video link
+                    else if (line.startsWith("http")) {
+                        const linkContainer = document.createElement("div");
 
-        player.configure({
-            drm: {
-                clearKeys: {
-                    'ae7076b647133606b704d33e4cef5134': "810251515584cf71216d9a2d1ebf04bb"
-                }
+                        // Add logo
+                        if (logoUrl) {
+                            const logoImg = document.createElement("img");
+                            logoImg.src = logoUrl;
+                            logoImg.alt = "Event Logo";
+                            logoImg.onclick = () => {
+                                window.open(linkPrefix + encodeURIComponent(line), '_blank');
+                            };
+                            linkContainer.appendChild(logoImg);
+                        }
+
+                        // Add description
+                        if (description) {
+                            const descriptionElem = document.createElement("p");
+                            descriptionElem.textContent = description;
+                            linkContainer.appendChild(descriptionElem);
+                        }
+
+                        // Add watch button
+                        const button = document.createElement("a");
+                        button.href = linkPrefix + encodeURIComponent(line);
+                        button.target = "_blank";
+                        button.textContent = "Click to Watch";
+                        button.className = "watch-button";
+                        linkContainer.appendChild(button);
+
+                        container.appendChild(linkContainer);
+                        description = "";
+                        logoUrl = "";
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching M3U file:", error);
             }
-        });
-
-        ui.configure({
-            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-            volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                level: "rgb(0, 255, 0)"     // Green color for the volume level
-            },
-            seekBarColors: {
-                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
-            }
-        });
-window.player = player;
-        window.ui = ui;
-
-        player.addEventListener("error", onPlayerErrorEvent);
-        controls.addEventListener("error", onUIErrorEvent);
-
-        try {
-            await player.load("https://dj-tm-srvr2.vercel.app/icctv/manifest.mpd?id=ch-hd-04|User-Agent=@DJ-TM&");
-            console.log("The video has now been loaded!");
-        } catch (error) {
-            onPlayerError(error);
         }
-    }
 
-    function onPlayerErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
+        /**
+         * Toggle between light and dark themes
+         */
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute("data-theme");
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+            document.documentElement.setAttribute("data-theme", newTheme);
+        }
 
-    function onPlayerError(error) {
-        console.error("Error code", error.code, "object", error);
-    }
-
-    function onUIErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
-
-    function initFailed() {
-        console.error("Unable to load the UI library!");
-    }
-
-    document.addEventListener("shaka-ui-loaded", init);
-    document.addEventListener("shaka-ui-load-failed", initFailed);
-
-    if (confirm("Join For More Links!!")) {
-        window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-    }
+        // Fetch video links on page load
+        fetchAndDisplayLinks();
     </script>
+
+    <footer>
+        <p><strong>Disclaimer:</strong> All content and streams are provided by third-party sources and belong to their respective owners.</p>
+        <p>API Credit: drm</p>
+    </footer>
 </body>
 </html>
