@@ -1,182 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TG_@Cricinsider365</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title>Fancode Web by @Axtream_Bingewav</title>
+    <link rel="icon" href="https://i.ibb.co/3NxnnZ2/Fan-Code-logo-svg.png" type="image/png">
     <style>
+        /* Global Variables */
         :root {
-    --bg-color: #121212;
-    --text-color: #ffffff;
-    --button-bg: #1E88E5;
-    --button-hover-bg: #1565C0;
-    --logo-frame-color: #444444;
-    --dot-color: #ffff00;
-    --title-bg: linear-gradient(90deg, #FF5722, #FF9800); /* Orange gradient */
-    --title-text: #ffffff;
-    --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --button-bg: #1E88E5;
+            --button-hover-bg: #1565C0;
+            --slider-bg: #555555;
+            --slider-thumb: #1E88E5;
+            --card-bg: #1e1e1e;
+            --card-shadow: rgba(255, 255, 255, 0.1);
+        }
 
-[data-theme="light"] {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --button-bg: #4CAF50;
-    --button-hover-bg: #45a049;
-    --logo-frame-color: #cccccc;
-    --dot-color: #ff0000;
-    --title-bg: linear-gradient(90deg, #FF5722, #FF9800); /* Orange gradient for light mode */
-    --title-text: #000000;
-    --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
+        /* Light Theme */
         [data-theme="light"] {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --button-bg: #4CAF50;
-            --button-hover-bg: #45a049;
-            --logo-frame-color: #cccccc;
-            --dot-color: #ff0000;
-            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722);
-            --title-text: #000000;
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --bg-color: #f5f5f5;
+            --text-color: #333333;
+            --button-bg: #007BFF;
+            --button-hover-bg: #0056b3;
+            --slider-bg: #cccccc;
+            --slider-thumb: #4CAF50;
+            --card-bg: #ffffff;
+            --card-shadow: rgba(0, 0, 0, 0.15);
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-        }
-
-        .title-box {
-            background: var(--title-bg);
-            color: var(--title-text);
-            text-shadow: var(--title-shadow);
-            padding: 20px 30px;
-            font-size: 28px;
-            font-weight: bold;
-            text-align: center;
-            box-shadow: var(--title-shadow);
-            border-radius: 8px;
-            margin: 20px auto;
-            max-width: 90%;
-        }
-
-        .telegram-button {
-            display: block;
-            margin: 10px auto 30px;
-            padding: 12px 25px;
-            background-color: #0088cc;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s, box-shadow 0.3s;
-            max-width: 300px;
-        }
-
-        .telegram-button:hover {
-            background-color: #005f99;
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .theme-toggle {
-            margin: 20px;
-            padding: 10px 20px;
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             transition: background-color 0.3s;
         }
 
-        .theme-toggle:hover {
-            background-color: var(--button-hover-bg);
+        /* Logo Container */
+        .logo-container {
+            background: #000;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
+        .logo-container img {
+            width: 220px;
+            height: auto;
+        }
+
+        /* Link Container */
         #link-container {
-            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
         }
 
+        /* Individual Link Item */
         #link-container div {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--card-shadow);
             text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        #link-container img {
-            width: 350px;
+        #link-container div:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px var(--card-shadow);
+        }
+
+        /* Match Image */
+        .match-image {
             max-width: 100%;
-            border: 5px solid var(--logo-frame-color);
-            cursor: pointer;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
         }
 
+        /* Watch Now Button */
         .watch-button {
-    display: inline-block;
-    padding: 12px 24px;
-    margin-top: 15px;
-    background-color: #FF5722;  /* Bold and warm color */
-    color: white;
-    border: 2px solid #FF5722;  /* Matching border for a clean look */
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);  /* Smooth shadow for depth */
-}
+            width: 140px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(to right, #77530a, #ffd277, #77530a);
+            background-size: 250%;
+            background-position: left;
+            color: #ffd277;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 1s;
+            overflow: hidden;
+            text-decoration: none;
+        }
 
-.watch-button:hover {
-    background-color: #ffffff;  /* White background on hover */
-    color: #FF5722;  /* Orange text on hover */
-    transform: translateY(-5px);  /* Slight lift effect on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);  /* More pronounced shadow on hover */
-}
+        .watch-button::before {
+            content: "Watch Now";
+            position: absolute;
+            color: #ffd277;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 97%;
+            height: 90%;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.842);
+            background-size: 200%;
+            transition: 1s;
+        }
 
-.watch-button:active {
-    transform: translateY(2px);  /* Button presses down slightly when clicked */
-}
+        .watch-button:hover::before {
+            background-position: right;
+        }
 
-.watch-button span {
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
+        .watch-button:hover {
+            background-position: right;
+            transform: scale(1.05);
+        }
 
-.watch-button:hover span {
-    transform: translateX(5px);  /* Subtle text movement on hover */
-}
+        .watch-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Theme Toggle Button */
+        #checkboxInput {
+            display: none;
+        }
+
+        .toggleSwitch {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 50px;
+            height: 30px;
+            background-color: rgb(82, 82, 82);
+            border-radius: 20px;
+            cursor: pointer;
+            transition-duration: 0.2s;
+        }
+
+        .toggleSwitch::after {
+            content: "";
+            position: absolute;
+            height: 10px;
+            width: 10px;
+            left: 5px;
+            background-color: transparent;
+            border-radius: 50%;
+            box-shadow: 5px 2px 7px rgba(8, 8, 8, 0.26);
+            border: 5px solid white;
+            transition-duration: 0.2s;
+        }
+
+        #checkboxInput:checked + .toggleSwitch::after {
+            transform: translateX(100%);
+            background-color: white;
+        }
+
+        #checkboxInput:checked + .toggleSwitch {
+            background-color: rgb(148, 118, 255);
+        }
+
+        /* Paragraphs and Footer */
+        p {
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-color);
+        }
     </style>
 </head>
+
 <body>
-    <!-- Title Box -->
-    <div class="title-box">FANCODE MATCHES </div>
 
-    <!-- Join Telegram Button -->
-    <a href="https://t.me/YourTelegramGroup" target="_blank" class="telegram-button">Join Our Telegram</a>
+    <div class="logo-container">
+        <img src="https://i.ibb.co/jyRc858/Untitled-design-2-1-1.png" alt="Bingewav Sports Logo">
+    </div>
 
-    <!-- Theme Toggle Button with sun and moon icons -->
-    <button class="theme-toggle" onclick="toggleTheme()">
-        <i class="fas fa-sun" id="sun-icon" style="display: none;"></i>
-        <i class="fas fa-moon" id="moon-icon" style="display: inline;"></i>
-    </button>
+    <h1>Fancode Live Events</h1>
 
-    <!-- Links Container -->
+    <!-- Theme Toggle Button -->
+    <input type="checkbox" id="checkboxInput">
+    <label for="checkboxInput" class="toggleSwitch"></label>
+
+    <!-- Link Container -->
     <div id="link-container"></div>
+
+    <footer>
+        © 2024 Bingewav Sports. All rights reserved.
+    </footer>
 
     <script>
         const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
-        const linkPrefix = "https://shz.al/~insiderlive_Stream.html?videoUrl=";
+
+        function encodeOppositeAlphabet(str) {
+            return str.split('').map(char => {
+                if (/[a-z]/.test(char)) {
+                    return String.fromCharCode(219 - char.charCodeAt(0));
+                } else if (/[A-Z]/.test(char)) {
+                    return String.fromCharCode(155 - char.charCodeAt(0));
+                } else {
+                    return char;
+                }
+            }).join('');
+        }
 
         async function fetchAndDisplayLinks() {
             try {
@@ -192,27 +248,35 @@
                     line = line.trim();
 
                     if (line.startsWith("#EXTINF")) {
+                        const descriptionMatch = line.match(/group-title="Cricket",(.*)/);
+                        description = descriptionMatch ? descriptionMatch[1].trim() : "";
+
                         const logoMatch = line.match(/tvg-logo="(.*?)"/);
                         logoUrl = logoMatch ? logoMatch[1] : "";
-                        const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
-                        description = descriptionMatch ? descriptionMatch[1].trim() : "";
                     } else if (line.startsWith("http")) {
                         const linkContainer = document.createElement("div");
 
                         if (logoUrl) {
-                            const logoImg = document.createElement("img");
-                            logoImg.src = logoUrl;
-                            logoImg.alt = "Logo";
-                            logoImg.onclick = () => { 
-                                window.open(linkPrefix + encodeURIComponent(line), '_blank'); 
-                            };
-                            linkContainer.appendChild(logoImg);
+                            const imgElem = document.createElement("img");
+                            imgElem.src = logoUrl;
+                            imgElem.alt = description;
+                            imgElem.className = "match-image";
+                            linkContainer.appendChild(imgElem);
                         }
 
+                        if (description) {
+                            const matchTitleElem = document.createElement("p");
+                            matchTitleElem.textContent = description;
+                            linkContainer.appendChild(matchTitleElem);
+                        }
+
+                        const encodedUrl = encodeOppositeAlphabet(line);
+                        const redirectUrl = `https://bingewav-sports.netlify.app/stream?q=${encodedUrl}`;
+
                         const button = document.createElement("a");
-                        button.href = linkPrefix + encodeURIComponent(line);
+                        button.href = redirectUrl;
                         button.target = "_blank";
-                        button.textContent = "Click to Watch";
+                        button.textContent = "Watch Now";
                         button.className = "watch-button";
                         linkContainer.appendChild(button);
 
@@ -229,23 +293,13 @@
 
         fetchAndDisplayLinks();
 
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute("data-theme");
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
+        // Theme toggle functionality
+        document.getElementById("checkboxInput").addEventListener("change", function (event) {
+            const newTheme = event.target.checked ? "dark" : "light";
             document.documentElement.setAttribute("data-theme", newTheme);
-
-            // Toggle icons visibility
-            const sunIcon = document.getElementById("sun-icon");
-            const moonIcon = document.getElementById("moon-icon");
-            if (newTheme === "dark") {
-                sunIcon.style.display = "none";
-                moonIcon.style.display = "inline";
-            } else {
-                sunIcon.style.display = "inline";
-                moonIcon.style.display = "none";
-            }
-        }
+        });
     </script>
 
 </body>
+
 </html>
