@@ -134,22 +134,25 @@
                     } else if (line.startsWith("http")) {
                         const linkContainer = document.createElement("div");
 
+                        // Add logo if available
                         if (logoUrl) {
                             const logoImg = document.createElement("img");
-                            logoImg.src = logoUrl;
-                            logoImg.alt = "Logo";
+                            logoImg.src = logoUrl; // Only used to load the image
+                            logoImg.alt = "Channel Logo"; // Generic alt text
                             logoImg.onclick = () => {
                                 window.open(linkPrefix + encodeURIComponent(line), '_blank');
                             };
                             linkContainer.appendChild(logoImg);
                         }
 
+                        // Add description if available
                         if (description) {
                             const descriptionElem = document.createElement("p");
                             descriptionElem.textContent = description;
                             linkContainer.appendChild(descriptionElem);
                         }
 
+                        // Add watch button
                         const button = document.createElement("a");
                         button.href = linkPrefix + encodeURIComponent(line);
                         button.target = "_blank";
@@ -159,6 +162,7 @@
 
                         container.appendChild(linkContainer);
 
+                        // Reset variables for the next entry
                         description = "";
                         logoUrl = "";
                     }
