@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TG_@Cricinsider365</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #121212; /* Default to dark mode */
+            --bg-color: #121212;
             --text-color: #ffffff;
             --button-bg: #1E88E5;
             --button-hover-bg: #1565C0;
             --logo-frame-color: #444444;
             --dot-color: #ffff00;
-            --title-bg: linear-gradient(90deg, #4CAF50, #1E88E5); /* Gradient background */
-            --title-text: #ffffff; /* White text for title */
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Shadow for title */
+            --title-bg: linear-gradient(90deg, #4CAF50, #1E88E5);
+            --title-text: #ffffff;
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
         [data-theme="light"] {
@@ -24,9 +25,9 @@
             --button-hover-bg: #45a049;
             --logo-frame-color: #cccccc;
             --dot-color: #ff0000;
-            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722); /* Gradient for light mode */
-            --title-text: #000000; /* Dark text for light mode */
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Lighter shadow for light mode */
+            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722);
+            --title-text: #000000;
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         body {
@@ -107,25 +108,24 @@
             cursor: pointer;
         }
 
-        /* Updated red and white button styles */
         .watch-button {
             display: inline-block;
             padding: 10px 20px;
             margin-top: 10px;
-            background-color: #FF0000;  /* Red background */
+            background-color: #FF0000;
             color: white;
             border: none;
             border-radius: 5px;
             text-decoration: none;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;  /* Added transform for smooth hover effect */
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .watch-button:hover {
-            background-color: #ffffff;  /* White background on hover */
-            color: #FF0000;  /* Red text on hover */
-            transform: scale(1.05);  /* Slightly scale up the button for better hover effect */
+            background-color: #ffffff;
+            color: #FF0000;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -136,8 +136,11 @@
     <!-- Join Telegram Button -->
     <a href="https://t.me/YourTelegramGroup" target="_blank" class="telegram-button">Join Our Telegram</a>
 
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
+    <!-- Theme Toggle Button with sun and moon icons -->
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-sun" id="sun-icon" style="display: none;"></i>
+        <i class="fas fa-moon" id="moon-icon" style="display: inline;"></i>
+    </button>
 
     <!-- Links Container -->
     <div id="link-container"></div>
@@ -201,6 +204,17 @@
             const currentTheme = document.documentElement.getAttribute("data-theme");
             const newTheme = currentTheme === "dark" ? "light" : "dark";
             document.documentElement.setAttribute("data-theme", newTheme);
+
+            // Toggle icons visibility
+            const sunIcon = document.getElementById("sun-icon");
+            const moonIcon = document.getElementById("moon-icon");
+            if (newTheme === "dark") {
+                sunIcon.style.display = "none";
+                moonIcon.style.display = "inline";
+            } else {
+                sunIcon.style.display = "inline";
+                moonIcon.style.display = "none";
+            }
         }
     </script>
 
