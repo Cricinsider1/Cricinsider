@@ -12,8 +12,9 @@
             --button-hover-bg: #1565C0;
             --logo-frame-color: #444444;
             --dot-color: #ffff00;
-            --title-bg: #333333; /* Background for title box */
-            --title-text: #ffffff; /* Text color for title box */
+            --title-bg: linear-gradient(90deg, #4CAF50, #1E88E5); /* Gradient background */
+            --title-text: #ffffff; /* White text for title */
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Shadow for title */
         }
 
         [data-theme="light"] {
@@ -23,27 +24,31 @@
             --button-hover-bg: #45a049;
             --logo-frame-color: #cccccc;
             --dot-color: #ff0000;
-            --title-bg: #f0f0f0;
-            --title-text: #000000;
+            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722); /* Gradient for light mode */
+            --title-text: #000000; /* Dark text for light mode */
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Lighter shadow for light mode */
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
         }
 
         .title-box {
-            background-color: var(--title-bg);
+            background: var(--title-bg);
             color: var(--title-text);
-            padding: 20px;
-            text-align: center;
-            font-size: 24px;
+            text-shadow: var(--title-shadow);
+            padding: 20px 30px;
+            font-size: 28px;
             font-weight: bold;
-            margin: 0;
-            border-bottom: 2px solid var(--logo-frame-color);
+            text-align: center;
+            box-shadow: var(--title-shadow);
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 90%;
         }
 
         .theme-toggle {
@@ -102,7 +107,7 @@
 </head>
 <body>
     <!-- Title Box -->
-    <div class="title-box">Welcome to Our Streaming Page</div>
+    <div class="title-box">🎥 Welcome to Our Streaming Platform</div>
 
     <!-- Theme Toggle Button -->
     <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
