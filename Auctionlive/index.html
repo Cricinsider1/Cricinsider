@@ -205,7 +205,7 @@
           let statusClass = match.status.toLowerCase() === "live" ? "live" : "upcoming";
 
           matchCard.innerHTML = `
-            <a href="https://shz.al/~insiderlive_Stream.html?videoUrl=(match.adfree_url)}" target="_blank">
+            <a href="https://shz.al/~insiderlive_Stream.html?videoUrl=$encodeURIComponent(match.adfree_url)}" target="_blank">
               <div class="logo-box">
                 <img src="${match.src}" alt="${match.title}">
               </div>
