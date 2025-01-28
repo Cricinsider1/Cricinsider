@@ -1,285 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TG_@Cricinsider365</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #121212;
-            --text-color: #ffffff;
-            --button-bg: #1E88E5;
-            --button-hover-bg: #1565C0;
-            --logo-frame-color: #444444;
-            --dot-color: #ffff00;
-            --title-bg: linear-gradient(90deg, #FF5722, #FF9800); /* Orange gradient */
-            --title-text: #ffffff;
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        [data-theme="light"] {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --button-bg: #4CAF50;
-            --button-hover-bg: #45a049;
-            --logo-frame-color: #cccccc;
-            --dot-color: #ff0000;
-            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722);
-            --title-text: #000000;
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
+        /* General Page Styling */
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            padding-bottom: 100px; /* Adding space to prevent footer overlap */
-        }
-
-        .title-box {
-            background: var(--title-bg);
-            color: var(--title-text);
-            text-shadow: var(--title-shadow);
-            padding: 20px 30px;
-            font-size: 28px;
-            font-weight: bold;
-            text-align: center;
-            box-shadow: var(--title-shadow);
-            border-radius: 8px;
-            margin: 20px auto;
-            max-width: 90%;
-        }
-
-        .telegram-button {
-            display: block;
-            margin: 10px auto 30px;
-            padding: 12px 25px;
-            background-color: #0088cc;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s, box-shadow 0.3s;
-            max-width: 300px;
-        }
-
-        .telegram-button:hover {
-            background-color: #005f99;
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .theme-toggle {
-            margin: 20px;
-            padding: 10px 20px;
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--button-hover-bg);
-        }
-
-        #link-container {
-            padding: 20px;
-        }
-
-        #link-container div {
+            background: linear-gradient(135deg, #242424, #3b5998);
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            justify-content: center;
+            min-height: 100vh;
             text-align: center;
         }
 
-        #link-container img {
-            width: 350px;
-            max-width: 100%;
-            border: 5px solid var(--logo-frame-color);
-            cursor: pointer;
-        }
-
-        .watch-button {
-            display: inline-block;
-            padding: 12px 24px;
-            margin-top: 15px;
-            background-color: #FF5722;
-            color: white;
-            border: 2px solid #FF5722;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 600;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .watch-button:hover {
-            background-color: #ffffff;
-            color: #FF5722;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-
-        .watch-button:active {
-            transform: translateY(2px);
-        }
-
-        .watch-button span {
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-
-        .watch-button:hover span {
-            transform: translateX(5px);
-        }
-
-        /* Footer styles */
-        .footer {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            text-align: center;
+        /* Bingewav Sports Logo Section */
+        .logo-container {
+            background: #000; /* Black background for the logo */
             padding: 15px;
-            margin-top: 30px; /* Space between content and footer */
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
-        .footer-button {
-            background-color: var(--button-bg);
-            color: white;
+        .logo-container img {
+            width: 220px; /* Adjust the logo size */
+            height: auto;
+        }
+
+        /* Video Player Styling */
+        .player-container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000; /* Black background behind the video for better focus */
+        }
+
+        .player-container iframe {
+            border-radius: 15px;
+        }
+
+        /* Stream Issue Section */
+        .stream-issue {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             font-size: 16px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            color: #fff;
+            width: fit-content;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .stream-issue a {
+            color: #00c1ff;
+            text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s;
         }
 
-        .footer-button:hover {
-            background-color: var(--button-hover-bg);
+        .stream-issue a:hover {
+            text-decoration: underline;
         }
 
-        .footer-text {
-            margin-top: 10px;
-            font-size: 14px;
+        /* Credits Section */
+        .credits {
+            margin-top: 25px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 16px;
+            color: #fff;
+            width: fit-content;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: inline-block;
+        }
+
+        .credits-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .credits a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .credits a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo-container img {
+                width: 180px;
+            }
+
+            .credits, .stream-issue {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .credits-title {
+                font-size: 16px;
+            }
         }
     </style>
-</head>
+<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
 <body>
-    <!-- Title Box -->
-    <div class="title-box">FANCODE MATCHES</div>
-
-    <!-- Join Telegram Button -->
-    <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank" class="telegram-button">Join Our Telegram</a>
-
-    <!-- Theme Toggle Button with sun and moon icons -->
-    <button class="theme-toggle" onclick="toggleTheme()">
-        <i class="fas fa-sun" id="sun-icon" style="display: none;"></i>
-        <i class="fas fa-moon" id="moon-icon" style="display: inline;"></i>
-    </button>
-
-    <!-- Links Container -->
-    <div id="link-container"></div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <button class="footer-button" onclick="toggleFooterText()">Copyright & Credit</button>
-        <div id="footer-text" class="footer-text" style="display: none;">
-            Important Information<br>
-            We do not own any material or streams here, All content and streams are provided by third-party sites & Belong To Their Respective Owners.<br>
-            API Credit: Toor
-        </div>
     </div>
 
-    <script>
-        const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
-        const linkPrefix = "https://shz.al/~insiderlive_Stream.html?videoUrl=";
+   <!-- Video Player Section -->
+<div class="player-container">
+    <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="true" scrolling="no" src="https://cdn.crichdplays.ru/kachabadam.php?id=starsp3" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+    </div>
+</div>
+<!-- Join Telegram Button -->
+<div class="join-telegram-container">
+    <button class="join-telegram-btn" onclick="window.open('https://t.me/+Pj_QX9oygJNiYmRl', '_blank')">Join Telegram Channel</button>
+</div>
 
-        async function fetchAndDisplayLinks() {
-            try {
-                const response = await fetch(m3uUrl);
-                const text = await response.text();
-                const lines = text.split('\n');
-                const container = document.getElementById("link-container");
+<style>
+    .join-telegram-container {
+        margin-top: 20px;
+        text-align: center;
+    }
 
-                let description = "";
-                let logoUrl = "";
+    .join-telegram-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #008fd6;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
 
-                lines.forEach(line => {
-                    line = line.trim();
+    .join-telegram-btn:hover {
+        background-color: #006bb3;
+    }
+</style>
 
-                    if (line.startsWith("#EXTINF")) {
-                        const logoMatch = line.match(/tvg-logo="(.*?)"/);
-                        logoUrl = logoMatch ? logoMatch[1] : "";
-                        const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
-                        description = descriptionMatch ? descriptionMatch[1].trim() : "";
-                    } else if (line.startsWith("http")) {
-                        const linkContainer = document.createElement("div");
+<script>
+ // Close popup function
+    function closePopup() {
+      const popup = document.getElementById('popup');
+      popup.style.display = 'none';
+    }
+  </script>
 
-                        if (logoUrl) {
-                            const logoImg = document.createElement("img");
-                            logoImg.src = logoUrl;
-                            logoImg.alt = "Logo";
-                            logoImg.onclick = () => { 
-                                window.open(linkPrefix + encodeURIComponent(line), '_blank'); 
-                            };
-                            linkContainer.appendChild(logoImg);
-                        }
+  <div id="popup" style="display: none;">
+    <div class="popup-content">
+      <h2>Support Us!</h2>
+      <p>Join Our Telegram Channel @Cricinsider365</p>
+      <button class="join-btn" onclick="window.open('https://t.me/+4IVZUQOhnshkN2E9', '_blank')">Join Now</button>
+      <button class="close-btn" onclick="closePopup()">Already Joined</button>
+    </div>
+  </div>
 
-                        const button = document.createElement("a");
-                        button.href = linkPrefix + encodeURIComponent(line);
-                        button.target = "_blank";
-                        button.textContent = "Click to Watch";
-                        button.className = "watch-button";
-                        linkContainer.appendChild(button);
-
-                        container.appendChild(linkContainer);
-
-                        description = "";
-                        logoUrl = "";
-                    }
-                });
-            } catch (error) {
-                console.error("Error fetching M3U file:", error);
-            }
+<script>
+        // Show the alert
+        if (confirm("Join Our Telegram Channel @Cricinsider365")) {
+            // Redirect to the Telegram channel if 'OK' is clicked
+            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+        } else {
+            // Close the alert if 'Cancel' is clicked (do nothing)
         }
+</script>
 
-        fetchAndDisplayLinks();
 
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute("data-theme");
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
-            document.documentElement.setAttribute("data-theme", newTheme);
-
-            // Toggle icons visibility
-            const sunIcon = document.getElementById("sun-icon");
-            const moonIcon = document.getElementById("moon-icon");
-            if (newTheme === "dark") {
-                sunIcon.style.display = "none";
-                moonIcon.style.display = "inline";
-            } else {
-                sunIcon.style.display = "inline";
-                moonIcon.style.display = "none";
-            }
-        }
-
-        function toggleFooterText() {
-            const footerText = document.getElementById("footer-text");
-            footerText.style.display = footerText.style.display === "none" ? "block" : "none";
-        }
-    </script>
-
-</body>
-</html>
+</body></html>
