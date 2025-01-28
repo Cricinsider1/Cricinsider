@@ -23,23 +23,23 @@
 
     /* Header Box with Glowing Effect */
     .header-box {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-      margin-bottom: 20px;
-      text-align: center;
-      animation: glow 1.5s ease-in-out infinite alternate;
-    }
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #ffa500, #ffffff); /* Orange to white gradient */
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.7); /* Orange glow */
+  margin-bottom: 20px;
+  text-align: center;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
 
-    .header-box h1 {
+.header-box h1 {
   font-size: 1.5em;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #ffa500; /* Base text color: Orange */
-  text-shadow: 0 0 10px #ffa500, 0 0 20px #ffffff, 0 0 30px #ffcc66;
+  color: #000; /* Black text for contrast */
+  text-shadow: 0 0 10px #ffae42, 0 0 20px #fff;
 }
 
     @keyframes glow {
