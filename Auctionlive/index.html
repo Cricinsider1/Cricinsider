@@ -1,4 +1,3 @@
-<!DOCTYPE html><html 
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FanCode by @crictos99</title>
@@ -179,11 +178,17 @@
     <div class="header-box">
       <h1>FanCode Live by @crictos99</h1>
     </div>
-<!-- Telegram Button -->
+
+    <!-- Telegram Button -->
     <div class="telegram-box">
       <a href="https://t.me/crictos99" class="telegram-button" target="_blank">Join Our Telegram</a>
     </div>
+
+    <!-- Loader and Matches Grid -->
 </div>
+            </a>
+          </div></div>
+  </div>
 
   <script>
     const apiUrl = "https://raw.githubusercontent.com/abid58b/FanCodePlaylist/refs/heads/main/fancode.json";
@@ -206,7 +211,7 @@
 
           let statusClass = match.status.toLowerCase() === "live" ? "live" : "upcoming";
 
-          matchCard.innerHTML = 
+          matchCard.innerHTML = `
             <a href="https://shz.al/xFc7.html/?videoUrl=${encodeURIComponent(match.adfree_url)}" target="_blank">
               <div class="logo-box">
                 <img src="${match.src}" alt="${match.title}">
@@ -217,7 +222,7 @@
                 <div class="match-time">${match.startTime}</div>
               </div>
             </a>
-          ;
+          `;
 
           matchesContainer.appendChild(matchCard);
         });
