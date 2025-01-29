@@ -212,47 +212,48 @@
   </div>
 
   <script>
-    const apiUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
+    const M3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
+
     async function fetchMatches() {
-      try {
-        document.getElementById("loader").style.display = "flex";
-        document.getElementById("matches").style.display = "none";
+        try {
+            document.getElementById("loader").style.display = "flex";
+            document.getElementById("matches").style.display = "none";
 
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        const matches = data.matches;
-        const matchesContainer = document.getElementById("matches");
+            const response = await fetch(M3uUrl);
+            const data = await response.json();
+            const matches = data.matches;
+            const matchesContainer = document.getElementById("matches");
 
-        matchesContainer.innerHTML = "";
+            matchesContainer.innerHTML = "";
 
-        matches.forEach((match) => {
-          const matchCard = document.createElement("div");
-          matchCard.className = "match-card";
+            matches.forEach((match) => {
+                const matchCard = document.createElement("div");
+                matchCard.className = "match-card";
 
-          let statusClass = match.status.toLowerCase() === "live" ? "live" : "upcoming";
+                let statusClass = match.status.toLowerCase() === "live" ? "live" : "upcoming";
 
-          matchCard.innerHTML = `
-            <a href="https://shz.al/~insiderlive_Stream.html?videoUrl=${encodeURIComponent(match.adfree_url)}" target="_blank">
-              <div class="logo-box">
-                <img src="${match.src}" alt="${match.title}">
-              </div>
-              <div class="match-details">
-                <div class="match-title">${match.title}</div>
-                <div class="match-status ${statusClass}">${match.status}</div>
-                <div class="match-time">${match.startTime}</div>
-              </div>
-            </a>
-          `;
+                matchCard.innerHTML = `
+                    <a href="https://shz.al/~insiderlive_Stream.html?videoUrl=${encodeURIComponent(match.adfree_url)}" target="_blank">
+                        <div class="logo-box">
+                            <img src="${match.src}" alt="${match.title}">
+                        </div>
+                        <div class="match-details">
+                            <div class="match-title">${match.title}</div>
+                            <div class="match-status ${statusClass}">${match.status}</div>
+                            <div class="match-time">${match.startTime}</div>
+                        </div>
+                    </a>
+                `;
 
-          matchesContainer.appendChild(matchCard);
-        });
+                matchesContainer.appendChild(matchCard);
+            });
 
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("matches").style.display = "grid";
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("matches").style.display = "grid";
 
-      } catch (error) {
-        console.error("Error fetching match data:", error);
-      }
+        } catch (error) {
+            console.error("Error fetching match data:", error);
+        }
     }
 
     setInterval(fetchMatches, 200000);
