@@ -265,8 +265,8 @@
           const matchCard = document.createElement("div");
           matchCard.className = "match-card";
 
-          matchCard.innerHTML = `
-            <a href=https://shz.al/~insiderlive_Stream.html?videoUrl="${match.adfree_url}" target="_blank">
+          matchCard.innerHTML = 
+            <a href="https://shz.al/~insiderlive_Stream.html?videoUrl=${encodeURIComponent(match.adfree_url)}" target="_blank">
               <div class="logo-box">
                 <img src="${match.src}" alt="${match.title}">
               </div>
