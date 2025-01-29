@@ -1,263 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TG_@Cricinsider365</title>
-  <style>
-    /* General Styles */
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #000; /* Solid black background */
-      color: #fff; 
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TG_@Cricinsider365</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --button-bg: #1E88E5;
+            --button-hover-bg: #1565C0;
+            --logo-frame-color: #444444;
+            --dot-color: #ffff00;
+            --title-bg: linear-gradient(90deg, #FF5722, #FF9800);
+            --title-text: #ffffff;
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
 
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 30px auto;
-    }
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --button-bg: #4CAF50;
+            --button-hover-bg: #45a049;
+            --logo-frame-color: #cccccc;
+            --dot-color: #ff0000;
+            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722);
+            --title-text: #000000;
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    /* Title Box */
-    .title-box {
-      display: inline-block;
-      background-color: #ff5722; /* Dark Orange */
-      padding: 10px 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      margin-bottom: 20px;
-    }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 100px;
+        }
 
-    .title-box h1 {
-      font-size: 1.8em;
-      font-weight: bold;
-      margin: 0;
-      color: #fff; /* White text */
-      text-transform: uppercase;
-    }
+        .title-box {
+            background: var(--title-bg);
+            color: var(--title-text);
+            text-shadow: var(--title-shadow);
+            padding: 20px 30px;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: var(--title-shadow);
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 90%;
+        }
 
-    /* Telegram Button */
-    .telegram-box {
-      display: inline-block;
-      margin-bottom: 20px;
-    }
+        .match-container {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
 
-    .telegram-button {
-      display: block;
-      padding: 12px 20px;
-      background-color: #0088cc;
-      color: white;
-      font-size: 1.2em;
-      font-weight: bold;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
+        .match-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-    .telegram-button:hover {
-      background-color: #0077b5;
-      transform: scale(1.05);
-    }
+        .match-status {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
 
-    /* Matches Grid */
-    .matches-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      justify-content: center;
-    }
+        .match-time {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
 
-    /* Match Card */
-    .match-card {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
+        .match-details {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
 
-    .match-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    }
+        .watch-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #FF5722;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
 
-    .match-card a {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    /* Logo Box */
-    .logo-box {
-      width: 100%;
-      height: 300px;
-      overflow: hidden;
-    }
-
-    .logo-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-
-    .match-details {
-      padding: 15px;
-    }
-
-    .match-title {
-      font-size: 1.3em;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .match-status {
-      font-size: 1em;
-      font-weight: bold;
-      padding: 5px 10px;
-      border-radius: 5px;
-      display: inline-block;
-      margin-bottom: 10px;
-    }
-
-    .live {
-      background: #ff1e56;
-      color: #fff;
-    }
-
-    .upcoming {
-      background: #ffd700;
-      color: #000;
-    }
-
-    .match-time {
-      font-size: 0.9em;
-      color: #eee;
-    }
-
-    /* Loader Animation */
-    .loader {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 200px;
-    }
-
-    .loader div {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* Footer Box */
-    .footer-box {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 15px;
-      margin-top: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-    }
-
-    .footer-box p {
-      font-size: 0.9em;
-      color: #ddd;
-      margin: 5px 0;
-    }
-
-    .footer-box span {
-      font-weight: bold;
-      color: #ff5722;
-    }
-  </style>
+        .watch-button:hover {
+            background: #ff784e;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
     <!-- Title Box -->
-    <div class="title-box">
-      <h1>FANCODE MATCHES</h1>
-    </div>
+    <div class="title-box">FANCODE MATCHES</div>
 
-    <!-- Telegram Button -->
-    <div class="telegram-box">
-      <a href="https://t.me/+Pj_QX9oygJNiYmRl" class="telegram-button" target="_blank">Join Our Telegram</a>
-    </div>
+    <!-- Join Telegram Button -->
+    <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank" class="telegram-button">Join Our Telegram</a>
 
-    <!-- Loader -->
-    <div id="loader" class="loader"><div></div></div>
+    <!-- Links Container -->
+    <div id="link-container"></div>
 
-    <!-- Matches Grid -->
-    <div id="matches" class="matches-grid" style="display: none;"></div>
+    <script>
+        const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
+        const linkPrefix = "https://shz.al/~insiderlive_Stream.html?videoUrl=";
 
-    <!-- Footer Box -->
-    <div class="footer-box">
-      <p><span>Copyright & Credit</span></p>
-      <p>We do not own any material or streams here. All content and streams are provided by third-party sites & belong to their respective owners.</p>
-      <p>API Credit: Toor</p>
-    </div>
-  </div>
+        async function fetchAndDisplayLinks() {
+            try {
+                const response = await fetch(m3uUrl);
+                const text = await response.text();
+                const lines = text.split('\n');
+                const container = document.getElementById("link-container");
 
-  <script>
-    const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
+                let matchTitle = "";
+                let matchStatus = "Live";  // Default status (can be dynamic)
+                let matchDetails = "";
+                let matchTime = "Unknown";
+                let logoUrl = "";
 
-    async function fetchMatches() {
-        try {
-            document.getElementById("loader").style.display = "flex";
-            document.getElementById("matches").style.display = "none";
+                lines.forEach(line => {
+                    line = line.trim();
 
-            const response = await fetch(M3uUrl);
-            const data = await response.json();
-            const matches = data.matches;
-            const matchesContainer = document.getElementById("matches");
+                    if (line.startsWith("#EXTINF")) {
+                        const logoMatch = line.match(/tvg-logo="(.*?)"/);
+                        logoUrl = logoMatch ? logoMatch[1] : "";
+                        
+                        const titleMatch = line.match(/#EXTINF.*?,(.*)/);
+                        matchTitle = titleMatch ? titleMatch[1].trim() : "Unknown Match";
 
-            matchesContainer.innerHTML = "";
+                        const detailsMatch = line.match(/group-title="(.*?)"/);
+                        matchDetails = detailsMatch ? detailsMatch[1] : "No details available";
 
-            matches.forEach((match) => {
-                const matchCard = document.createElement("div");
-                matchCard.className = "match-card";
+                        const timeMatch = line.match(/match-time="(.*?)"/);
+                        matchTime = timeMatch ? timeMatch[1] : "Time not available";
+                    } else if (line.startsWith("http")) {
+                        const matchContainer = document.createElement("div");
+                        matchContainer.className = "match-container";
 
-                let statusClass = match.status.toLowerCase() === "live" ? "live" : "upcoming";
+                        if (logoUrl) {
+                            const logoImg = document.createElement("img");
+                            logoImg.src = logoUrl;
+                            logoImg.alt = "Match Logo";
+                            logoImg.style.width = "100px";
+                            matchContainer.appendChild(logoImg);
+                        }
 
-                matchCard.innerHTML = `
-                    <a href="https://shz.al/~insiderlive_Stream.html?videoUrl=${encodeURIComponent(match.adfree_url)}" target="_blank">
-                        <div class="logo-box">
-                            <img src="${match.src}" alt="${match.title}">
-                        </div>
-                        <div class="match-details">
-                            <div class="match-title">${match.title}</div>
-                            <div class="match-status ${statusClass}">${match.status}</div>
-                            <div class="match-time">${match.startTime}</div>
-                        </div>
-                    </a>
-                `;
+                        const titleElement = document.createElement("div");
+                        titleElement.className = "match-title";
+                        titleElement.textContent = matchTitle;
+                        matchContainer.appendChild(titleElement);
 
-                matchesContainer.appendChild(matchCard);
-            });
+                        const statusElement = document.createElement("div");
+                        statusElement.className = "match-status";
+                        statusElement.textContent = "Status: " + matchStatus;
+                        matchContainer.appendChild(statusElement);
 
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("matches").style.display = "grid";
+                        const timeElement = document.createElement("div");
+                        timeElement.className = "match-time";
+                        timeElement.textContent = "Match Time: " + matchTime;
+                        matchContainer.appendChild(timeElement);
 
-        } catch (error) {
-            console.error("Error fetching match data:", error);
+                        const detailsElement = document.createElement("div");
+                        detailsElement.className = "match-details";
+                        detailsElement.textContent = "Details: " + matchDetails;
+                        matchContainer.appendChild(detailsElement);
+
+                        const button = document.createElement("a");
+                        button.href = linkPrefix + encodeURIComponent(line);
+                        button.target = "_blank";
+                        button.textContent = "Watch Now";
+                        button.className = "watch-button";
+                        matchContainer.appendChild(button);
+
+                        container.appendChild(matchContainer);
+
+                        // Reset variables for next match
+                        matchTitle = "";
+                        matchDetails = "";
+                        matchTime = "Unknown";
+                        logoUrl = "";
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching M3U file:", error);
+            }
         }
-    }
 
-    setInterval(fetchMatches, 200000);
-    fetchMatches();
-  </script>
+        fetchAndDisplayLinks();
+    </script>
+
 </body>
 </html>
