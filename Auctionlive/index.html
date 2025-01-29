@@ -162,6 +162,27 @@
         transform: rotate(360deg);
       }
     }
+
+    /* Footer Box */
+    .footer-box {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 15px;
+      margin-top: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .footer-box p {
+      font-size: 0.9em;
+      color: #ddd;
+      margin: 5px 0;
+    }
+
+    .footer-box span {
+      font-weight: bold;
+      color: #ff5722;
+    }
   </style>
 </head>
 <body>
@@ -181,11 +202,17 @@
 
     <!-- Matches Grid -->
     <div id="matches" class="matches-grid" style="display: none;"></div>
+
+    <!-- Footer Box -->
+    <div class="footer-box">
+      <p><span>Copyright & Credit</span></p>
+      <p>We do not own any material or streams here. All content and streams are provided by third-party sites & belong to their respective owners.</p>
+      <p>API Credit: Toor</p>
+    </div>
   </div>
 
   <script>
-    const apiUrl = "https://raw.githubusercontent.com/abid58b/FanCodePlaylist/refs/heads/main/fancode.json";
-
+    const apiUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
     async function fetchMatches() {
       try {
         document.getElementById("loader").style.display = "flex";
