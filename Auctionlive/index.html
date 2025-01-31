@@ -1,120 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Willow HD</title>
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="referrer" content="no-referrer">
-    <link rel="shortcut icon" href="https://live.drmlive.in/sports/willow.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TG_@Cricinsider365</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000; /* Solid black background */
+      color: #fff; 
+      text-align: center;
+    }
 
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: black;
-        }
-        #player {
-            width: 100vw;
-            height: 100vh;
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-    </style>
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 30px auto;
+    }
 
-    <script src="https://ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
+    /* Title Box */
+    .title-box {
+      display: inline-block;
+      background-color: #ff5722; /* Dark Orange */
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
 
-            const m3u8Url = "https://p-cdn4-a-cg14-linear-cbd46b77.movetv.com/clipslist/22/20250130T145341Z/20250130T165341Z/master_7_3_widevine.m3u8";
-            const encryptedToken = "Mk9ocFR3U1RTVnRZQkNTcER1b2pGdTlzSlBQN3h5WktheitUR0g1Z2hteDJGZVNjbHhGRXppTXViUXRuTlIwYg==";
+    .title-box h1 {
+      font-size: 1.8em;
+      font-weight: bold;
+      margin: 0;
+      color: #fff; /* White text */
+      text-transform: uppercase;
+    }
 
-            async function fetchClearKey(pssh) {
-                try {
-                    const response = await fetch("key.php", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({ pssh, token: encryptedToken })
-                    });
+    /* Telegram Button */
+    .telegram-box {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
 
-                    if (!response.ok) throw new Error("Failed to fetch key");
+    .telegram-button {
+      display: block;
+      padding: 12px 20px;
+      background-color: #0088cc;
+      color: white;
+      font-size: 1.2em;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
 
-                    return await response.json();
-                } catch (error) {
-                    console.error("Error fetching ClearKey:", error);
-                    return null;
-                }
-            }
+    .telegram-button:hover {
+      background-color: #0077b5;
+      transform: scale(1.05);
+    }
 
-            async function fetchPSSHFromM3U8(m3u8Url) {
-                try {
-                    const response = await fetch(m3u8Url);
-                    if (!response.ok) throw new Error("Failed to fetch M3U8");
+    /* Matches Grid */
+    .matches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      justify-content: center;
+    }
 
-                    const m3u8Text = await response.text();
-                    const sessionKeyTag = m3u8Text.split("\n").find(line =>
-                        line.startsWith("#EXT-X-SESSION-KEY") &&
-                        line.includes('KEYFORMAT="urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed"')
-                    );
+    /* Match Card */
+    .match-card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
 
-                    if (!sessionKeyTag) return null;
+    .match-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
 
-                    const uriMatch = sessionKeyTag.match(/URI="data:text\/plain;base64,([^"]+)"/);
-                    return uriMatch ? uriMatch[1] : null;
-                } catch (error) {
-                    console.error("Error fetching PSSH:", error);
-                    return null;
-                }
-            }
+    .match-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
 
-            async function initializePlayer() {
-                try {
-                    const pssh = await fetchPSSHFromM3U8(m3u8Url);
-                    if (!pssh) throw new Error("PSSH not found");
+    /* Logo Box */
+    .logo-box {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
 
-                    const keys = await fetchClearKey(pssh);
-                    if (!keys) throw new Error("Keys not found");
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
 
-                    jwplayer("player").setup({
-                        playlist: [{
-                            sources: [{
-                                default: true,
-                                type: "dash",
-                                file: m3u8Url,
-                                drm: {
-                                    clearkey: {
-                                        keyId: keys.keyId,
-                                        key: keys.key
-                                    }
-                                },
-                                label: "HD"
-                            }]
-                        }],
-                        width: "100%",
-                        height: "100%",
-                        aspectratio: "16:9",
-                        autostart: true
-                    });
-                } catch (error) {
-                    console.error("Error initializing player:", error);
-                }
-            }
+    .match-details {
+      padding: 15px;
+    }
 
-            initializePlayer();
-        });
-    </script>
+    .match-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .match-status {
+      font-size: 1em;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .live {
+      background: #ff1e56;
+      color: #fff;
+    }
+
+    .upcoming {
+      background: #ffd700;
+      color: #000;
+    }
+
+    .match-time {
+      font-size: 0.9em;
+      color: #eee;
+    }
+
+    /* Loader Animation */
+    .loader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+
+    .loader div {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
-    <div id="player"></div>
+  <div class="container">
+    <!-- Title Box -->
+    <div class="title-box">
+      <h1>FANCODE MATCHES</h1>
+    </div>
+
+    <!-- Telegram Button -->
+    <div class="telegram-box">
+      <a href="https://t.me/+Pj_QX9oygJNiYmRl" class="telegram-button" target="_blank">Join Our Telegram</a>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="loader"><div></div></div>
+
+    <!-- Matches Grid -->
+    <div id="matches" class="matches-grid" style="display: none;"></div>
+  </div>
+
+  <script>
+    const apiUrl = "https://github.com/byte-capsule/FanCode-Hls-Fetcher/blob/main/Fancode_hls_m3u8.Json";
+async function fetchMatches() {
+      try {
+        document.getElementById("loader").style.display = "flex";
+        document.getElementById("matches").style.display = "none";
+
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        const matches = data.matches;
+        const matchesContainer = document.getElementById("matches");
+
+        matchesContainer.innerHTML = "";
+
+        matches.forEach((match) => {
+          const matchCard = document.createElement("div");
+          matchCard.className = "match-card";
+
+          let statusClass = match.status.toLowerCase() === "live" ? "live" : "upcoming";
+
+          matchCard.innerHTML = 
+            <a href="https://shz.al/~insiderlive_Stream.html?videoUrl=${encodeURIComponent(match.adfree_url)}" target="_blank">
+              <div class="logo-box">
+                <img src="${match.src}" alt="${match.title}">
+              </div>
+              <div class="match-details">
+                <div class="match-title">${match.title}</div>
+                <div class="match-status ${statusClass}">${match.status}</div>
+                <div class="match-time">${match.startTime}</div>
+              </div>
+            </a>
+          ;
+
+          matchesContainer.appendChild(matchCard);
+        });
+
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("matches").style.display = "grid";
+
+      } catch (error) {
+        console.error("Error fetching match data:", error);
+      }
+    }
+
+    setInterval(fetchMatches, 200000);
+    fetchMatches();
+  </script>
 </body>
 </html>
