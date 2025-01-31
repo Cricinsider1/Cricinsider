@@ -1,157 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Matches - CricInsider</title>
-  <style>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>TG_@Cricinsider365</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+<style>
     body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #000;
-      color: #fff; 
-      text-align: center;
+        background-color: #000;
+        margin: 0;
     }
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 30px auto;
+
+    /* Container for video and logo */
+    .video-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: black;
     }
-    .title-box {
-      display: inline-block;
-      background-color: #ff5722;
-      padding: 10px 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      margin-bottom: 20px;
+
+    /* Style for the logo */
+    .logo {
+        position: absolute;
+        top: 10px; /* Adjust vertical position */
+        left: 10px; /* Adjust horizontal position */
+        z-index: 1; /* Ensure the logo appears above the video */
+        max-width: 120px; /* Set maximum width for the logo */
+        max-height: 120px; /* Set maximum height for the logo */
+        pointer-events: none; /* Prevent interference with video controls */
     }
-    .title-box h1 {
-      font-size: 1.8em;
-      font-weight: bold;
-      margin: 0;
-      color: #fff;
-      text-transform: uppercase;
+
+    .shaka-spinner-container {
+        display: none;
     }
-    .matches-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      justify-content: center;
+
+    .uc {
+        pointer-events: none;
     }
-    .match-card {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    .match-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    }
-    .match-card a {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-    .match-details {
-      padding: 15px;
-    }
-    .match-title {
-      font-size: 1.3em;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .match-time {
-      font-size: 0.9em;
-      color: #eee;
-    }
-    .loader {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 200px;
-    }
-    .loader div {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <div class="title-box">
-      <h1>Live Cricket Matches</h1>
+    <!-- Video container -->
+    <div class="video-container">
+        <!-- Logo inside the video -->
+        <img src="https://i.ibb.co/fMKnFg3/1000003992-removebg-preview.png" alt="Logo" class="logo">
+
+        <!-- Video player -->
+        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            <video autoplay muted data-shaka-player id="video" poster="https://i.ibb.co/x7jXd29/In-Shot-20241215-002653932.jpg" style="width:100%; height:100%;"></video>
+        </div>
     </div>
 
-    <div id="loader" class="loader"><div></div></div>
+    <script>
+    // Restrict iframe embedding
+    if (window.top !== window.self) {
+        window.addEventListener('DOMContentLoaded', function() {
+            // Clear the existing content
+            document.body.innerHTML = '';
 
-    <div id="matches" class="matches-grid" style="display: none;"></div>
-  </div>
+            // Add custom message
+            const messageDiv = document.createElement('div');
+            messageDiv.id = 'message';
+            messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
 
-  <script>
-    const apiUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
+            // Style the message
+            messageDiv.style.color = '#fff';
+            messageDiv.style.backgroundColor = '#000';
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '50%';
+            messageDiv.style.left = '50%';
+            messageDiv.style.transform = 'translate(-50%, -50%)';
+            messageDiv.style.padding = '20px';
+            messageDiv.style.borderRadius = '10px';
+            messageDiv.style.textAlign = 'center';
+            messageDiv.style.fontFamily = 'Arial, sans-serif';
+            messageDiv.style.fontSize = '20px';
 
-    async function fetchMatches() {
-      try {
-        document.getElementById("loader").style.display = "flex";
-        document.getElementById("matches").style.display = "none";
-
-        const response = await fetch(apiUrl);
-        const m3uData = await response.text();
-
-        const matchesContainer = document.getElementById("matches");
-        matchesContainer.innerHTML = "";
-
-        const lines = m3uData.split("\n").map(line => line.trim());
-        let matches = [];
-
-        for (let i = 0; i < lines.length; i++) {
-          if (lines[i].startsWith("#EXTINF")) {
-            const titleMatch = lines[i].match(/,(.+)$/);
-            const title = titleMatch ? titleMatch[1] : "Unknown Match";
-            const streamUrl = lines[i + 1] || "#";
-            matches.push({ title, streamUrl });
-          }
-        }
-
-        matches.forEach(match => {
-          const matchCard = document.createElement("div");
-          matchCard.className = "match-card";
-
-          matchCard.innerHTML = `
-            <a href="${match.streamUrl}" target="_blank">
-              <div class="match-details">
-                <div class="match-title">${match.title}</div>
-                <div class="match-time">LIVE</div>
-              </div>
-            </a>
-          `;
-
-          matchesContainer.appendChild(matchCard);
+            // Append the message to the body
+            document.body.appendChild(messageDiv);
         });
-
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("matches").style.display = "grid";
-
-      } catch (error) {
-        console.error("Error fetching match data:", error);
-      }
     }
 
-    setInterval(fetchMatches, 200000);
-    fetchMatches();
-  </script>
+    async function init() {
+        const video = document.getElementById("video");
+        const ui = video.ui;
+        const controls = ui.getControls();
+        const player = controls.getPlayer();
+
+        player.configure({
+            drm: {
+                clearKeys: {
+                    'N1Bt-2EVTLmZn710zkrttg': "Z4eegMEhQisPnBEW6Wz_LQ"
+                }
+            }
+        });
+
+        ui.configure({
+            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+            volumeBarColors: {
+                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                level: "rgb(0, 255, 0)"     // Green color for the volume level
+            },
+            seekBarColors: {
+                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+            }
+        });
+window.player = player;
+        window.ui = ui;
+
+        player.addEventListener("error", onPlayerErrorEvent);
+        controls.addEventListener("error", onUIErrorEvent);
+
+        try {
+            await player.load("https://p-cdn1-a-cg14-linear-cbd46b77.movetv.com/clipslist/22/20250131T000000Z/20250201T000000Z.mpd");
+            console.log("The video has now been loaded!");
+        } catch (error) {
+            onPlayerError(error);
+        }
+    }
+
+    function onPlayerErrorEvent(event) {
+        onPlayerError(event.detail);
+    }
+
+    function onPlayerError(error) {
+        console.error("Error code", error.code, "object", error);
+    }
+
+    function onUIErrorEvent(event) {
+        onPlayerError(event.detail);
+    }
+
+    function initFailed() {
+        console.error("Unable to load the UI library!");
+    }
+
+    document.addEventListener("shaka-ui-loaded", init);
+    document.addEventListener("shaka-ui-load-failed", initFailed);
+
+    if (confirm("Join For More Links!!")) {
+        window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+    }
+    </script>
 </body>
 </html>
