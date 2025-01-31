@@ -3,75 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TG_@Cricinsider365</title>
+  <title>Live Matches - CricInsider</title>
   <style>
-    /* General Styles */
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #000; /* Solid black background */
+      background-color: #000;
       color: #fff; 
       text-align: center;
     }
-
     .container {
       width: 90%;
       max-width: 1200px;
       margin: 30px auto;
     }
-
-    /* Title Box */
     .title-box {
       display: inline-block;
-      background-color: #ff5722; /* Dark Orange */
+      background-color: #ff5722;
       padding: 10px 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       margin-bottom: 20px;
     }
-
     .title-box h1 {
       font-size: 1.8em;
       font-weight: bold;
       margin: 0;
-      color: #fff; /* White text */
+      color: #fff;
       text-transform: uppercase;
     }
-
-    /* Telegram Button */
-    .telegram-box {
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-
-    .telegram-button {
-      display: block;
-      padding: 12px 20px;
-      background-color: #0088cc;
-      color: white;
-      font-size: 1.2em;
-      font-weight: bold;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .telegram-button:hover {
-      background-color: #0077b5;
-      transform: scale(1.05);
-    }
-
-    /* Matches Grid */
     .matches-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
       justify-content: center;
     }
-
-    /* Match Card */
     .match-card {
       background: rgba(255, 255, 255, 0.15);
       border-radius: 12px;
@@ -80,74 +47,33 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       backdrop-filter: blur(10px);
     }
-
     .match-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     }
-
     .match-card a {
       text-decoration: none;
       color: inherit;
       display: block;
     }
-
-    /* Logo Box */
-    .logo-box {
-      width: 100%;
-      height: 300px;
-      overflow: hidden;
-    }
-
-    .logo-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-
     .match-details {
       padding: 15px;
     }
-
     .match-title {
       font-size: 1.3em;
       font-weight: bold;
       margin-bottom: 10px;
     }
-
-    .match-status {
-      font-size: 1em;
-      font-weight: bold;
-      padding: 5px 10px;
-      border-radius: 5px;
-      display: inline-block;
-      margin-bottom: 10px;
-    }
-
-    .live {
-      background: #ff1e56;
-      color: #fff;
-    }
-
-    .upcoming {
-      background: #ffd700;
-      color: #000;
-    }
-
     .match-time {
       font-size: 0.9em;
       color: #eee;
     }
-
-    /* Loader Animation */
     .loader {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 200px;
     }
-
     .loader div {
       width: 40px;
       height: 40px;
@@ -156,7 +82,6 @@
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
-
     @keyframes spin {
       to {
         transform: rotate(360deg);
@@ -166,55 +91,53 @@
 </head>
 <body>
   <div class="container">
-    <!-- Title Box -->
     <div class="title-box">
-      <h1>FANCODE MATCHES</h1>
+      <h1>Live Cricket Matches</h1>
     </div>
 
-    <!-- Telegram Button -->
-    <div class="telegram-box">
-      <a href="https://t.me/+Pj_QX9oygJNiYmRl" class="telegram-button" target="_blank">Join Our Telegram</a>
-    </div>
-
-    <!-- Loader -->
     <div id="loader" class="loader"><div></div></div>
 
-    <!-- Matches Grid -->
     <div id="matches" class="matches-grid" style="display: none;"></div>
   </div>
 
   <script>
-    const apiUrl = "https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json";
-async function fetchMatches() {
+    const apiUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
+
+    async function fetchMatches() {
       try {
         document.getElementById("loader").style.display = "flex";
         document.getElementById("matches").style.display = "none";
 
         const response = await fetch(apiUrl);
-        const data = await response.json();
-        const matches = data.matches;
-        const matchesContainer = document.getElementById("matches");
+        const m3uData = await response.text();
 
+        const matchesContainer = document.getElementById("matches");
         matchesContainer.innerHTML = "";
 
-        matches.forEach((match) => {
+        const lines = m3uData.split("\n").map(line => line.trim());
+        let matches = [];
+
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].startsWith("#EXTINF")) {
+            const titleMatch = lines[i].match(/,(.+)$/);
+            const title = titleMatch ? titleMatch[1] : "Unknown Match";
+            const streamUrl = lines[i + 1] || "#";
+            matches.push({ title, streamUrl });
+          }
+        }
+
+        matches.forEach(match => {
           const matchCard = document.createElement("div");
           matchCard.className = "match-card";
 
-          let statusClass = match.status.toLowerCase() === "live" ? "live" : "upcoming";
-
-          matchCard.innerHTML = 
-            <a href="https://shz.al/~insiderlive_Stream.html?videoUrl=${encodeURIComponent(match.adfree_url)}" target="_blank">
-              <div class="logo-box">
-                <img src="${match.src}" alt="${match.title}">
-              </div>
+          matchCard.innerHTML = `
+            <a href="${match.streamUrl}" target="_blank">
               <div class="match-details">
                 <div class="match-title">${match.title}</div>
-                <div class="match-status ${statusClass}">${match.status}</div>
-                <div class="match-time">${match.startTime}</div>
+                <div class="match-time">LIVE</div>
               </div>
             </a>
-          ;
+          `;
 
           matchesContainer.appendChild(matchCard);
         });
