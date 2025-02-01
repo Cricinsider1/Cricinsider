@@ -2,109 +2,158 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DASH Player with Icons</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TG_@Cricinsider365</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        /* General Page Styling */
         body {
             font-family: 'Arial', sans-serif;
-            background: #111;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #242424, #3b5998);
             color: #fff;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             flex-direction: column;
-        }
-
-        #video-container {
-            position: relative;
-            width: 80%;
-            max-width: 960px;
-            background: #000;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-        }
-
-        .controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            z-index: 10;
-        }
-
-        .control-btn {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ecf0f1;
-            font-size: 24px;
-            padding: 10px 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
         }
 
-        .control-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-            transform: scale(1.1);
+        /* Bingewav Sports Logo Section */
+        .logo-container {
+            background: #000; /* Black background for the logo */
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
-        .control-btn:active {
-            background-color: rgba(0, 0, 0, 0.9);
+        .logo-container img {
+            width: 220px; /* Adjust the logo size */
+            height: auto;
         }
 
-        .header {
-            font-size: 24px;
+        /* Video Player Styling */
+        .player-container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000; /* Black background behind the video for better focus */
+        }
+
+        .player-container iframe {
+            border-radius: 15px;
+        }
+
+        /* Stream Issue Section */
+        .stream-issue {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            color: #fff;
+            width: fit-content;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .stream-issue a {
+            color: #00c1ff;
+            text-decoration: none;
             font-weight: bold;
-            text-align: center;
-            margin-bottom: 15px;
-            color: #ecf0f1;
         }
 
-        .footer {
-            font-size: 14px;
-            text-align: center;
-            color: #ecf0f1;
-            margin-top: 15px;
+        .stream-issue a:hover {
+            text-decoration: underline;
+        }
+
+        /* Credits Section */
+        .credits {
+            margin-top: 25px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 16px;
+            color: #fff;
+            width: fit-content;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: inline-block;
+        }
+
+        .credits-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .credits a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .credits a:hover {
+            text-decoration: underline;
+        }
+
+        /* Video Player Styles */
+        #video {
+            width: 100%;
+            height: 100vh;
+            max-height: 720px;
+            background: black;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo-container img {
+                width: 180px;
+            }
+
+            .credits, .stream-issue {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .credits-title {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="header">Professional DASH Video Player with Icons</div>
-    
-    <div id="video-container">
-        <video id="video" controls autoplay></video>
-        
-        <!-- Custom Controls -->
-        <div class="controls">
-            <button class="control-btn" onclick="playVideo()"><i class="fas fa-play"></i></button>
-            <button class="control-btn" onclick="pauseVideo()"><i class="fas fa-pause"></i></button>
-            <button class="control-btn" onclick="muteVideo()"><i class="fas fa-volume-mute"></i></button>
-            <button class="control-btn" onclick="unmuteVideo()"><i class="fas fa-volume-up"></i></button>
-        </div>
+    <!-- Logo Section -->
+    <div class="logo-container">
+        <img src="https://your-logo-link.com/logo.png" alt="Bingewav Sports Logo">
     </div>
 
-    <div class="footer">Powered by Shaka Player</div>
+    <!-- Video Player -->
+    <div class="player-container">
+        <video id="video" controls autoplay></video>
+    </div>
+
+    <!-- Stream Issue Section (optional) -->
+    <div class="stream-issue">
+        <p>If you're facing issues, visit our <a href="https://help.example.com" target="_blank">Help Center</a> for support.</p>
+    </div>
+
+    <!-- Credits Section -->
+    <div class="credits">
+        <div class="credits-title">Credits:</div>
+        <p>Powered by <a href="https://www.shaka-player-demo.com" target="_blank">Shaka Player</a></p>
+    </div>
 
     <script>
         async function initPlayer() {
@@ -113,7 +162,7 @@
 
             if (shaka.Player.isBrowserSupported()) {
                 const player = new shaka.Player(video);
-
+                
                 // Error handling
                 player.addEventListener("error", event => console.error("Error:", event.detail));
 
@@ -127,12 +176,6 @@
                 alert("Your browser does not support DASH playback.");
             }
         }
-
-        // Custom Control Functions
-        function playVideo() { document.getElementById("video").play(); }
-        function pauseVideo() { document.getElementById("video").pause(); }
-        function muteVideo() { document.getElementById("video").muted = true; }
-        function unmuteVideo() { document.getElementById("video").muted = false; }
 
         document.addEventListener("DOMContentLoaded", initPlayer);
     </script>
