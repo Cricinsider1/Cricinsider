@@ -3,80 +3,80 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FREDFLIX SPORTS</title>
-    <link rel="icon" href="./img/fredflix.png">
-    <link rel="stylesheet" href="./player.css">
-
-    <!-- JW Player Script -->
-    <script type="text/javascript" src="https://ssl.p.jwpcdn.com/player/v/8.36.4/jwplayer.js"></script>
-
+    <title>DASH Player</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
     <style>
         body {
             margin: 0;
             background: black;
+            text-align: center;
         }
-        #player {
+        video {
             width: 100%;
             height: 100vh;
+            max-height: 720px;
         }
-        .watermark {
-            position: absolute;
+        .controls {
+            position: fixed;
             bottom: 10px;
-            right: 10px;
-            font-size: 10px;
-            font-weight: bold;
-            color: #fff;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 2px 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background: red;
+            color: white;
             border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-    <!-- JW Player Container -->
-    <div id="player"></div>
+    <!-- Video Player -->
+    <video id="video" controls autoplay></video>
 
-    <!-- Watermark -->
-    <div class="watermark">shounwifi.net/wp</div>
+    <!-- Custom Controls -->
+    <div class="controls">
+        <button onclick="playVideo()">Play</button>
+        <button onclick="pauseVideo()">Pause</button>
+        <button onclick="muteVideo()">Mute</button>
+        <button onclick="unmuteVideo()">Unmute</button>
+    </div>
 
     <script>
-        // Define stream URL
-        const streamURL = "https://streamline.sturls.com/FoxSports501/index.mpd?token=734ccc9aca65a77e90dccf0551df7d3d64aad4fb-e205f11a3f56747d330370d6a60b7c76-1738443960-1738433160&remote=no_check_ip";
+        async function initPlayer() {
+            const video = document.getElementById("video");
+            const manifestUri = "https://streamline.sturls.com/FoxSports501/index.mpd?token=734ccc9aca65a77e90dccf0551df7d3d64aad4fb-e205f11a3f56747d330370d6a60b7c76-1738443960-1738433160&remote=no_check_ip";
 
-        // Check if JW Player is loaded
-        if (typeof jwplayer === "undefined") {
-            alert("Error: JW Player failed to load.");
-        } else {
-            // Initialize JW Player
-            jwplayer("player").setup({
-                file: streamURL,
-                width: "100%",
-                height: "100%",
-                autostart: true,
-                preload: "auto",
-                controls: true,
-                aspectratio: "16:9",
-                skin: { name: "netflix" },
-                captions: {
-                    color: "#FFFFFF",
-                    fontSize: 14,
-                    backgroundOpacity: 50
-                },
-                logo: {
-                    file: "./img/fredflix.png",
-                    position: "top-right"
+            if (shaka.Player.isBrowserSupported()) {
+                const player = new shaka.Player(video);
+                
+                // Error handling
+                player.addEventListener("error", event => console.error("Error:", event.detail));
+
+                try {
+                    await player.load(manifestUri);
+                    console.log("DASH Stream Loaded Successfully!");
+                } catch (error) {
+                    console.error("Failed to load stream:", error);
                 }
-            });
-
-            // Event listeners for debugging
-            jwplayer().on('play', function() {
-                console.log("Playback started!");
-            });
-            jwplayer().on('error', function(e) {
-                console.error("Error occurred:", e.message);
-            });
+            } else {
+                alert("Your browser does not support DASH playback.");
+            }
         }
+
+        // Custom Control Functions
+        function playVideo() { document.getElementById("video").play(); }
+        function pauseVideo() { document.getElementById("video").pause(); }
+        function muteVideo() { document.getElementById("video").muted = true; }
+        function unmuteVideo() { document.getElementById("video").muted = false; }
+
+        document.addEventListener("DOMContentLoaded", initPlayer);
     </script>
 
 </body>
