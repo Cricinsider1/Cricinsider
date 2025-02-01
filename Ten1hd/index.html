@@ -1,96 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@TG_Cricinsider365</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
     <style>
+        /* General Page Styling */
         body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #242424, #3b5998);
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
-            margin: 0;
-            padding: 0;
-        }
-        .title {
-            background-color: #000;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-            font-size: 1.5em;
+            justify-content: center;
+            min-height: 100vh;
             text-align: center;
         }
-        .iframe-container {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 16/9;
-            background-color: #000;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .options, .join-telegram {
-            margin-top: 15px;
+
+        .logo-container {
+            background: #000; /* Black background for the logo */
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            width: 100%;
-            max-width: 500px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
-        button {
-            padding: 10px 15px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #000;
+
+        .logo-container img {
+            width: 220px; /* Adjust the logo size */
+            height: auto;
+        }
+
+        /* Video Player Styling */
+        .player-container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000; /* Black background behind the video for better focus */
+        }
+
+        .player-container iframe {
+            border-radius: 15px;
+        }
+
+        .stream-issue {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
             color: #fff;
-            transition: background-color 0.3s, color 0.3s;
+            width: fit-content;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
-        button:hover {
-            background-color: #fff;
-            color: #000;
-            border: 1px solid #000;
+
+        .stream-issue a {
+            color: #00c1ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .stream-issue a:hover {
+            text-decoration: underline;
+        }
+
+            margin-top: 25px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 16px;
+            color: #fff;
+            width: fit-content;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: inline-block;
+        }
+
+        .credits-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .credits a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .credits a:hover {
+            text-decoration: underline;
+        }
+
+        /* Video Player Styles */
+        #video {
+            width: 100%;
+            height: 100vh;
+            max-height: 720px;
+            background: black;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo-container img {
+                width: 180px;
+            }
+
+            .credits, .stream-issue {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .credits-title {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1 class="title">SONY TEN 1 HD </h1>
-
-    <div class="iframe-container">
-        <iframe id="streamIframe" src="https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510895~acl=%2f*~id=1556784483112233~data=hdntl~hmac=96cc6b37d046072cb44536b895dc364e0a107df1a4a43f0d21d75873a310ddf2/master_3500.m3u8" allowfullscreen></iframe>
     </div>
 
-    <div class="options">
-        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510895~acl=%2f*~id=1556784483112233~data=hdntl~hmac=96cc6b37d046072cb44536b895dc364e0a107df1a4a43f0d21d75873a310ddf2/master_3500.m3u8')">1080p</button>
-        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510894~acl=%2f*~id=1556784483112233~data=hdntl~hmac=4a204b9082d13aa65d13e9ea4a4aa69dce1cb5357a298e057166cb8cd692387e/master_1300.m3u8')">720p</button>
-        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510895~acl=%2f*~id=1556784483112233~data=hdntl~hmac=96cc6b37d046072cb44536b895dc364e0a107df1a4a43f0d21d75873a310ddf2/master_664.m3u8')">360p</button>
-        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510894~acl=%2f*~id=1556784483112233~data=hdntl~hmac=4a204b9082d13aa65d13e9ea4a4aa69dce1cb5357a298e057166cb8cd692387e/master_412.m3u8')">240p</button>
+    <!-- Video Player -->
+    <div class="player-container">
+        <video id="video" controls autoplay></video>
     </div>
-
-    <div class="join-telegram">
-        <button onclick="window.location.href='https://t.me/+Pj_QX9oygJNiYmRl'">Join Telegram Channel</button>
     </div>
+<script>
+        //<!--
+const _0x3bfcbb=_0x51bf;function _0x51bf(_0x46149f,_0x259d76){const _0x31daed=_0x45ed();return _0x51bf=function(_0x4f82b1,_0x3a301e){_0x4f82b1=_0x4f82b1-(0x251*-0x3+-0x12cd*0x1+0x1b14);let _0x2032d9=_0x31daed[_0x4f82b1];return _0x2032d9;},_0x51bf(_0x46149f,_0x259d76);}(function(_0xf15edd,_0x3dbc98){const _0x6f2561=_0x51bf,_0x2cda17=_0xf15edd();while(!![]){try{const _0x5bda5b=-parseInt(_0x6f2561(0x17d))/(-0x26*-0xe3+-0x15*-0x146+-0x3c6f)+parseInt(_0x6f2561(0x174))/(0x55+-0x16*0x14b+-0x1*-0x1c1f)+parseInt(_0x6f2561(0x16e))/(0x1*0x1ea+-0x162c+0x1445*0x1)+parseInt(_0x6f2561(0x178))/(-0x1a13*-0x1+0x228d+-0x3c9c)*(-parseInt(_0x6f2561(0x154))/(-0x19*0x175+-0x1bdb+-0x725*-0x9))+parseInt(_0x6f2561(0x164))/(0x451+-0x3*0x786+0x1247)+parseInt(_0x6f2561(0x15f))/(0x5*-0x20+-0x9f7+0xa9e)+parseInt(_0x6f2561(0x169))/(0x13ea+-0x3*-0x923+0x2f4b*-0x1)*(-parseInt(_0x6f2561(0x166))/(-0x3bc*-0x1+0x1ed6*-0x1+0x1b23*0x1));if(_0x5bda5b===_0x3dbc98)break;else _0x2cda17['push'](_0x2cda17['shift']());}catch(_0x1e5612){_0x2cda17['push'](_0x2cda17['shift']());}}}(_0x45ed,-0x469e*-0x15+0x37760+-0x30627*0x1));function _0x45ed(){const _0x2c35da=['3112LwkdZl','Ten01/inde','Failed\x20to\x20','a62f2d193e','m\x20Loaded\x20S','1943919UKDSpQ','6ca68c19a3','SonySports','91ef04ef9d','eck_ip','https://st','536072mNDVwM','10ffda4f34','be667f5ecb','Error:','779772JuBnTW','nGPbY','stener','isBrowserS','reamline.s','728374wmeJQp','load','t\x20support\x20','video','TRMzX','447688-173','x.mpd?toke','upported','turls.com/','getElement','DASH\x20playb','log','Your\x20brows','Player','load\x20strea','uccessfull','detail','addEventLi','5zPCVXb','ById','DASH\x20Strea','DOMContent','n=b7685c24','9d75a-1738','LGgdS','BBuwl','eWxhk','gfHlg','mote=no_ch','4295536iOViAE','8436888&re','error','Loaded','er\x20does\x20no','596874BJOtJT','ack.','6876lGtnSn','HpCdK','da-fa093bc'];_0x45ed=function(){return _0x2c35da;};return _0x45ed();}async function initPlayer(){const _0x2027e5=_0x51bf,_0xc04695={'HpCdK':_0x2027e5(0x180),'eWxhk':_0x2027e5(0x173)+_0x2027e5(0x17c)+_0x2027e5(0x185)+_0x2027e5(0x170)+_0x2027e5(0x16a)+_0x2027e5(0x183)+_0x2027e5(0x158)+_0x2027e5(0x16c)+_0x2027e5(0x175)+_0x2027e5(0x176)+_0x2027e5(0x168)+_0x2027e5(0x171)+_0x2027e5(0x16f)+_0x2027e5(0x159)+_0x2027e5(0x182)+_0x2027e5(0x160)+_0x2027e5(0x15e)+_0x2027e5(0x172),'BBuwl':_0x2027e5(0x161),'LGgdS':_0x2027e5(0x156)+_0x2027e5(0x16d)+_0x2027e5(0x18c)+'y!','TRMzX':_0x2027e5(0x16b)+_0x2027e5(0x18b)+'m:','nGPbY':function(_0x142873,_0x55f2a8){return _0x142873(_0x55f2a8);},'gfHlg':_0x2027e5(0x189)+_0x2027e5(0x163)+_0x2027e5(0x17f)+_0x2027e5(0x187)+_0x2027e5(0x165)},_0x212422=document[_0x2027e5(0x186)+_0x2027e5(0x155)](_0xc04695[_0x2027e5(0x167)]),_0x704636=_0xc04695[_0x2027e5(0x15c)];if(shaka[_0x2027e5(0x18a)][_0x2027e5(0x17b)+_0x2027e5(0x184)]()){const _0x2d5032=new shaka[(_0x2027e5(0x18a))](_0x212422);_0x2d5032[_0x2027e5(0x18e)+_0x2027e5(0x17a)](_0xc04695[_0x2027e5(0x15b)],_0x2c6054=>console[_0x2027e5(0x161)](_0x2027e5(0x177),_0x2c6054[_0x2027e5(0x18d)]));try{await _0x2d5032[_0x2027e5(0x17e)](_0x704636),console[_0x2027e5(0x188)](_0xc04695[_0x2027e5(0x15a)]);}catch(_0x4f9201){console[_0x2027e5(0x161)](_0xc04695[_0x2027e5(0x181)],_0x4f9201);}}else _0xc04695[_0x2027e5(0x179)](alert,_0xc04695[_0x2027e5(0x15d)]);}document[_0x3bfcbb(0x18e)+_0x3bfcbb(0x17a)](_0x3bfcbb(0x157)+_0x3bfcbb(0x162),initPlayer);
+//-->
 
-    <script>
-        function changeStream(url) {
-            document.getElementById('streamIframe').src = url;
-        }
-
-        setTimeout(() => {
-            if (confirm("Join For More Links!!")) {
-                window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-            }
-        }, 2000);  // Delay to avoid immediate popup
     </script>
-<script disable-devtool-auto="" src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"></script>
+<script>
+//<!--
+var _0x2a8c36=_0xe91a;function _0x2ad5(){var _0x188d06=['Join\x20Our\x20T','oygJNiYmRl','3inRlcS','13978840TQqlYH','5272836NlOitf','me/+Pj_QX9','18hlSSPL','684478ImiIED','384828xPWQSo','7dMaKPy','open','annel\x20@Cri','583SjWRbk','1132194SeJovD','https://t.','_blank','cinsider36','1862570wfBlBN','9655992nmqVjP','9zTzVuh','elegram\x20Ch'];_0x2ad5=function(){return _0x188d06;};return _0x2ad5();}function _0xe91a(_0x4d1065,_0x4b2d92){var _0x44845f=_0x2ad5();return _0xe91a=function(_0x1e002b,_0x1b75ac){_0x1e002b=_0x1e002b-(0x22f0+-0x4e+-0x21fd);var _0xcce6f3=_0x44845f[_0x1e002b];return _0xcce6f3;},_0xe91a(_0x4d1065,_0x4b2d92);}(function(_0x40a042,_0x11bf83){var _0x5ab479=_0xe91a,_0x4e3151=_0x40a042();while(!![]){try{var _0x3606bc=parseInt(_0x5ab479(0xb7))/(0xb0*-0xf+0x1463*-0x1+0x1eb4)+parseInt(_0x5ab479(0xa8))/(0x1855+0x17f4+-0x3047*0x1)+-parseInt(_0x5ab479(0xb2))/(-0x8*-0x18e+-0x32b*0x6+0x695)*(parseInt(_0x5ab479(0xb4))/(0x172a+-0x23a1+0xc7b))+-parseInt(_0x5ab479(0xac))/(0x7*0x48b+-0x2*0xb26+0x4be*-0x2)*(parseInt(_0x5ab479(0xb6))/(0x2*-0xc6c+-0x13fb+-0x59*-0x81))+parseInt(_0x5ab479(0xb9))/(-0x160d+-0x66a*-0x2+0x4*0x250)*(-parseInt(_0x5ab479(0xad))/(-0x813*-0x1+-0x2ca*0x1+-0x541))+parseInt(_0x5ab479(0xae))/(-0x1*0x26dd+-0x215e+-0x172*-0x32)*(parseInt(_0x5ab479(0xb3))/(-0x1*-0xf8d+-0x1fb3+0x25*0x70))+-parseInt(_0x5ab479(0xa7))/(-0xed*-0x5+0xc1*-0x3+-0x253)*(-parseInt(_0x5ab479(0xb8))/(-0x19cf*0x1+0xa31+0xfaa));if(_0x3606bc===_0x11bf83)break;else _0x4e3151['push'](_0x4e3151['shift']());}catch(_0x1e552c){_0x4e3151['push'](_0x4e3151['shift']());}}}(_0x2ad5,-0x545*0xc9+-0x1*0xadb27+-0x182*-0x1115));confirm(_0x2a8c36(0xb0)+_0x2a8c36(0xaf)+_0x2a8c36(0xa6)+_0x2a8c36(0xab)+'5')==!![]&&window[_0x2a8c36(0xa5)](_0x2a8c36(0xa9)+_0x2a8c36(0xb5)+_0x2a8c36(0xb1),_0x2a8c36(0xaa));
+//-->
 
+</script>
 </body>
 </html>
