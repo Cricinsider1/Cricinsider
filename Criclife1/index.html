@@ -1,7 +1,10 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TG_@Cricinsider365</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DASH Player</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
     <style>
         /* General Page Styling */
         body {
@@ -104,6 +107,14 @@
             text-decoration: underline;
         }
 
+        /* Video Player Styles */
+        #video {
+            width: 100%;
+            height: 100vh;
+            max-height: 720px;
+            background: black;
+        }
+
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .logo-container img {
@@ -120,70 +131,54 @@
             }
         }
     </style>
-<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
+</head>
 <body>
+
+    <!-- Logo Section -->
+    <div class="logo-container">
+        <img src="https://your-logo-link.com/logo.png" alt="Bingewav Sports Logo">
     </div>
 
-   <!-- Video Player Section -->
-<div class="player-container">
-    <div style="padding:56.25% 0 0 0;position:relative;">
-        <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="true" scrolling="no" src="https://dlolcast.com/kachabadam.php?v=starsp&amp;r=&amp;id=starsp&amp;secure=jcN1_atf0PI1FHQkQx-8aA&amp;expires=1738339125" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+    <!-- Video Player -->
+    <div class="player-container">
+        <video id="video" controls autoplay></video>
     </div>
-</div>
-<!-- Join Telegram Button -->
-<div class="join-telegram-container">
-    <button class="join-telegram-btn" onclick="window.open('https://t.me/+Pj_QX9oygJNiYmRl', '_blank')">Join Telegram Channel</button>
-</div>
 
-<style>
-    .join-telegram-container {
-        margin-top: 20px;
-        text-align: center;
-    }
-
-    .join-telegram-btn {
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        color: white;
-        background-color: #008fd6;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .join-telegram-btn:hover {
-        background-color: #006bb3;
-    }
-</style>
-
-<script>
- // Close popup function
-    function closePopup() {
-      const popup = document.getElementById('popup');
-      popup.style.display = 'none';
-    }
-  </script>
-
-  <div id="popup" style="display: none;">
-    <div class="popup-content">
-      <h2>Support Us!</h2>
-      <p>Join Our Telegram Channel @Cricinsider365</p>
-      <button class="join-btn" onclick="window.open('https://t.me/+4IVZUQOhnshkN2E9', '_blank')">Join Now</button>
-      <button class="close-btn" onclick="closePopup()">Already Joined</button>
+    <!-- Stream Issue Section (optional) -->
+    <div class="stream-issue">
+        <p>If you're facing issues, visit our <a href="https://help.example.com" target="_blank">Help Center</a> for support.</p>
     </div>
-  </div>
 
-<script>
-        // Show the alert
-        if (confirm("Join Our Telegram Channel @Cricinsider365")) {
-            // Redirect to the Telegram channel if 'OK' is clicked
-            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-        } else {
-            // Close the alert if 'Cancel' is clicked (do nothing)
+    <!-- Credits Section -->
+    <div class="credits">
+        <div class="credits-title">Credits:</div>
+        <p>Powered by <a href="https://www.shaka-player-demo.com" target="_blank">Shaka Player</a></p>
+    </div>
+
+    <script>
+        async function initPlayer() {
+            const video = document.getElementById("video");
+            const manifestUri = "https://streamline.sturls.com/FoxSports501/index.mpd?token=734ccc9aca65a77e90dccf0551df7d3d64aad4fb-e205f11a3f56747d330370d6a60b7c76-1738443960-1738433160&remote=no_check_ip";
+
+            if (shaka.Player.isBrowserSupported()) {
+                const player = new shaka.Player(video);
+                
+                // Error handling
+                player.addEventListener("error", event => console.error("Error:", event.detail));
+
+                try {
+                    await player.load(manifestUri);
+                    console.log("DASH Stream Loaded Successfully!");
+                } catch (error) {
+                    console.error("Failed to load stream:", error);
+                }
+            } else {
+                alert("Your browser does not support DASH playback.");
+            }
         }
-</script>
 
+        document.addEventListener("DOMContentLoaded", initPlayer);
+    </script>
 
-</body></html>
+</body>
+</html>
