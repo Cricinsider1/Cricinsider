@@ -1,89 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@TG_Cricinsider365</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FREDFLIX SPORTS</title>
+    <link rel="icon" href="./img/fredflix.png">
+    <link rel="stylesheet" href="./player.css">
+
+    <!-- JW Player Script -->
+    <script type="text/javascript" src="https://ssl.p.jwpcdn.com/player/v/8.36.4/jwplayer.js"></script>
+
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
             margin: 0;
-            padding: 0;
+            background: black;
         }
-        .title {
-            background-color: #000;
+        #player {
+            width: 100%;
+            height: 100vh;
+        }
+        .watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 10px;
+            font-weight: bold;
             color: #fff;
-            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 2px 5px;
             border-radius: 5px;
-            margin: 20px 0;
-            font-size: 1.5em;
-            text-align: center;
-        }
-        .iframe-container {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 16/9;
-            background-color: #000;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .options, .join-telegram {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            width: 100%;
-            max-width: 500px;
-        }
-        button {
-            padding: 10px 15px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #000;
-            color: #fff;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        button:hover {
-            background-color: #fff;
-            color: #000;
-            border: 1px solid #000;
         }
     </style>
 </head>
 <body>
 
-    <h1 class="title">SONY TEN 1 HD</h1>
+    <!-- JW Player Container -->
+    <div id="player"></div>
 
-    <div class="iframe-container">
-        <iframe id="streamIframe" allowfullscreen></iframe>
-    </div>
-
-    <div class="options">
-        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510895~acl=%2f*~id=1556784483112233~data=hdntl~hmac=96cc6b37d046072cb44536b895dc364e0a107df1a4a43f0d21d75873a310ddf2/master_3500.m3u8')">1080p</button>
-        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510894~acl=%2f*~id=1556784483112233~data=hdntl~hmac=4a204b9082d13aa65d13e9ea4a4aa69dce1cb5357a298e057166cb8cd692387e/master_1300.m3u8')">720p</button>
-        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510895~acl=%2f*~id=1556784483112233~data=hdntl~hmac=96cc6b37d046072cb44536b895dc364e0a107df1a4a43f0d21d75873a310ddf2/master_664.m3u8')">360p</button>
-        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510894~acl=%2f*~id=1556784483112233~data=hdntl~hmac=4a204b9082d13aa65d13e9ea4a4aa69dce1cb5357a298e057166cb8cd692387e/master_412.m3u8')">240p</button>
-    </div>
-
-    <div class="join-telegram">
-        <button onclick="window.location.href='https://t.me/+Pj_QX9oygJNiYmRl'">Join Telegram Channel</button>
-    </div>
+    <!-- Watermark -->
+    <div class="watermark">shounwifi.net/wp</div>
 
     <script>
-    //<!--
-const _0x766321=_0x5bb1;(function(_0x4fa69d,_0x16cdbf){const _0x590187=_0x5bb1,_0x3bc0e7=_0x4fa69d();while(!![]){try{const _0x30c096=-parseInt(_0x590187(0x1c5))/(-0xe65+0x2372+-0x150c)+-parseInt(_0x590187(0x1e8))/(0x2077+-0x1*0x24af+0x43a)*(-parseInt(_0x590187(0x1d1))/(-0x7a*0xe+0x1137+0x8*-0x151))+-parseInt(_0x590187(0x1bd))/(-0x7e9*-0x3+0x101c+-0x27d3)*(-parseInt(_0x590187(0x1e0))/(0xc4*-0x22+0x302+-0x15b*-0x11))+parseInt(_0x590187(0x1bf))/(0x357+-0x34c*-0x4+-0x1081)*(-parseInt(_0x590187(0x1e5))/(0x1731+0x1*0x11dd+-0x9*0x48f))+parseInt(_0x590187(0x1db))/(0x6b*-0x29+-0xb7b+-0x13*-0x182)*(parseInt(_0x590187(0x1da))/(0x204f*-0x1+0x1*-0xbaa+-0x2c02*-0x1))+parseInt(_0x590187(0x1d5))/(0xa88+0x2401*0x1+-0x2e7f)+-parseInt(_0x590187(0x1d4))/(0xa30*-0x1+0x1e52+-0x1*0x1417);if(_0x30c096===_0x16cdbf)break;else _0x3bc0e7['push'](_0x3bc0e7['shift']());}catch(_0xd0cc77){_0x3bc0e7['push'](_0x3bc0e7['shift']());}}}(_0x53a5,0x5e45*-0x1f+-0xddc34+-0x3*-0xae405));function _0x53a5(){const _0x3f9023=['src','ore\x20Links!','222786iTCLLK','taplaymt.s','536b895dc3','20EQxFuF','5678448311','204ifSSfu','oygJNiYmRl','https://ta','getElement','1d75873a31','64e0a107df','302506UTwbbX','N1HD/hdntl','0ddf2/mast','location','Join\x20For\x20M','1a4a43f0d2','livcdn.com','JGqdG','=96cc6b37d','https://t.','%2f*~id=15','er_3500.m3','21avIkda','2011747/TE','hdntl~hmac','18415067IWGzrA','4304960iSADPt','=exp=17385','QUENT','/hls/live/','2233~data=','924003CGEhLa','40AnPsqi','EVmWF','me/+Pj_QX9','10895~acl=','iHHwn','883175DhQwyV','ById','href','046072cb44','streamIfra','29939ZbLcgW'];_0x53a5=function(){return _0x3f9023;};return _0x53a5();}const defaultStream=_0x766321(0x1c1)+_0x766321(0x1bb)+_0x766321(0x1cb)+_0x766321(0x1d8)+_0x766321(0x1d2)+_0x766321(0x1c6)+_0x766321(0x1d6)+_0x766321(0x1de)+_0x766321(0x1cf)+_0x766321(0x1be)+_0x766321(0x1d9)+_0x766321(0x1d3)+_0x766321(0x1cd)+_0x766321(0x1e3)+_0x766321(0x1bc)+_0x766321(0x1c4)+_0x766321(0x1ca)+_0x766321(0x1c3)+_0x766321(0x1c7)+_0x766321(0x1d0)+'u8';document[_0x766321(0x1c2)+_0x766321(0x1e1)](_0x766321(0x1e4)+'me')[_0x766321(0x1e6)]=defaultStream;function _0x5bb1(_0x555807,_0x5ef047){const _0x2ae84c=_0x53a5();return _0x5bb1=function(_0x553e0c,_0x2585ee){_0x553e0c=_0x553e0c-(0x15be*0x1+-0x2460+0x105d);let _0x387650=_0x2ae84c[_0x553e0c];return _0x387650;},_0x5bb1(_0x555807,_0x5ef047);}function changeStream(_0x561a48){const _0x10d0f8=_0x766321,_0x54bd73={'JGqdG':_0x10d0f8(0x1e4)+'me'};document[_0x10d0f8(0x1c2)+_0x10d0f8(0x1e1)](_0x54bd73[_0x10d0f8(0x1cc)])[_0x10d0f8(0x1e6)]=_0x561a48;}setTimeout(()=>{const _0x2ec274=_0x766321,_0x502aca={'QUENT':function(_0x4a7eb3,_0x12835f){return _0x4a7eb3(_0x12835f);},'EVmWF':_0x2ec274(0x1c9)+_0x2ec274(0x1e7)+'!','iHHwn':_0x2ec274(0x1ce)+_0x2ec274(0x1dd)+_0x2ec274(0x1c0)};_0x502aca[_0x2ec274(0x1d7)](confirm,_0x502aca[_0x2ec274(0x1dc)])&&(window[_0x2ec274(0x1c8)][_0x2ec274(0x1e2)]=_0x502aca[_0x2ec274(0x1df)]);},0x1*0xb2d+-0x13bb+0x105e);
-//-->
+        // Define stream URL
+        const streamURL = "https://streamline.sturls.com/FoxSports501/index.mpd?token=734ccc9aca65a77e90dccf0551df7d3d64aad4fb-e205f11a3f56747d330370d6a60b7c76-1738443960-1738433160&remote=no_check_ip";
 
+        // Check if JW Player is loaded
+        if (typeof jwplayer === "undefined") {
+            alert("Error: JW Player failed to load.");
+        } else {
+            // Initialize JW Player
+            jwplayer("player").setup({
+                file: streamURL,
+                width: "100%",
+                height: "100%",
+                autostart: true,
+                preload: "auto",
+                controls: true,
+                aspectratio: "16:9",
+                skin: { name: "netflix" },
+                captions: {
+                    color: "#FFFFFF",
+                    fontSize: 14,
+                    backgroundOpacity: 50
+                },
+                logo: {
+                    file: "./img/fredflix.png",
+                    position: "top-right"
+                }
+            });
+
+            // Event listeners for debugging
+            jwplayer().on('play', function() {
+                console.log("Playback started!");
+            });
+            jwplayer().on('error', function(e) {
+                console.error("Error occurred:", e.message);
+            });
+        }
     </script>
 
 </body>
