@@ -1,171 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Fancode Live Matches</title>
-    
-    <link rel="shortcut icon" href="https://live.drmlive.in/sports/fancode.png">
-    
+    <title>@TG_Cricinsider365</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
     <style>
+        /* General Page Styling */
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #000;
+            padding: 0;
+            background: linear-gradient(135deg, #242424, #3b5998);
             color: #fff;
-        }
-
-        h1 {
-            text-align: center;
-            color: #00bfff;
-            margin-bottom: 40px;
-        }
-
-        .file-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            padding: 10px;
-        }
-
-        .match-item {
+            min-height: 100vh;
             text-align: center;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-color: #1a1a1a;
-            padding: 10px;
-            width: calc(14.28% - 20px); /* Desktop view */
-            box-sizing: border-box;
-            cursor: pointer;
         }
 
-        .match-item img {
-            max-width: 100%;
+        .logo-container {
+            background: #000; /* Black background for the logo */
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-container img {
+            width: 220px; /* Adjust the logo size */
             height: auto;
-            display: block;
-            margin: 0 auto 10px;
         }
 
-        .match-item h3 {
-            margin: 10px 0 5px;
+        /* Video Player Styling */
+        .player-container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000; /* Black background behind the video for better focus */
         }
 
-        .match-item p {
-            margin: 5px 0;
+        .player-container iframe {
+            border-radius: 15px;
         }
 
-        .match-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        .stream-issue {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            color: #fff;
+            width: fit-content;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
-        .status-LIVE {
-            color: red;
-            font-weight: bold;
-            animation: glow 1s infinite alternate;
-        }
-
-        .status-UPCOMING {
-            color: #777;
-            opacity: 0.6;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px red;
-            }
-            to {
-                text-shadow: 0 0 20px red;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .match-item { width: calc(25% - 20px); } /* Tablets */
-        }
-
-        @media (max-width: 768px) {
-            .match-item { width: calc(33.333% - 20px); } /* Small tablets */
-        }
-
-        @media (max-width: 480px) {
-            .match-item { width: calc(50% - 20px); } /* Mobile */
-        }
-
-        .telegram-toggle {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: #0088cc;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 50px;
+        .stream-issue a {
+            color: #00c1ff;
             text-decoration: none;
             font-weight: bold;
         }
 
-        .telegram-toggle:hover {
-            background-color: #006699;
+        .stream-issue a:hover {
+            text-decoration: underline;
+        }
+
+            margin-top: 25px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 16px;
+            color: #fff;
+            width: fit-content;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: inline-block;
+        }
+
+        .credits-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .credits a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .credits a:hover {
+            text-decoration: underline;
+        }
+
+        /* Video Player Styles */
+        #video {
+            width: 100%;
+            height: 100vh;
+            max-height: 720px;
+            background: black;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo-container img {
+                width: 180px;
+            }
+
+            .credits, .stream-issue {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .credits-title {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <a href="https://t.me/+rQTz5VL8CRpjNTZl" class="telegram-toggle">Join Telegram</a>
+    </div>
 
-    <h1>Fancode Live Matches</h1>
+    <!-- Video Player -->
+    <div class="player-container">
+        <video id="video" controls autoplay></video>
+    </div>
+    </div>
+<script>
+        async function initPlayer() {
+            const video = document.getElementById("video");
+            const manifestUri = "https://cdn.sturls.com/SuperSportsCricket/index.mpd?token=2a21a3f19ee62e82aef2a4f057d64370b476dde1-fc9b436e078040ffc62d961fe8242cca-1738683035-1738672235&remote=no_check_ip";
 
-    <div class="file-container" id="matches"></div>
+            if (shaka.Player.isBrowserSupported()) {
+                const player = new shaka.Player(video);
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const apiURL = 'https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u';
+                // Error handling
+                player.addEventListener("error", event => console.error("Error:", event.detail));
 
-            fetch(apiURL)
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.matches) {
-                        throw new Error("Invalid data format received.");
-                    }
+                try {
+                    await player.load(manifestUri);
+                    console.log("DASH Stream Loaded Successfully!");
+                } catch (error) {
+                    console.error("Failed to load stream:", error);
+                }
+            } else {
+                alert("Your browser does not support DASH playback.");
+            }
+        }
 
-                    // Sort matches so LIVE matches appear first
-                    data.matches.sort((a, b) => (b.status === 'LIVE') - (a.status === 'LIVE'));
-
-                    const matchesContainer = document.getElementById("matches");
-
-                    data.matches.forEach(match => {
-                        const matchItem = document.createElement("div");
-                        matchItem.className = "match-item";
-
-                        matchItem.innerHTML = `
-                            <img src="${match.src}" alt="${match.event_name}">
-                            <h3>${match.event_name}</h3>
-                            <p>${match.match_name}</p>
-                            <p class="${match.status === 'LIVE' ? 'status-LIVE' : 'status-UPCOMING'}">${match.status}</p>
-                            ${match.status === 'UPCOMING' ? `<p>${match.startTime}</p>` : ""}
-                        `;
-
-                        if (match.status === 'LIVE' && match.adfree_url) {
-                            matchItem.addEventListener("click", () => {
-                                window.location.href = `play.php?id=${match.match_id}`;
-                            });
-                        } else if (match.status === 'UPCOMING') {
-                            matchItem.addEventListener("click", () => {
-                                alert("This match is UPCOMING.");
-                            });
-                        }
-
-                        matchesContainer.appendChild(matchItem);
-                    });
-                })
-                .catch(error => {
-                    console.error("Error fetching data:", error);
-                });
-        });
+        document.addEventListener("DOMContentLoaded", initPlayer);
     </script>
-
+<script>
+// alert('Join Our Telegram For Latest update')
+         if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
+         window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
+     }
+</script>
 </body>
 </html>
