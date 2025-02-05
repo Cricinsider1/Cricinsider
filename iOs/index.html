@@ -1,152 +1,161 @@
-<!DOCTYPE html><html lang="en"><head><script language="javascript">
-<!--
-</script>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TG_@Cricinsider365</title>
-
-    <link rel="stylesheet" href="/style.css">
+    <title>@Cricinsider365</title>
     <style>
-        body,
-        html {
+        /* General Body Styling */
+        body {
+            background: linear-gradient(135deg, #0d0d0d, #1f1f1f, #121212);
+            color: white;
             margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
+        /* Header Box Styling */
+        .title-box {
+            background: linear-gradient(135deg, #1a73e8, #004aad, #3b8dff);
+            color: white;
+            border-radius: 15px;
+            padding: 15px 25px;
+            display: inline-block;
+            margin: 20px auto 10px; /* Space around the box */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);
         }
 
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        #my-video {
-            width: 100%;
-            height: 100vh;
-            height: 100svh;
-        }
-
-        li a {
-            text-transform: capitalize;
-
-        }
-
-        video {
-            width: 100% !important;
-            height: 100vh;
-            height: 100svh !important;
-        }
-
-        .tg-banner {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, #1da1f2, #0077b5);
-            border-radius: 12px;
-padding: 12px 18px;
-            display: flex;
-            align-items: center;
+        /* Telegram Button Styling */
+        .telegram-button {
+            background: linear-gradient(135deg, #0088cc, #005f9e); /* Telegram blue gradient */
             color: white;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px; /* Rounded button */
+            padding: 12px 25px;
+            display: inline-block;
+            margin-top: 15px; /* Space below the title box */
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 10px rgba(0, 136, 204, 0.4);
+        }
+
+        .telegram-button:hover {
+            transform: scale(1.08);
+            box-shadow: 0px 6px 20px rgba(0, 136, 204, 0.7);
+            background: linear-gradient(135deg, #005f9e, #0088cc);
+        }
+
+        /* Channel Grid Container */
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Channel Slot Styling */
+        .tvv-item {
+            background: linear-gradient(145deg, #252525, #2f2f2f);
+            border: 1px solid #444;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: white;
         }
 
-        .tg-banner:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        /* Image Styling */
+        .tvv-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
 
-        .tg-banner img {
-            width: 36px;
-            height: 36px;
-            margin-right: 12px;
-            border-radius: 50%;
-            border: 2px solid white;
+        /* Channel Name Styling */
+        .tvv-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .tg-banner span {
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+        /* Hover Effects */
+        .tvv-item:hover {
+            transform: scale(1.08);
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
+            border-color: #ffffff;
+            background: linear-gradient(135deg, #2a2a2a, #3d3d3d);
         }
 
-        .relative {
-            position: relative !important;
-            left: 0 !important;
-            top: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .channel-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .Top {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .Top h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #1da1f2;
-            margin-bottom: 1rem;
-            text-decoration: underline;
-        }
-
-        .Top p {
-            font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 0.2rem;
-            opacity: 0.7;
-        }
-
-        .Bottom {
-            display: flex;
-            flex-direction: column;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            margin: 0 auto;
-            max-width: 300px;
-        }
-
-        .m2 {
-            margin-left: 2rem;
-            margin-top: 0.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+        @media (max-width: 480px) {
+            .channel-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
-<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
-
+</head>
 <body>
+    <!-- Title Box -->
+    <div class="title-box">
+        Cricinsider365 Web 24/7
+    </div>
 
-    <a href="https://t.me/+Pj_QX9oygJNiYmRl" class="tg-banner" target="_blank" rel="noopener noreferrer">
-        <img src="https://i.pinimg.com/originals/31/2a/f9/312af9235aadad69655688eaee97eabf.png" alt="Telegram Icon">
-        <span>@TG_@Cricinsider365- Join us!</span>
+    <!-- Join Telegram Button -->
+    <a href="https://t.me/yourtelegramchannel" class="telegram-button" target="_blank">
+        Join For More Live Links 
     </a>
-    <script>
-        if (confirm("Join For More Links!!")) {
-            window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-        }
-    </script>
 
-    <iframe src="https://streamtp2.com/global1.php?stream=tnt_1_gb" allowfullscreen=""></iframe>
+    <!-- Channel Slots Container -->
+    <div class="channel-grid">
+        <!-- Channel Slot 1 -->
+        <a href="http://insiderlive.pages.dev/T1" class="tvv-item">
+            <img src="https://i.postimg.cc/LXP7342X/1200x600wa.png" alt="Channel 1">
+            <div class="tvv-name">TNT 1</div>
+        </a>
 
+        <!-- Channel Slot 2 -->
+        <a href="http://insiderlive.pages.dev/Hindi Star" class="tvv-item">
+            <img src="https://i.postimg.cc/FKhByDVR/star-sports-1-hindi.webp" alt="Channel 2">
+            <div class="tvv-name">Star Hindi</div>
+        </a>
 
+        <!-- Channel Slot 3 -->
+        <a href="http://insiderlive.pages.dev/W1" class="tvv-item">
+            <img src="https://i.postimg.cc/gkHfqJGp/f2570ffcbce276a93baf8dd15009347e-fgraphic.jpg" alt="Channel 3">
+            <div class="tvv-name">Willow</div>
+        </a>
 
+        <!-- Channel Slot 4 -->
+        <a href="http://insiderlive.pages.dev/Tnt4" class="tvv-item">
+            <img src="https://i.postimg.cc/LXP7342X/1200x600wa.png" alt="Channel 4">
+            <div class="tvv-name">StarHindi Server 2</div>
+        </a>
 
-</body></html>
+        <!-- Channel Slot 5 -->
+        <a href="http://insiderlive.pages.dev/Star1Hd" class="tvv-item">
+            <img src="https://i.postimg.cc/LXP7342X/1200x600wa.png" alt="Channel 5">
+            <div class="tvv-name">StarSports 1Hd</div>
+        </a>
+
+        </a>
+    </div>
+</body>
+</html>
