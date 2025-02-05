@@ -1,68 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cricinsider365</title>
-<script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
-</head>
-<style>
-body {
-    background-color: black;
-}
-#container {
-    background-color: black;
-}
-    #telegramButton {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 378px;
-      height: 50px;
-      background: linear-gradient(90deg, darkblue, #001f3f);
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      overflow: hidden;
-      position: relative;
-      animation: flowAnimation 2s infinite;
-    }
-
-    @keyframes flowAnimation {
-      0% {
-        background-position: -200px 0;
-      }
-      100% {
-        background-position: 200px 0;
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TG_@Cricinsider365</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #242424, #3b5998);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
         }
-    }
 
-    #telegramButton:hover {
-      animation: none; /* Pause animation on hover */
-      background: linear-gradient(90deg, #001f3f, darkblue); /* Reverse colors on hover */
-    }
-  </style>
+        /* Bingewav Sports Logo Section */
+        .logo-container {
+            background: #000; /* Black background for the logo */
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-container img {
+            width: 220px; /* Adjust the logo size */
+            height: auto;
+        }
+
+        /* Video Player Styling */
+        .player-container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000; /* Black background behind the video for better focus */
+        }
+
+        .player-container iframe {
+            border-radius: 15px;
+        }
+
+        /* Stream Issue Section */
+        .stream-issue {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            color: #fff;
+            width: fit-content;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .stream-issue a {
+            color: #00c1ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .stream-issue a:hover {
+            text-decoration: underline;
+        }
+
+        /* Credits Section */
+        .credits {
+            margin-top: 25px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 16px;
+            color: #fff;
+            width: fit-content;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: inline-block;
+        }
+
+        .credits-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .credits a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .credits a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo-container img {
+                width: 180px;
+            }
+
+            .credits, .stream-issue {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .credits-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
 <body>
-<div id="video"></div>
+    </div>
 
-<script type="text/javascript">
-  //<!--
-function _0x1100(){var _0x20311e=['t/live/m4-','25767600oJRFuI','setup','2AFicfx','video','513zCtbXp','100%','480p.m3u8','12344VVnslk','6063568ZXtfhu','722968dSWoOF','18753.prot','1132596nyInLX','1555wbNEkW','https://m1','ect-cdn.ne','64248mJmCkY','2855178DqvPjk'];_0x1100=function(){return _0x20311e;};return _0x1100();}function _0x2990(_0x30188d,_0x55d5f1){var _0x9a8709=_0x1100();return _0x2990=function(_0x554145,_0x1363d0){_0x554145=_0x554145-(-0x5a1+-0x224+0x92b);var _0x2d6301=_0x9a8709[_0x554145];return _0x2d6301;},_0x2990(_0x30188d,_0x55d5f1);}var _0x15f330=_0x2990;(function(_0x52ed47,_0x3e24d0){var _0x5bd030=_0x2990,_0x33c724=_0x52ed47();while(!![]){try{var _0x45e719=-parseInt(_0x5bd030(0x16a))/(0x89d+-0xa3*0x4+0x8*-0xc2)*(-parseInt(_0x5bd030(0x175))/(-0x7*-0x18d+0x25*-0xf1+-0x5*-0x4cc))+-parseInt(_0x5bd030(0x16c))/(-0x17d6+0x36*-0xd+0x1a97)+-parseInt(_0x5bd030(0x168))/(0x1999+0x13c5+-0x36*0xd7)*(-parseInt(_0x5bd030(0x16d))/(-0x6fd+-0x41*0x25+0x1*0x1067))+parseInt(_0x5bd030(0x171))/(-0x4*-0x688+0xd81+0x1*-0x279b)+parseInt(_0x5bd030(0x169))/(-0x4cf*-0x3+-0x1198+0x332)+-parseInt(_0x5bd030(0x170))/(0x55*0xb+0xa6*0xa+-0xa1b)*(-parseInt(_0x5bd030(0x177))/(-0x1e4f+-0xf4*0x13+-0x3074*-0x1))+-parseInt(_0x5bd030(0x173))/(-0x7*0x166+0x2113+-0x21d*0xb);if(_0x45e719===_0x3e24d0)break;else _0x33c724['push'](_0x33c724['shift']());}catch(_0x207e67){_0x33c724['push'](_0x33c724['shift']());}}}(_0x1100,0x86ef1+-0x10125+0xa1c8),jwplayer(_0x15f330(0x176))[_0x15f330(0x174)]({'width':_0x15f330(0x166),'height':_0x15f330(0x166),'autostart':!![],'mute':![],'file':_0x15f330(0x16e)+_0x15f330(0x16b)+_0x15f330(0x16f)+_0x15f330(0x172)+_0x15f330(0x167)}));
-//-->
+   <!-- Video Player Section -->
+<div class="player-container">
+    <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="true" scrolling="no" src="https://crichd-embet.tiiny.io/embet.php?id=starhindi" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+    </div>
+</div>
+<!-- Join Telegram Button -->
+<div class="join-telegram-container">
+    <button class="join-telegram-btn" onclick="window.open('https://t.me/+tL4jz_00y6NlMGRl', '_blank')">Join Telegram Channel</button>
+</div>
 
-</script>
+<style>
+    .join-telegram-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .join-telegram-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #008fd6;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .join-telegram-btn:hover {
+        background-color: #006bb3;
+    }
+</style>
+
 <script>
-if(confirm("Join Our Telegram Channel")) { window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl" }
-</script>
-  <div id="telegramButton" onclick="redirectToTelegram()">
-  Join Telegram
-  </div>
-  <script>
-  function redirectToTelegram() {
-    // Your redirect code here
-    window.location.href = 'https://t.me/+Pj_QX9oygJNiYmRl';
-  }
+ // Close popup function
+    function closePopup() {
+      const popup = document.getElementById('popup');
+      popup.style.display = 'none';
+    }
   </script>
-</body>
-</html>
+
+  <div id="popup" style="display: none;">
+    <div class="popup-content">
+      <h2>Support Us!</h2>
+      <p>Join Our Telegram Channel @Cricinsider365</p>
+      <button class="join-btn" onclick="window.open('https://t.me/+tL4jz_00y6NlMGRl', '_blank')">Join Now</button>
+      <button class="close-btn" onclick="closePopup()">Already Joined</button>
+    </div>
+  </div>
+
+<script>
+        // Show the alert
+        if (confirm("Join Our Telegram Channel @Cricinsider365")) {
+            // Redirect to the Telegram channel if 'OK' is clicked
+            window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";
+        } else {
+            // Close the alert if 'Cancel' is clicked (do nothing)
+        }
+</script>
+
+
+</body></html>
