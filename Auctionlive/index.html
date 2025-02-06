@@ -207,6 +207,7 @@
 
     <script>
         const apiURL = 'https://raw.githubusercontent.com/drmlive/fancode-live-events/refs/heads/main/fancode.json';
+        const linkPrefix = "https://shz.al/~insiderlive_Stream.html?videoUrl=";
 
         fetch(apiURL)
             .then(response => response.json())
@@ -234,15 +235,13 @@
                         </div>
                     `;
 
-                    if (match.status === 'LIVE' && match.adfree_url) {
-                        matchCard.addEventListener('click', () => {
-                            window.location.href = `https://shz.al/~insiderlive_Stream.html?videoUrl=${match.match_id}`;
-                        });
-                    } else if (match.status === 'UPCOMING') {
-                        matchCard.addEventListener('click', () => {
+                    matchCard.addEventListener('click', () => {
+                        if (match.status === 'LIVE' && match.adfree_url) {
+                            window.location.href = linkPrefix + encodeURIComponent(match.adfree_url);
+                        } else if (match.status === 'UPCOMING') {
                             alert('This match is UPCOMING.');
-                        });
-                    }
+                        }
+                    });
 
                     matchesContainer.appendChild(matchCard);
                 });
