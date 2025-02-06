@@ -209,42 +209,26 @@
             try {
                 const response = await fetch(m3uUrl);
                 const text = await response.text();
-                const lines = text.split('\n');
-                const container = document.getElementById("link-container");
+                const lines = const matchesContainer = document.getElementById('matches');
+                data.matches.forEach(match => {
+                    const matchCard = document.createElement('div');
+                    matchCard.className = 'match-card';
 
-                let description = "";
-                let logoUrl = "";
+                    const statusText = match.status === 'LIVE' ? 'LIVE' : 'UPCOMING';
+                    const statusClass = match.status === 'LIVE' ? 'status-LIVE' : 'status-UPCOMING';
 
-                lines.forEach(line => {
-                    line = line.trim();
-
-                    if (line.startsWith("#EXTINF")) {
-                        const logoMatch = line.match(/tvg-logo="(.*?)"/);
-                        logoUrl = logoMatch ? logoMatch[1] : "";
-                        const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
-                        description = descriptionMatch ? descriptionMatch[1].trim() : "";
-                    } else if (line.startsWith("http")) {
-                        const linkContainer = document.createElement("div");
-
-                        if (logoUrl) {
-                            const logoImg = document.createElement("img");
-                            logoImg.src = logoUrl;
-                            logoImg.alt = "Logo";
-                            logoImg.onclick = () => { 
-                                window.open(linkPrefix + encodeURIComponent(line), '_blank'); 
-                            };
-                            linkContainer.appendChild(logoImg);
-                        }
-const button = document.createElement("a");
-                        button.href = linkPrefix + encodeURIComponent(line);
-                        button.target = "_blank";
-                        button.textContent = "Click to Watch";
-                        button.className = "watch-button";
-                        linkContainer.appendChild(button);
-
-                        container.appendChild(linkContainer);
-
-                        description = "";
+                    matchCard.innerHTML = `
+                        <div class="match-image-container">
+                            <div class="match-category">${match.event_category || 'Sport'}</div>
+                            <div class="match-status ${statusClass}">${statusText}</div>
+                            <img src="${match.src}" alt="${match.event_name}">
+                        </div>
+                        <div class="match-details">
+                            <h3>${match.event_name}</h3>
+                            <p>${match.match_name}</p>
+                            <p>${match.status === 'LIVE' ? match.startTime : (match.status === 'UPCOMING' ? match.startTime : '')}</p>
+                        </div>
+                    `;                   description = "";
                         logoUrl = "";
                     }
                 });
