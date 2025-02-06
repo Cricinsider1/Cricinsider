@@ -115,7 +115,7 @@ window.player = player;
         controls.addEventListener("error", onUIErrorEvent);
 
         try {
-            await player.load("https://dds.livecricketsl.xyz/proxy/sg.php/https://linearjitp-playback.astro.com.my/dash-wv/linear/2504/default_primary.mpd");
+            await player.load("https://dds.livecricketsl.xyz/proxy/sg.php/https://linearjitp-playback.astro.com.my/dash-wv/linear/2504/default_primary.mpd|origin=https://livecricketsl.kesug.com?");
             console.log("The video has now been loaded!");
         } catch (error) {
             onPlayerError(error);
