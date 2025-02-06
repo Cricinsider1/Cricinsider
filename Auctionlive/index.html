@@ -1,171 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@TG_Cricinsider365</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
+    <title>Fancode Live Matches</title>
     <style>
-        /* General Page Styling */
-        body {
-            font-family: 'Arial', sans-serif;
+        :root {
+            --bg-dark: #121212;
+            --bg-medium: #1E1E1E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --accent-live: #FF4136;
+            --accent-upcoming: #4CAF50;
+            --transition-speed: 0.3s;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #242424, #3b5998);
-            color: #fff;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-button {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-button:hover {
+            background-color: var(--bg-medium);
+        }
+
+        .back-arrow {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .header h1 {
+            color: var(--text-primary);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .telegram-btn {
+            background-color: #0088cc;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color var(--transition-speed);
+        }
+
+        .telegram-btn:hover {
+            background-color: #006699;
+        }
+
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .match-card {
+            background-color: var(--bg-medium);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            cursor: pointer;
+            position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
         }
 
-        .logo-container {
-            background: #000; /* Black background for the logo */
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        .match-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        .logo-container img {
-            width: 220px; /* Adjust the logo size */
-            height: auto;
-        }
-
-        /* Video Player Styling */
-        .player-container {
-            width: 95%;
-            max-width: 1200px;
-            margin: 20px auto;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
-            overflow: hidden;
-            background: #000; /* Black background behind the video for better focus */
-        }
-
-        .player-container iframe {
-            border-radius: 15px;
-        }
-
-        .stream-issue {
-            margin-top: 20px;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 16px;
-            color: #fff;
-            width: fit-content;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .stream-issue a {
-            color: #00c1ff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .stream-issue a:hover {
-            text-decoration: underline;
-        }
-
-            margin-top: 25px;
-            padding: 15px 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            font-size: 16px;
-            color: #fff;
-            width: fit-content;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            display: inline-block;
-        }
-
-        .credits-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .credits a {
-            color: #ffcc00;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .credits a:hover {
-            text-decoration: underline;
-        }
-
-        /* Video Player Styles */
-        #video {
+        .match-image-container {
+            position: relative;
             width: 100%;
-            height: 100vh;
-            max-height: 720px;
-            background: black;
+            height: 250px;
         }
 
-        /* Responsive Adjustments */
+        .match-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .match-category {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            background-color: rgba(0,0,0,0.7);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        .match-details {
+            padding: 15px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .match-details h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .match-details p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .match-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        .status-LIVE {
+            background-color: var(--accent-live);
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-UPCOMING {
+            background-color: var(--accent-upcoming);
+            color: white;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
         @media (max-width: 768px) {
-            .logo-container img {
-                width: 180px;
-            }
-
-            .credits, .stream-issue {
-                font-size: 14px;
-                padding: 10px 20px;
-            }
-
-            .credits-title {
-                font-size: 16px;
+            .matches-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <a href="../index.html" class="back-button">
+                    <svg class="back-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                    </svg>
+                </a>
+                <h1>Fancode Live Matches</h1>
+            </div>
+            <a href="https://t.me/The8088yyy" class="telegram-btn">Join Telegram</a>
+        </div>
 
+        <div id="matches" class="matches-grid"></div>
     </div>
 
-    <!-- Video Player -->
-    <div class="player-container">
-        <video id="video" controls autoplay></video>
-    </div>
-    </div>
-<script>
-        async function initPlayer() {
-            const video = document.getElementById("video");
-            const manifestUri = "https://cdn.sturls.com/SuperSportsCricket/index.mpd?token=2a21a3f19ee62e82aef2a4f057d64370b476dde1-fc9b436e078040ffc62d961fe8242cca-1738683035-1738672235&remote=no_check_ip";
+    <script>
+        const apiURL = 'https://raw.githubusercontent.com/drmlive/fancode-live-events/refs/heads/main/fancode.json';
 
-            if (shaka.Player.isBrowserSupported()) {
-                const player = new shaka.Player(video);
+        fetch(apiURL)
+            .then(response => response.json())
+            .then(data => {
+                data.matches.sort((a, b) => (a.status === 'LIVE' ? -1 : 1));
 
-                // Error handling
-                player.addEventListener("error", event => console.error("Error:", event.detail));
+                const matchesContainer = document.getElementById('matches');
 
-                try {
-                    await player.load(manifestUri);
-                    console.log("DASH Stream Loaded Successfully!");
-                } catch (error) {
-                    console.error("Failed to load stream:", error);
-                }
-            } else {
-                alert("Your browser does not support DASH playback.");
-            }
-        }
+                data.matches.forEach(match => {
+                    const matchCard = document.createElement('div');
+                    matchCard.className = 'match-card';
 
-        document.addEventListener("DOMContentLoaded", initPlayer);
+                    const statusClass = match.status === 'LIVE' ? 'status-LIVE' : 'status-UPCOMING';
+
+                    matchCard.innerHTML = `
+                        <div class="match-image-container">
+                            <div class="match-category">${match.event_category || 'Sport'}</div>
+                            <div class="match-status ${statusClass}">${match.status}</div>
+                            <img src="${match.src}" alt="${match.event_name}">
+                        </div>
+                        <div class="match-details">
+                            <h3>${match.event_name}</h3>
+                            <p>${match.match_name}</p>
+                            <p>${match.status === 'LIVE' ? match.startTime : 'Upcoming'}</p>
+                        </div>
+                    `;
+
+                    if (match.status === 'LIVE' && match.adfree_url) {
+                        matchCard.addEventListener('click', () => {
+                            window.location.href = `play.html?id=${match.match_id}`;
+                        });
+                    } else if (match.status === 'UPCOMING') {
+                        matchCard.addEventListener('click', () => {
+                            alert('This match is UPCOMING.');
+                        });
+                    }
+
+                    matchesContainer.appendChild(matchCard);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
     </script>
-<script>
-// alert('Join Our Telegram For Latest update')
-         if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
-         window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
-     }
-</script>
 </body>
 </html>
