@@ -3,145 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full-Screen Video Stream</title>
-
-    <!-- Plyr CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.css">
-
-    <!-- HLS.js for streaming -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.10/hls.min.js"></script>
-
-    <!-- Plyr JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.js"></script>
-
+    <title>TG_@Cricinsider365</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --button-bg: #1E88E5;
+            --button-hover-bg: #1565C0;
+            --logo-frame-color: #444444;
+            --dot-color: #ffff00;
+            --title-bg: linear-gradient(90deg, #FF5722, #FF9800); /* Orange gradient */
+            --title-text: #ffffff;
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --button-bg: #4CAF50;
+            --button-hover-bg: #45a049;
+            --logo-frame-color: #cccccc;
+            --dot-color: #ff0000;
+            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722);
+            --title-text: #000000;
+            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #111;
-            color: white;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding-bottom: 100px; /* Adding space to prevent footer overlap */
         }
-        .hidden {
-            display: none;
+
+        .title-box {
+            background: var(--title-bg);
+            color: var(--title-text);
+            text-shadow: var(--title-shadow);
+            padding: 20px 30px;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: var(--title-shadow);
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 90%;
         }
-        .video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+
+        .telegram-button {
+            display: block;
+            margin: 10px auto 30px;
+            padding: 12px 25px;
+            background-color: #0088cc;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, box-shadow 0.3s;
+            max-width: 300px;
         }
-        video {
-            width: 100%;
-            height: 100%;
+
+        .telegram-button:hover {
+            background-color: #005f99;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
-        .plyr__controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .plyr__controls .settings-icon {
-            width: 24px;
-            height: 24px;
+
+        .theme-toggle {
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            background: url('https://cdn-icons-png.flaticon.com/512/2099/2099058.png') no-repeat center;
-            background-size: contain;
-            margin-right: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        #link-container {
+            padding: 20px;
+        }
+
+        #link-container div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #link-container img {
+            width: 350px;
+            max-width: 100%;
+            border: 5px solid var(--logo-frame-color);
+            cursor: pointer;
+        }
+
+        .watch-button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-top: 15px;
+            background-color: #FF5722;
+            color: white;
+            border: 2px solid #FF5722;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }.watch-button:hover {
+            background-color: #ffffff;
+            color: #FF5722;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .watch-button:active {
+            transform: translateY(2px);
+        }
+
+        .watch-button span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .watch-button:hover span {
+            transform: translateX(5px);
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px; /* Space between content and footer */
+        }
+
+        .footer-button {
+            background-color: var(--button-bg);
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .footer-button:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        .footer-text {
+            margin-top: 10px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
+    <!-- Title Box -->
+    <div class="title-box">FANCODE MATCHES</div>
 
-    <!-- Clickable link to start the video -->
-    <a href="#" id="start-video">▶ Watch Live Stream</a>
+    <!-- Join Telegram Button -->
+    <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank" class="telegram-button">Join Our Telegram</a>
 
-    <!-- Full-screen video container -->
-    <div class="video-container hidden" id="video-wrapper">
-        <video id="video-player" controls></video>
+    <!-- Theme Toggle Button with sun and moon icons -->
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-sun" id="sun-icon" style="display: none;"></i>
+        <i class="fas fa-moon" id="moon-icon" style="display: inline;"></i>
+    </button>
+
+    <!-- Links Container -->
+    <div id="link-container"></div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <button class="footer-button" onclick="toggleFooterText()">Copyright & Credit</button>
+        <div id="footer-text" class="footer-text" style="display: none;">
+            Important Information<br>
+            We do not own any material or streams here, All content and streams are provided by third-party sites & Belong To Their Respective Owners.<br>
+            API Credit: Toor
+        </div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const startVideoBtn = document.getElementById("start-video");
-            const videoWrapper = document.getElementById("video-wrapper");
-            const video = document.getElementById("video-player");
-            const videoSrc = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1738911177~acl=%2f*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=303742a446e007921463b30230ce8cd68092f50a5cfad55ba6700db15bb90f56/index.m3u8";  // Replace with actual stream URL
+        const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
+        const linkPrefix = "https://shz.al/~insiderlive_Stream.html?videoUrl=";
 
-            startVideoBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                videoWrapper.classList.remove("hidden"); // Show full-screen player
+        async function fetchAndDisplayLinks() {
+            try {
+                const response = await fetch(m3uUrl);
+                const text = await response.text();
+                const lines = text.split('\n');
+                const container = document.getElementById("link-container");
 
-                if (Hls.isSupported()) {
-                    const hls = new Hls();
-                    hls.loadSource(videoSrc);
-                    hls.attachMedia(video);
-                    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                        video.play();
-                    });
-                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                    video.src = videoSrc;
-                    video.addEventListener('loadedmetadata', () => {
-                        video.play();
-                    });
-                }
+                let description = "";
+                let logoUrl = "";
 
-                // Initialize Plyr with custom controls
-                const player = new Plyr(video, {
-                    controls: [
-                        'play-large', 
-                        'rewind', 
-                        'play', 
-                        'fast-forward', 
-                        '<div class="settings-icon" id="settings-btn"></div>', // Settings Icon
-                        'mute', 
-                        'volume', 
-                        'progress', 
-                        'current-time', 
-                        'duration', 
-                        'fullscreen'
-                    ]
+                lines.forEach(line => {
+                    line = line.trim();
+
+                    if (line.startsWith("#EXTINF")) {
+                        const logoMatch = line.match(/tvg-logo="(.*?)"/);
+                        logoUrl = logoMatch ? logoMatch[1] : "";
+                        const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
+                        description = descriptionMatch ? descriptionMatch[1].trim() : "";
+                    } else if (line.startsWith("http")) {
+                        const linkContainer = document.createElement("div");
+
+                        if (logoUrl) {
+                            const logoImg = document.createElement("img");
+                            logoImg.src = logoUrl;
+                            logoImg.alt = "Logo";
+                            logoImg.onclick = () => { 
+                                window.open(linkPrefix + encodeURIComponent(line), '_blank'); 
+                            };
+                            linkContainer.appendChild(logoImg);
+                        }
+const button = document.createElement("a");
+                        button.href = linkPrefix + encodeURIComponent(line);
+                        button.target = "_blank";
+                        button.textContent = "Click to Watch";
+                        button.className = "watch-button";
+                        linkContainer.appendChild(button);
+
+                        container.appendChild(linkContainer);
+
+                        description = "";
+                        logoUrl = "";
+                    }
                 });
-
-                // Handle settings button click
-                document.getElementById("settings-btn").addEventListener("click", () => {
-                    alert("Settings clicked! Add functionality here.");
-                });
-
-                // Full-screen mode
-                if (video.requestFullscreen) {
-                    video.requestFullscreen();
-                } else if (video.webkitRequestFullscreen) {
-                    video.webkitRequestFullscreen();
-                } else if (video.msRequestFullscreen) {
-                    video.msRequestFullscreen();
-                }
-
-                // Close video when full-screen exits
-                document.addEventListener("fullscreenchange", closeVideoOnExit);
-                document.addEventListener("webkitfullscreenchange", closeVideoOnExit);
-                document.addEventListener("mozfullscreenchange", closeVideoOnExit);
-                document.addEventListener("MSFullscreenChange", closeVideoOnExit);
-            });
-
-            function closeVideoOnExit() {
-                if (!document.fullscreenElement) {
-                    videoWrapper.classList.add("hidden");
-                    video.pause();
-                    video.src = ""; // Stop video on exit
-                }
+            } catch (error) {
+                console.error("Error fetching M3U file:", error);
             }
-        });
+        }
+
+        fetchAndDisplayLinks();
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute("data-theme");
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", newTheme);
+
+            // Toggle icons visibility
+            const sunIcon = document.getElementById("sun-icon");
+            const moonIcon = document.getElementById("moon-icon");
+            if (newTheme === "dark") {
+                sunIcon.style.display = "none";
+                moonIcon.style.display = "inline";
+            } else {
+                sunIcon.style.display = "inline";
+                moonIcon.style.display = "none";
+            }
+        }
+
+        function toggleFooterText() {
+            const footerText = document.getElementById("footer-text");
+            footerText.style.display = footerText.style.display === "none" ? "block" : "none";
+        }
     </script>
 
 </body>
