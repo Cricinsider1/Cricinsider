@@ -3,76 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zee5 Channel Player</title>
+    <title>Full-Screen Video Stream</title>
 
     <!-- Plyr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.css">
 
-    <!-- HLS.js for HLS stream playback -->
+    <!-- HLS.js for streaming -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.10/hls.min.js"></script>
 
     <!-- Plyr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.js"></script>
 
     <style>
-        :root {
-            --plyr-color-main: #ff8c00;
-            --plyr-range-fill-background: #ff8c00;
-            --plyr-video-controls-background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
-        }
         body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #111;
+            color: white;
             margin: 0;
             padding: 0;
-            width: 100%;
             height: 100vh;
-            overflow: hidden;
-            background: #000;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .player-container {
+        .hidden {
+            display: none;
+        }
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 900px;
             height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
         video {
             width: 100%;
             height: 100%;
         }
+        .plyr__controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .plyr__controls .settings-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            background: url('https://cdn-icons-png.flaticon.com/512/2099/2099058.png') no-repeat center;
+            background-size: contain;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="player-container">
+    <!-- Clickable link to start the video -->
+    <a href="#" id="start-video">▶ Watch Live Stream</a>
+
+    <!-- Full-screen video container -->
+    <div class="video-container hidden" id="video-wrapper">
         <video id="video-player" controls></video>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            const startVideoBtn = document.getElementById("start-video");
+            const videoWrapper = document.getElementById("video-wrapper");
             const video = document.getElementById("video-player");
-            const videoSrc = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1738911177~acl=%2f*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=303742a446e007921463b30230ce8cd68092f50a5cfad55ba6700db15bb90f56/index.m3u8";  // Replace with the actual HLS stream URL
+            const videoSrc = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1738911177~acl=%2f*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=303742a446e007921463b30230ce8cd68092f50a5cfad55ba6700db15bb90f56/index.m3u8";  // Replace with actual stream URL
 
-            if (Hls.isSupported()) {
-                const hls = new Hls();
-                hls.loadSource(videoSrc);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                    video.play();
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = videoSrc;
-                video.addEventListener('loadedmetadata', () => {
-                    video.play();
-                });
-            }
+            startVideoBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                videoWrapper.classList.remove("hidden"); // Show full-screen player
 
-            // Initialize Plyr
-            const player = new Plyr(video, {
-                controls: [
-                    'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'
-                ]
+                if (Hls.isSupported()) {
+                    const hls = new Hls();
+                    hls.loadSource(videoSrc);
+                    hls.attachMedia(video);
+                    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                        video.play();
+                    });
+                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                    video.src = videoSrc;
+                    video.addEventListener('loadedmetadata', () => {
+                        video.play();
+                    });
+                }
+
+                // Initialize Plyr with custom controls
+                const player = new Plyr(video, {
+                    controls: [
+                        'play-large', 
+                        'rewind', 
+                        'play', 
+                        'fast-forward', 
+                        '<div class="settings-icon" id="settings-btn"></div>', // Settings Icon
+                        'mute', 
+                        'volume', 
+                        'progress', 
+                        'current-time', 
+                        'duration', 
+                        'fullscreen'
+                    ]
+                });
+
+                // Handle settings button click
+                document.getElementById("settings-btn").addEventListener("click", () => {
+                    alert("Settings clicked! Add functionality here.");
+                });
+
+                // Full-screen mode
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) {
+                    video.msRequestFullscreen();
+                }
+
+                // Close video when full-screen exits
+                document.addEventListener("fullscreenchange", closeVideoOnExit);
+                document.addEventListener("webkitfullscreenchange", closeVideoOnExit);
+                document.addEventListener("mozfullscreenchange", closeVideoOnExit);
+                document.addEventListener("MSFullscreenChange", closeVideoOnExit);
             });
+
+            function closeVideoOnExit() {
+                if (!document.fullscreenElement) {
+                    videoWrapper.classList.add("hidden");
+                    video.pause();
+                    video.src = ""; // Stop video on exit
+                }
+            }
         });
     </script>
 
