@@ -8,7 +8,7 @@
     <!-- Plyr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.css">
 
-    <!-- HLS.js -->
+    <!-- HLS.js for HLS stream playback -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.10/hls.min.js"></script>
 
     <!-- Plyr JS -->
@@ -25,82 +25,53 @@
             padding: 0;
             width: 100%;
             height: 100vh;
+            overflow: hidden;
             background: #000;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+        .player-container {
+            width: 100%;
+            max-width: 900px;
+            height: 100%;
+        }
         video {
             width: 100%;
-            height: 100vh;
-            object-fit: contain;
-        }
-        #unmute-overlay {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            z-index: 9999;
-            cursor: pointer;
+            height: 100%;
         }
     </style>
 </head>
 <body>
 
-    <video id="player" controls></video>
-    <div id="unmute-overlay">Click to unmute</div>
+    <div class="player-container">
+        <video id="video-player" controls></video>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('player');
-            const unmuteOverlay = document.getElementById('unmute-overlay');
-            const streamUrl = "https://z5ak-cmaflive.zee5.com/cmaf/live/2105503/AAJTAKHDNEWSELE/index.m3u8?hdnts=st=1738832967~exp=1738835967~acl=/cmaf/live/2105503/AAJTAKHDNEWSELE/index.m3u8*~hmac=f6cf4073dc1c654e35c176ed90e9987f5ab1645ad73f6ed00002eac59bd22087&req_id=5882ce90-b63d-4496-aebf-617209be24b2";
+        document.addEventListener("DOMContentLoaded", () => {
+            const video = document.getElementById("video-player");
+            const videoSrc = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1738911177~acl=%2f*~id=aaf549ec51984c86b32dd7de3e1334c7~data=hdntl~hmac=303742a446e007921463b30230ce8cd68092f50a5cfad55ba6700db15bb90f56/index.m3u8";  // Replace with the actual HLS stream URL
 
-            // Initialize Plyr player
-            const player = new Plyr(video, {
-                controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-                autoplay: true,
-                muted: true, 
-                volume: 1
-            });
-
-            // HLS support
             if (Hls.isSupported()) {
                 const hls = new Hls();
-                hls.loadSource(streamUrl);
+                hls.loadSource(videoSrc);
                 hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    video.play().catch(error => console.log("Autoplay blocked:", error));
-                });
-
-                hls.on(Hls.Events.ERROR, (event, data) => {
-                    console.error("HLS error:", data);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
                 });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = streamUrl;
-                video.addEventListener('canplay', () => {
-                    video.play().catch(error => console.log("Autoplay blocked:", error));
+                video.src = videoSrc;
+                video.addEventListener('loadedmetadata', () => {
+                    video.play();
                 });
             }
 
-            // Handle unmute overlay
-            video.addEventListener('playing', () => {
-                if (video.muted) unmuteOverlay.style.display = 'block';
-            });
-
-            unmuteOverlay.addEventListener('click', () => {
-                video.muted = false;
-                unmuteOverlay.style.display = 'none';
-            });
-
-            video.addEventListener('click', () => {
-                video.muted = false;
-                unmuteOverlay.style.display = 'none';
+            // Initialize Plyr
+            const player = new Plyr(video, {
+                controls: [
+                    'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'
+                ]
             });
         });
     </script>
