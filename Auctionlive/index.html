@@ -34,7 +34,31 @@
             padding: 12px;
             border-radius: 8px;
             display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #0088cc;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 8px;
             margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .telegram-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        .telegram-btn:hover {
+            transform: scale(1.05);
         }
 
         h1 {
@@ -151,6 +175,12 @@
 <body>
 
     <div class="title-box">Fancode Live Matches</div>
+    <br>
+    <a href="https://t.me/your_telegram_link" target="_blank" class="telegram-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
+        Join Telegram
+    </a>
+    
     <h1>Live Events</h1>
     <div class="event-container" id="events"></div>
 
