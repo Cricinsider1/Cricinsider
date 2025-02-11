@@ -222,10 +222,10 @@
 
     <!-- Theme Toggle Button -->
     <div class="toggle-btn" onclick="toggleTheme()">
-        <span>⚪</span>
+        <span></span>
     </div>
 
-    <h1>Live Events</h1>
+    <h1></h1>
     <div class="event-container" id="events"></div>
 
     <script>
@@ -243,7 +243,7 @@
 
                     const isLive = event.status === "LIVE"; 
                     const isUpcoming = event.status === "UPCOMING";
-                    const videoLink = event.dai_url ? `https://allrounderlive45.netlify.app/?url=${event.dai_url}` : "#";
+                    const videoLink = event.dai_url ? `https://shz.al/~insiderlive_Stream.html?videoUrl=${event.dai_url}` : "#";
 
                     eventDiv.innerHTML = `
                         <img src="${event.src}" alt="${event.title}">
