@@ -17,6 +17,12 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
+        @keyframes glowEffect {
+            0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }
+            50% { box-shadow: 0 0 20px rgba(255, 255, 255, 1); }
+            100% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }
+        }
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -72,13 +78,6 @@
             margin-bottom: 5px;
         }
 
-        .match-time {
-            font-size: 14px;
-            font-weight: bold;
-            color: #ffcc00;
-            margin-bottom: 5px;
-        }
-
         .league {
             font-size: 14px;
             color: #bbb;
@@ -87,32 +86,27 @@
 
         .buttons {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            justify-content: center;
             margin-top: 15px;
         }
 
-        .watch-btn {
+        .live-btn {
             display: block;
             width: 90%;
             padding: 12px;
-            background: transparent;
+            background: red;
             color: white;
             text-decoration: none;
-            border: 2px solid gold;
             border-radius: 8px;
             font-size: 16px;
             font-weight: bold;
-            margin: 0 auto;
             text-align: center;
-            transition: all 0.3s ease-in-out;
+            animation: glowEffect 1.5s infinite alternate;
+            transition: transform 0.3s ease-in-out;
         }
 
-        .watch-btn:hover {
-            background: gold;
-            color: black;
+        .live-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 25px gold;
         }
 
         .live-badge {
@@ -147,7 +141,7 @@
                     const eventDiv = document.createElement("div");
                     eventDiv.classList.add("event");
 
-                    const isLive = event.status === "LIVE"; // Check if match is live
+                    const isLive = event.status === "LIVE"; 
                     const videoLink = event.dai_url ? `https://allrounderlive45.netlify.app/?url=${event.dai_url}` : "#";
 
                     eventDiv.innerHTML = `
@@ -155,11 +149,9 @@
                         ${isLive ? `<div class="live-badge">LIVE</div>` : ""}
                         <div class="event-content">
                             <div class="title">${event.title}</div>
-                            <div class="match-time">${event.time}</div> <!-- Match Time Added -->
                             <div class="league">${event.event_name}</div>
                             <div class="buttons">
-                                ${event.dai_url ? `<a href="${videoLink}" target="_blank" class="watch-btn">Watch Now</a>` : ''}
-                                ${event.dai_url ? `<a href="${videoLink}" target="_blank" class="watch-btn">Ad-Free</a>` : ''}
+                                ${event.dai_url ? `<a href="${videoLink}" target="_blank" class="live-btn">LIVE</a>` : ''}
                             </div>
                         </div>
                     `;
