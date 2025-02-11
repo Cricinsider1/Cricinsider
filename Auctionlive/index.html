@@ -1,149 +1,170 @@
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<title>TG_@Cricinsider365</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
-<style>
-    body {
-        background-color: #000;
-        margin: 0;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Events</title>
+    <style>
+        @keyframes heartbeat {
+            0% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            50% { transform: scale(1.02); box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        }
 
-    /* Container for video and logo */
-    .video-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-    }
+        @keyframes livePulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
-    /* Style for the logo */
-    .logo {
-        position: absolute;
-        top: 10px; /* Adjust vertical position */
-        left: 10px; /* Adjust horizontal position */
-        z-index: 1; /* Ensure the logo appears above the video */
-        max-width: 120px; /* Set maximum width for the logo */
-        max-height: 120px; /* Set maximum height for the logo */
-        pointer-events: none; /* Prevent interference with video controls */
-    }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #121212;
+            color: white;
+            padding: 20px;
+        }
 
-    .shaka-spinner-container {
-        display: none;
-    }
+        h1 {
+            font-size: 26px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
 
-    .uc {
-        pointer-events: none;
-    }
-</style>
+        .event-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .event {
+            width: 400px;
+            background: #222;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 15px;
+            animation: heartbeat 3s infinite;
+            transition: transform 0.3s;
+        }
+
+        .event:hover {
+            transform: scale(1.03);
+        }
+
+        .event img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .event-content {
+            padding: 15px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .league {
+            font-size: 14px;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .watch-btn {
+            display: block;
+            width: 90%;
+            padding: 12px;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border: 2px solid gold;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 auto;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .watch-btn:hover {
+            background: gold;
+            color: black;
+            transform: scale(1.1);
+            box-shadow: 0 0 25px gold;
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            animation: livePulse 1.5s infinite;
+        }
+    </style>
 </head>
-
 <body>
-    <!-- Video container -->
-    <div class="video-container">
-        <!-- Logo inside the video -->
-        <img src="https://i.ibb.co/fMKnFg3/1000003992-removebg-preview.png" alt="Logo" class="logo">
 
-        <!-- Video player -->
-        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-            <video autoplay muted data-shaka-player id="video" poster="https://i.ibb.co/x7jXd29/In-Shot-20241215-002653932.jpg" style="width:100%; height:100%;"></video>
-        </div>
-    </div>
+    <h1>Live Events</h1>
+    <div class="event-container" id="events"></div>
 
     <script>
-    // Restrict iframe embedding
-    if (window.top !== window.self) {
-        window.addEventListener('DOMContentLoaded', function() {
-            // Clear the existing content
-            document.body.innerHTML = '';
+        async function fetchEvents() {
+            try {
+                const response = await fetch("https://raw.githubusercontent.com/drmlive/fancode-live-events/refs/heads/main/fancode.json");
+                const data = await response.json();
 
-            // Add custom message
-            const messageDiv = document.createElement('div');
-            messageDiv.id = 'message';
-            messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
+                const container = document.getElementById("events");
+                container.innerHTML = ""; 
 
-            // Style the message
-            messageDiv.style.color = '#fff';
-            messageDiv.style.backgroundColor = '#000';
-            messageDiv.style.position = 'fixed';
-            messageDiv.style.top = '50%';
-            messageDiv.style.left = '50%';
-            messageDiv.style.transform = 'translate(-50%, -50%)';
-            messageDiv.style.padding = '20px';
-            messageDiv.style.borderRadius = '10px';
-            messageDiv.style.textAlign = 'center';
-            messageDiv.style.fontFamily = 'Arial, sans-serif';
-            messageDiv.style.fontSize = '20px';
+                data.matches.forEach(event => {
+                    const eventDiv = document.createElement("div");
+                    eventDiv.classList.add("event");
 
-            // Append the message to the body
-            document.body.appendChild(messageDiv);
-        });
-    }
+                    const isLive = event.status === "LIVE"; // Check if match is live
+                    const videoLink = event.dai_url ? `https://allrounderlive45.netlify.app/?url=${event.dai_url}` : "#";
 
-    async function init() {
-        const video = document.getElementById("video");
-        const ui = video.ui;
-        const controls = ui.getControls();
-        const player = controls.getPlayer();
+                    eventDiv.innerHTML = `
+                        <img src="${event.src}" alt="${event.title}">
+                        ${isLive ? `<div class="live-badge">LIVE</div>` : ""}
+                        <div class="event-content">
+                            <div class="title">${event.title}</div>
+                            <div class="league">${event.event_name}</div>
+                            <div class="buttons">
+                                ${event.dai_url ? `<a href="${videoLink}" target="_blank" class="watch-btn">Watch Now</a>` : ''}
+                                ${event.dai_url ? `<a href="${videoLink}" target="_blank" class="watch-btn">Ad-Free</a>` : ''}
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(eventDiv);
+                });
 
-        player.configure({
-            drm: {
-                clearKeys: {
-                    '03c2e0af2f8159f9f0ce9b5dbc865f10': "cd84ed136b0cc71f8ab8cd4d4f6a2e4c"
-                }
+            } catch (error) {
+                console.error("Error fetching events:", error);
             }
-        });
-
-        ui.configure({
-            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-            volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                level: "rgb(0, 255, 0)"     // Green color for the volume level
-            },
-            seekBarColors: {
-                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
-            }
-        });
-window.player = player;
-        window.ui = ui;
-
-        player.addEventListener("error", onPlayerErrorEvent);
-        controls.addEventListener("error", onUIErrorEvent);
-
-        try {
-            await player.load("https://dds.livecricketsl.xyz/proxy/sg.php/https://linearjitp-playback.astro.com.my/dash-wv/linear/2504/default_primary.mpd|origin=https://livecricketsl.kesug.com?");
-            console.log("The video has now been loaded!");
-        } catch (error) {
-            onPlayerError(error);
         }
-    }
 
-    function onPlayerErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
-
-    function onPlayerError(error) {
-        console.error("Error code", error.code, "object", error);
-    }
-
-    function onUIErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
-
-    function initFailed() {
-        console.error("Unable to load the UI library!");
-    }
-
-    document.addEventListener("shaka-ui-loaded", init);
-    document.addEventListener("shaka-ui-load-failed", initFailed);
-
-    if (confirm("Join For More Links!!")) {
-        window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";
-    }
+        fetchEvents();
     </script>
+
 </body>
 </html>
