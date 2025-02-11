@@ -60,7 +60,7 @@
             font-weight: bold;
             padding: 10px 15px;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             transition: transform 0.3s;
         }
 
@@ -184,11 +184,8 @@
             animation: livePulse 1.5s infinite;
         }
 
-        /* Glowing Theme Toggle Button */
+        /* Theme Toggle Button */
         .toggle-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
             width: 50px;
             height: 50px;
             background: white;
@@ -199,6 +196,7 @@
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
+            margin: 0 auto 20px; /* Centered under Telegram button */
         }
 
         .toggle-btn:hover {
@@ -222,13 +220,13 @@
         Join Telegram
     </a>
 
-    <h1>Live Events</h1>
-    <div class="event-container" id="events"></div>
-
     <!-- Theme Toggle Button -->
     <div class="toggle-btn" onclick="toggleTheme()">
         <span>⚪</span>
     </div>
+
+    <h1>Live Events</h1>
+    <div class="event-container" id="events"></div>
 
     <script>
         async function fetchEvents() {
