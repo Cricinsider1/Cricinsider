@@ -5,7 +5,182 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fancode Live Matches</title>
     <style>
-        /* Existing CSS styles */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes livePulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        :root {
+            --background-color: #121212;
+            --text-color: white;
+            --card-background: #222;
+        }
+
+        .light-theme {
+            --background-color: white;
+            --text-color: black;
+            --card-background: #f0f0f0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: var(--background-color);
+            color: var(--text-color);
+            padding: 20px;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        .title-box {
+            background: #d35400;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 12px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #0088cc;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .telegram-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        .telegram-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .event-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .event {
+            width: 400px;
+            background: var(--card-background);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 15px;
+            animation: heartbeat 3s infinite;
+            transition: transform 0.3s;
+        }
+
+        .event:hover {
+            transform: scale(1.03);
+        }
+
+        .event img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .event-content {
+            padding: 15px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .league {
+            font-size: 14px;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+
+        .buttons {
+            margin-top: 15px;
+        }
+
+        .live-btn, .upcoming-btn {
+            display: block;
+            width: 60%;
+            padding: 8px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .live-btn {
+            background: red;
+        }
+
+        .upcoming-btn {
+            background: yellow;
+            color: black;
+        }
+
+        .live-btn:hover, .upcoming-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            animation: livePulse 1.5s infinite;
+        }
+
+        .toggle-btn {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 0 auto 20px;
+        }
+
+        .toggle-btn span {
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
@@ -39,16 +214,12 @@
                     const isUpcoming = event.status === "UPCOMING";
                     const videoLink = event.dai_url ? `https://shz.al/~insiderlive_Stream.html?videoUrl=${event.dai_url}` : "#";
 
-                    // Formatting the date and time
-                    const matchTime = new Date(event.start_time).toLocaleString();
-
                     eventDiv.innerHTML = `
                         <img src="${event.src}" alt="${event.title}">
                         ${isLive ? '<div class="live-badge">LIVE</div>' : ""}
                         <div class="event-content">
                             <div class="title">${event.title}</div>
                             <div class="league">${event.event_name}</div>
-                            ${isUpcoming ? `<div class="match-time">Match Time: ${matchTime}</div>` : ''}
                             <div class="buttons">
                                 ${isLive ? `<a href="${videoLink}" target="_blank" class="live-btn">WATCH LIVE</a>` : ''}
                                 ${isUpcoming ? '<a href="#" class="upcoming-btn">UPCOMING</a>' : ''}
