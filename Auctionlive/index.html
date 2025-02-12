@@ -124,30 +124,44 @@
             margin-top: 15px;
         }
 
-        .live-btn, .upcoming-btn {
+        .live-btn {
+            display: block;
+            width: 60%;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #ff4e50, #ff0000);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+            margin: 0 auto;
+        }
+
+        .live-btn:hover {
+            background: linear-gradient(135deg, #ff0000, #c40000);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .upcoming-btn {
             display: block;
             width: 60%;
             padding: 8px;
-            color: white;
+            background: yellow;
+            color: black;
             text-decoration: none;
             border-radius: 8px;
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            margin: 0 auto;
             transition: transform 0.3s ease-in-out;
+            margin: 0 auto;
         }
 
-        .live-btn {
-            background: red;
-        }
-
-        .upcoming-btn {
-            background: yellow;
-            color: black;
-        }
-
-        .live-btn:hover, .upcoming-btn:hover {
+        .upcoming-btn:hover {
             transform: scale(1.05);
         }
 
