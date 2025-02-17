@@ -100,6 +100,13 @@
         }
 
         /* Channel buttons - increased size */
+        .channel-buttons-container {
+            display: flex;
+            justify-content: flex-end; /* Align buttons to the right */
+            margin-top: 20px;
+            width: 80%;
+        }
+
         .channel-button {
             padding: 15px 25px; /* Increased padding for larger buttons */
             font-size: 1rem; /* Increased font size */
@@ -188,7 +195,7 @@
                 <div class="iframe-container">
                     <iframe id="player" src="https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <div class="hero-wrapper-iframe">
+                <div class="channel-buttons-container">
                     <button class="channel-button" onclick="playChannelIframe('https://example.com/channel1')">Tsports 1</button>
                     <button class="channel-button" onclick="playChannelIframe('https://example.com/channel2')">Tsports 2</button>
                     <button class="channel-button" onclick="playChannelIframe('https://example.com/channel3')">PTV Sports</button>
