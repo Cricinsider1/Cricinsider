@@ -1,119 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" style="scroll-behavior: smooth;">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="yAFfTwqZrPnN9SKdzxCNipM_H63nQuqk8YkIZDlDOcc">
-    <meta property="og:title" content="Champions Trophy 2025 LIVE Stream">
-    <meta property="og:description" content="Your Gateway to Live Cricket Thrills! 🏏 - Champions Trophy 2025 Live">
-    <meta property="og:url" content="https://ct25.vercel.app">
-    <meta name="description" content="Your Gateway to Live Cricket Thrills! 🏏">
-    <meta name="theme-color" content="#e1ebf5">
-    
-    <!-- Title -->
-    <title>Champions🏆'25 - Enjoy the Vibes - Watch LIVE - Champions Trophy 2025</title>
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="https://upload-cloudfalre-r2-assets.omrecipes.dev/Icc.png" type="image/x-icon">
-
-    <!-- External CSS -->
-    <link rel="stylesheet" href="CSS/style.css">
-
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-    <!-- Inline Style for User Selection -->
-    <style type="text/css">
-        * {
-            user-select: auto !important;
-            -webkit-user-select: auto !important;
+    <meta name="description" content="Watch Live Streaming - Your Gateway to Live Sports!">
+    <title>Live Sports Stream 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f5;
+        }
+        nav {
+            background-color: #003580;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav h1 {
+            margin: 0;
+        }
+        .iframe-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            position: relative;
+            padding-top: 56.25%;
+            background: #000;
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .channel-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .channel-button {
+            background-color: #003580;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .channel-button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background-color: #003580;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
         }
     </style>
 </head>
-
-<body style="overflow: auto;">
-    <!-- Loader -->
-    <div class="loader-wrapper" style="opacity: 0; display: none;">
-        <div class="loader-stroke">
-            <div class="loader-inner-stroke"></div>
-        </div>
-    </div>
-
-    <!-- Navigation -->
+<body>
     <nav>
-        <div class="nav-bar">
-            <a href="/">
-                <div class="nav-left">
-                    <img src="https://upload-cloudfalre-r2-assets.omrecipes.dev/Icc.png" alt="Champions Trophy 2025 Logo">
-                    <h1>Champions🏆'25</h1>
-                </div>
-            </a>
-            <div class="nav-right">
-                <div class="menu-icon">
-                    <i class="fa-solid fa-bars"></i>
-                </div>
-            </div>
-            <div class="menu menu-close">
-                <div class="menu-body">
-                    <div class="menu-head">
-                        <h1>Menu</h1>
-                    </div>
-                    <div class="menu-links">
-                        <a href="/">Home</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1>Live Sports 2025</h1>
     </nav>
 
-    <!-- Main Content -->
-    <main style="margin-top: 55px;">
-        <section class="hero-wrapper">
-            <div class="hero-section">
-                <!-- Iframe Player Container -->
-                <div class="iframe-container">
-                    <iframe id="player" src="https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8" frameborder="0" allowfullscreen title="Live Cricket Stream"></iframe>
-                </div>
-            </div>
+    <div class="iframe-container">
+        <iframe id="player" src="https://anym3u8player.com/tv/p.php?url=https://live.tsports.com/mobile_hls/tsports_live_1/playlist.m3u8" allowfullscreen></iframe>
+    </div>
 
-            <!-- Channel Buttons -->
-            <div class="hero-wrapper-iframe">
-                <button class="channel-button" onclick="playChannelIframe('https://anym3u8player.com/p2p-player-generator-jwplayer/mplay.php?data=nCLCQmLtFml/wHRSNI+EmeWTWn3YvhET014fxklDYSvEOlMn5eD4jtWYm0d70CplYg0nG6syQveqnTHKlOxvtN5CXlTBw5+T4F3+30kY/u7u7Yvtiriecy7RDyW5/lkydB6aNyEaOHRAKztdH/Lek3ld4/t1HUrU72+arMFhdLxERnZ2ZjDWXY9NhGjfFj5422itFf/xkK6u64ZsWIp71Z9uByIg0YGeh0O0d8OknjDXoj6iglytBB8BnMVgivJv5Dm0EXAF5Hobi9kOw8ZXg7nJkn3ecEmvqDKExLR2FQGyNeJZ5HkMOGVYGTbJ6cn5JfU6G8wr0kerVWs4IUtW42h4bGw+ZikSx2rw9r+ilZY=')" aria-label="Watch Tsports 1">Tsports 1</button>
-                <!-- More buttons here (similar structure) -->
-            </div>
-        </section>
-    </main>
+    <div class="channel-buttons">
+        <button class="channel-button" onclick="playChannel('https://anym3u8player.com/p2p-player-generator-jwplayer/mplay.php?data=channel1')">Channel 1</button>
+        <button class="channel-button" onclick="playChannel('https://anym3u8player.com/p2p-player-generator-jwplayer/mplay.php?data=channel2')">Channel 2</button>
+        <button class="channel-button" onclick="playChannel('https://anym3u8player.com/p2p-player-generator-jwplayer/mplay.php?data=channel3')">Channel 3</button>
+        <button class="channel-button" onclick="playChannel('https://anym3u8player.com/p2p-player-generator-jwplayer/mplay.php?data=channel4')">Channel 4</button>
+    </div>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-wrapper">
-            <div class="footer-right">
-                <div class="footer-disc">
-                    <h1>Disclaimer</h1>
-                    <p>The match scores and player names presented on this website are created for the purpose of showcasing. Any resemblance to real events or individuals is purely coincidental.</p>
-                </div>
-                <div class="footer-copyright">
-                    <p>Copyright © 2025 | Some Rights Reserved</p>
-                </div>
-            </div>
-        </div>
+        <p>Copyright © 2025 | Live Sports Stream | All Rights Reserved</p>
     </footer>
 
-    <!-- GSAP CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- GSAP Scroll Trigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- External JavaScript -->
-    <script src="Script/script.js"></script>
-    
-    <!-- Channel Switching Script -->
     <script>
-        function playChannelIframe(url) {
-            const iframe = document.getElementById('player');
-            iframe.src = url;
-            console.log('Iframe source changed to:', url);
+        function playChannel(url) {
+            document.getElementById('player').src = url;
+            console.log('Channel switched to:', url);
         }
     </script>
 </body>
