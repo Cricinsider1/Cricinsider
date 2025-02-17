@@ -124,6 +124,33 @@
             text-align: center;
         }
 
+        /* Join Telegram button */
+        .telegram-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+
+        .telegram-button img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .telegram-button:hover {
+            transform: scale(1.1);
+        }
+
         /* Keyframe animations */
         @keyframes fadeIn {
             from {
@@ -182,10 +209,10 @@
 
     <footer>
         <div class="footer-wrapper">
-            <div class="footer-disc">
-                <h1>Disclaimer</h1>
-                <h2>The match scores and player names presented on this website are fictional for demonstration purposes.</h2>
-            </div>
+            <a class="telegram-button" href="https://t.me/joinchat/example" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
+                Join Telegram
+            </a>
             <div class="footer-copyright">
                 <h1>Copyright © 2025 | Some Rights Reserved</h1>
             </div>
