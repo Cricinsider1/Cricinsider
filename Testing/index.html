@@ -1,36 +1,33 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cricinsider365</title>
-  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: linear-gradient(135deg, #1d1d1d, #3b3b3b);
-      height: 100vh;
-      color: #fff;
-    }
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Cricinsider365</title>  
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>  
+  <style>  
+    body {  
+      margin: 0;  
+      font-family: Arial, sans-serif;  
+      display: flex;  
+      flex-direction: column;  
+      align-items: center;  
+      background-color: #f4f4f4;  
+    }  
 
-    .title-column {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #1a1a1a;
-      width: 100%;
-      padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    }
+    .title-column {  
+      display: flex;  
+      justify-content: center;  
+      align-items: center;  
+      background-color: #000;  
+      width: 100%;  
+      padding: 15px;  
+      margin-bottom: 20px;  
+    }  
 
     .title-column h1 {
-      font-size: 28px;
-      color: #00bcd4;
+      font-size: 24px;
+      color: #fff;
       text-align: center;
       margin: 0;
     }
@@ -38,76 +35,70 @@
     .jwplayer {
       position: relative;
       width: 100%;
-      max-width: 900px;
-      height: 480px;
-      background-color: #333;
-      border-radius: 10px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+      max-width: 800px;
+      height: 360px;
+      background-color: #000;
     }
 
     .feed-buttons {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 40px 0;
-      width: 90%;
-      background: #121212;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+      margin: 20px;
+      width: 100%;
+      background-color: #000;
+      padding: 20px;
+      border-radius: 10px;
     }
 
     .feed-button {
-      padding: 15px 35px;
-      background: linear-gradient(45deg, #007bff, #00bcd4);
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #007bff, #00bfff); /* Gradient blue */
       color: #fff;
       border: none;
-      border-radius: 30px;
+      border-radius: 10px;
       cursor: pointer;
-      margin: 12px 0;
-      width: 85%;
-      font-size: 20px;
-      text-transform: uppercase;
-      transition: all 0.4s ease-in-out;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      margin: 10px;
+      width: 80%;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
 
     .feed-button:hover {
-      background: linear-gradient(45deg, #00bcd4, #007bff);
-      transform: scale(1.1);
+      background: linear-gradient(45deg, #0056b3, #0088cc); /* Darker gradient on hover */
+      transform: scale(1.05); /* Slightly larger button on hover */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
     }
 
     #language-switch, #telegram-button {
-      padding: 18px 40px;
+      padding: 15px 30px;
       color: #fff;
       border: none;
-      border-radius: 30px;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 20px;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      margin: 15px 0;
-      width: 70%;
-      text-align: center;
-      text-decoration: none;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin: 10px 0;
     }
 
     #language-switch {
-      background-color: #4CAF50; /* Green */
+      background-color: #28a745;
     }
 
     #language-switch:hover {
-      background-color: #45a049;
-      transform: scale(1.05);
+      background-color: #218838;
     }
 
     #telegram-button {
-      background-color: #0088cc; /* Telegram's brand color */
+      background-color: #0088cc;
+      text-decoration: none;
+      text-align: center;
     }
 
     #telegram-button:hover {
-      background-color: #0077b5;
-      transform: scale(1.05);
+      background-color: #007ab8;
     }
 
     footer {
@@ -116,105 +107,95 @@
       padding: 20px;
       margin-top: auto;
       color: #fff;
-      width: 100%;
-      font-size: 16px;
-      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
     }
 
-    footer a {
-      color: #fff;
-      text-decoration: none;
-    }
+  </style>  
+</head>  
+<body>  
+  <div class="title-column">  
+    <h1>Cricinsider365 - Live Cricket Streams</h1>  
+  </div>  
 
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <div class="title-column">
-    <h1>Cricinsider365 - Live Cricket Streams</h1>
-  </div>
+  <div class="jwplayer" id="video"></div>  
 
-  <div class="jwplayer" id="video"></div>
+  <div class="feed-buttons">  
+    <button class="feed-button" id="feed_1">MyCo Live</button>  
+    <button class="feed-button" id="feed_2">Ptv Sports</button>  
+    <button class="feed-button" id="feed_3">T Sports</button>  
+    <button class="feed-button" id="feed_4">Feed 4</button>  
+    <button class="feed-button" id="feed_5">Feed 5</button>  
+    <button class="feed-button" id="feed_6">Feed 6</button>  
+    <button class="feed-button" id="feed_7">Feed 7</button>  
+    <button class="feed-button" id="feed_8">Feed 8</button>  
+  </div>  
 
-  <div class="feed-buttons">
-    <button class="feed-button" id="feed_1">MyCo Live</button>
-    <button class="feed-button" id="feed_2">Ptv Sports</button>
-    <button class="feed-button" id="feed_3">T Sports</button>
-    <button class="feed-button" id="feed_4">Feed 4</button>
-    <button class="feed-button" id="feed_5">Feed 5</button>
-    <button class="feed-button" id="feed_6">Feed 6</button>
-    <button class="feed-button" id="feed_7">Feed 7</button>
-    <button class="feed-button" id="feed_8">Feed 8</button>
-  </div>
+  <button id="language-switch">Select Your Feed Here</button>  
 
-  <button id="language-switch">Select Your Feed Here</button>
+  <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">  
+    Join Our Telegram Channel  
+  </a>  
 
-  <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
-    Join Our Telegram Channel
-  </a>
+  <footer>  
+    &copy; 2024 Cricinsider365 - All rights reserved.  
+  </footer>  
 
-  <footer>
-    &copy; 2024 Cricinsider365 - All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a>
-  </footer>
+  <script>  
+    if (confirm("Join Our Telegram Channel For More Live Links")) {  
+      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";  
+    }  
 
-  <script>
-    if (confirm("Join Our Telegram Channel For More Live Links")) {
-      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
-    }
+    document.addEventListener("DOMContentLoaded", function() {  
+      var videoSources = {  
+        "feed_1": "https://ml-pull-hwc.myco.io/stream1/hls/stream1.m3u8",  
+        "feed_2": "https://cdn.hoichoi24.com/TSportsHD/tracks-v1a1/mono.m3u8",  
+        "feed_3": "https://cdn.hoichoi24.com/PTVSportsHD/tracks-v1a1/mono.ts.m3u8",  
+        "feed_4": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112593/uhd_akamai_ctv_avc_eng_olympic_feed4_270724/index.m3u8",  
+        "feed_5": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112593/uhd_akamai_ctv_avc_eng_olympic_feed5_270724/index.m3u8",  
+        "feed_6": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112594/uhd_akamai_ctv_avc_eng_olympic_feed6_270724/index.m3u8",  
+        "feed_7": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112594/uhd_akamai_ctv_avc_eng_olympic_feed7_270724/index.m3u8",  
+        "feed_8": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112595/uhd_akamai_ctv_avc_eng_olympic_feed9_270724/index.m3u8"  
+      };  
 
-    document.addEventListener("DOMContentLoaded", function() {
-      var videoSources = {
-        "feed_1": "https://ml-pull-hwc.myco.io/stream1/hls/stream1.m3u8",
-        "feed_2": "https://cdn.hoichoi24.com/TSportsHD/tracks-v1a1/mono.m3u8",
-        "feed_3": "https://cdn.hoichoi24.com/PTVSportsHD/tracks-v1a1/mono.ts.m3u8",
-        "feed_4": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112593/uhd_akamai_ctv_avc_eng_olympic_feed4_270724/index.m3u8",
-        "feed_5": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112593/uhd_akamai_ctv_avc_eng_olympic_feed5_270724/index.m3u8",
-        "feed_6": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112594/uhd_akamai_ctv_avc_eng_olympic_feed6_270724/index.m3u8",
-        "feed_7": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112594/uhd_akamai_ctv_avc_eng_olympic_feed7_270724/index.m3u8",
-        "feed_8": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112595/uhd_akamai_ctv_avc_eng_olympic_feed9_270724/index.m3u8"
-      };
+      var playerInstance = jwplayer("video");  
 
-      var playerInstance = jwplayer("video");
+      document.getElementById("feed_1").addEventListener("click", function() {  
+        playerInstance.load([{ file: videoSources["feed_1"] }]).play();  
+      });  
 
-      document.getElementById("feed_1").addEventListener("click", function() {
-        playerInstance.load([{ file: videoSources["feed_1"] }]).play();
-      });
+      document.getElementById("feed_2").addEventListener("click", function() {  
+        playerInstance.load([{ file: videoSources["feed_2"] }]).play();  
+      });  
 
-      document.getElementById("feed_2").addEventListener("click", function() {
-        playerInstance.load([{ file: videoSources["feed_2"] }]).play();
-      });
+      document.getElementById("feed_3").addEventListener("click", function() {  
+        playerInstance.load([{ file: videoSources["feed_3"] }]).play();  
+      });  
 
-      document.getElementById("feed_3").addEventListener("click", function() {
-        playerInstance.load([{ file: videoSources["feed_3"] }]).play();
-      });
+      document.getElementById("feed_4").addEventListener("click", function() {  
+        playerInstance.load([{ file: videoSources["feed_4"] }]).play();  
+      });  
 
-      document.getElementById("feed_4").addEventListener("click", function() {
-        playerInstance.load([{ file: videoSources["feed_4"] }]).play();
-      });
+      document.getElementById("feed_5").addEventListener("click", function() {  
+        playerInstance.load([{ file: videoSources["feed_5"] }]).play();  
+      });  
 
-      document.getElementById("feed_5").addEventListener("click", function() {
-        playerInstance.load([{ file: videoSources["feed_5"] }]).play();
-      });
+      document.getElementById("feed_6").addEventListener("click", function() {  
+        playerInstance.load([{ file: videoSources["feed_6"] }]).play();  
+      });  
 
-      document.getElementById("feed_6").addEventListener("click", function() {
-        playerInstance.load([{ file: videoSources["feed_6"] }]).play();
-      });
+      document.getElementById("feed_7").addEventListener("click", function() {  
+        playerInstance.load([{ file: videoSources["feed_7"] }]).play();  
+      });  
 
-      document.getElementById("feed_7").addEventListener("click", function() {
-        playerInstance.load([{ file: videoSources["feed_7"] }]).play();
-      });
+      document.getElementById("feed_8").addEventListener("click", function() {  
+        playerInstance.load([{ file: videoSources["feed_8"] }]).play();  
+      });  
 
-      document.getElementById("feed_8").addEventListener("click", function() {
-        playerInstance.load([{ file: videoSources["feed_8"] }]).play();
-      });
+      playerInstance.setup({  
+        autostart: true,  
+        playlist: [{ file: videoSources["feed_1"] }]  
+      });  
+    });  
+  </script>  
 
-      playerInstance.setup({
-        autostart: true,
-        playlist: [{ file: videoSources["feed_1"] }]
-      });
-    });
-  </script>
-</body>
+</body>  
 </html>
