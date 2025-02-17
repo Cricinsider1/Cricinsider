@@ -21,11 +21,20 @@ body {
     overflow: hidden;
 }
 
+/* Logo Styling */
+#logo {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
 /* Video Player Container */
 #video {
     width: 90%;
     max-width: 720px;
-    margin: 20px auto;
+    margin: 60px auto 20px auto;
     border: 2px solid #1e90ff;
     border-radius: 10px;
     overflow: hidden;
@@ -67,6 +76,11 @@ body {
 </head>
 <body>
 
+<!-- Logo Slot -->
+<div id="logo" onclick="redirectToWebsite()">
+    <img src="https://i.postimg.cc/rw0xB8nh/IMG-20250217-230348-305.png" alt="Logo" width="120" height="auto" />
+</div>
+
 <!-- Video Player -->
 <div id="video"></div>
 
@@ -100,6 +114,11 @@ body {
     // Redirect function for Telegram button
     function redirectToTelegram() {
         window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";
+    }
+
+    // Redirect function for logo click
+    function redirectToWebsite() {
+        window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";  // Add your website link here
     }
 
     // Confirm dialog for joining Telegram
