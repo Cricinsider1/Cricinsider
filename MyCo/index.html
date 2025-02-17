@@ -24,10 +24,15 @@ body {
 /* Logo Styling */
 #logo {
     position: absolute;
-    top: 20px;
+    top: 80px;  /* Moved the logo a bit down */
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
+}
+
+#logo img {
+    width: 180px;  /* Increased logo size */
+    height: auto;
 }
 
 /* Video Player Container */
@@ -78,7 +83,7 @@ body {
 
 <!-- Logo Slot -->
 <div id="logo" onclick="redirectToWebsite()">
-    <img src="https://i.postimg.cc/rw0xB8nh/IMG-20250217-230348-305.png" alt="Logo" width="120" height="auto" />
+    <img src="https://i.postimg.cc/rw0xB8nh/IMG-20250217-230348-305.png" alt="Logo" />
 </div>
 
 <!-- Video Player -->
