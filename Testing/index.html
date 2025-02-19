@@ -37,7 +37,16 @@
       padding: 20px;
     }
 
-    /* Remove border in full-screen mode */
+    /* Ensure controls are visible in full-screen */
+    .jwplayer.jw-flag-fullscreen .jw-controlbar,
+    .jwplayer.jw-flag-fullscreen .jw-icon,
+    .jwplayer.jw-flag-fullscreen .jw-controls {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    /* Remove the border in full-screen mode */
     .jwplayer.jw-flag-fullscreen #player {
       border: none;
     }
