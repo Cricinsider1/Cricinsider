@@ -10,45 +10,28 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #141e30, #243b55);
+      background-color: #000;
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      overflow: hidden;
     }
 
     #player {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
       position: relative;
-      width: 90%;
-      max-width: 1200px;
-      height: 0;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
       background-color: #000;
     }
 
-    #message {
-      font-size: 1.5rem;
-      text-align: center;
-      color: #ff5e57;
-      padding: 20px;
-    }
-
     /* Ensure controls are visible in full-screen */
-    .jwplayer.jw-flag-fullscreen .jw-controlbar,
-    .jwplayer.jw-flag-fullscreen .jw-icon,
     .jwplayer.jw-flag-fullscreen .jw-controls {
       display: block !important;
       visibility: visible !important;
       opacity: 1 !important;
-    }
-
-    /* Remove the border in full-screen mode */
-    .jwplayer.jw-flag-fullscreen #player {
-      border: none;
     }
   </style>
 </head>
@@ -66,10 +49,10 @@
       window.open("https://t.me/+tL4jz_00y6NlMGRl", '_blank');
     }
 
+    // JW Player setup
     jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
-
     if (window.top === window.self) {
-      document.addEventListener('DOMContentLoaded', function () {
+      document.addEventListener('DOMContentLoaded', function() {
         const playerInstance = jwplayer("player");
 
         const processedData = {
@@ -91,7 +74,7 @@
           aspectratio: "16:9",
           preload: "auto",
           autostart: true,
-          controls: true // Ensure control buttons are always visible
+          controls: true
         });
       });
     }
