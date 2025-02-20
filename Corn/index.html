@@ -1,0 +1,188 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cricinsider365</title>
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f4f4f4;
+    }
+
+    .title-column {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000; /* Black background for the title column */
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .title-column h1 {
+      font-size: 24px;
+      color: #fff; /* White text for the title */
+      text-align: center;
+      margin: 0;
+    }
+
+    .jwplayer {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 360px;
+      background-color: #000; /* Black background for the video frame */
+    }
+
+    .feed-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+      width: 100%;
+      background-color: #000; /* Black background for the feed buttons column */
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .feed-button {
+      padding: 15px 30px;
+      background-color: #007bff; /* Blue color */
+      color: #fff; /* White text */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+      width: 80%;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .feed-button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+    }
+
+    #language-switch, #telegram-button {
+      padding: 15px 30px;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin: 10px 0;
+    }
+
+    #language-switch {
+      background-color: #28a745; /* Green color */
+    }
+
+    #language-switch:hover {
+      background-color: #218838; /* Darker green on hover */
+    }
+
+    #telegram-button {
+      background-color: #0088cc; /* Telegram's brand color */
+      text-decoration: none;
+      text-align: center;
+    }
+
+    #telegram-button:hover {
+      background-color: #007ab8; /* Darker shade of Telegram's brand color */
+    }
+
+    footer {
+      background-color: #0074d9; /* Footer background color */
+      text-align: center;
+      padding: 20px;
+      margin-top: auto;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="title-column">
+    <h1>Cricinsider365 - Live Cricket Streams</h1>
+  </div>
+
+  <div class="jwplayer" id="video"></div>
+
+  <div class="feed-buttons">
+    <button class="feed-button" id="feed_1">Hindi</button>
+    <button class="feed-button" id="feed_2">Bengali</button>
+    <button class="feed-button" id="feed_3">Tamil</button>
+    <button class="feed-button" id="feed_4">Telgu</button>
+  </div>
+
+  <button id="language-switch">Select Your Feed Here</button>
+  
+  <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
+    Join Our Telegram Channel
+  </a>
+
+  <footer>
+    &copy; 2024 Cricinsider365 - All rights reserved.
+  </footer>
+
+  <script>
+    if (confirm("Join Our Telegram Channel For More Live Links")) {
+      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+var videoSources = {
+        "feed_1": "https://mafiatv.live/vod/icc/hindi.php?chunks=master_ap_1080_5.m3u8",
+        "feed_2": "https://mafiatv.live/vod/icc/bengali.php?chunks=master_ap_1080_5.m3u8",
+        "feed_3": "https://mafiatv.live/vod/icc/tamil.php?chunks=master_ap_1080_5.m3u8",
+        "feed_4": "https://mafiatv.live/vod/icc/telugu.php?chunks=master_ap_1080_5.m3u8",
+
+      var playerInstance = jwplayer("video");
+
+      document.getElementById("feed_1").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_1"] }]).play();
+      });
+
+      document.getElementById("feed_2").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_2"] }]).play();
+      });
+
+      document.getElementById("feed_3").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_3"] }]).play();
+      });
+
+      document.getElementById("feed_4").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_4"] }]).play();
+      });
+
+      document.getElementById("feed_5").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_5"] }]).play();
+      });
+
+      document.getElementById("feed_6").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_6"] }]).play();
+      });
+
+      document.getElementById("feed_7").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_7"] }]).play();
+      });
+
+      document.getElementById("feed_8").addEventListener("click", function() {
+        playerInstance.load([{ file: videoSources["feed_8"] }]).play();
+      });
+
+      playerInstance.setup({
+        autostart: true,
+        playlist: [{ file: videoSources["feed_1"] }]
+      });
+    });
+  </script>
+</body>
+</html>
