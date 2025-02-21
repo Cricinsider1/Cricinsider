@@ -144,7 +144,10 @@ footer { background-color: #1f1f1f; text-align: center; padding: 15px; width: 10
     document.addEventListener("DOMContentLoaded", function() {    
       var videoSources = {    
         "feed_1": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/hindi.php?chunks=master_ap_1080_5.m3u8",    
-        "feed_2": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/english.php?chunks=master_ap_1080_5.m3u8",    
+        "feed_2": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/english.php?chunks=master_ap_1080_5.m3u8",
+  "feed_3": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/telugu.php?chunks=master_ap_1080_5.m3u8",  
+        "feed_4": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/tamil.php?chunks=master_ap_1080_5.m3u8",  
+        "feed_5": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/bengali.php?chunks=master_ap_1080_5.m3u8",      
       };  
       var playerInstance = jwplayer("video").setup({ autostart: true, playlist: [{ file: videoSources["feed_1"] }] });
       document.querySelectorAll(".feed-button").forEach(button => {  
