@@ -13,18 +13,17 @@
       align-items: center;
       background-color: #121212;
       color: #fff;
-    }.title-column {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #1f1f1f;
-  width: 100%;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.title-column h1 {
+    }
+    .title-column {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #007bff; /* Changed to blue */
+      width: 100%;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }.title-column h1 {
   font-size: 26px;
   color: #ffcc00;
   text-align: center;
@@ -50,8 +49,8 @@
 
 .feed-button {
   padding: 12px 25px;
-  background: linear-gradient(135deg, #ff9900, #ff5500);
-  color: #fff;
+  background: #ffffff; /* Changed to white */
+  color: #000; /* Changed text color to black for visibility */
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -62,7 +61,7 @@
 }
 
 .feed-button:hover {
-  background: linear-gradient(135deg, #ff5500, #ff3300);
+  background: #f0f0f0;
   transform: translateY(-2px);
 }
 
@@ -114,7 +113,9 @@ footer {
 <body>
   <div class="title-column">
     <h1>Cricinsider365 - Live Cricket Streams</h1>
-  </div>  <div class="jwplayer" id="video"></div>  <div class="feed-buttons">
+  </div>
+  <div class="jwplayer" id="video"></div>
+  <div class="feed-buttons">
     <button class="feed-button" id="feed_1">Hindi</button>
     <button class="feed-button" id="feed_2">English</button>
     <button class="feed-button" id="feed_3">Telugu</button>
@@ -123,9 +124,9 @@ footer {
     <button class="feed-button" id="feed_6">Feed 6</button>
     <button class="feed-button" id="feed_7">Feed 7</button>
     <button class="feed-button" id="feed_8">Feed 8</button>
-  </div><button id="language-switch">Select Your Feed Here</button> <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">Join Our Telegram Channel</a>
-
-  <footer>&copy; 2024 Cricinsider365 - All rights reserved.</footer>  <script>
+  </div>
+  <button id="language-switch">Select Your Feed Here</button>
+  <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">Join Our Telegram Channel</a>  <footer>&copy; 2024 Cricinsider365 - All rights reserved.</footer>  <script>
     document.addEventListener("DOMContentLoaded", function() {
       var videoSources = {
         "feed_1": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/hindi.php?chunks=master_ap_1080_5.m3u8",
