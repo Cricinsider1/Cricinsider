@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cricinsider365</title>
@@ -18,19 +17,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #007bff; /* Changed to blue */
+      background-color: #000; /* Changed to black */
       width: 100%;
       padding: 20px;
       margin-bottom: 20px;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    }.title-column h1 {
-  font-size: 26px;
-  color: #ffcc00;
-  text-align: center;
-  margin: 0;
-}
-
-.jwplayer {
+    }
+    .title-column h1 {
+      font-size: 26px;
+      color: #fff; /* Changed text color to white */
+      text-align: center;
+      margin: 0;
+    }.jwplayer {
   width: 100%;
   max-width: 900px;
   height: 450px;
@@ -49,8 +47,8 @@
 
 .feed-button {
   padding: 12px 25px;
-  background: #ffffff; /* Changed to white */
-  color: #000; /* Changed text color to black for visibility */
+  background: #ffffff;
+  color: #000;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -126,7 +124,9 @@ footer {
     <button class="feed-button" id="feed_8">Feed 8</button>
   </div>
   <button id="language-switch">Select Your Feed Here</button>
-  <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">Join Our Telegram Channel</a>  <footer>&copy; 2024 Cricinsider365 - All rights reserved.</footer>  <script>
+  <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">Join Our Telegram Channel</a>
+  <footer>&copy; 2024 Cricinsider365 - All rights reserved.</footer>
+  <script>
     document.addEventListener("DOMContentLoaded", function() {
       var videoSources = {
         "feed_1": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/hindi.php?chunks=master_ap_1080_5.m3u8",
@@ -137,18 +137,18 @@ footer {
         "feed_6": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112594/uhd_akamai_ctv_avc_eng_olympic_feed6_270724/index.m3u8",
         "feed_7": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112594/uhd_akamai_ctv_avc_eng_olympic_feed7_270724/index.m3u8",
         "feed_8": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112595/uhd_akamai_ctv_avc_eng_olympic_feed9_270724/index.m3u8"
-      };
+      };var playerInstance = jwplayer("video").setup({
+    autostart: true,
+    playlist: [{ file: videoSources["feed_1"] }]
+  });
 
-      var playerInstance = jwplayer("video").setup({
-        autostart: true,
-        playlist: [{ file: videoSources["feed_1"] }]
-      });
-
-      document.querySelectorAll(".feed-button").forEach(button => {
-        button.addEventListener("click", function() {
-          playerInstance.load([{ file: videoSources[this.id] }]).play();
-        });
-      });
+  document.querySelectorAll(".feed-button").forEach(button => {
+    button.addEventListener("click", function() {
+      playerInstance.load([{ file: videoSources[this.id] }]).play();
     });
-  </script></body>
+  });
+});
+
+  </script>
+</body>
 </html>
