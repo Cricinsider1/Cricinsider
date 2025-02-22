@@ -29,7 +29,7 @@ width :100%;
         background: #000;
         z-index: 9999;
     }
-    
+
     .loading-text {
         position: absolute;
         top: 0;
@@ -42,68 +42,19 @@ width :100%;
         height: 100px;
         line-height: 100px;
     }
-    
+
     .loading-text span {
         display: inline-block;
         margin: 0 5px;
         color: #00b3ff;
         font-family: 'Quattrocento Sans', sans-serif;
     }
-    
+
     .loading-text span:nth-child(1) {
         filter: blur(0px);
         animation: blur-text 1.5s 0s infinite linear alternate;
     }
-    
-    .loading-text span:nth-child(2) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 0.2s infinite linear alternate;
-    }
-    
-    .loading-text span:nth-child(3) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 0.4s infinite linear alternate;
-    }
-    
-    .loading-text span:nth-child(4) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 0.6s infinite linear alternate;
-    }
-    
-    .loading-text span:nth-child(5) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 0.8s infinite linear alternate;
-    }
-    
-    .loading-text span:nth-child(6) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 1s infinite linear alternate;
-    }
-    
-    .loading-text span:nth-child(7) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 1.2s infinite linear alternate;
-    }
-    .loading-text span:nth-child(8) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 1.4s infinite linear alternate;
-    }
-    .loading-text span:nth-child(9) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 1.6s infinite linear alternate;
-    }
-    .loading-text span:nth-child(10) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 1.8s infinite linear alternate;
-    }
-    .loading-text span:nth-child(11) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 2s infinite linear alternate;
-    }
-    .loading-text span:nth-child(12) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 2.2s infinite linear alternate;
-    }
+
     @keyframes blur-text {
         0% {
             filter: blur(0px);
@@ -112,18 +63,6 @@ width :100%;
             filter: blur(4px);
         }
     }
-
-    .plyr__video-wrapper::before {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 10;
-        content: '';
-        height: 35px;
-        width: 35px;
-        background-size: 35px auto, auto;
-    }
-
 </style>
 </head>
 <body>
@@ -136,53 +75,60 @@ width :100%;
     <span class="loading-text-words" style="color:#d9230f;">D</span>
     <span class="loading-text-words" style="color:#d9230f;">E</span>
     <span class="loading-text-words" style="color:#d9230f;">R</span>
-<span class="loading-text-words" style="color:#d9230f;">3</span>
-    <span class="loading-text-words" style="color:#d9230f;">6</span><span class="loading-text-words" style="color:#d9230f;">5</span></div>
+    <span class="loading-text-words" style="color:#d9230f;">3</span>
+    <span class="loading-text-words" style="color:#d9230f;">6</span>
+    <span class="loading-text-words" style="color:#d9230f;">5</span>
 </div>
+</div>
+
 <div>
-<video autoplay controls crossorigin playsinline>
-<source type="application/vnd.apple.mpegurl" src="https://prod-ent-live-gm.jiocinema.com/bpk-tv/JV_SportsHD15_DIG_MOB/Fallback/index.m3u8"video>
+    <video id="video" autoplay controls crossorigin playsinline></video>
 </div>
-</body>
+
 <script>
- setTimeout(videovisible, 3000)
-function videovisible() {
-    document.getElementById('loading').style.display = 'none'
-}
+ setTimeout(() => {
+    document.getElementById('loading').style.display = 'none';
+ }, 3000);
+
 document.addEventListener("DOMContentLoaded", () => {
-const e = document.querySelector("video"),
-n = e.getElementsByTagName("source")[0].src,
-o = {};
-if(Hls.isSupported()) {
-var config = {
-maxMaxBufferLength: 100,
-};
-const t = new Hls(config);
-t.loadSource(n), t.on(Hls.Events.MANIFEST_PARSED, function(n, l) {
-const s = t.levels.map(e => e.height);
-o.quality = {
-default: s[0],
-options: s,
-forced: !0,
-onChange: e => (function(e) {
-window.hls.levels.forEach((n, o) => {
-n.height === e && (window.hls.currentLevel = o)
-})
-})(e)
-};
-new Plyr(e, o)
-}), t.attachMedia(e), window.hls = t
-} else {
-new Plyr(e, o)
-}
+    const video = document.getElementById("video");
+    const videoSrc = "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JV_SportsHD15_DIG_MOB/Fallback/index.m3u8";
+    const playerOptions = {};
+
+    if (Hls.isSupported()) {
+        var config = {
+            maxMaxBufferLength: 100,
+        };
+        const hls = new Hls(config);
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            const qualities = hls.levels.map(level => level.height);
+            playerOptions.quality = {
+                default: qualities[0],
+                options: qualities,
+                forced: true,
+                onChange: quality => {
+                    hls.levels.forEach((level, index) => {
+                        if (level.height === quality) {
+                            hls.currentLevel = index;
+                        }
+                    });
+                }
+            };
+            new Plyr(video, playerOptions);
+        });
+        window.hls = hls;
+    } else {
+        new Plyr(video, playerOptions);
+    }
 });
-  </script>
-<script>
-// alert('Join Our Telegram For Latest update')
-         if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
-         window.open("https://t.me/+tL4jz_00y6NlMGRl", '_blank');
-     }
+
+// Telegram Join Prompt
+if (confirm("Join Our Telegram Channel @Cricinsider365")) {
+    window.open("https://t.me/+tL4jz_00y6NlMGRl", '_blank');
+}
 </script>
-</script>
-  </body>
+
+</body>
 </html>
