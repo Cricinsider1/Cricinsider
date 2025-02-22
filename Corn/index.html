@@ -1,149 +1,185 @@
 <html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<title>TG_@Cricinsider365</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+<head>
+<title>TG-SAMARTH</title>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.4/dist/hls.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css"/>
+<script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.min.js"></script>
 <style>
-    body {
-        background-color: #000;
-        margin: 0;
-    }
-
-    /* Container for video and logo */
-    .video-container {
-        position: relative;
+html {
+font-family: sans-serif;
+background: #000;
+}
+.plyr {
+height: 100%;
+width :100%;
+}
+:root {
+--plyr-color-main: #d9230f;
+}
+.loading {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
-        background-color: black;
+        background: #000;
+        z-index: 9999;
     }
-
-    /* Style for the logo */
-    .logo {
+    
+    .loading-text {
         position: absolute;
-        top: 10px; /* Adjust vertical position */
-        left: 10px; /* Adjust horizontal position */
-        z-index: 1; /* Ensure the logo appears above the video */
-        max-width: 120px; /* Set maximum width for the logo */
-        max-height: 120px; /* Set maximum height for the logo */
-        pointer-events: none; /* Prevent interference with video controls */
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        width: 100%;
+        height: 100px;
+        line-height: 100px;
     }
-
-    .shaka-spinner-container {
-        display: none;
+    
+    .loading-text span {
+        display: inline-block;
+        margin: 0 5px;
+        color: #00b3ff;
+        font-family: 'Quattrocento Sans', sans-serif;
     }
-
-    .uc {
-        pointer-events: none;
+    
+    .loading-text span:nth-child(1) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 0s infinite linear alternate;
     }
-</style>
-</head>
-
-<body>
-    <!-- Video container -->
-    <div class="video-container">
-        <!-- Logo inside the video -->
-        <img src="https://i.ibb.co/fMKnFg3/1000003992-removebg-preview.png" alt="Logo" class="logo">
-
-        <!-- Video player -->
-        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-            <video autoplay muted data-shaka-player id="video" poster="https://i.ibb.co/x7jXd29/In-Shot-20241215-002653932.jpg" style="width:100%; height:100%;"></video>
-        </div>
-    </div>
-
-    <script>
-    // Restrict iframe embedding
-    if (window.top !== window.self) {
-        window.addEventListener('DOMContentLoaded', function() {
-            // Clear the existing content
-            document.body.innerHTML = '';
-
-            // Add custom message
-            const messageDiv = document.createElement('div');
-            messageDiv.id = 'message';
-            messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
-
-            // Style the message
-            messageDiv.style.color = '#fff';
-            messageDiv.style.backgroundColor = '#000';
-            messageDiv.style.position = 'fixed';
-            messageDiv.style.top = '50%';
-            messageDiv.style.left = '50%';
-            messageDiv.style.transform = 'translate(-50%, -50%)';
-            messageDiv.style.padding = '20px';
-            messageDiv.style.borderRadius = '10px';
-            messageDiv.style.textAlign = 'center';
-            messageDiv.style.fontFamily = 'Arial, sans-serif';
-            messageDiv.style.fontSize = '20px';
-
-            // Append the message to the body
-            document.body.appendChild(messageDiv);
-        });
+    
+    .loading-text span:nth-child(2) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 0.2s infinite linear alternate;
     }
-
-    async function init() {
-        const video = document.getElementById("video");
-        const ui = video.ui;
-        const controls = ui.getControls();
-        const player = controls.getPlayer();
-
-        player.configure({
-            drm: {
-                clearKeys: {
-                    '03c2e0af2f8159f9f0ce9b5dbc865f10': "cd84ed136b0cc71f8ab8cd4d4f6a2e4c"
-                }
-            }
-        });
-
-        ui.configure({
-            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-            volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                level: "rgb(0, 255, 0)"     // Green color for the volume level
-            },
-            seekBarColors: {
-                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
-            }
-        });
-window.player = player;
-        window.ui = ui;
-
-        player.addEventListener("error", onPlayerErrorEvent);
-        controls.addEventListener("error", onUIErrorEvent);
-
-        try {
-            await player.load("https://sg-cors.onrender.com/https://linearjitp-playback.astro.com.my/dash-wv/linear/2504/default_primary.mpd");
-            console.log("The video has now been loaded!");
-        } catch (error) {
-            onPlayerError(error);
+    
+    .loading-text span:nth-child(3) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 0.4s infinite linear alternate;
+    }
+    
+    .loading-text span:nth-child(4) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 0.6s infinite linear alternate;
+    }
+    
+    .loading-text span:nth-child(5) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 0.8s infinite linear alternate;
+    }
+    
+    .loading-text span:nth-child(6) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 1s infinite linear alternate;
+    }
+    
+    .loading-text span:nth-child(7) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 1.2s infinite linear alternate;
+    }
+    .loading-text span:nth-child(8) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 1.4s infinite linear alternate;
+    }
+    .loading-text span:nth-child(9) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 1.6s infinite linear alternate;
+    }
+    .loading-text span:nth-child(10) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 1.8s infinite linear alternate;
+    }
+    .loading-text span:nth-child(11) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 2s infinite linear alternate;
+    }
+    .loading-text span:nth-child(12) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 2.2s infinite linear alternate;
+    }
+    @keyframes blur-text {
+        0% {
+            filter: blur(0px);
+        }
+        100% {
+            filter: blur(4px);
         }
     }
 
-    function onPlayerErrorEvent(event) {
-        onPlayerError(event.detail);
+    .plyr__video-wrapper::before {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+        content: '';
+        height: 35px;
+        width: 35px;
+        background-size: 35px auto, auto;
     }
 
-    function onPlayerError(error) {
-        console.error("Error code", error.code, "object", error);
-    }
-
-    function onUIErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
-
-    function initFailed() {
-        console.error("Unable to load the UI library!");
-    }
-
-    document.addEventListener("shaka-ui-loaded", init);
-    document.addEventListener("shaka-ui-load-failed", initFailed);
-
-    if (confirm("Join For More Links!!")) {
-        window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";
-    }
-    </script>
+</style>
+</head>
+<body>
+ <div id="loading" class="loading">
+<div class="loading-text">
+    <span class="loading-text-words" style="color:#d9230f;">T</span>
+    <span class="loading-text-words" style="color:#d9230f;">G</span>
+    <span class="loading-text-words" style="color:#d9230f;">-</span>
+    <span class="loading-text-words" style="color:#d9230f;">S</span>
+    <span class="loading-text-words" style="color:#d9230f;">A</span>
+    <span class="loading-text-words" style="color:#d9230f;">M</span>
+    <span class="loading-text-words" style="color:#d9230f;">A</span>
+<span class="loading-text-words" style="color:#d9230f;">R</span>
+    <span class="loading-text-words" style="color:#d9230f;">T</span><span class="loading-text-words" style="color:#d9230f;">H</span></div>
+</div>
+<div>
+<video autoplay controls crossorigin playsinline>
+<source type="application/vnd.apple.mpegurl" src="https://prod-ent-live-gm.jiocinema.com/bpk-tv/JV_SportsHD15_DIG_MOB/Fallback/index.m3u8"video>
+</div>
 </body>
+<script>
+ setTimeout(videovisible, 3000)
+function videovisible() {
+    document.getElementById('loading').style.display = 'none'
+}
+document.addEventListener("DOMContentLoaded", () => {
+const e = document.querySelector("video"),
+n = e.getElementsByTagName("source")[0].src,
+o = {};
+if(Hls.isSupported()) {
+var config = {
+maxMaxBufferLength: 100,
+};
+const t = new Hls(config);
+t.loadSource(n), t.on(Hls.Events.MANIFEST_PARSED, function(n, l) {
+const s = t.levels.map(e => e.height);
+o.quality = {
+default: s[0],
+options: s,
+forced: !0,
+onChange: e => (function(e) {
+window.hls.levels.forEach((n, o) => {
+n.height === e && (window.hls.currentLevel = o)
+})
+})(e)
+};
+new Plyr(e, o)
+}), t.attachMedia(e), window.hls = t
+} else {
+new Plyr(e, o)
+}
+});
+  </script>
+<script> alert("JOIN MY TELEGRAM CHANNEL LIVE LINKS BY TEAMROHITOFFICAL45 ")
+</script>
+}
+</script>
+  </body>
 </html>
