@@ -5,76 +5,38 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>TG_@Cricinsider365</title>
+    <title>Cricinsider365</title>
 
-    <!-- HLS.js & Plyr CSS -->
+    <!-- HLS.js & Plyr -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.4/dist/hls.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css"/>
     <script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.min.js"></script>
 
     <style>
-        html, body {
-            font-family: sans-serif;
+        body {
             background: #000;
             margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-        }
-        #video-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
             height: 100vh;
         }
-        .plyr {
+        video {
             width: 80%;
             max-width: 900px;
-        }
-        :root {
-            --plyr-color-main: #d9230f;
-        }
-        /* Loading Screen */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-        .loading-text {
-            text-align: center;
-            font-size: 24px;
-            color: #d9230f;
         }
     </style>
 </head>
 <body>
 
-    <!-- Loading Animation -->
-    <div id="loading" class="loading">
-        <div class="loading-text">INSIDER365</div>
-    </div>
-
-    <!-- Video Player Container -->
-    <div id="video-container">
-        <video id="video" controls crossorigin playsinline></video>
-    </div>
+    <video id="video" controls crossorigin playsinline></video>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-                document.getElementById('loading').style.display = 'none';
-            }, 3000);
-
             const video = document.getElementById("video");
-            const videoSrc = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740642673~acl=%2f*~id=3f74cbd9e396350d08288a1ec2051858~data=hdntl~hmac=d18d36b982203b27673e1ca12f04b179d737e624d656809cf350a80caaf0472e/index.m3u8";
+
+            // Test Stream (Replace this with your stream URL)
+            const videoSrc = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
 
             function setupHLS() {
                 if (Hls.isSupported()) {
@@ -94,19 +56,11 @@
                         new Plyr(video);
                     });
                 } else {
-                    console.error("HLS Not Supported on this browser.");
+                    console.error("HLS Not Supported in this browser.");
                 }
             }
 
             setupHLS();
-
-            // Telegram Prompt (Only Once)
-            if (!localStorage.getItem("tg_prompt_shown")) {
-                if (confirm("Join Our Telegram Channel @Cricinsider365")) {
-                    window.open("https://t.me/+tL4jz_00y6NlMGRl", '_blank');
-                }
-                localStorage.setItem("tg_prompt_shown", "true");
-            }
         });
     </script>
 
