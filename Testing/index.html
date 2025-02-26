@@ -1,149 +1,95 @@
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<title>TG_@Cricinsider365</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
-<style>
-    body {
-        background-color: #000;
-        margin: 0;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>TG_@Cricinsider365</title>
 
-    /* Container for video and logo */
-    .video-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-    }
+    <!-- HLS.js & Plyr CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.4/dist/hls.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.min.js"></script>
 
-    /* Style for the logo */
-    .logo {
-        position: absolute;
-        top: 10px; /* Adjust vertical position */
-        left: 10px; /* Adjust horizontal position */
-        z-index: 1; /* Ensure the logo appears above the video */
-        max-width: 120px; /* Set maximum width for the logo */
-        max-height: 120px; /* Set maximum height for the logo */
-        pointer-events: none; /* Prevent interference with video controls */
-    }
-
-    .shaka-spinner-container {
-        display: none;
-    }
-
-    .uc {
-        pointer-events: none;
-    }
-</style>
+    <style>
+        html, body {
+            font-family: sans-serif;
+            background: #000;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        .plyr {
+            width: 100%;
+            height: 100vh;
+        }
+        :root {
+            --plyr-color-main: #d9230f;
+        }
+        /* Loading Screen */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .loading-text {
+            text-align: center;
+            font-size: 24px;
+            color: #d9230f;
+        }
+    </style>
 </head>
-
 <body>
-    <!-- Video container -->
-    <div class="video-container">
-        <!-- Logo inside the video -->
-        <img src="https://i.ibb.co/fMKnFg3/1000003992-removebg-preview.png" alt="Logo" class="logo">
 
-        <!-- Video player -->
-        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-            <video autoplay muted data-shaka-player id="video" poster="https://i.ibb.co/x7jXd29/In-Shot-20241215-002653932.jpg" style="width:100%; height:100%;"></video>
-        </div>
+    <!-- Loading Animation -->
+    <div id="loading" class="loading">
+        <div class="loading-text">INSIDER365</div>
     </div>
 
+    <!-- Video Player -->
+    <video id="video" controls crossorigin playsinline></video>
+
     <script>
-    // Restrict iframe embedding
-    if (window.top !== window.self) {
-        window.addEventListener('DOMContentLoaded', function() {
-            // Clear the existing content
-            document.body.innerHTML = '';
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+            }, 3000);
 
-            // Add custom message
-            const messageDiv = document.createElement('div');
-            messageDiv.id = 'message';
-            messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
+            const video = document.getElementById("video");
+            const videoSrc = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740642673~acl=%2f*~id=3f74cbd9e396350d08288a1ec2051858~data=hdntl~hmac=d18d36b982203b27673e1ca12f04b179d737e624d656809cf350a80caaf0472e/index.m3u8";
 
-            // Style the message
-            messageDiv.style.color = '#fff';
-            messageDiv.style.backgroundColor = '#000';
-            messageDiv.style.position = 'fixed';
-            messageDiv.style.top = '50%';
-            messageDiv.style.left = '50%';
-            messageDiv.style.transform = 'translate(-50%, -50%)';
-            messageDiv.style.padding = '20px';
-            messageDiv.style.borderRadius = '10px';
-            messageDiv.style.textAlign = 'center';
-            messageDiv.style.fontFamily = 'Arial, sans-serif';
-            messageDiv.style.fontSize = '20px';
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    new Plyr(video);
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = videoSrc;
+                new Plyr(video);
+            } else {
+                console.error("HLS not supported on this browser.");
+            }
 
-            // Append the message to the body
-            document.body.appendChild(messageDiv);
-        });
-    }
-
-    async function init() {
-        const video = document.getElementById("video");
-        const ui = video.ui;
-        const controls = ui.getControls();
-        const player = controls.getPlayer();
-
-        player.configure({
-            drm: {
-                clearKeys: {
-                    '04a4ed8c992d291ce2097663b2adb677': "f108f8cb08c765aedf55d5b5eae58f4c"
+            // Telegram Prompt (Only Once)
+            if (!localStorage.getItem("tg_prompt_shown")) {
+                if (confirm("Join Our Telegram Channel @Cricinsider365")) {
+                    window.open("https://t.me/+tL4jz_00y6NlMGRl", '_blank');
                 }
+                localStorage.setItem("tg_prompt_shown", "true");
             }
         });
-
-        ui.configure({
-            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-            volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                level: "rgb(0, 255, 0)"     // Green color for the volume level
-            },
-            seekBarColors: {
-                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
-            }
-        });
-window.player = player;
-        window.ui = ui;
-
-        player.addEventListener("error", onPlayerErrorEvent);
-        controls.addEventListener("error", onUIErrorEvent);
-
-        try {
-            await player.load("https://live-hw-stream.starzplayarabia.com/ICC_Champions_Trophy_2025/dash/drm/a_1_0-36497243334.m4a?pkg_vdrm=40fa54859e4887e0e49fe518adf8ed1f&pkg_hm=index.mpd&pkg_prot=dash&pkg_vcodec=avc1&pkg_profile=a_1_0.m3u8&pkg_svc=1");
-            console.log("The video has now been loaded!");
-        } catch (error) {
-            onPlayerError(error);
-        }
-    }
-
-    function onPlayerErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
-
-    function onPlayerError(error) {
-        console.error("Error code", error.code, "object", error);
-    }
-
-    function onUIErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
-
-    function initFailed() {
-        console.error("Unable to load the UI library!");
-    }
-
-    document.addEventListener("shaka-ui-loaded", init);
-    document.addEventListener("shaka-ui-load-failed", initFailed);
-
-    if (confirm("Join For More Links!!")) {
-        window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";
-    }
     </script>
+
 </body>
 </html>
