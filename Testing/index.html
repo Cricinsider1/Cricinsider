@@ -91,7 +91,7 @@
         player.configure({
             drm: {
                 clearKeys: {
-                    'cb8daf414566aa17d06f8294f3f3b444': "89d58908a57d70ef87bf16c9b5821ca2"
+                    '04a4ed8c992d291ce2097663b2adb677': "f108f8cb08c765aedf55d5b5eae58f4c"
                 }
             }
         });
@@ -115,7 +115,7 @@ window.player = player;
         controls.addEventListener("error", onUIErrorEvent);
 
         try {
-            await player.load("https://otte.live.fly.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/36ey04dwgw/out/v1/190f1d69a3d5467f8fb7d9df4339bc49/cenc.mpd");
+            await player.load("https://live-hw-stream.starzplayarabia.com/ICC_Champions_Trophy_2025/dash/drm/index.mpd");
             console.log("The video has now been loaded!");
         } catch (error) {
             onPlayerError(error);
