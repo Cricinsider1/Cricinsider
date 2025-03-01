@@ -1,68 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Cricinsider365</title>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>TG_@Cricinsider365</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
+<style>
+    body {
+        background-color: #000;
+        margin: 0;
+    }
 
-    <!-- HLS.js & Plyr -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.4/dist/hls.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.min.js"></script>
+    /* Container for video and logo */
+    .video-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+    }
 
-    <style>
-        body {
-            background: #000;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        video {
-            width: 80%;
-            max-width: 900px;
-        }
-    </style>
+    /* Style for the logo */
+    .logo {
+        position: absolute;
+        top: 10px; /* Adjust vertical position */
+        left: 10px; /* Adjust horizontal position */
+        z-index: 1; /* Ensure the logo appears above the video */
+        max-width: 120px; /* Set maximum width for the logo */
+        max-height: 120px; /* Set maximum height for the logo */
+        pointer-events: none; /* Prevent interference with video controls */
+    }
+
+    .shaka-spinner-container {
+        display: none;
+    }
+
+    .uc {
+        pointer-events: none;
+    }
+</style>
 </head>
-<body>
 
-    <video id="video" controls crossorigin playsinline></video>
+<body>
+    <!-- Video container -->
+    <div class="video-container">
+        <!-- Logo inside the video -->
+        <img src="https://i.ibb.co/fMKnFg3/1000003992-removebg-preview.png" alt="Logo" class="logo">
+
+        <!-- Video player -->
+        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            <video autoplay muted data-shaka-player id="video" poster="https://i.ibb.co/x7jXd29/In-Shot-20241215-002653932.jpg" style="width:100%; height:100%;"></video>
+        </div>
+    </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const video = document.getElementById("video");
+    // Restrict iframe embedding
+    if (window.top !== window.self) {
+        window.addEventListener('DOMContentLoaded', function() {
+            // Clear the existing content
+            document.body.innerHTML = '';
 
-            // Test Stream (Replace this with your stream URL)
-            const videoSrc = "https://jcevents.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/hdntl=exp=1740642673~acl=%2f*~id=3f74cbd9e396350d08288a1ec2051858~data=hdntl~hmac=d18d36b982203b27673e1ca12f04b179d737e624d656809cf350a80caaf0472e/index.m3u8";
+            // Add custom message
+            const messageDiv = document.createElement('div');
+            messageDiv.id = 'message';
+            messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
 
-            function setupHLS() {
-                if (Hls.isSupported()) {
-                    const hls = new Hls();
-                    hls.loadSource(videoSrc);
-                    hls.attachMedia(video);
-                    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                        console.log("HLS Loaded Successfully!");
-                        new Plyr(video);
-                    });
-                    hls.on(Hls.Events.ERROR, (event, data) => {
-                        console.error("HLS Error:", data);
-                    });
-                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                    video.src = videoSrc;
-                    video.addEventListener("loadedmetadata", () => {
-                        new Plyr(video);
-                    });
-                } else {
-                    console.error("HLS Not Supported in this browser.");
+            // Style the message
+            messageDiv.style.color = '#fff';
+            messageDiv.style.backgroundColor = '#000';
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '50%';
+            messageDiv.style.left = '50%';
+            messageDiv.style.transform = 'translate(-50%, -50%)';
+            messageDiv.style.padding = '20px';
+            messageDiv.style.borderRadius = '10px';
+            messageDiv.style.textAlign = 'center';
+            messageDiv.style.fontFamily = 'Arial, sans-serif';
+            messageDiv.style.fontSize = '20px';
+
+            // Append the message to the body
+            document.body.appendChild(messageDiv);
+        });
+    }
+
+    async function init() {
+        const video = document.getElementById("video");
+        const ui = video.ui;
+        const controls = ui.getControls();
+        const player = controls.getPlayer();
+
+        player.configure({
+            drm: {
+                clearKeys: {
+                    '03c2e0af2f8159f9f0ce9b5dbc865f10': "cd84ed136b0cc71f8ab8cd4d4f6a2e4c"
                 }
             }
-
-            setupHLS();
         });
-    </script>
 
+        ui.configure({
+            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+            volumeBarColors: {
+                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                level: "rgb(0, 255, 0)"     // Green color for the volume level
+            },
+            seekBarColors: {
+                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+            }
+        });
+window.player = player;
+        window.ui = ui;
+
+        player.addEventListener("error", onPlayerErrorEvent);
+        controls.addEventListener("error", onUIErrorEvent);
+
+        try {
+            await player.load("https://astro-gbj7.vercel.app/2504/default_ott.mpd");
+            console.log("The video has now been loaded!");
+        } catch (error) {
+            onPlayerError(error);
+        }
+    }
+
+    function onPlayerErrorEvent(event) {
+        onPlayerError(event.detail);
+    }
+
+    function onPlayerError(error) {
+        console.error("Error code", error.code, "object", error);
+    }
+
+    function onUIErrorEvent(event) {
+        onPlayerError(event.detail);
+    }
+
+    function initFailed() {
+        console.error("Unable to load the UI library!");
+    }
+
+    document.addEventListener("shaka-ui-loaded", init);
+    document.addEventListener("shaka-ui-load-failed", initFailed);
+
+    if (confirm("Join For More Links!!")) {
+        window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";
+    }
+    </script>
 </body>
 </html>
