@@ -1,152 +1,106 @@
-<!DOCTYPE html><html lang="en"><head><script language="javascript">
-<!--
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cricinsider365</title>
+<script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+<style>
+/* General Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #000000, #1a1a1a);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TG_@Cricinsider365</title>
+/* Logo Styling */
+#logo {
+    position: absolute;
+    top: 80px;  /* Moved the logo a bit down */
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
 
-    <link rel="stylesheet" href="/style.css">
-    <style>
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-        }
+#logo img {
+    width: 180px;  /* Increased logo size */
+    height: auto;
+}
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
+/* Video Player Container */
+#video {
+    width: 90%;
+    max-width: 720px;
+    margin: 60px auto 20px auto;
+    border: 2px solid #1e90ff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    transition: border 0.3s;
+}
 
+.fullscreen #video {
+    border: none;
+    box-shadow: none;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* Telegram Button Styling */
+#telegramButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 50px;
+    background: linear-gradient(90deg, #1e90ff, #001f3f);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-        #my-video {
-            width: 100%;
-            height: 100vh;
-            height: 100svh;
-        }
-
-        li a {
-            text-transform: capitalize;
-
-        }
-
-        video {
-            width: 100% !important;
-            height: 100vh;
-            height: 100svh !important;
-        }
-
-        .tg-banner {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, #1da1f2, #0077b5);
-            border-radius: 12px;
-padding: 12px 18px;
-            display: flex;
-            align-items: center;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .tg-banner:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .tg-banner img {
-            width: 36px;
-            height: 36px;
-            margin-right: 12px;
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-
-        .tg-banner span {
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .relative {
-            position: relative !important;
-            left: 0 !important;
-            top: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-        }
-
-        .Top {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .Top h1 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #1da1f2;
-            margin-bottom: 1rem;
-            text-decoration: underline;
-        }
-
-        .Top p {
-            font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 0.2rem;
-            opacity: 0.7;
-        }
-
-        .Bottom {
-            display: flex;
-            flex-direction: column;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            margin: 0 auto;
-            max-width: 300px;
-        }
-
-        .m2 {
-            margin-left: 2rem;
-            margin-top: 0.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-    </style>
-<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
-
+#telegramButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    background: linear-gradient(90deg, #001f3f, #1e90ff);
+}
+</style>
+</head>
 <body>
 
-    <a href="https://t.me/+tL4jz_00y6NlMGRl" class="tg-banner" target="_blank" rel="noopener noreferrer">
-        <img src="https://i.pinimg.com/originals/31/2a/f9/312af9235aadad69655688eaee97eabf.png" alt="Telegram Icon">
-        <span>@TG_@Cricinsider365- Join us!</span>
-    </a>
-    <script>
-        if (confirm("Join For More Links!!")) {
-            window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";
-        }
-    </script>
+<!-- Logo Slot -->
+<div id="logo" onclick="redirectToWebsite()">
+    <img src="https://i.postimg.cc/rw0xB8nh/IMG-20250217-230348-305.png" alt="Logo" />
+</div>
 
-    <iframe src="https://xhls.embedxt.site/?live/hls.m3u8" allowfullscreen=""></iframe>
+<!-- Video Player -->
+<div id="video"></div>
 
+<!-- Telegram Button -->
+<div id="telegramButton" onclick="redirectToTelegram()">
+    Join Telegram
+</div>
 
+<!-- Scripts -->
+<script type="text/javascript">
+//<!--
+const _0x3748c2=_0xe42a;(function(_0x5ab508,_0x5877cb){const _0x359d7=_0xe42a,_0xa0ec63=_0x5ab508();while(!![]){try{const _0x1f1c04=parseInt(_0x359d7(0x1d0))/(-0x9*-0x11b+-0x9f*0x1c+0x772)*(-parseInt(_0x359d7(0x1c8))/(0x31*0x71+0x1e29+0x19e4*-0x2))+-parseInt(_0x359d7(0x1c3))/(-0x12d4*-0x1+0x20b9*-0x1+0xde8)+parseInt(_0x359d7(0x1d6))/(-0x64*0x37+0xdf6+0x78a)*(-parseInt(_0x359d7(0x1cd))/(0x237d+-0x1*-0x1c05+-0x3f7d))+parseInt(_0x359d7(0x1dc))/(-0x4c1+-0x269*-0x7+-0x81*0x18)*(-parseInt(_0x359d7(0x1d3))/(0x4b+-0x20d3+0x208f))+parseInt(_0x359d7(0x1e3))/(-0x4*0x6d8+-0x8e+0x4a9*0x6)+parseInt(_0x359d7(0x1c7))/(-0x35*0x4d+-0x127c+0x2276)+parseInt(_0x359d7(0x1c2))/(-0x1599+-0x22*-0xb+0x1*0x142d);if(_0x1f1c04===_0x5877cb)break;else _0xa0ec63['push'](_0xa0ec63['shift']());}catch(_0x4baf92){_0xa0ec63['push'](_0xa0ec63['shift']());}}}(_0x4352,0xc2eb6+0x2*0x4325+-0x5ac77));const playerInstance=jwplayer(_0x3748c2(0x1c5))[_0x3748c2(0x1de)]({'width':_0x3748c2(0x1ca),'aspectratio':_0x3748c2(0x1d7),'autostart':!![],'mute':![],'file':_0x3748c2(0x1c6)+_0x3748c2(0x1e1)+_0x3748c2(0x1da)+_0x3748c2(0x1e4)+_0x3748c2(0x1db),'skin':{'name':_0x3748c2(0x1d2)}});playerInstance['on'](_0x3748c2(0x1cf),function(_0x4663e0){const _0xa1ea84=_0x3748c2,_0x19c0ad={'ZTOYE':_0xa1ea84(0x1cf)};_0x4663e0[_0xa1ea84(0x1cf)]?document[_0xa1ea84(0x1ce)][_0xa1ea84(0x1c1)][_0xa1ea84(0x1d8)](_0x19c0ad[_0xa1ea84(0x1cc)]):document[_0xa1ea84(0x1ce)][_0xa1ea84(0x1c1)][_0xa1ea84(0x1d1)](_0x19c0ad[_0xa1ea84(0x1cc)]);});function redirectToTelegram(){const _0x5263d2=_0x3748c2,_0x9fd867={'yikBf':_0x5263d2(0x1d5)+_0x5263d2(0x1df)+_0x5263d2(0x1c9)};window[_0x5263d2(0x1d4)][_0x5263d2(0x1dd)]=_0x9fd867[_0x5263d2(0x1cb)];}function _0xe42a(_0x24caad,_0x4adc2b){const _0x23dc65=_0x4352();return _0xe42a=function(_0x3a3aa0,_0x224412){_0x3a3aa0=_0x3a3aa0-(-0x1e8*-0xb+0x7d+-0x13b4);let _0x57c256=_0x23dc65[_0x3a3aa0];return _0x57c256;},_0xe42a(_0x24caad,_0x4adc2b);}function redirectToWebsite(){const _0xe1b96d=_0x3748c2,_0x19e51d={'IIivn':_0xe1b96d(0x1d5)+_0xe1b96d(0x1df)+_0xe1b96d(0x1c9)};window[_0xe1b96d(0x1d4)][_0xe1b96d(0x1dd)]=_0x19e51d[_0xe1b96d(0x1d9)];}confirm(_0x3748c2(0x1c4)+_0x3748c2(0x1e0)+_0x3748c2(0x1e5)+_0x3748c2(0x1e2)+'d!')&&redirectToTelegram();function _0x4352(){const _0x129e73=['1862379xOATlH','650336SwQTeI','00y6NlMGRl','100%','yikBf','ZTOYE','1633595gTKFJq','body','fullscreen','1nwADHu','remove','glow','81165CpFXQm','location','https://t.','4qvMIuR','16:9','add','IIivn','.site/hls/','m3u8','36cWyngS','href','setup','me/+tL4jz_','elegram\x20Ch','nb.embedxt','tay\x20update','7345248ACWUcP','index720p.','annel\x20to\x20s','classList','5524330zRjdGs','1485378ciZUkm','Join\x20Our\x20T','video','https://cd'];_0x4352=function(){return _0x129e73;};return _0x4352();}
+//-->
 
+</script>
 
-</body></html>
+</body>
+</html>
