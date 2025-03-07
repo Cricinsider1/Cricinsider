@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M3U8 Stream Player</title>
+    <title>M3U8 Stream Player with Quality Selection</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body {
@@ -16,14 +16,28 @@
             width: 80%;
             max-width: 800px;
             margin-top: 20px;
+            display: block;
+            margin: auto;
+        }
+        select {
+            margin-top: 10px;
+            padding: 5px;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
     <h2>Live Stream Player</h2>
     <video id="video" controls autoplay></video>
+    <br>
+    <label for="quality">Select Quality: </label>
+    <select id="quality">
+        <option value="auto">Auto</option>
+    </select>
+
     <script>
         var video = document.getElementById('video');
+        var qualitySelector = document.getElementById('quality');
         var videoSrc = "https://v18tataplaysyndication.akamaized.net/bpk-tv/Sports18_1_HD_voot_MOB/output03/index.m3u8?hdnea=exp=1741365391~acl=/*~hmac=8e79ea61424999c077471222df66f706d56d589172881768fda4531a7f73598b";
 
         if (Hls.isSupported()) {
@@ -32,6 +46,25 @@
             hls.attachMedia(video);
             hls.on(Hls.Events.MANIFEST_PARSED, function () {
                 video.play();
+                let levels = hls.levels;
+
+                // Add quality levels to the dropdown
+                levels.forEach((level, index) => {
+                    let option = document.createElement("option");
+                    option.value = index;
+                    option.text = level.height + "p";
+                    qualitySelector.appendChild(option);
+                });
+
+                // Change quality when the user selects a different option
+                qualitySelector.addEventListener("change", function () {
+                    let selectedQuality = qualitySelector.value;
+                    if (selectedQuality === "auto") {
+                        hls.currentLevel = -1; // Auto quality
+                    } else {
+                        hls.currentLevel = parseInt(selectedQuality);
+                    }
+                });
             });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = videoSrc;
