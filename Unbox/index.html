@@ -1,96 +1,189 @@
-<html>
-<head>
-<title>TG_@Cricinsider365</title>
-<meta charset="UTF-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.4/dist/hls.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css"/>
-<script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.min.js"></script>
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TG_@Cricinsider365</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #242424, #3b5998);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Bingewav Sports Logo Section */
+        .logo-container {
+            background: #000; /* Black background for the logo */
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-container img {
+            width: 220px; /* Adjust the logo size */
+            height: auto;
+        }
+
+        /* Video Player Styling */
+        .player-container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000; /* Black background behind the video for better focus */
+        }
+
+        .player-container iframe {
+            border-radius: 15px;
+        }
+
+        /* Stream Issue Section */
+        .stream-issue {
+            margin-top: 20px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            color: #fff;
+            width: fit-content;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .stream-issue a {
+            color: #00c1ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .stream-issue a:hover {
+            text-decoration: underline;
+        }
+
+        /* Credits Section */
+        .credits {
+            margin-top: 25px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 16px;
+            color: #fff;
+            width: fit-content;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: inline-block;
+        }
+
+        .credits-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .credits a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .credits a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo-container img {
+                width: 180px;
+            }
+
+            .credits, .stream-issue {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .credits-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
+<body>
+    </div>
+
+   <!-- Video Player Section -->
+<div class="player-container">
+    <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="true" scrolling="no" src="https://www.youtube.com/live/r0Vo68aaPao?si=3_TnsSKQdkYhU_nv" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+    </div>
+</div>
+<!-- Join Telegram Button -->
+<div class="join-telegram-container">
+    <button class="join-telegram-btn" onclick="window.open('https://t.me/+tL4jz_00y6NlMGRl', '_blank')">Join Telegram Channel</button>
+</div>
+
 <style>
-html {
-font-family: sans-serif;
-background: #000;
-}
-.plyr {
-height: 100%;
-width :100%;
-}
-:root {
---plyr-color-main: #d9230f;
-}
-.loading {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        z-index: 9999;
-    }
-
-    .loading-text {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
+    .join-telegram-container {
+        margin-top: 20px;
         text-align: center;
-        width: 100%;
-        height: 100px;
-        line-height: 100px;
     }
 
-    .loading-text span {
-        display: inline-block;
-        margin: 0 5px;
-        color: #00b3ff;
-        font-family: 'Quattrocento Sans', sans-serif;
+    .join-telegram-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #008fd6;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .loading-text span:nth-child(1) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 0s infinite linear alternate;
-    }
-
-    @keyframes blur-text {
-        0% {
-            filter: blur(0px);
-        }
-        100% {
-            filter: blur(4px);
-        }
+    .join-telegram-btn:hover {
+        background-color: #006bb3;
     }
 </style>
-</head>
-<body>
- <div id="loading" class="loading">
-<div class="loading-text">
-    <span class="loading-text-words" style="color:#d9230f;">I</span>
-    <span class="loading-text-words" style="color:#d9230f;">N</span>
-    <span class="loading-text-words" style="color:#d9230f;">S</span>
-    <span class="loading-text-words" style="color:#d9230f;">I</span>
-    <span class="loading-text-words" style="color:#d9230f;">D</span>
-    <span class="loading-text-words" style="color:#d9230f;">E</span>
-    <span class="loading-text-words" style="color:#d9230f;">R</span>
-    <span class="loading-text-words" style="color:#d9230f;">3</span>
-    <span class="loading-text-words" style="color:#d9230f;">6</span>
-    <span class="loading-text-words" style="color:#d9230f;">5</span>
-</div>
-</div>
-
-<div>
-    <video id="video" autoplay controls crossorigin playsinline></video>
-</div>
 
 <script>
- //<!--
-const _0x21f6ec=_0x27db;function _0x4060(){const _0x54d1e4=['609ZNYwQt','7f097c15b9','sKNDF','forEach','quality','42588/mast','Dsvvn','28158pWndlo','style','currentLev','levels','14986288RSrJVv','wnrAT','none','5477550jRvmLh','ById','LESbp','658234ErVVLr','MANIFEST_P','elegram\x20Ch','annel\x20@Cri','c7c5289/67','getElement','_blank','s.live/bea','attachMedi','er.m3u8','height','video','Loaded','stener','n-in3.100m','DOMContent','7c4bc5bc99','7/17422040','https://t.','00y6NlMGRl','addEventLi','map','https://cd','loadSource','Events','hls','d7e9c70214','3770700xHoCfR','33kZPBlI','jTPcH','loading','3812BePsLE','ARSED','Join\x20Our\x20T','isSupporte','cinsider36','display','open','4884ieqCuj','m1/62306e5','me/+tL4jz_','LiflO','2AZbrRv','14865372CyPAFP','3c/2025031'];_0x4060=function(){return _0x54d1e4;};return _0x4060();}(function(_0x14e11e,_0x3f315f){const _0x47c57f=_0x27db,_0x6de63b=_0x14e11e();while(!![]){try{const _0x5dca58=parseInt(_0x47c57f(0xae))/(0x2321+-0x4*-0x518+-0x10*0x378)*(-parseInt(_0x47c57f(0x9a))/(-0x1a99+0x1*-0xa31+0x24cc))+parseInt(_0x47c57f(0x96))/(0x83c*0x4+0x1db3+-0x20*0x1f5)*(-parseInt(_0x47c57f(0x8f))/(0x15cb*0x1+-0x77*-0x2b+0xa2*-0x42))+-parseInt(_0x47c57f(0xab))/(-0x1*0x1da9+0xc*-0x24+0x49*0x6e)+-parseInt(_0x47c57f(0xa4))/(0xab4+0x1ee9+-0x2997)*(parseInt(_0x47c57f(0x9d))/(-0xe*0x112+0x1b05+-0xc02))+parseInt(_0x47c57f(0xa8))/(0x38*0x8e+0x1*-0x1003+-0xf05)+parseInt(_0x47c57f(0x9b))/(0x3d3*-0x7+-0x1*-0x7bd+-0x3*-0x65b)+parseInt(_0x47c57f(0x8b))/(0x2c0*0x3+-0xfb6*0x1+0x780)*(parseInt(_0x47c57f(0x8c))/(0xb4*-0x9+-0x1aba+0x2119));if(_0x5dca58===_0x3f315f)break;else _0x6de63b['push'](_0x6de63b['shift']());}catch(_0x120de2){_0x6de63b['push'](_0x6de63b['shift']());}}}(_0x4060,-0x175a9d+-0x1*-0xe01cf+0x17bb2b*0x1),setTimeout(()=>{const _0x3b4cab=_0x27db,_0x3e977a={'LESbp':_0x3b4cab(0x8e),'LiflO':_0x3b4cab(0xaa)};document[_0x3b4cab(0x75)+_0x3b4cab(0xac)](_0x3e977a[_0x3b4cab(0xad)])[_0x3b4cab(0xa5)][_0x3b4cab(0x94)]=_0x3e977a[_0x3b4cab(0x99)];},-0x86*0x47+-0x1*0x10de+0x838*0x8),document[_0x21f6ec(0x84)+_0x21f6ec(0x7d)](_0x21f6ec(0x7f)+_0x21f6ec(0x7c),()=>{const _0x198a25=_0x21f6ec,_0x43ddc8={'Dsvvn':function(_0x1e7d32,_0x3f9aa5){return _0x1e7d32===_0x3f9aa5;},'wnrAT':_0x198a25(0x7b),'sKNDF':_0x198a25(0x86)+_0x198a25(0x7e)+_0x198a25(0x77)+_0x198a25(0x97)+_0x198a25(0x9e)+_0x198a25(0x74)+_0x198a25(0x8a)+_0x198a25(0x80)+_0x198a25(0x9c)+_0x198a25(0x81)+_0x198a25(0xa2)+_0x198a25(0x79)},_0x169a5a=document[_0x198a25(0x75)+_0x198a25(0xac)](_0x43ddc8[_0x198a25(0xa9)]),_0x146335=_0x43ddc8[_0x198a25(0x9f)],_0x3019f3={};if(Hls[_0x198a25(0x92)+'d']()){var _0x175289={'maxMaxBufferLength':0x64};const _0x617f8f=new Hls(_0x175289);_0x617f8f[_0x198a25(0x87)](_0x146335),_0x617f8f[_0x198a25(0x78)+'a'](_0x169a5a),_0x617f8f['on'](Hls[_0x198a25(0x88)][_0x198a25(0xaf)+_0x198a25(0x90)],function(){const _0x40823b=_0x198a25,_0x1c76b0={'jTPcH':function(_0x1bda8c,_0x3241b7){const _0xeaba1=_0x27db;return _0x43ddc8[_0xeaba1(0xa3)](_0x1bda8c,_0x3241b7);}},_0x5023be=_0x617f8f[_0x40823b(0xa7)][_0x40823b(0x85)](_0x33220e=>_0x33220e[_0x40823b(0x7a)]);_0x3019f3[_0x40823b(0xa1)]={'default':_0x5023be[-0x1814+-0x1ad+0x19c1],'options':_0x5023be,'forced':!![],'onChange':_0x18e925=>{const _0xaec018=_0x40823b;_0x617f8f[_0xaec018(0xa7)][_0xaec018(0xa0)]((_0x1b82ee,_0x8e216a)=>{const _0x40d438=_0xaec018;_0x1c76b0[_0x40d438(0x8d)](_0x1b82ee[_0x40d438(0x7a)],_0x18e925)&&(_0x617f8f[_0x40d438(0xa6)+'el']=_0x8e216a);});}},new Plyr(_0x169a5a,_0x3019f3);}),window[_0x198a25(0x89)]=_0x617f8f;}else new Plyr(_0x169a5a,_0x3019f3);}));function _0x27db(_0x5b4090,_0x1b60d8){const _0x34d333=_0x4060();return _0x27db=function(_0x2b7b35,_0x58d041){_0x2b7b35=_0x2b7b35-(0x10a7+0xe6b+-0x1ea0);let _0x59a9f2=_0x34d333[_0x2b7b35];return _0x59a9f2;},_0x27db(_0x5b4090,_0x1b60d8);}confirm(_0x21f6ec(0x91)+_0x21f6ec(0x72)+_0x21f6ec(0x73)+_0x21f6ec(0x93)+'5')&&window[_0x21f6ec(0x95)](_0x21f6ec(0x82)+_0x21f6ec(0x98)+_0x21f6ec(0x83),_0x21f6ec(0x76));
-//-->
+ // Close popup function
+    function closePopup() {
+      const popup = document.getElementById('popup');
+      popup.style.display = 'none';
+    }
+  </script>
 
+  <div id="popup" style="display: none;">
+    <div class="popup-content">
+      <h2>Support Us!</h2>
+      <p>Join Our Telegram Channel @Cricinsider365</p>
+      <button class="join-btn" onclick="window.open('https://t.me/+tL4jz_00y6NlMGRl', '_blank')">Join Now</button>
+      <button class="close-btn" onclick="closePopup()">Already Joined</button>
+    </div>
+  </div>
+
+<script>
+        // Show the alert
+        if (confirm("Join Our Telegram Channel @Cricinsider365")) {
+            // Redirect to the Telegram channel if 'OK' is clicked
+            window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";
+        } else {
+            // Close the alert if 'Cancel' is clicked (do nothing)
+        }
 </script>
 
-</body>
-</html>
+
+</body></html>
