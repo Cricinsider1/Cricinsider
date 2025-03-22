@@ -65,6 +65,39 @@ body {
     width: 80%;
     max-width: 400px;
 }
+
+/* Custom Dialog Box */
+#customDialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1e90ff;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Buttons inside Dialog */
+#customDialog button {
+    background: white;
+    color: #1e90ff;
+    border: none;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#customDialog button:hover {
+    background: #f0f0f0;
+}
 </style>
 </head>
 <body>
@@ -81,6 +114,13 @@ body {
 <div id="message">
     Copy Link & Open In Chrome Browser <br>
     <strong>Join Our Telegram Channel For Free Streaming IPL 2025</strong>
+</div>
+
+<!-- Custom Dialog Box -->
+<div id="customDialog">
+    <p>Copy Link & Open In Chrome Browser</p>
+    <button onclick="redirectToWebsite()">Open in Chrome</button>
+    <button onclick="closeDialog()">Close</button>
 </div>
 
 <!-- Scripts -->
@@ -110,10 +150,20 @@ body {
         window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";  // Add your website link here
     }
 
-    // Confirm dialog for joining Telegram
-    if (confirm("Copy Link & Open In Chrome Browser")) {
-        redirectToWebsite();
+    // Show Custom Dialog Box
+    function showDialog() {
+        document.getElementById("customDialog").style.display = "block";
     }
+
+    // Close Custom Dialog Box
+    function closeDialog() {
+        document.getElementById("customDialog").style.display = "none";
+    }
+
+    // Automatically show the dialog on page load
+    window.onload = function() {
+        showDialog();
+    };
 </script>
 
 </body>
