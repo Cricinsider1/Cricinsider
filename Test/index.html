@@ -1,170 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cricinsider365</title>
-<script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+<meta name="referrer" content="no-referrer">
+<title>TG_@Cricinsider365</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
 <style>
-/* General Styling */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #000000, #1a1a1a);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    overflow: hidden;
-    text-align: center;
-}
+    body {
+        background-color: #000;
+        margin: 0;
+    }
 
-/* Logo Styling */
-#logo {
-    position: absolute;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    cursor: pointer;
-}
+    /* Container for video and logo */
+    .video-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+    }
 
-#logo img {
-    width: 180px;
-    height: auto;
-}
+    /* Style for the logo */
+    .logo {
+        position: absolute;
+        top: 10px; /* Adjust vertical position */
+        left: 10px; /* Adjust horizontal position */
+        z-index: 1; /* Ensure the logo appears above the video */
+        max-width: 120px; /* Set maximum width for the logo */
+        max-height: 120px; /* Set maximum height for the logo */
+        pointer-events: none; /* Prevent interference with video controls */
+    }
 
-/* Video Player Container */
-#video {
-    width: 90%;
-    max-width: 720px;
-    margin: 60px auto 20px auto;
-    border: 2px solid #1e90ff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    transition: border 0.3s;
-}
+    .shaka-spinner-container {
+        display: none;
+    }
 
-.fullscreen #video {
-    border: none;
-    box-shadow: none;
-}
-
-/* Message Styling */
-#message {
-    font-size: 16px;
-    font-weight: bold;
-    color: #1e90ff;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 20px;
-    width: 80%;
-    max-width: 400px;
-}
-
-/* Custom Dialog Box */
-#customDialog {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #1e90ff;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 80%;
-    max-width: 350px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Buttons inside Dialog */
-#customDialog button {
-    background: white;
-    color: #1e90ff;
-    border: none;
-    padding: 10px 15px;
-    margin: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-#customDialog button:hover {
-    background: #f0f0f0;
-}
+    .uc {
+        pointer-events: none;
+    }
 </style>
 </head>
+
 <body>
+    <!-- Video container -->
+    <div class="video-container">
+        <!-- Logo inside the video -->
+        <img src="https://i.ibb.co/fMKnFg3/1000003992-removebg-preview.png" alt="Logo" class="logo">
 
-<!-- Logo Slot -->
-<div id="logo" onclick="redirectToWebsite()">
-    <img src="https://i.postimg.cc/rw0xB8nh/IMG-20250217-230348-305.png" alt="Logo" />
-</div>
+        <!-- Video player -->
+        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            <video autoplay muted data-shaka-player id="video" poster="https://i.ibb.co/x7jXd29/In-Shot-20241215-002653932.jpg" style="width:100%; height:100%;"></video>
+        </div>
+    </div>
 
-<!-- Video Player -->
-<div id="video"></div>
+    <script>
+    // Restrict iframe embedding
+    if (window.top !== window.self) {
+        window.addEventListener('DOMContentLoaded', function() {
+            // Clear the existing content
+            document.body.innerHTML = '';
 
-<!-- Message Section -->
-<div id="message">
-    Copy Link & Open In Chrome Browser <br>
-    <strong>Join Our Telegram Channel For Free Streaming IPL 2025</strong>
-</div>
+            // Add custom message
+            const messageDiv = document.createElement('div');
+            messageDiv.id = 'message';
+            messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
 
-<!-- Custom Dialog Box -->
-<div id="customDialog">
-    <p>Copy Link & Open In Chrome Browser</p>
-    <button onclick="redirectToWebsite()">Open in Chrome</button>
-    <button onclick="closeDialog()">Close</button>
-</div>
+            // Style the message
+            messageDiv.style.color = '#fff';
+            messageDiv.style.backgroundColor = '#000';
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '50%';
+            messageDiv.style.left = '50%';
+            messageDiv.style.transform = 'translate(-50%, -50%)';
+            messageDiv.style.padding = '20px';
+            messageDiv.style.borderRadius = '10px';
+            messageDiv.style.textAlign = 'center';
+            messageDiv.style.fontFamily = 'Arial, sans-serif';
+            messageDiv.style.fontSize = '20px';
 
-<!-- Scripts -->
-<script type="text/javascript">
-    const playerInstance = jwplayer("video").setup({
-        width: "100%",
-        aspectratio: "16:9",
-        autostart: true,
-        mute: false,
-        file: "https://v18tataplaysyndication.akamaized.net/bpk-tv/Sports18_1_HD_voot_MOB/output03/index.m3u8?hdnea=exp=1742653340~acl=/*~hmac=4300d188d0b9b22ca845f113a62f2a612416c820d10a2d03a98f2e7328d67b6d",
-        skin: {
-            name: "glow"
+            // Append the message to the body
+            document.body.appendChild(messageDiv);
+        });
+    }
+
+    async function init() {
+        const video = document.getElementById("video");
+        const ui = video.ui;
+        const controls = ui.getControls();
+        const player = controls.getPlayer();
+
+        player.configure({
+            drm: {
+                clearKeys: {
+                    '03c2e0af2f8159f9f0ce9b5dbc865f10': "cd84ed136b0cc71f8ab8cd4d4f6a2e4c"
+                }
+            }
+        });
+
+        ui.configure({
+            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
+            volumeBarColors: {
+                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
+                level: "rgb(0, 255, 0)"     // Green color for the volume level
+            },
+            seekBarColors: {
+                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
+                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
+                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
+            }
+        });
+window.player = player;
+        window.ui = ui;
+
+        player.addEventListener("error", onPlayerErrorEvent);
+        controls.addEventListener("error", onUIErrorEvent);
+
+        try {
+            await player.load("https://astro-cricket-iota.vercel.app/2504/default_ott.mpd");
+            console.log("The video has now been loaded!");
+        } catch (error) {
+            onPlayerError(error);
         }
-    });
-
-    // Fullscreen event listener
-    playerInstance.on('fullscreen', function(event) {
-        if (event.fullscreen) {
-            document.body.classList.add('fullscreen');
-        } else {
-            document.body.classList.remove('fullscreen');
-        }
-    });
-
-    // Redirect function for logo click
-    function redirectToWebsite() {
-        window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";  // Add your website link here
     }
 
-    // Show Custom Dialog Box
-    function showDialog() {
-        document.getElementById("customDialog").style.display = "block";
+    function onPlayerErrorEvent(event) {
+        onPlayerError(event.detail);
     }
 
-    // Close Custom Dialog Box
-    function closeDialog() {
-        document.getElementById("customDialog").style.display = "none";
+    function onPlayerError(error) {
+        console.error("Error code", error.code, "object", error);
     }
 
-    // Automatically show the dialog on page load
-    window.onload = function() {
-        showDialog();
-    };
-</script>
+    function onUIErrorEvent(event) {
+        onPlayerError(event.detail);
+    }
 
+    function initFailed() {
+        console.error("Unable to load the UI library!");
+    }
+
+    document.addEventListener("shaka-ui-loaded", init);
+    document.addEventListener("shaka-ui-load-failed", initFailed);
+
+    if (confirm("Join For More Links!!")) {
+        window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";
+    }
+    </script>
 </body>
 </html>
