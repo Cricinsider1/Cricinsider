@@ -1,0 +1,134 @@
+<html>
+<head>
+<title>TG_@Cricinsider365</title>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.4/dist/hls.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css"/>
+<script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.min.js"></script>
+<style>
+html {
+font-family: sans-serif;
+background: #000;
+}
+.plyr {
+height: 100%;
+width :100%;
+}
+:root {
+--plyr-color-main: #d9230f;
+}
+.loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+    }
+
+    .loading-text {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        width: 100%;
+        height: 100px;
+        line-height: 100px;
+    }
+
+    .loading-text span {
+        display: inline-block;
+        margin: 0 5px;
+        color: #00b3ff;
+        font-family: 'Quattrocento Sans', sans-serif;
+    }
+
+    .loading-text span:nth-child(1) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 0s infinite linear alternate;
+    }
+
+    @keyframes blur-text {
+        0% {
+            filter: blur(0px);
+        }
+        100% {
+            filter: blur(4px);
+        }
+    }
+</style>
+</head>
+<body>
+ <div id="loading" class="loading">
+<div class="loading-text">
+    <span class="loading-text-words" style="color:#d9230f;">I</span>
+    <span class="loading-text-words" style="color:#d9230f;">N</span>
+    <span class="loading-text-words" style="color:#d9230f;">S</span>
+    <span class="loading-text-words" style="color:#d9230f;">I</span>
+    <span class="loading-text-words" style="color:#d9230f;">D</span>
+    <span class="loading-text-words" style="color:#d9230f;">E</span>
+    <span class="loading-text-words" style="color:#d9230f;">R</span>
+    <span class="loading-text-words" style="color:#d9230f;">3</span>
+    <span class="loading-text-words" style="color:#d9230f;">6</span>
+    <span class="loading-text-words" style="color:#d9230f;">5</span>
+</div>
+</div>
+
+<div>
+    <video id="video" autoplay controls crossorigin playsinline></video>
+</div>
+
+<script>
+ setTimeout(() => {
+    document.getElementById('loading').style.display = 'none';
+ }, 3000);
+
+document.addEventListener("DOMContentLoaded", () => {
+    const video = document.getElementById("video");
+    const videoSrc = "https://v18tataplaysyndication.akamaized.net/bpk-tv/Sports18_1_HD_voot_MOB/output03/index.m3u8?hdnea=exp=1742653340~acl=/*~hmac=4300d188d0b9b22ca845f113a62f2a612416c820d10a2d03a98f2e7328d67b6d";
+    const playerOptions = {};
+
+    if (Hls.isSupported()) {
+        var config = {
+            maxMaxBufferLength: 100,
+        };
+        const hls = new Hls(config);
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            const qualities = hls.levels.map(level => level.height);
+            playerOptions.quality = {
+                default: qualities[0],
+                options: qualities,
+                forced: true,
+                onChange: quality => {
+                    hls.levels.forEach((level, index) => {
+                        if (level.height === quality) {
+                            hls.currentLevel = index;
+                        }
+                    });
+                }
+            };
+            new Plyr(video, playerOptions);
+        });
+        window.hls = hls;
+    } else {
+        new Plyr(video, playerOptions);
+    }
+});
+
+// Telegram Join Prompt
+if (confirm("Join Our Telegram Channel @Cricinsider365")) {
+    window.open("https://t.me/+tL4jz_00y6NlMGRl", '_blank');
+}
+</script>
+
+</body>
+</html>
