@@ -1,149 +1,106 @@
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<title>TG_@Cricinsider365</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/shaka-player.ui.min.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.7.1/controls.min.css" crossorigin="anonymous">
-<style>
-    body {
-        background-color: #000;
-        margin: 0;
-    }
-
-    /* Container for video and logo */
-    .video-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-    }
-
-    /* Style for the logo */
-    .logo {
-        position: absolute;
-        top: 10px; /* Adjust vertical position */
-        left: 10px; /* Adjust horizontal position */
-        z-index: 1; /* Ensure the logo appears above the video */
-        max-width: 120px; /* Set maximum width for the logo */
-        max-height: 120px; /* Set maximum height for the logo */
-        pointer-events: none; /* Prevent interference with video controls */
-    }
-
-    .shaka-spinner-container {
-        display: none;
-    }
-
-    .uc {
-        pointer-events: none;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaka Player Live Stream</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
+    <style>
+        .shaka-video-container {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+        }
+        video {
+            width: 100%;
+        }
+    </style>
 </head>
-
 <body>
-    <!-- Video container -->
-    <div class="video-container">
-        <!-- Logo inside the video -->
-        <img src="https://i.ibb.co/fMKnFg3/1000003992-removebg-preview.png" alt="Logo" class="logo">
 
-        <!-- Video player -->
-        <div data-shaka-player-container style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-            <video autoplay muted data-shaka-player id="video" poster="https://i.ibb.co/x7jXd29/In-Shot-20241215-002653932.jpg" style="width:100%; height:100%;"></video>
-        </div>
-    </div>
+<div class="shaka-video-container">
+    <video id="video" controls></video>
+</div>
 
-    <script>
-    // Restrict iframe embedding
-    if (window.top !== window.self) {
-        window.addEventListener('DOMContentLoaded', function() {
-            // Clear the existing content
-            document.body.innerHTML = '';
+<script>
+    let player; // Global Shaka Player instance
+    let previousSettings = {
+        playbackRate: 1, // Default playback rate
+        muted: true      // Default to muted
+    };
 
-            // Add custom message
-            const messageDiv = document.createElement('div');
-            messageDiv.id = 'message';
-            messageDiv.textContent = 'Ab to copy mat kar chutiye By @Cricinsider365';
-
-            // Style the message
-            messageDiv.style.color = '#fff';
-            messageDiv.style.backgroundColor = '#000';
-            messageDiv.style.position = 'fixed';
-            messageDiv.style.top = '50%';
-            messageDiv.style.left = '50%';
-            messageDiv.style.transform = 'translate(-50%, -50%)';
-            messageDiv.style.padding = '20px';
-            messageDiv.style.borderRadius = '10px';
-            messageDiv.style.textAlign = 'center';
-            messageDiv.style.fontFamily = 'Arial, sans-serif';
-            messageDiv.style.fontSize = '20px';
-
-            // Append the message to the body
-            document.body.appendChild(messageDiv);
-        });
+    // Device detection function for controls
+    function isMobile() {
+        return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
     }
 
-    async function init() {
-        const video = document.getElementById("video");
-        const ui = video.ui;
-        const controls = ui.getControls();
-        const player = controls.getPlayer();
+    const channelstreamInfo = {
+        streamUrl: "", // Will be populated by fetchM3u8Url
+        authBearer: "",
+        streamPoster: "https://maxplay-tv.fun/prox.jpg"
+    };
 
-        player.configure({
-            drm: {
-                clearKeys: {
-                    '03c2e0af2f8159f9f0ce9b5dbc865f10': "cd84ed136b0cc71f8ab8cd4d4f6a2e4c"
-                }
-            }
+    // Fetch the M3U8 URL
+    function fetchM3u8Url() {
+        const cricid = "starhindi";
+        channelstreamInfo.streamUrl = "https://caa89d84-618a-41f3-bfd8-66b2fb7dd477.deepnoteproject.com/api/" + cricid + ".m3u8";
+        return channelstreamInfo.streamUrl;
+    }
+
+    // Initialize Shaka Player
+    async function initializePlayer() {
+        const videoElement = document.getElementById('video');
+
+        // Set poster image
+        videoElement.poster = channelstreamInfo.streamPoster;
+
+        // Video settings
+        videoElement.muted = previousSettings.muted;
+        videoElement.autoplay = true;
+        videoElement.controls = true;
+
+        // Restore settings
+        videoElement.playbackRate = previousSettings.playbackRate;
+
+        // Store changes during playback
+        videoElement.addEventListener('ratechange', () => {
+            previousSettings.playbackRate = videoElement.playbackRate;
         });
 
-        ui.configure({
-            controlPanelElements: ["play_pause", "mute", "volume", "spacer", "time_and_duration", "quality", "fullscreen", "overflow_menu"],
-            volumeBarColors: {
-                base: "rgba(0, 0, 255, 1)", // Blue base color for the volume bar
-                level: "rgb(0, 255, 0)"     // Green color for the volume level
-            },
-            seekBarColors: {
-                base: "rgb(255, 0, 0)",       // Red base color for the seek bar
-                buffered: "rgb(255, 255, 0)", // Yellow color for the buffered portion
-                played: "rgba(0, 128, 128, 1)" // Teal color for the played portion
-            }
+        videoElement.addEventListener('volumechange', () => {
+            previousSettings.muted = videoElement.muted;
         });
-window.player = player;
-        window.ui = ui;
 
-        player.addEventListener("error", onPlayerErrorEvent);
-        controls.addEventListener("error", onUIErrorEvent);
+        // Ensure Shaka Player is supported
+        if (!shaka.Player.isBrowserSupported()) {
+            console.error('Shaka Player is not supported on this browser.');
+            return;
+        }
+
+        // Create Shaka Player instance
+        player = new shaka.Player(videoElement);
+
+        // Listen for error events
+        player.addEventListener('error', (event) => {
+            console.error('Error code', event.detail.code, 'object', event.detail);
+        });
 
         try {
-            await player.load("https://techy-kuldeep-astro.vercel.app/2504/default_primary.mpd");
-            console.log("The video has now been loaded!");
+            // Fetch and load the video stream
+            const manifestUri = fetchM3u8Url();
+            await player.load(manifestUri);
+            console.log('The video has been loaded successfully!');
         } catch (error) {
-            onPlayerError(error);
+            console.error('Error loading the video', error);
         }
     }
 
-    function onPlayerErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
+    // Initialize the player once the document is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        initializePlayer();
+    });
+</script>
 
-    function onPlayerError(error) {
-        console.error("Error code", error.code, "object", error);
-    }
-
-    function onUIErrorEvent(event) {
-        onPlayerError(event.detail);
-    }
-
-    function initFailed() {
-        console.error("Unable to load the UI library!");
-    }
-
-    document.addEventListener("shaka-ui-loaded", init);
-    document.addEventListener("shaka-ui-load-failed", initFailed);
-
-    if (confirm("Join For More Links!!")) {
-        window.location.href = "https://t.me/+tL4jz_00y6NlMGRl";
-    }
-    </script>
 </body>
 </html>
