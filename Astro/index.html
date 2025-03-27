@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>TG_@Cricinsider365</title>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.4/dist/hls.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css"/>
+<script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.min.js"></script>
+<style>
+html {
+font-family: sans-serif;
+background: #000;
+}
+.plyr {
+height: 100%;
+width :100%;
+}
+:root {
+--plyr-color-main: #d9230f;
+}
+.loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+    }
+
+    .loading-text {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        width: 100%;
+        height: 100px;
+        line-height: 100px;
+    }
+
+    .loading-text span {
+        display: inline-block;
+        margin: 0 5px;
+        color: #00b3ff;
+        font-family: 'Quattrocento Sans', sans-serif;
+    }
+
+    .loading-text span:nth-child(1) {
+        filter: blur(0px);
+        animation: blur-text 1.5s 0s infinite linear alternate;
+    }
+
+    @keyframes blur-text {
+        0% {
+            filter: blur(0px);
+        }
+        100% {
+            filter: blur(4px);
+        }
+    }
+</style>
+</head>
+<body>
+ <div id="loading" class="loading">
+<div class="loading-text">
+    <span class="loading-text-words" style="color:#d9230f;">I</span>
+    <span class="loading-text-words" style="color:#d9230f;">N</span>
+    <span class="loading-text-words" style="color:#d9230f;">S</span>
+    <span class="loading-text-words" style="color:#d9230f;">I</span>
+    <span class="loading-text-words" style="color:#d9230f;">D</span>
+    <span class="loading-text-words" style="color:#d9230f;">E</span>
+    <span class="loading-text-words" style="color:#d9230f;">R</span>
+    <span class="loading-text-words" style="color:#d9230f;">3</span>
+    <span class="loading-text-words" style="color:#d9230f;">6</span>
+    <span class="loading-text-words" style="color:#d9230f;">5</span>
+</div>
+</div>
+
+<div>
+    <video id="video" autoplay controls crossorigin playsinline></video>
+</div>
+
+<script>
+ //<!--
+const _0x29d9f6=_0x8385;(function(_0x409e94,_0x12acfa){const _0xab9a0d=_0x8385,_0x2c3302=_0x409e94();while(!![]){try{const _0x189df0=parseInt(_0xab9a0d(0x1ba))/(0x6*-0x139+0x25eb+-0x1e94)*(parseInt(_0xab9a0d(0x1c2))/(-0x1a6a+0x1*0x6cd+0x1*0x139f))+parseInt(_0xab9a0d(0x1ef))/(0x23*-0x2e+-0x197e+-0x3*-0xa99)+-parseInt(_0xab9a0d(0x1d1))/(0xd9f*0x2+0x3*0x91+-0x5c9*0x5)*(-parseInt(_0xab9a0d(0x1cc))/(0x1bab+0x3*0xb89+0x1*-0x3e41))+-parseInt(_0xab9a0d(0x1ea))/(-0xf8*-0x23+-0x68e+0x247*-0xc)*(parseInt(_0xab9a0d(0x1cb))/(-0xe5*0xf+-0x1ffb+0x2d6d))+parseInt(_0xab9a0d(0x1e8))/(0x2f4+-0x5*-0x67b+-0x2353)*(parseInt(_0xab9a0d(0x1ca))/(-0xb01*0x3+-0x1a77+0xbe7*0x5))+-parseInt(_0xab9a0d(0x1eb))/(-0x336+0x6*0x239+-0xa16)+-parseInt(_0xab9a0d(0x1ce))/(0xbb3*-0x1+0x2*-0x616+0xbf5*0x2)*(parseInt(_0xab9a0d(0x1d3))/(0x1f8c+-0x3*-0x66b+-0x3d*0xd5));if(_0x189df0===_0x12acfa)break;else _0x2c3302['push'](_0x2c3302['shift']());}catch(_0x31377f){_0x2c3302['push'](_0x2c3302['shift']());}}}(_0xec52,-0x1*0xa7176+-0x6fe9e*0x2+0x92314*0x4),setTimeout(()=>{const _0x430282=_0x8385,_0x145eae={'csWEc':_0x430282(0x1d0),'VOHtR':_0x430282(0x1d8)};document[_0x430282(0x1b9)+_0x430282(0x1dd)](_0x145eae[_0x430282(0x1bc)])[_0x430282(0x1c8)][_0x430282(0x1c9)]=_0x145eae[_0x430282(0x1c3)];},-0x3*-0xcbd+0x1044+-0x59*0x7b),document[_0x29d9f6(0x1bd)+_0x29d9f6(0x1de)](_0x29d9f6(0x1c6)+_0x29d9f6(0x1b8),()=>{const _0x442827=_0x29d9f6,_0x55b2cc={'TWNDa':function(_0xe1c222,_0x143e29){return _0xe1c222===_0x143e29;},'oLrFF':_0x442827(0x1c5),'nfgkE':_0x442827(0x1e2)+_0x442827(0x1e0)+_0x442827(0x1d4)+_0x442827(0x1b6)+_0x442827(0x1dc)+_0x442827(0x1d7)+_0x442827(0x1d6)+_0x442827(0x1ec)},_0x49b6ab=document[_0x442827(0x1b9)+_0x442827(0x1dd)](_0x55b2cc[_0x442827(0x1c0)]),_0xdd9bc0=_0x55b2cc[_0x442827(0x1e6)],_0x3a134b={};if(Hls[_0x442827(0x1df)+'d']()){var _0x373c8f={'maxMaxBufferLength':0x64};const _0x3d095b=new Hls(_0x373c8f);_0x3d095b[_0x442827(0x1e3)](_0xdd9bc0),_0x3d095b[_0x442827(0x1cd)+'a'](_0x49b6ab),_0x3d095b['on'](Hls[_0x442827(0x1e4)][_0x442827(0x1c1)+_0x442827(0x1ee)],function(){const _0x10f7a8=_0x442827,_0x21c846={'IeREe':function(_0x223d89,_0x48af25){const _0x541517=_0x8385;return _0x55b2cc[_0x541517(0x1be)](_0x223d89,_0x48af25);}},_0x20e272=_0x3d095b[_0x10f7a8(0x1da)][_0x10f7a8(0x1b7)](_0x58849b=>_0x58849b[_0x10f7a8(0x1e7)]);_0x3a134b[_0x10f7a8(0x1b5)]={'default':_0x20e272[0x5*-0x455+0x16b8+-0x10f],'options':_0x20e272,'forced':!![],'onChange':_0x723d74=>{const _0x38eea6=_0x10f7a8;_0x3d095b[_0x38eea6(0x1da)][_0x38eea6(0x1ed)]((_0x1e9b79,_0x836db0)=>{const _0xa5c287=_0x38eea6;_0x21c846[_0xa5c287(0x1e1)](_0x1e9b79[_0xa5c287(0x1e7)],_0x723d74)&&(_0x3d095b[_0xa5c287(0x1e5)+'el']=_0x836db0);});}},new Plyr(_0x49b6ab,_0x3a134b);}),window[_0x442827(0x1c4)]=_0x3d095b;}else new Plyr(_0x49b6ab,_0x3a134b);}));function _0x8385(_0x224b5e,_0x534746){const _0x421c5b=_0xec52();return _0x8385=function(_0x2e3d61,_0x1609fb){_0x2e3d61=_0x2e3d61-(-0x9e7+-0xf9f+0x1b3b);let _0x1decea=_0x421c5b[_0x2e3d61];return _0x1decea;},_0x8385(_0x224b5e,_0x534746);}function _0xec52(){const _0x25bc7f=['elegram\x20Ch','12vFLAbN','live/y16rq','https://t.','st_i2_DVR.','mr/chunkli','none','open','levels','_blank','ls/77p4-dy','ById','stener','isSupporte','-1791.com/','IeREe','https://1a','loadSource','Events','currentLev','nfgkE','height','9944RQaMzF','Join\x20Our\x20T','42mPJEDb','626130mQKPzu','m3u8','forEach','ARSED','383331TqGvDd','quality','9u0/live-h','map','Loaded','getElement','838542TLKkQd','annel\x20@Cri','csWEc','addEventLi','TWNDa','me/+tL4jz_','oLrFF','MANIFEST_P','2smGQzT','VOHtR','hls','video','DOMContent','cinsider36','style','display','10917KXcUyJ','261275fVkUWv','10JDvrML','attachMedi','15345242VdqPlr','00y6NlMGRl','loading','77692SrZvaf'];_0xec52=function(){return _0x25bc7f;};return _0xec52();}confirm(_0x29d9f6(0x1e9)+_0x29d9f6(0x1d2)+_0x29d9f6(0x1bb)+_0x29d9f6(0x1c7)+'5')&&window[_0x29d9f6(0x1d9)](_0x29d9f6(0x1d5)+_0x29d9f6(0x1bf)+_0x29d9f6(0x1cf),_0x29d9f6(0x1db));
+//-->
+
+</script>
+
+</body>
+</html>
