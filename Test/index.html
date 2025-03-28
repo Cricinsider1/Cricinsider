@@ -1,103 +1,177 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head><style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head><body><a href="https://www.freecounterstat.com" title="website hits counter"><img src="https://counter4.optistats.ovh/private/freecounterstat.php?c=h39cnaqxrdaeatb6lbmyly49lw2tf743" border="0" title="website hits counter" alt="website hits counter"></a>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TG_@Cricinsider365</title>
+    <title>Live IPL Streaming</title>
     <style>
-        /* General Page Styling */
-        body {
-            font-family: 'Arial', sans-serif;
+        body, html {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #242424, #3b5998);
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
             text-align: center;
+            font-family: Arial, sans-serif;
         }
-
-        /* Glowing Effect for Message */
-        .loading-message {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffcc00;
-            margin-bottom: 10px;
-            padding: 10px 20px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            text-align: center;
-            box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
-            animation: glow 1.5s infinite alternate;
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00; }
-            100% { box-shadow: 0 0 15px #ffcc00, 0 0 25px #ffcc00, 0 0 35px #ffcc00; }
-        }
-
-        /* Video Player Styling */
-        .player-container {
-            width: 95%;
-            max-width: 1200px;
-            margin: 20px auto;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .player-container iframe {
-            border-radius: 15px;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Join Telegram Button */
-        .join-telegram-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .join-telegram-btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background-color: #008fd6;
+        #contentFrame {
+            width: 80%;
+            height: 55vw; /* 16:9 aspect ratio */
+            max-height: 500px; /* Limits max height */
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
         }
-
-        .join-telegram-btn:hover {
-            background-color: #006bb3;
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-54 {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            color: #fff;
+            background: linear-gradient(45deg, #ff0047, #6a00ff);
+            transition: all 0.3s ease-in-out;
+        }
+        .button-54:hover {
+            background: linear-gradient(45deg, #ff7a7a, #8c7aff);
+            transform: scale(1.1);
+        }
+        a {
+            text-decoration: none;
+            color: white;
         }
     </style>
-</head>
-<body>
 
-    <!-- Loading Message -->
-    <div class="loading-message">Wait 10-15 Sec For Loading The Stream</div>
 
-    <!-- Video Player Section -->
-    <div class="player-container">
-        <div style="padding:56.25% 0 0 0;position:relative;">
-            <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" 
-            frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="true" scrolling="no" 
-            src="https://mafiatv.live/watch.php?stream=STARSPORTS1" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+
+    <h2>IPL 2025 Live Streaming</h2>
+    
+    <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" frameborder="0" allowfullscreen="true" scrolling="no" src="https://cxh.pages.dev/play/?id=H1"></iframe>
+
+    <p>Please be patient, the video might take some time to load 🔍.</p>
+
+    <div class="button-container">
+        <button class="button-54" onclick="changeIframe('https://live.starsports.news/lunar-ipl-hindi')">Hindi</button>
+    </div>
+
+    <p>Open links in Chrome browser ONLY</p>
+
+    <div>
+        <button class="button-54">
+            <a href="https://t.me/+tL4jz_00y6NlMGRl" target="_blank">Join Telegram</a>
+        </button>
+    </div>
+
+    <script>
+        function changeIframe(url) {
+            document.getElementById('contentFrame').src = url;
+        }
+
+        // Set the default iframe source
+        document.getElementById('contentFrame').src = "https://live.starsports.news/lunar-ipl-hindi";
+    </script>
+
+
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Telegram Popup</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; }
+        
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .popup-content {
+            background: #1a1a1a;
+            color: white;
+text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            animation: pulse 1.5s infinite alternate;
+        }
+        
+        .popup-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ff4444;
+            text-transform: uppercase;
+        }
+        
+        .popup-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .popup-content a {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #ff4444;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            transition: 0.3s;
+        }
+        
+        .popup-content a:hover {
+            background: #cc0000;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+    </style>
+
+
+    <div class="popup-overlay" id="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">×</span>
+            <h2>🚨 Emergency Alert! 🚨</h2>
+            <p>Join our Telegram now for live updates and breaking news!</p>
+            <a href="https://t.me/+tL4jz_00y6NlMGRl" target="_blank">Join Now</a>
         </div>
     </div>
+    
+    <script>
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
 
-    <!-- Join Telegram Button -->
-    <div class="join-telegram-container">
-        <button class="join-telegram-btn" onclick="window.open('https://t.me/+tL4jz_00y6NlMGRl', '_blank')">Join Telegram Channel</button>
-    </div>
 
-</body>
-</html>
+</body></html>
