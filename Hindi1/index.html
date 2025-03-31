@@ -1,96 +1,103 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>TG_@Cricinsider365</title>
-<meta charset="UTF-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.4/dist/hls.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.css"/>
-<script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.min.js"></script>
-<style>
-html {
-font-family: sans-serif;
-background: #000;
-}
-.plyr {
-height: 100%;
-width :100%;
-}
-:root {
---plyr-color-main: #d9230f;
-}
-.loading {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        z-index: 9999;
-    }
-
-    .loading-text {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        text-align: center;
-        width: 100%;
-        height: 100px;
-        line-height: 100px;
-    }
-
-    .loading-text span {
-        display: inline-block;
-        margin: 0 5px;
-        color: #00b3ff;
-        font-family: 'Quattrocento Sans', sans-serif;
-    }
-
-    .loading-text span:nth-child(1) {
-        filter: blur(0px);
-        animation: blur-text 1.5s 0s infinite linear alternate;
-    }
-
-    @keyframes blur-text {
-        0% {
-            filter: blur(0px);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TG_@Cricinsider365</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #242424, #3b5998);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
         }
-        100% {
-            filter: blur(4px);
+
+        /* Glowing Effect for Message */
+        .loading-message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
+            animation: glow 1.5s infinite alternate;
         }
-    }
-</style>
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00; }
+            100% { box-shadow: 0 0 15px #ffcc00, 0 0 25px #ffcc00, 0 0 35px #ffcc00; }
+        }
+
+        /* Video Player Styling */
+        .player-container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 20px auto;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .player-container iframe {
+            border-radius: 15px;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Join Telegram Button */
+        .join-telegram-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .join-telegram-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #008fd6;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .join-telegram-btn:hover {
+            background-color: #006bb3;
+        }
+    </style>
 </head>
 <body>
- <div id="loading" class="loading">
-<div class="loading-text">
-    <span class="loading-text-words" style="color:#d9230f;">I</span>
-    <span class="loading-text-words" style="color:#d9230f;">N</span>
-    <span class="loading-text-words" style="color:#d9230f;">S</span>
-    <span class="loading-text-words" style="color:#d9230f;">I</span>
-    <span class="loading-text-words" style="color:#d9230f;">D</span>
-    <span class="loading-text-words" style="color:#d9230f;">E</span>
-    <span class="loading-text-words" style="color:#d9230f;">R</span>
-    <span class="loading-text-words" style="color:#d9230f;">3</span>
-    <span class="loading-text-words" style="color:#d9230f;">6</span>
-    <span class="loading-text-words" style="color:#d9230f;">5</span>
-</div>
-</div>
 
-<div>
-    <video id="video" autoplay controls crossorigin playsinline></video>
-</div>
+    <!-- Loading Message -->
+    <div class="loading-message">Tap On Right Side < 👈🏻 This iCon For Quality Option </div>
 
-<script>
- //<!--
-function _0x160a(){const _0x271b29=['_blank','/files/480','288chWlCM','currentLev','style','245yoETVz','attachMedi','KIHCA','elegram\x20Ch','ById','loadSource','p.m3u8','92679xYlxhd','e.ammoapps','/media/hls','oudycx.net','stener','Events','https://t.','579680CHoJUt','display','height','https://co','12tEdHkV','://m3u8.cl','rs-anywher','me/+tL4jz_','open','kzgpM','levels','.com/https','ARSED','exxkO','video','839856iULPpX','loading','MANIFEST_P','forEach','annel\x20@Cri','cinsider36','getElement','UPaQy','isSupporte','DOMContent','18229gVsIFs','ehNwC','map','fkPgU','Join\x20Our\x20T','none','7428ioGNVI','quality','1116695iOZyOm','134090udDwKG','hls','00y6NlMGRl','Loaded','addEventLi'];_0x160a=function(){return _0x271b29;};return _0x160a();}function _0x15b7(_0x10a0b1,_0x3b9977){const _0x392ec9=_0x160a();return _0x15b7=function(_0x3e8edf,_0x3d4290){_0x3e8edf=_0x3e8edf-(0xcc7+-0x1330+0x726);let _0x41f852=_0x392ec9[_0x3e8edf];return _0x41f852;},_0x15b7(_0x10a0b1,_0x3b9977);}const _0x2fbb92=_0x15b7;(function(_0x234a83,_0x560a39){const _0x3ef91c=_0x15b7,_0x39a789=_0x234a83();while(!![]){try{const _0x6381aa=parseInt(_0x3ef91c(0xdd))/(-0x2f7*-0x1+-0x1*0x770+0x47a)*(parseInt(_0x3ef91c(0xc8))/(0x14c5+0xad5*-0x2+0xe7))+-parseInt(_0x3ef91c(0xbd))/(-0x3a*-0x58+0x13*0x7d+0xc*-0x26f)+parseInt(_0x3ef91c(0xd3))/(-0x23bf*-0x1+0x37*-0x86+-0x6f1)+parseInt(_0x3ef91c(0xe5))/(0xe20+-0x231b*-0x1+-0x3136*0x1)+-parseInt(_0x3ef91c(0xe3))/(0x633*0x5+0x77c*0x1+-0x2675)*(parseInt(_0x3ef91c(0xf0))/(0x2b3*0x3+-0x1b35+-0x47*-0x45))+parseInt(_0x3ef91c(0xc4))/(0x13*0x44+0x1468+-0x65b*0x4)+-parseInt(_0x3ef91c(0xed))/(0x988+-0x192*-0x12+-0x7*0x565)*(parseInt(_0x3ef91c(0xe6))/(-0x173e+0xa5e+0xcea));if(_0x6381aa===_0x560a39)break;else _0x39a789['push'](_0x39a789['shift']());}catch(_0x11ee1b){_0x39a789['push'](_0x39a789['shift']());}}}(_0x160a,0x1*0x8452+0x1*-0x1dea6+0x30f26),setTimeout(()=>{const _0x333707=_0x15b7,_0x59e4ec={'kzgpM':_0x333707(0xd4),'fkPgU':_0x333707(0xe2)};document[_0x333707(0xd9)+_0x333707(0xf4)](_0x59e4ec[_0x333707(0xcd)])[_0x333707(0xef)][_0x333707(0xc5)]=_0x59e4ec[_0x333707(0xe0)];},0x20ea+0x17dd+-0x2d0f),document[_0x2fbb92(0xea)+_0x2fbb92(0xc1)](_0x2fbb92(0xdc)+_0x2fbb92(0xe9),()=>{const _0x554e64=_0x2fbb92,_0x1b5681={'UPaQy':function(_0xea4522,_0x58224f){return _0xea4522===_0x58224f;},'KIHCA':_0x554e64(0xd2),'exxkO':_0x554e64(0xc7)+_0x554e64(0xca)+_0x554e64(0xbe)+_0x554e64(0xcf)+_0x554e64(0xc9)+_0x554e64(0xc0)+_0x554e64(0xbf)+_0x554e64(0xec)+_0x554e64(0xf6)},_0x1859a2=document[_0x554e64(0xd9)+_0x554e64(0xf4)](_0x1b5681[_0x554e64(0xf2)]),_0x38b3b8=_0x1b5681[_0x554e64(0xd1)],_0x4b8aaf={};if(Hls[_0x554e64(0xdb)+'d']()){var _0x539f56={'maxMaxBufferLength':0x64};const _0x336e76=new Hls(_0x539f56);_0x336e76[_0x554e64(0xf5)](_0x38b3b8),_0x336e76[_0x554e64(0xf1)+'a'](_0x1859a2),_0x336e76['on'](Hls[_0x554e64(0xc2)][_0x554e64(0xd5)+_0x554e64(0xd0)],function(){const _0x440bcf=_0x554e64,_0x1e5461={'ehNwC':function(_0x2433af,_0x4c998d){const _0x54485c=_0x15b7;return _0x1b5681[_0x54485c(0xda)](_0x2433af,_0x4c998d);}},_0x313f63=_0x336e76[_0x440bcf(0xce)][_0x440bcf(0xdf)](_0x599727=>_0x599727[_0x440bcf(0xc6)]);_0x4b8aaf[_0x440bcf(0xe4)]={'default':_0x313f63[0x27*-0x25+-0xade+0x1081],'options':_0x313f63,'forced':!![],'onChange':_0x4efdfd=>{const _0x38fed4=_0x440bcf;_0x336e76[_0x38fed4(0xce)][_0x38fed4(0xd6)]((_0x163aef,_0x19cd1b)=>{const _0x36546c=_0x38fed4;_0x1e5461[_0x36546c(0xde)](_0x163aef[_0x36546c(0xc6)],_0x4efdfd)&&(_0x336e76[_0x36546c(0xee)+'el']=_0x19cd1b);});}},new Plyr(_0x1859a2,_0x4b8aaf);}),window[_0x554e64(0xe7)]=_0x336e76;}else new Plyr(_0x1859a2,_0x4b8aaf);}));confirm(_0x2fbb92(0xe1)+_0x2fbb92(0xf3)+_0x2fbb92(0xd7)+_0x2fbb92(0xd8)+'5')&&window[_0x2fbb92(0xcc)](_0x2fbb92(0xc3)+_0x2fbb92(0xcb)+_0x2fbb92(0xe8),_0x2fbb92(0xeb));
-//-->
+    <!-- Video Player Section -->
+    <div class="player-container">
+        <div style="padding:56.25% 0 0 0;position:relative;">
+            <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" 
+            frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="true" scrolling="no" 
+            src="https://vimeo.com/event/5027375/embed" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+        </div>
+    </div>
 
-</script>
+    <!-- Join Telegram Button -->
+    <div class="join-telegram-container">
+        <button class="join-telegram-btn" onclick="window.open('https://t.me/+tL4jz_00y6NlMGRl', '_blank')">Join Telegram Channel</button>
+    </div>
 
 </body>
 </html>
