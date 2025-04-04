@@ -149,11 +149,11 @@ id="feed_3">Telugu</button>
 </div>    <script>    
     document.addEventListener("DOMContentLoaded", function() {    
       var videoSources = {    
-        "feed_1": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/hindi.php?chunks=master_ap_1080_5.m3u8",    
-        "feed_2": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/english.php?chunks=master_ap_1080_5.m3u8",
-  "feed_3": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/telugu.php?chunks=master_ap_1080_5.m3u8",  
-        "feed_4": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/tamil.php?chunks=master_ap_1080_5.m3u8",  
-        "feed_5": "https://tv.onlinetvbd.com/2025ChamTrop_Day3/bengali.php?chunks=master_ap_1080_5.m3u8",      
+        "feed_1": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_HIN_IDC_MOB/Fallback/index.m3u8",    
+        "feed_2": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_ENG_IDC_MOB/Fallback/index.m3u8",
+  "feed_3": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_TEL_IDC_MOB/Fallback/index.m3u8",  
+        "feed_4": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_TAM_IDC_MOB/Fallback/index.m3u8",  
+        "feed_5": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_BEN_IDC_MOB/Fallback/index.m3u8",      
       };  
       var playerInstance = jwplayer("video").setup({ autostart: true, playlist: [{ file: videoSources["feed_1"] }] });
       document.querySelectorAll(".feed-button").forEach(button => {  
@@ -164,5 +164,11 @@ id="feed_3">Telugu</button>
       document.getElementById("popup").style.display = "block";
     });
     function closePopup() { document.getElementById("popup").style.display = "none"; }
-  </script>    </body>    
+  </script>    </body> 
+<script>
+// alert('Join Our Telegram For Latest update')
+         if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
+         window.open("https://t.me/+tL4jz_00y6NlMGRl", '_blank');
+     }
+</script>   
 </html>
