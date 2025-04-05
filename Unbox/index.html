@@ -1,241 +1,150 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TG_@Cricinsider365</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cricinsider365</title>
   <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      color: #fff;
       display: flex;
       flex-direction: column;
-      align-items: center;
       min-height: 100vh;
     }
 
-    .title-column {
-      background-color: #000;
+    .jwplayer {
+      position: relative;
       width: 100%;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      height: 360px; /* Adjust height as needed */
     }
 
-    .title-column h1 {
-      margin: 0;
-      font-size: 28px;
-      color: #ffcc00;
-    }
-
-    #video {
-      width: 90%;
-      max-width: 960px;
-      height: 540px;
-      margin: 20px auto;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .feed-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin: 20px 0;
-    }
-
-    .feed-button {
-      padding: 12px 20px;
-      background: #fff;
-      color: #000;
-      font-weight: bold;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
-    }
-
-    .feed-button:hover {
-      background-color: #f1f1f1;
-      transform: translateY(-2px);
-    }
-
-    #language-switch,
-    #telegram-button {
-      width: 80%;
-      max-width: 320px;
-      margin: 10px auto;
-      padding: 14px;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      text-align: center;
-      display: block;
-      transition: background 0.3s ease;
+    #video-selector {
+      margin: 10px;
     }
 
     #language-switch {
-      background: #28a745;
-      color: white;
+      padding: 10px 20px;
+      background-color: #007bff; /* Blue color, you can change this */
+      color: #fff; /* White text color */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s ease;
     }
 
     #language-switch:hover {
-      background: #218838;
-    }
-
-    #telegram-button {
-      background: #0088cc;
-      color: white;
-      text-decoration: none;
-    }
-
-    #telegram-button:hover {
-      background: #007ab8;
+      background-color: #0056b3; /* Darker blue on hover */
     }
 
     footer {
+      background-color: #0074d9; /* Background color */
+      text-align: center;
+      padding: 10px;
       margin-top: auto;
-      background-color: #1f1f1f;
-      width: 100%;
-      text-align: center;
-      padding: 15px;
-      color: #ffcc00;
     }
 
-    .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #222;
-      padding: 30px;
-      max-width: 90%;
-      width: 400px;
-      border-radius: 16px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-      text-align: center;
-      display: none;
-      z-index: 1000;
-    }
-
-    .popup p {
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-
-    .popup a,
-    .popup button {
+    #telegram-button {
       display: inline-block;
-      margin: 10px 5px 0;
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .popup a {
-      background: #0088cc;
-      color: white;
-    }
-
-    .popup a:hover {
-      background: #007ab8;
-    }
-
-    .popup button {
-      background: #ff0000;
-      color: white;
+      width: auto;
+      text-align: center;
+      background-color: #0088cc; /* Telegram's brand color */
+      color: #fff;
+      padding: 10px 20px;
       border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    #telegram-button:hover {
+      background-color: #007ab8; /* Darker shade of Telegram's brand color */
     }
   </style>
 </head>
 <body>
-  <div class="title-column">
-    <h1>Search On Telegram - @Cricinsider365</h1>
-  </div>
+  <br>
+  <select id="video-select">
+    <option value="feed_1" selected="">Hindi_Feed 1</option>
+    <option value="feed_2">English_Feed 2</option>
+    <option value="feed_3">Tamil_Feed 3</option>
+    <option value="feed_4">Telgu_Feed 4</option>
+    <option value="feed_5">Bhojpuri_Feed 5</option>
+    <option value="feed_6">Kannada_Feed 6</option>
+    <option value="feed_7">Haryanvi_Feed 7</option>
+<option value="feed_8">Bengali_Feed 8</option>
+    <>
+  </select>
 
-  <div id="video" class="jwplayer"></div>
+  <button id="language-switch">Select Your Feed Here</button>
 
-  <div class="feed-buttons">
-    <button class="feed-button" id="feed_1">Hindi</button>
-    <button class="feed-button" id="feed_2">English</button>
-    <button class="feed-button" id="feed_3">Telugu</button>
-    <button class="feed-button" id="feed_4">Tamil</button>
-    <button class="feed-button" id="feed_5">Bengali</button>
-    <button class="feed-button" id="feed_6">Gujarati</button>
-    <button class="feed-button" id="feed_7">Kannada</button>
-    <button class="feed-button" id="feed_8">Haryanvi</button>
-    <button class="feed-button" id="feed_9">Bhojpuri</button>
-    <button class="feed-button" id="feed_10">Punjabi</button>
-    <button class="feed-button" id="feed_11">Marathi</button>
-    <button class="feed-button" id="feed_12">Malayalam</button>
-  </div>
+  <div id="video"></div>
 
-  <button id="language-switch">Choose Your Feed</button>
-  <a id="telegram-button" href="https://t.me/+tL4jz_00y6NlMGRl" target="_blank">Join Telegram Channel</a>
-
-  <footer>&copy; Search On Telegram - @Cricinsider365 </footer>
-
-  <!-- Popup -->
-  <div class="popup" id="popup">
-    <p><strong>Join our Telegram for Free Live Matches!</strong></p>
-    <a href="https://t.me/+tL4jz_00y6NlMGRl" target="_blank">Join Now</a>
-    <button onclick="closePopup()">Close</button>
-  </div>
+  <footer>
+    <a id="telegram-button" href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank">
+      Join Our Telegram Channel
+    </a>
+  </footer>
 
   <script>
-    const videoSources = {
-      feed_1: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_HIN_IDC_MOB/Fallback/index.m3u8",
-      feed_2: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_ENG_IDC_MOB/Fallback/index.m3u8",
-      feed_3: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_TEL_IDC_MOB/Fallback/index.m3u8",
-      feed_4: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_TAM_IDC_MOB/Fallback/index.m3u8",
-      feed_5: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_BEN_IDC_MOB/Fallback/index.m3u8",
-      feed_6: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_Guj_IDC_MOB/Fallback/index.m3u8",
-      feed_7: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_KAN_IDC_MOB/Fallback/index.m3u8",
-      feed_8: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_HAR_IDC_MOB/Fallback/index.m3u8",
-      feed_9: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_Bhoj_IDC_MOB/Fallback/index.m3u8",
-      feed_10: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_Punj_IDC_MOB/Fallback/index.m3u8",
-      feed_11: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_MAR_IDC_MOB/Fallback/index.m3u8",
-      feed_12: "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_Mal_IDC_MOB/Fallback/index.m3u8"
-    };
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const player = jwplayer("video").setup({
-        autostart: true,
-        controls: true,
-        stretching: "uniform",
-        width: "100%",
-        height: "100%",
-        playlist: [{ file: videoSources["feed_1"] }]
-      });
-
-      document.querySelectorAll(".feed-button").forEach(button => {
-        button.addEventListener("click", () => {
-          const feed = videoSources[button.id];
-          if (feed) player.load([{ file: feed }]).play();
-        });
-      });
-
-      // Show popup
-      document.getElementById("popup").style.display = "block";
-
-      // Optional Alert on Load
-      if (confirm("Join Our Telegram Channel @Cricinsider365")) {
-        window.open("https://t.me/+tL4jz_00y6NlMGRl", "_blank");
-      }
-    });
-
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
+    if (confirm("Join Our Telegram Channel For More Live Links")) {
+      window.location.href = "https://t.me/+Pj_QX9oygJNiYmRl";
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var videoSources = {
+        "feed_1": "https://prod-sports-hin-gm.jiocinema.com/hls/live/2100322/hd_akamai_iosmob_avc_hin_indvsnz_261024/master.m3u8",
+
+        "feed_2": "https://prod-sports-eng-gm.jiocinema.com/hls/live/2100297/hd_akamai_iosmob_avc_eng_indvsnz_261024/master.m3u8",
+
+        "feed_3": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109711/hd_akamai_iosmob_avc_tam_indvsnz_261024/master.m3u8",
+
+        "feed_4": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109717/hd_akamai_iosmob_avc_tel_indvsnz_261024/master.m3u8",
+
+        "feed_5": "https://prod-sports-north-gm.jiocinema.com/hls/live/2109761/hd_akamai_iosmob_avc_bhoj_indvsnz_261024/master.m3u8",
+
+        "feed_6": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109723/hd_akamai_iosmob_avc_kan_indvsnz_261024/master.m3u8",
+
+        "feed_7";
+"https://prod-sports-south-gm.jiocinema.com/hls/live/2109699/hd_akamai_iosmob_avc_odia_indvsnz_261024/master.m3u8",
+
+ "feed_8": "https://prod-sports-north-gm.jiocinema.com/hls/live/2109773/hd_akamai_iosmob_avc_ben_indvsnz_261024/master.m3u8",
+
+      };
+
+      var playerInstance = jwplayer("video");
+
+      document.getElementById("video-select").addEventListener("change", function() {
+        var selectedValue = this.value;
+        var videoSource = videoSources[selectedValue];
+
+        playerInstance.load([{ file: videoSource }]);
+        playerInstance.play();
+      });
+
+      document.getElementById("language-switch").addEventListener("click", function() {var selectedValue = document.getElementById("video-select").value;
+        var currentIndex = Object.keys(videoSources).indexOf(selectedValue);
+        var nextIndex = (currentIndex + 1) % Object.keys(videoSources).length;
+        var nextLanguage = Object.keys(videoSources)[nextIndex];
+        document.getElementById("video-select").value = nextLanguage;
+
+        var videoSource = videoSources[nextLanguage];
+        playerInstance.load([{ file: videoSource }]);
+        playerInstance.play();
+      });
+
+      var selectedValue = document.getElementById("video-select").value;
+      var videoSource = videoSources[selectedValue];
+
+      playerInstance.setup({
+        autostart: true,
+        mute: false,
+        playlist: [{ file: videoSource }]
+      });
+    });
   </script>
 </body>
 </html>
