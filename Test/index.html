@@ -91,7 +91,7 @@
         player.configure({
             drm: {
                 clearKeys: {
-                    'e31a5a81caff5d07ea2411a571fc2e59': "96c5ef69479732ae734f962748c19729"
+                    '00223c422b0436f109f1de7f65a0d3eb': "75b52aa8d6f81447979352d73f66b965"
                 }
             }
         });
@@ -115,7 +115,7 @@ window.player = player;
         controls.addEventListener("error", onUIErrorEvent);
 
         try {
-            await player.load("https://live.ll.ww.aiv-cdn.net/OTTB/lhr-nitro/live/clients/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd");
+            await player.load("https://g002-sle-us-cmaf-prd-fy.cdn.peacocktv.com/co01/Content/CMAF_S2-CTR-4s/Live/channel(5017873-719505-4905094a0d1)/master.mpd?c3.ri=5001669874623317028");
             console.log("The video has now been loaded!");
         } catch (error) {
             onPlayerError(error);
