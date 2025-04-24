@@ -1,88 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@Cricinsider365</title>
-  <style>
-    body {
-      margin: 0;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    video {
-      width: 100%;
-      max-width: 800px;
-      height: auto;
-      background: #000;
-    }
-  </style>
+    <style type="text/css">
+        * { user-select: auto !important; -webkit-user-select: auto !important; }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL 2025 Live</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #contentFrame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 65.25vw; /* 16:9 aspect ratio */
+            max-height: 100vh;
+            border: none;
+        }
+    </style>
 </head>
 <body>
 
-  <video id="video" controls muted playsinline></video>
+    <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" frameborder="0" allowfullscreen="true" scrolling="no" src="https://live.dtvxtream.com/lunar-ipl-eng">
+    </iframe>
 
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script>
-    const video = document.getElementById('video');
-    const videoSrc = 'https://www.tbn24.com/api/video/4031_0.m3u8';
+    <script>
+        // Set the iframe source via script
+        document.getElementById('contentFrame').src = "https://live.dtvxtream.com/lunar-ipl-eng";
+    </script>
 
-    function setupHLS() {
-      if (Hls.isSupported()) {
-        const hls = new Hls({
-          maxBufferLength: 30,
-          liveSyncDurationCount: 3,
-          enableWorker: true,
-          lowLatencyMode: true
-        });
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; }
+        
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .popup-content {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            animation: pulse 1.5s infinite alternate;
+        }
+        
+        .popup-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ff4444;
+            text-transform: uppercase;
+        }
+        
+        .popup-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .popup-content a {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #ff4444;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            transition: 0.3s;
+        }
+        
+        .popup-content a:hover {
+            background: #cc0000;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+    </style>
 
-        hls.loadSource(videoSrc);
-        hls.attachMedia(video);
-
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-          video.play().catch(err => console.error('Autoplay error:', err));
-        });
-
-        hls.on(Hls.Events.ERROR, function (event, data) {
-          console.error('HLS error:', data);
-          if (data.fatal) {
-            switch (data.type) {
-              case Hls.ErrorTypes.NETWORK_ERROR:
-                console.log("Network error. Trying to recover...");
-                hls.startLoad();
-                break;
-              case Hls.ErrorTypes.MEDIA_ERROR:
-                console.log("Media error. Trying to recover...");
-                hls.recoverMediaError();
-                break;
-              default:
-                hls.destroy();
-                alert("An unrecoverable error occurred. Please reload the page.");
-                break;
-            }
-          }
-        });
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = videoSrc;
-        video.addEventListener('loadedmetadata', () => {
-          video.play().catch(err => console.error('Autoplay error:', err));
-        });
-      } else {
-        alert("Your browser does not support HLS streaming.");
-      }
-    }
-
-    setupHLS();
-  </script>
-<script>
-// alert('Join Our Telegram For Latest update')
-         if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
-         window.open("https://t.me/+tL4jz_00y6NlMGRl", '_blank');
-     }
-</script>
+    <div class="popup-overlay" id="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">×</span>
+            <h2>🚨 Emergency Alert! 🚨</h2>
+            <p>Join our Telegram now for live updates and breaking news!</p>
+            <a href="http://Telegram.me/+jXFxo1HWPlphZTU1" target="_blank">Join Now</a>
+        </div>
+    </div>
+    
+    <script>
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
 
 </body>
 </html>
