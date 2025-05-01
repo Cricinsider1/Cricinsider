@@ -4,279 +4,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TG_@Cricinsider365</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #121212;
-            --text-color: #ffffff;
-            --button-bg: #1E88E5;
-            --button-hover-bg: #1565C0;
-            --logo-frame-color: #444444;
-            --dot-color: #ffff00;
-            --title-bg: linear-gradient(90deg, #FF5722, #FF9800); /* Orange gradient */
-            --title-text: #ffffff;
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
 
-        [data-theme="light"] {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --button-bg: #4CAF50;
-            --button-hover-bg: #45a049;
-            --logo-frame-color: #cccccc;
-            --dot-color: #ff0000;
-            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722);
-            --title-text: #000000;
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        @keyframes livePulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        :root {
+            --background-color: #121212;
+            --text-color: white;
+            --card-background: #222;
+        }
+
+        .light-theme {
+            --background-color: white;
+            --text-color: black;
+            --card-background: #f0f0f0;
         }
 
         body {
-            background-color: var(--bg-color);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: var(--background-color);
             color: var(--text-color);
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            padding-bottom: 100px; /* Adding space to prevent footer overlap */
+            padding: 20px;
+            transition: background 0.5s, color 0.5s;
         }
 
         .title-box {
-            background: var(--title-bg);
-            color: var(--title-text);
-            text-shadow: var(--title-shadow);
-            padding: 20px 30px;
-            font-size: 28px;
+            background: #d35400;
+            color: white;
+            font-size: 22px;
             font-weight: bold;
-            text-align: center;
-            box-shadow: var(--title-shadow);
-            border-radius: 8px;
-            margin: 20px auto;
-            max-width: 90%;
-        }
-
-        .telegram-button {
-            display: block;
-            margin: 10px auto 30px;
-            padding: 12px 25px;
-            background-color: #0088cc;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s, box-shadow 0.3s;
-            max-width: 300px;
-        }
-
-        .telegram-button:hover {
-            background-color: #005f99;
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .theme-toggle {
-            margin: 20px;
-            padding: 10px 20px;
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--button-hover-bg);
-        }
-
-        #link-container {
-            padding: 20px;
-        }
-
-        #link-container div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        #link-container img {
-            width: 350px;
-            max-width: 100%;
-            border: 5px solid var(--logo-frame-color);
-            cursor: pointer;
-        }
-
-        .watch-button {
-            display: inline-block;
-            padding: 12px 24px;
-            margin-top: 15px;
-            background-color: #FF5722;
-            color: white;
-            border: 2px solid #FF5722;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 600;
             text-transform: uppercase;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-.watch-button:hover {
-            background-color: #ffffff;
-            color: #FF5722;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-
-        .watch-button:active {
-            transform: translateY(2px);
-        }
-
-        .watch-button span {
+            padding: 12px;
+            border-radius: 8px;
             display: inline-block;
-            transition: transform 0.3s ease;
+            margin-bottom: 10px;
         }
 
-        .watch-button:hover span {
-            transform: translateX(5px);
-        }
-
-        /* Footer styles */
-        .footer {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            text-align: center;
-            padding: 15px;
-            margin-top: 30px; /* Space between content and footer */
-        }
-
-        .footer-button {
-            background-color: var(--button-bg);
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #0088cc;
             color: white;
+            text-decoration: none;
             font-size: 16px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.3s;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
         }
 
-        .footer-button:hover {
-            background-color: var(--button-hover-bg);
+        .telegram-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
         }
 
-        .footer-text {
-            margin-top: 10px;
+        .telegram-btn:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 26px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .event-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .event {
+            width: 400px;
+            background: var(--card-background);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 15px;
+            animation: heartbeat 3s infinite;
+            transition: transform 0.3s;
+        }
+
+        .event:hover {
+            transform: scale(1.03);
+        }
+
+        .event img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .event-content {
+            padding: 15px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+
+        .league {
             font-size: 14px;
+            color: #bbb;
+            margin-bottom: 10px;
         }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .live-btn {
+            display: block;
+            width: 60%;
+            padding: 8px;
+            background: red;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            margin: 0 auto;
+        }
+
+        .live-btn:hover {
+            transform: scale(1.05);
+        }
+.upcoming-btn {
+            display: block;
+            width: 60%;
+            padding: 8px;
+            background: yellow;
+            color: black;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            margin: 0 auto;
+        }
+
+        .upcoming-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            animation: livePulse 1.5s infinite;
+        }
+
+        /* Theme Toggle Button */
+        .toggle-btn {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 0 auto 20px; /* Centered under Telegram button */
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+        }
+
+        .toggle-btn span {
+            font-size: 24px;
+            color: black;
+        }
+
     </style>
 </head>
 <body>
-    <!-- Title Box -->
-    <div class="title-box">FANCODE MATCHES</div>
 
-    <!-- Join Telegram Button -->
-    <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank" class="telegram-button">Join Our Telegram</a>
+    <div class="title-box">Fancode Live Matches</div>
+    <br>
+    <a href="https://t.me/+tL4jz_00y6NlMGRl" target="_blank" class="telegram-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
+        Join Telegram
+    </a>
 
-    <!-- Theme Toggle Button with sun and moon icons -->
-    <button class="theme-toggle" onclick="toggleTheme()">
-        <i class="fas fa-sun" id="sun-icon" style="display: none;"></i>
-        <i class="fas fa-moon" id="moon-icon" style="display: inline;"></i>
-    </button>
-
-    <!-- Links Container -->
-    <div id="link-container"></div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <button class="footer-button" onclick="toggleFooterText()">Copyright & Credit</button>
-        <div id="footer-text" class="footer-text" style="display: none;">
-            Important Information<br>
-            We do not own any material or streams here, All content and streams are provided by third-party sites & Belong To Their Respective Owners.<br>
-            API Credit: Toor
-        </div>
+    <!-- Theme Toggle Button -->
+    <div class="toggle-btn" onclick="toggleTheme()">
+        <span>🔅</span>
     </div>
 
+    <h1></h1>
+    <div class="event-container" id="events"></div>
+
     <script>
-        const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
-        const linkPrefix = "https://p.apeiria.net/~insiderlive.html?videoUrl=";
-
-        async function fetchAndDisplayLinks() {
+        async function fetchEvents() {
             try {
-                const response = await fetch(m3uUrl);
-                const text = await response.text();
-                const lines = text.split('\n');
-                const container = document.getElementById("link-container");
+                const response = await fetch("https://raw.githubusercontent.com/drmlive/fancode-live-events/refs/heads/main/fancode.json");
+                const data = await response.json();
 
-                let description = "";
-                let logoUrl = "";
+                const container = document.getElementById("events");
+                container.innerHTML = ""; 
 
-                lines.forEach(line => {
-                    line = line.trim();
+                data.matches.forEach(event => {
+                    const eventDiv = document.createElement("div");
+                    eventDiv.classList.add("event");
 
-                    if (line.startsWith("#EXTINF")) {
-                        const logoMatch = line.match(/tvg-logo="(.*?)"/);
-                        logoUrl = logoMatch ? logoMatch[1] : "";
-                        const descriptionMatch = line.match(/#EXTINF.*?,(.*)/);
-                        description = descriptionMatch ? descriptionMatch[1].trim() : "";
-                    } else if (line.startsWith("http")) {
-                        const linkContainer = document.createElement("div");
+                    const isLive = event.status === "LIVE"; 
+                    const isUpcoming = event.status === "UPCOMING";
+                    const videoLink = event.dai_url ? https://p.apeiria.net/~insiderlive.html?videoUrl=${event.dai_url} : "#";
 
-                        if (logoUrl) {
-                            const logoImg = document.createElement("img");
-                            logoImg.src = logoUrl;
-                            logoImg.alt = "Logo";
-                            logoImg.onclick = () => { 
-                                window.open(linkPrefix + encodeURIComponent(line), '_blank'); 
-                            };
-                            linkContainer.appendChild(logoImg);
-                        }
-const button = document.createElement("a");
-                        button.href = linkPrefix + encodeURIComponent(line);
-                        button.target = "_blank";
-                        button.textContent = "Click to Watch";
-                        button.className = "watch-button";
-                        linkContainer.appendChild(button);
-
-                        container.appendChild(linkContainer);
-
-                        description = "";
-                        logoUrl = "";
-                    }
+                    eventDiv.innerHTML = 
+                        <img src="${event.src}" alt="${event.title}">
+                        ${isLive ? <div class="live-badge">LIVE</div> : ""}
+                        <div class="event-content">
+                            <div class="title">${event.title}</div>
+                            <div class="league">${event.event_name}</div>
+                            <div class="buttons">
+                                ${isLive ? <a href="${videoLink}" target="_blank" class="live-btn">WATCH LIVE</a> : ''}
+                                ${isUpcoming ? <a href="#" class="upcoming-btn">UPCOMING</a> : ''}
+                            </div>
+                        </div>
+                    ;
+                    container.appendChild(eventDiv);
                 });
+
             } catch (error) {
-                console.error("Error fetching M3U file:", error);
+                console.error("Error fetching events:", error);
             }
         }
-
-        fetchAndDisplayLinks();
 
         function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute("data-theme");
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
-            document.documentElement.setAttribute("data-theme", newTheme);
-
-            // Toggle icons visibility
-            const sunIcon = document.getElementById("sun-icon");
-            const moonIcon = document.getElementById("moon-icon");
-            if (newTheme === "dark") {
-                sunIcon.style.display = "none";
-                moonIcon.style.display = "inline";
-            } else {
-                sunIcon.style.display = "inline";
-                moonIcon.style.display = "none";
-            }
+            document.body.classList.toggle("light-theme");
         }
 
-        function toggleFooterText() {
-            const footerText = document.getElementById("footer-text");
-            footerText.style.display = footerText.style.display === "none" ? "block" : "none";
-        }
+        fetchEvents();
     </script>
 
 </body>
