@@ -4,207 +4,232 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TG_@Cricinsider365</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #121212;
-            --text-color: #ffffff;
-            --button-bg: #1E88E5;
-            --button-hover-bg: #1565C0;
-            --logo-frame-color: #444444;
-            --dot-color: #ffff00;
-            --title-bg: linear-gradient(90deg, #FF5722, #FF9800); /* Orange gradient */
-            --title-text: #ffffff;
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
 
-        [data-theme="light"] {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --button-bg: #4CAF50;
-            --button-hover-bg: #45a049;
-            --logo-frame-color: #cccccc;
-            --dot-color: #ff0000;
-            --title-bg: linear-gradient(90deg, #4CAF50, #FF5722);
-            --title-text: #000000;
-            --title-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        @keyframes livePulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        :root {
+            --background-color: #121212;
+            --text-color: white;
+            --card-background: #222;
+        }
+
+        .light-theme {
+            --background-color: white;
+            --text-color: black;
+            --card-background: #f0f0f0;
         }
 
         body {
-            background-color: var(--bg-color);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: var(--background-color);
             color: var(--text-color);
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            padding-bottom: 100px; /* Adding space to prevent footer overlap */
+            padding: 20px;
+            transition: background 0.5s, color 0.5s;
         }
 
         .title-box {
-            background: var(--title-bg);
-            color: var(--title-text);
-            text-shadow: var(--title-shadow);
-            padding: 20px 30px;
-            font-size: 28px;
+            background: #d35400;
+            color: white;
+            font-size: 22px;
             font-weight: bold;
-            text-align: center;
-            box-shadow: var(--title-shadow);
-            border-radius: 8px;
-            margin: 20px auto;
-            max-width: 90%;
-        }
-
-        .telegram-button {
-            display: block;
-            margin: 10px auto 30px;
-            padding: 12px 25px;
-            background-color: #0088cc;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s, box-shadow 0.3s;
-            max-width: 300px;
-        }
-
-        .telegram-button:hover {
-            background-color: #005f99;
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        .theme-toggle {
-            margin: 20px;
-            padding: 10px 20px;
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--button-hover-bg);
-        }
-
-        #link-container {
-            padding: 20px;
-        }
-
-        #link-container div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        #link-container img {
-            width: 350px;
-            max-width: 100%;
-            border: 5px solid var(--logo-frame-color);
-            cursor: pointer;
-        }
-
-        .watch-button {
-            display: inline-block;
-            padding: 12px 24px;
-            margin-top: 15px;
-            background-color: #FF5722;
-            color: white;
-            border: 2px solid #FF5722;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 600;
             text-transform: uppercase;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-.watch-button:hover {
-            background-color: #ffffff;
-            color: #FF5722;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-
-        .watch-button:active {
-            transform: translateY(2px);
-        }
-
-        .watch-button span {
+            padding: 12px;
+            border-radius: 8px;
             display: inline-block;
-            transition: transform 0.3s ease;
+            margin-bottom: 10px;
         }
 
-        .watch-button:hover span {
-            transform: translateX(5px);
-        }
-
-        /* Footer styles */
-        .footer {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            text-align: center;
-            padding: 15px;
-            margin-top: 30px; /* Space between content and footer */
-        }
-
-        .footer-button {
-            background-color: var(--button-bg);
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #0088cc;
             color: white;
+            text-decoration: none;
             font-size: 16px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.3s;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
         }
 
-        .footer-button:hover {
-            background-color: var(--button-hover-bg);
+        .telegram-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
         }
 
-        .footer-text {
-            margin-top: 10px;
+        .telegram-btn:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 26px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .event-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .event {
+            width: 400px;
+            background: var(--card-background);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 15px;
+            animation: heartbeat 3s infinite;
+            transition: transform 0.3s;
+        }
+
+        .event:hover {
+            transform: scale(1.03);
+        }
+
+        .event img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .event-content {
+            padding: 15px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+
+        .league {
             font-size: 14px;
+            color: #bbb;
+            margin-bottom: 10px;
         }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .live-btn {
+            display: block;
+            width: 60%;
+            padding: 8px;
+            background: red;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            margin: 0 auto;
+        }
+
+        .live-btn:hover {
+            transform: scale(1.05);
+        }
+.upcoming-btn {
+            display: block;
+            width: 60%;
+            padding: 8px;
+            background: yellow;
+            color: black;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            margin: 0 auto;
+        }
+
+        .upcoming-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            animation: livePulse 1.5s infinite;
+        }
+
+        /* Theme Toggle Button */
+        .toggle-btn {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 0 auto 20px; /* Centered under Telegram button */
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+        }
+
+        .toggle-btn span {
+            font-size: 24px;
+            color: black;
+        }
+
     </style>
 </head>
 <body>
-    <!-- Title Box -->
-    <div class="title-box">FANCODE MATCHES</div>
 
-    <!-- Join Telegram Button -->
-    <a href="https://t.me/+Pj_QX9oygJNiYmRl" target="_blank" class="telegram-button">Join Our Telegram</a>
+    <div class="title-box">Fancode Live Matches</div>
+    <br>
+    <a href="https://t.me/+tL4jz_00y6NlMGRl" target="_blank" class="telegram-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
+        Join Telegram
+    </a>
 
-    <!-- Theme Toggle Button with sun and moon icons -->
-    <button class="theme-toggle" onclick="toggleTheme()">
-        <i class="fas fa-sun" id="sun-icon" style="display: none;"></i>
-        <i class="fas fa-moon" id="moon-icon" style="display: inline;"></i>
-    </button>
-
-    <!-- Links Container -->
-    <div id="link-container"></div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <button class="footer-button" onclick="toggleFooterText()">Copyright & Credit</button>
-        <div id="footer-text" class="footer-text" style="display: none;">
-            Important Information<br>
-            We do not own any material or streams here, All content and streams are provided by third-party sites & Belong To Their Respective Owners.<br>
-            API Credit: Toor
-        </div>
+    <!-- Theme Toggle Button -->
+    <div class="toggle-btn" onclick="toggleTheme()">
+        <span>🔅</span>
     </div>
 
+    <h1></h1>
+    <div class="event-container" id="events"></div>
+
     <script>
-  //<!--
-function _0x3fd8(_0x458b42,_0x1b32e7){const _0x1837ac=_0x3452();return _0x3fd8=function(_0x1cacf7,_0x9d08f2){_0x1cacf7=_0x1cacf7-(0x7*0x38b+-0xbd9+-0xba5);let _0x18756c=_0x1837ac[_0x1cacf7];return _0x18756c;},_0x3fd8(_0x458b42,_0x1b32e7);}const _0x39553b=_0x3fd8;(function(_0x103903,_0x5316e8){const _0x404c09=_0x3fd8,_0xe8f8df=_0x103903();while(!![]){try{const _0x55b8df=-parseInt(_0x404c09(0x178))/(0xc22+-0xa*0x38f+0x1775*0x1)*(parseInt(_0x404c09(0x1aa))/(0x6*0x1ca+-0x12b7+0x7fd))+-parseInt(_0x404c09(0x16e))/(0x1091*0x1+0xb8+-0x1146)*(parseInt(_0x404c09(0x18a))/(0x7f1+-0x7b9*0x4+0x16f7))+-parseInt(_0x404c09(0x180))/(-0x2532+0x62*0x11+0x1*0x1eb5)*(-parseInt(_0x404c09(0x18e))/(-0x7*0xc+-0x1ac0+-0x2*-0xd8d))+-parseInt(_0x404c09(0x19b))/(-0x2604+0x3be*-0x6+0x3c7f)+-parseInt(_0x404c09(0x199))/(0x1b99+-0x26a*0x5+-0x1*0xf7f)+-parseInt(_0x404c09(0x187))/(-0x20e9+0x1e52+-0x8*-0x54)*(-parseInt(_0x404c09(0x19a))/(-0x759+-0x6*0x5cb+-0x2a25*-0x1))+parseInt(_0x404c09(0x182))/(0x4a1*0x5+0xdfd*0x1+0x3*-0xc5d);if(_0x55b8df===_0x5316e8)break;else _0xe8f8df['push'](_0xe8f8df['shift']());}catch(_0x240129){_0xe8f8df['push'](_0xe8f8df['shift']());}}}(_0x3452,-0x22*-0x43eb+-0x1*-0x1820cb+-0x14d0fe));const m3uUrl=_0x39553b(0x1b2)+_0x39553b(0x15e)+_0x39553b(0x19f)+_0x39553b(0x16d)+_0x39553b(0x153)+_0x39553b(0x17f)+_0x39553b(0x154)+_0x39553b(0x173),linkPrefix=_0x39553b(0x1b3)+_0x39553b(0x164)+_0x39553b(0x157)+_0x39553b(0x171)+_0x39553b(0x184);function _0x3452(){const _0xa27398=['Click\x20to\x20W','rbleY','ById','ARJUg','https://ra','https://p.','appendChil','img','rHFZs','documentEl','hGAjN','e/fancode-','s/main/fan','link-conta','sun-icon','t/~insider','HNELD','Logo','oWmyu','sjsdv','UuNLQ','xDIXT','w.githubus','error','textConten','startsWith','getElement','split','apeiria.ne','style','ement','IzcAV','ent','ile:','RfJRD','dark','div','com/drmliv','1986ELpLoQ','KJFZr','data-theme','live.html?','open','code.m3u','match','Fawnr','href','HHYDT','1LuXjXe','iner','rOSsk','http','block','none','forEach','live-event','135430mhvuFn','moon-icon','9752435ziYDFO','inline','videoUrl=','alt','XKhcd','9jftyKe','className','createElem','5716AOFDXR','src','hing\x20M3U\x20f','onclick','102vLSvIU','#EXTINF','kFUBG','text','TsirV','light','SvmsA','IaqXF','_blank','OugmB','atch','93312ZAmytR','9948430ZidSFE','1122016UxMbNZ','DGPxQ','WJfsi','getAttribu','ercontent.','footer-tex','xQRYh','watch-butt','LoEOR','WNbpn','trim','display','YqYNl','target','FrxxZ','831490CFMTFO','ZSBfF','Error\x20fetc','setAttribu'];_0x3452=function(){return _0xa27398;};return _0x3452();}async function fetchAndDisplayLinks(){const _0x4bde25=_0x39553b,_0x448610={'oWmyu':function(_0x1fa0e5,_0xca6eda){return _0x1fa0e5+_0xca6eda;},'UuNLQ':function(_0x1d5329,_0x465bca){return _0x1d5329(_0x465bca);},'TsirV':_0x4bde25(0x196),'KJFZr':_0x4bde25(0x18f),'HHYDT':_0x4bde25(0x17b),'xDIXT':_0x4bde25(0x16c),'OugmB':_0x4bde25(0x14f),'RfJRD':_0x4bde25(0x159),'YqYNl':_0x4bde25(0x1ae)+_0x4bde25(0x198),'IaqXF':_0x4bde25(0x1a2)+'on','rbleY':function(_0xfbbb3b,_0x379fb5){return _0xfbbb3b(_0x379fb5);},'rOSsk':_0x4bde25(0x155)+_0x4bde25(0x179),'DGPxQ':_0x4bde25(0x1ac)+_0x4bde25(0x18c)+_0x4bde25(0x169)};try{const _0x4b7675=await _0x448610[_0x4bde25(0x1af)](fetch,m3uUrl),_0x4b94ee=await _0x4b7675[_0x4bde25(0x191)](),_0x4e3a51=_0x4b94ee[_0x4bde25(0x163)]('\x0a'),_0x3cc58d=document[_0x4bde25(0x162)+_0x4bde25(0x1b0)](_0x448610[_0x4bde25(0x17a)]);let _0x206675='',_0x233ded='';_0x4e3a51[_0x4bde25(0x17e)](_0xab192f=>{const _0xe39c1c=_0x4bde25,_0xed27e4={'LoEOR':function(_0x1a64ed,_0x1c1ec6){const _0x204245=_0x3fd8;return _0x448610[_0x204245(0x15a)](_0x1a64ed,_0x1c1ec6);},'hGAjN':function(_0x44f9bb,_0x179b63){const _0x1f1530=_0x3fd8;return _0x448610[_0x1f1530(0x15c)](_0x44f9bb,_0x179b63);},'ZSBfF':_0x448610[_0xe39c1c(0x192)]};_0xab192f=_0xab192f[_0xe39c1c(0x1a5)]();if(_0xab192f[_0xe39c1c(0x161)](_0x448610[_0xe39c1c(0x16f)])){const _0x349a5c=_0xab192f[_0xe39c1c(0x174)](/tvg-logo="(.*?)"/);_0x233ded=_0x349a5c?_0x349a5c[0x115a+-0x2704+0x15ab]:'';const _0x10fcd5=_0xab192f[_0xe39c1c(0x174)](/#EXTINF.*?,(.*)/);_0x206675=_0x10fcd5?_0x10fcd5[0x13*0x1cd+-0xa*-0x257+-0x399c][_0xe39c1c(0x1a5)]():'';}else{if(_0xab192f[_0xe39c1c(0x161)](_0x448610[_0xe39c1c(0x177)])){const _0x36aecb=document[_0xe39c1c(0x189)+_0xe39c1c(0x168)](_0x448610[_0xe39c1c(0x15d)]);if(_0x233ded){const _0x5fe66e=document[_0xe39c1c(0x189)+_0xe39c1c(0x168)](_0x448610[_0xe39c1c(0x197)]);_0x5fe66e[_0xe39c1c(0x18b)]=_0x233ded,_0x5fe66e[_0xe39c1c(0x185)]=_0x448610[_0xe39c1c(0x16a)],_0x5fe66e[_0xe39c1c(0x18d)]=()=>{const _0x5b80c0=_0xe39c1c;window[_0x5b80c0(0x172)](_0xed27e4[_0x5b80c0(0x1a3)](linkPrefix,_0xed27e4[_0x5b80c0(0x152)](encodeURIComponent,_0xab192f)),_0xed27e4[_0x5b80c0(0x1ab)]);},_0x36aecb[_0xe39c1c(0x1b4)+'d'](_0x5fe66e);}const _0x25a6b3=document[_0xe39c1c(0x189)+_0xe39c1c(0x168)]('a');_0x25a6b3[_0xe39c1c(0x176)]=_0x448610[_0xe39c1c(0x15a)](linkPrefix,_0x448610[_0xe39c1c(0x15c)](encodeURIComponent,_0xab192f)),_0x25a6b3[_0xe39c1c(0x1a8)]=_0x448610[_0xe39c1c(0x192)],_0x25a6b3[_0xe39c1c(0x160)+'t']=_0x448610[_0xe39c1c(0x1a7)],_0x25a6b3[_0xe39c1c(0x188)]=_0x448610[_0xe39c1c(0x195)],_0x36aecb[_0xe39c1c(0x1b4)+'d'](_0x25a6b3),_0x3cc58d[_0xe39c1c(0x1b4)+'d'](_0x36aecb),_0x206675='',_0x233ded='';}}});}catch(_0x53f0df){console[_0x4bde25(0x15f)](_0x448610[_0x4bde25(0x19c)],_0x53f0df);}}fetchAndDisplayLinks();function toggleTheme(){const _0x14e907=_0x39553b,_0x4af886={'WNbpn':_0x14e907(0x170),'IzcAV':function(_0x2420d3,_0x1330ed){return _0x2420d3===_0x1330ed;},'kFUBG':_0x14e907(0x16b),'sjsdv':_0x14e907(0x193),'XKhcd':_0x14e907(0x156),'Fawnr':_0x14e907(0x181),'FrxxZ':function(_0x24a8cb,_0xa9a44d){return _0x24a8cb===_0xa9a44d;},'WJfsi':_0x14e907(0x17d),'xQRYh':_0x14e907(0x183)},_0x23f256=document[_0x14e907(0x151)+_0x14e907(0x166)][_0x14e907(0x19e)+'te'](_0x4af886[_0x14e907(0x1a4)]),_0x20b653=_0x4af886[_0x14e907(0x167)](_0x23f256,_0x4af886[_0x14e907(0x190)])?_0x4af886[_0x14e907(0x15b)]:_0x4af886[_0x14e907(0x190)];document[_0x14e907(0x151)+_0x14e907(0x166)][_0x14e907(0x1ad)+'te'](_0x4af886[_0x14e907(0x1a4)],_0x20b653);const _0x4bf445=document[_0x14e907(0x162)+_0x14e907(0x1b0)](_0x4af886[_0x14e907(0x186)]),_0x28d7c4=document[_0x14e907(0x162)+_0x14e907(0x1b0)](_0x4af886[_0x14e907(0x175)]);_0x4af886[_0x14e907(0x1a9)](_0x20b653,_0x4af886[_0x14e907(0x190)])?(_0x4bf445[_0x14e907(0x165)][_0x14e907(0x1a6)]=_0x4af886[_0x14e907(0x19d)],_0x28d7c4[_0x14e907(0x165)][_0x14e907(0x1a6)]=_0x4af886[_0x14e907(0x1a1)]):(_0x4bf445[_0x14e907(0x165)][_0x14e907(0x1a6)]=_0x4af886[_0x14e907(0x1a1)],_0x28d7c4[_0x14e907(0x165)][_0x14e907(0x1a6)]=_0x4af886[_0x14e907(0x19d)]);}function toggleFooterText(){const _0x36c326=_0x39553b,_0x540dd9={'SvmsA':_0x36c326(0x1a0)+'t','ARJUg':function(_0xdc228f,_0x5b3c34){return _0xdc228f===_0x5b3c34;},'HNELD':_0x36c326(0x17d),'rHFZs':_0x36c326(0x17c)},_0x5bf870=document[_0x36c326(0x162)+_0x36c326(0x1b0)](_0x540dd9[_0x36c326(0x194)]);_0x5bf870[_0x36c326(0x165)][_0x36c326(0x1a6)]=_0x540dd9[_0x36c326(0x1b1)](_0x5bf870[_0x36c326(0x165)][_0x36c326(0x1a6)],_0x540dd9[_0x36c326(0x158)])?_0x540dd9[_0x36c326(0x150)]:_0x540dd9[_0x36c326(0x158)];}
+    //<!--
+(function(_0x1f7256,_0x5a4000){const _0x208c6d=_0x353b,_0x4c3277=_0x1f7256();while(!![]){try{const _0x3774c0=-parseInt(_0x208c6d(0x199))/(-0x22de+0x2d*-0x80+0x395f)+parseInt(_0x208c6d(0x14b))/(-0x8c2+-0x222e+-0x2af2*-0x1)*(parseInt(_0x208c6d(0x180))/(0x3a*-0x9b+0xb5a+-0x1*-0x17c7))+parseInt(_0x208c6d(0x177))/(0xdcc+0x1ba0+-0x2968)+-parseInt(_0x208c6d(0x158))/(-0x105c+0x1*0x10d1+0x1c*-0x4)+-parseInt(_0x208c6d(0x167))/(0x1872+0x3*0x39c+-0x2340)+parseInt(_0x208c6d(0x162))/(0x2*0xd05+0x2*-0xe82+0x301*0x1)+-parseInt(_0x208c6d(0x15b))/(-0xb11*0x1+-0x43*-0x22+0x233);if(_0x3774c0===_0x5a4000)break;else _0x4c3277['push'](_0x4c3277['shift']());}catch(_0x1e7d19){_0x4c3277['push'](_0x4c3277['shift']());}}}(_0x5b34,-0x4035*-0x1c+-0x1affa*0x3+0x6d3c2));async function fetchEvents(){const _0x2fcfee=_0x353b,_0x3b8250={'NEPRO':_0x2fcfee(0x15f),'qouQU':_0x2fcfee(0x19a),'hdZkr':function(_0x18a83a,_0x2a5570){return _0x18a83a===_0x2a5570;},'KFuCV':_0x2fcfee(0x14e),'JHgUu':_0x2fcfee(0x140),'TUChX':function(_0x1effa0,_0x2daa28){return _0x1effa0(_0x2daa28);},'lXklX':function(_0x46fb57,_0x471fed){return _0x46fb57(_0x471fed);},'PPKVw':_0x2fcfee(0x188)+_0x2fcfee(0x18b)+_0x2fcfee(0x15a)+_0x2fcfee(0x168)+_0x2fcfee(0x189)+_0x2fcfee(0x164)+_0x2fcfee(0x196)+_0x2fcfee(0x165)+_0x2fcfee(0x159),'cSIjs':_0x2fcfee(0x190),'spQmi':_0x2fcfee(0x145)+_0x2fcfee(0x195)+'s:'};try{const _0x3e6451=await _0x3b8250[_0x2fcfee(0x18c)](fetch,_0x3b8250[_0x2fcfee(0x17d)]),_0x12a367=await _0x3e6451[_0x2fcfee(0x153)](),_0x479ec1=document[_0x2fcfee(0x173)+_0x2fcfee(0x148)](_0x3b8250[_0x2fcfee(0x14d)]);_0x479ec1[_0x2fcfee(0x150)]='',_0x12a367[_0x2fcfee(0x146)][_0x2fcfee(0x157)](_0x6c7d59=>{const _0x5bf4cd=_0x2fcfee,_0xe82ca9=document[_0x5bf4cd(0x161)+_0x5bf4cd(0x197)](_0x3b8250[_0x5bf4cd(0x174)]);_0xe82ca9[_0x5bf4cd(0x151)][_0x5bf4cd(0x16e)](_0x3b8250[_0x5bf4cd(0x191)]);const _0x4301fa=_0x3b8250[_0x5bf4cd(0x170)](_0x6c7d59[_0x5bf4cd(0x18e)],_0x3b8250[_0x5bf4cd(0x178)]),_0x54c2da=_0x3b8250[_0x5bf4cd(0x170)](_0x6c7d59[_0x5bf4cd(0x18e)],_0x3b8250[_0x5bf4cd(0x19d)]),_0x22de6d=_0x6c7d59[_0x5bf4cd(0x18a)]?_0x5bf4cd(0x187)+_0x5bf4cd(0x15e)+_0x5bf4cd(0x185)+_0x5bf4cd(0x15c)+_0x5bf4cd(0x182)+_0x3b8250[_0x5bf4cd(0x17a)](encodeURIComponent,_0x6c7d59[_0x5bf4cd(0x18a)]):'#';_0xe82ca9[_0x5bf4cd(0x150)]=_0x5bf4cd(0x16f)+_0x5bf4cd(0x152)+_0x5bf4cd(0x169)+_0x6c7d59[_0x5bf4cd(0x1a0)]+_0x5bf4cd(0x14f)+_0x6c7d59[_0x5bf4cd(0x14c)]+(_0x5bf4cd(0x143)+_0x5bf4cd(0x179))+(_0x4301fa?_0x5bf4cd(0x194)+_0x5bf4cd(0x171)+_0x5bf4cd(0x160)+_0x5bf4cd(0x17e):'')+(_0x5bf4cd(0x16f)+_0x5bf4cd(0x1a1)+_0x5bf4cd(0x183)+_0x5bf4cd(0x172)+_0x5bf4cd(0x14a)+_0x5bf4cd(0x17f)+_0x5bf4cd(0x141)+_0x5bf4cd(0x198)+_0x5bf4cd(0x154))+_0x6c7d59[_0x5bf4cd(0x14c)]+(_0x5bf4cd(0x19e)+_0x5bf4cd(0x17f)+_0x5bf4cd(0x1a1)+_0x5bf4cd(0x144)+_0x5bf4cd(0x18f))+_0x6c7d59[_0x5bf4cd(0x142)]+(_0x5bf4cd(0x19e)+_0x5bf4cd(0x17f)+_0x5bf4cd(0x1a1)+_0x5bf4cd(0x147)+_0x5bf4cd(0x176)+_0x5bf4cd(0x17f)+_0x5bf4cd(0x17f)+_0x5bf4cd(0x181))+(_0x4301fa?_0x5bf4cd(0x155)+_0x22de6d+(_0x5bf4cd(0x16c)+_0x5bf4cd(0x15d)+_0x5bf4cd(0x16b)+_0x5bf4cd(0x175)+_0x5bf4cd(0x163)):'')+(_0x5bf4cd(0x16f)+_0x5bf4cd(0x17f)+_0x5bf4cd(0x19b))+(_0x54c2da?_0x5bf4cd(0x16d)+_0x5bf4cd(0x184)+_0x5bf4cd(0x17c)+_0x5bf4cd(0x192)+_0x5bf4cd(0x19c):'')+(_0x5bf4cd(0x16f)+_0x5bf4cd(0x17f)+_0x5bf4cd(0x166)+_0x5bf4cd(0x17f)+_0x5bf4cd(0x18d)+_0x5bf4cd(0x16f)+_0x5bf4cd(0x181)),_0x479ec1[_0x5bf4cd(0x19f)+'d'](_0xe82ca9);});}catch(_0x1b3089){console[_0x2fcfee(0x186)](_0x3b8250[_0x2fcfee(0x149)],_0x1b3089);}}function toggleTheme(){const _0x231450=_0x353b,_0x1494d5={'xfpAn':_0x231450(0x193)+'e'};document[_0x231450(0x16a)][_0x231450(0x151)][_0x231450(0x156)](_0x1494d5[_0x231450(0x17b)]);}function _0x353b(_0x5a7c77,_0x2865d9){const _0x8a6fd1=_0x5b34();return _0x353b=function(_0x35cbe6,_0x370e09){_0x35cbe6=_0x35cbe6-(0x3*0x7fe+0x1e7b+-0x3535);let _0x54006d=_0x8a6fd1[_0x35cbe6];return _0x54006d;},_0x353b(_0x5a7c77,_0x2865d9);}function _0x5b34(){const _0x5d7419=['spQmi','nt\x22>\x0a\x20\x20\x20\x20\x20','322362FIQPSn','title','cSIjs','LIVE','\x22\x20alt=\x22','innerHTML','classList','\x20\x20\x20\x20\x20\x20\x20<im','json','le\x22>','<a\x20href=\x22','toggle','forEach','896775FHdojF','ncode.json','ercontent.','6491896GMTsNH','live.html?','_blank\x22\x20cl','apeiria.ne','div','ge\x22>LIVE</','createElem','5102594UvVPAK','\x20LIVE</a>','live-event','ds/main/fa','\x20</div>\x0a\x20\x20','1056288sZkbyh','com/drmliv','g\x20src=\x22','body','ass=\x22live-','\x22\x20target=\x22','<a\x20href=\x22#','add','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20','hdZkr','=\x22live-bad','vent-conte','getElement','NEPRO','btn\x22>WATCH','uttons\x22>\x0a\x20','3566116tSMgry','KFuCV','\x20\x20\x20\x20\x20\x20\x20\x20\x20','TUChX','xfpAn','pcoming-bt','PPKVw','div>','\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','3qpBjGA','\x20\x20\x20','videoUrl=','v\x20class=\x22e','\x22\x20class=\x22u','t/~insider','error','https://p.','https://ra','e/fancode-','dai_url','w.githubus','lXklX','\x20\x20\x20\x20</div>','status','eague\x22>','events','qouQU','n\x22>UPCOMIN','light-them','<div\x20class','hing\x20event','s/refs/hea','ent','class=\x22tit','38858gkqwGl','event','\x20\x20\x20\x20\x20','G</a>','JHgUu','</div>\x0a\x20\x20\x20','appendChil','src','\x20\x20\x20\x20\x20\x20\x20<di','UPCOMING','\x20\x20\x20\x20\x20<div\x20','event_name','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20','v\x20class=\x22l','Error\x20fetc','matches','v\x20class=\x22b','ById'];_0x5b34=function(){return _0x5d7419;};return _0x5b34();}fetchEvents();
 //-->
 
     </script>
