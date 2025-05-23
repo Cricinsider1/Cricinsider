@@ -25,21 +25,20 @@
             max-height: 100vh;
             border: none;
         }
-    </style>
-</head>
-<body>
 
-    <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" frameborder="0" allowfullscreen="true" scrolling="no" src="https://watch.dtvxtream.com/lunar-ipl-hindi">
-    </iframe>
-
-    <script>
-        // Set the iframe source via script
-        document.getElementById('contentFrame').src = "https://watch.dtvxtream.com/lunar-ipl-hindi";
-    </script>
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; }
+        .message-banner {
+            position: absolute;
+            top: 65.25vw; /* Just below the video */
+            width: 100%;
+            background: white;
+            padding: 15px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #111;
+            text-align: center;
+            z-index: 10;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
 
         .popup-overlay {
             position: fixed;
@@ -113,8 +112,26 @@
             0% { transform: scale(1); }
             100% { transform: scale(1.1); }
         }
-    </style>
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+    <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" frameborder="0" allowfullscreen="true" scrolling="no" src="https://live.dtvxtream.com/lunar-ipl-hindi">
+    </iframe>
+
+    <!-- Message below the video -->
+    <div class="message-banner">
+        Tap On This &lt; 👈🏻 For All Quality And Full Screen Mode
+    </div>
+
+    <script>
+        // Set the iframe source via script
+        document.getElementById('contentFrame').src = "https://watch.dtvxtream.com/lunar-ipl-hindi";
+    </script>
+
+    <!-- Telegram popup -->
     <div class="popup-overlay" id="popup" style="display: none;">
         <div class="popup-content">
             <span class="close-btn" onclick="closePopup()">×</span>
@@ -128,13 +145,12 @@
         function closePopup() {
             document.getElementById("popup").style.display = "none";
         }
+
+        // Telegram prompt on page load
+        if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
+            window.open("https://t.me/+tL4jz_00y6NlMGRl", '_blank');
+        }
     </script>
-<script>
-// alert('Join Our Telegram For Latest update')
-         if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
-         window.open("https://t.me/+tL4jz_00y6NlMGRl", '_blank');
-     }
-</script>
 
 </body>
 </html>
