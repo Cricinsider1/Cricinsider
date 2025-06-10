@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@TG_Cricinsider365</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TG_@Cricinsider365</title>
     <style>
         /* General Page Styling */
         body {
@@ -21,20 +20,24 @@
             text-align: center;
         }
 
-        .logo-container {
-            background: #000; /* Black background for the logo */
-            padding: 15px;
+        /* Glowing Effect for Message */
+        .loading-message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffcc00;
+            margin-bottom: 10px;
+            padding: 10px 20px;
             border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
+            animation: glow 1.5s infinite alternate;
         }
 
-        .logo-container img {
-            width: 220px; /* Adjust the logo size */
-            height: auto;
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00; }
+            100% { box-shadow: 0 0 15px #ffcc00, 0 0 25px #ffcc00, 0 0 35px #ffcc00; }
         }
 
         /* Video Player Styling */
@@ -45,127 +48,63 @@
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
             border-radius: 15px;
             overflow: hidden;
-            background: #000; /* Black background behind the video for better focus */
+            background: #000;
         }
 
         .player-container iframe {
             border-radius: 15px;
-        }
-
-        .stream-issue {
-            margin-top: 20px;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 16px;
-            color: #fff;
-            width: fit-content;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .stream-issue a {
-            color: #00c1ff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .stream-issue a:hover {
-            text-decoration: underline;
-        }
-
-            margin-top: 25px;
-            padding: 15px 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            font-size: 16px;
-            color: #fff;
-            width: fit-content;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            display: inline-block;
-        }
-
-        .credits-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .credits a {
-            color: #ffcc00;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .credits a:hover {
-            text-decoration: underline;
-        }
-
-        /* Video Player Styles */
-        #video {
             width: 100%;
-            height: 100vh;
-            max-height: 720px;
-            background: black;
+            height: 100%;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .logo-container img {
-                width: 180px;
-            }
+        /* Join Telegram Button */
+        .join-telegram-container {
+            margin-top: 20px;
+            text-align: center;
+        }
 
-            .credits, .stream-issue {
-                font-size: 14px;
-                padding: 10px 20px;
-            }
+        .join-telegram-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #008fd6;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
 
-            .credits-title {
-                font-size: 16px;
-            }
+        .join-telegram-btn:hover {
+            background-color: #006bb3;
         }
     </style>
 </head>
 <body>
 
-    </div>
+    <!-- Loading Message -->
+    <div class="loading-message">Share The Links With Your Friends</div>
 
-    <!-- Video Player -->
+    <!-- Video Player Section -->
     <div class="player-container">
-        <video id="video" controls autoplay></video>
+        <div style="padding:56.25% 0 0 0;position:relative;">
+            <iframe id="contentFrame" sandbox="allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" 
+            frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="true" scrolling="no" 
+            src="https://sliv.fredflix.fun/play.php?id=sony_ten1" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+        </div>
     </div>
+
+    <!-- Join Telegram Button -->
+    <div class="join-telegram-container">
+        <button class="join-telegram-btn" onclick="window.open('https://t.me/+IhSW51QysxU3NzY1', '_blank')">Join Telegram Channel</button>
     </div>
-<script>
-        async function initPlayer() {
-            const video = document.getElementById("video");
-            const manifestUri = "https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510895~acl=%2f*~id=1556784483112233~data=hdntl~hmac=96cc6b37d046072cb44536b895dc364e0a107df1a4a43f0d21d75873a310ddf2/master_3500.m3u8";
-
-            if (shaka.Player.isBrowserSupported()) {
-                const player = new shaka.Player(video);
-
-                // Error handling
-                player.addEventListener("error", event => console.error("Error:", event.detail));
-
-                try {
-                    await player.load(manifestUri);
-                    console.log("DASH Stream Loaded Successfully!");
-                } catch (error) {
-                    console.error("Failed to load stream:", error);
-                }
-            } else {
-                alert("Your browser does not support DASH playback.");
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", initPlayer);
-    </script>
 <script>
 // alert('Join Our Telegram For Latest update')
-         if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
-         window.open("https://t.me/+Pj_QX9oygJNiYmRl", '_blank');
-     }
+         if (confirm("Join Our Telegram Channel @Cricinsider365") == true) {
+         window.open("
+https://t.me/+IhSW51QysxU3NzY1", '_blank');
+     }
 </script>
+
 </body>
 </html>
