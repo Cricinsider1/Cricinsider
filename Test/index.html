@@ -3,71 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Cricsters</title>
+    <title>The Cricsters - Live Streaming</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             background-color: #000;
             color: #fff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
         .header {
-            font-size: 2em;
-            margin: 20px 0;
-            color: #3498db;
+            font-size: 2rem;
+            margin: 20px;
+            color: #00BFFF;
         }
         .poster img {
-            width: 90%;
+            width: 95%;
             max-width: 500px;
             border-radius: 15px;
-            margin: 20px 0;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
         }
         .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
             margin: 10px 0;
+            flex-wrap: wrap;
         }
         .btn {
-            padding: 15px 25px;
-            margin: 10px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1em;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            background-color: #000;
+            color: #fff;
             cursor: pointer;
             transition: 0.3s;
         }
-        .btn-lang {
-            background-color: #000;
-            border: 2px solid #fff;
-            color: #fff;
-        }
-        .btn-lang.active {
+        .btn.active, .btn:hover {
             background-color: #00BFFF;
             border-color: #00BFFF;
-        }
-        .btn-res {
-            background-color: #000;
-            border: 2px solid #fff;
             color: #fff;
         }
-        .btn-res.active {
-            background-color: #00BFFF;
-            border-color: #00BFFF;
+        .player {
+            margin-top: 20px;
+            width: 95%;
+            max-width: 500px;
+            aspect-ratio: 16/9;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #00BFFF;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
         .telegram {
-            margin-top: 30px;
+            margin: 30px 0;
         }
         .telegram a {
             background-color: #00BFFF;
             color: #fff;
-            padding: 15px 30px;
+            padding: 15px 40px;
             border-radius: 50px;
-            font-weight: bold;
             text-decoration: none;
+            font-weight: bold;
             transition: 0.3s;
         }
         .telegram a:hover {
             background-color: #0077B6;
+        }
+        .popup {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .popup button {
+            margin-top: 20px;
+            background-color: #00BFFF;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -85,38 +119,68 @@
     </div>
 
     <div class="buttons">
-        <button class="btn btn-res active" onclick="changeStream('https://tataplay.slivcdn.com/hls/live/2011747/TEN1HD/master_3500.m3u8')">1080p</button>
-        <button class="btn btn-res" onclick="changeStream('https://tataplay.slivcdn.com/hls/live/2011747/TEN1HD/master_3500.m3u8')">720p</button>
-        <button class="btn btn-res" onclick="changeStream('https://tataplay.slivcdn.com/hls/live/2011747/TEN1HD/master_3500.m3u8')">540p</button>
+        <button class="btn btn-res active" onclick="changeStream('1080p')">1080p</button>
+        <button class="btn btn-res" onclick="changeStream('720p')">720p</button>
+        <button class="btn btn-res" onclick="changeStream('540p')">540p</button>
+    </div>
+
+    <div class="player">
+        <iframe id="streamIframe" src="https://tataplay.slivcdn.com/hls/live/2020591/TEN3HD/master_3500.m3u8" allowfullscreen></iframe>
     </div>
 
     <div class="telegram">
         <a href="https://t.me/your-telegram-channel" target="_blank">Join us on Telegram</a>
     </div>
 
+    <div class="popup" id="popup">
+        <h2>Join Our Telegram Channel for Latest Updates!</h2>
+        <button onclick="closePopup()">Join Now</button>
+    </div>
+
     <script>
+        let streamLinks = {
+            hindi: {
+                '1080p': 'https://tataplay.slivcdn.com/hls/live/2020591/TEN3HD/master_3500.m3u8',
+                '720p': 'https://tataplay.slivcdn.com/hls/live/2020591/TEN3HD/master_2500.m3u8',
+                '540p': 'https://tataplay.slivcdn.com/hls/live/2020591/TEN3HD/master_1500.m3u8'
+            },
+            english: {
+                '1080p': 'https://tataplay.slivcdn.com/hls/live/2020591/TEN1HD/master_3500.m3u8',
+                '720p': 'https://tataplay.slivcdn.com/hls/live/2020591/TEN1HD/master_2500.m3u8',
+                '540p': 'https://tataplay.slivcdn.com/hls/live/2020591/TEN1HD/master_1500.m3u8'
+            }
+        };
+
+        let currentLanguage = 'hindi';
+        let currentResolution = '1080p';
+
         function selectLanguage(lang) {
             document.querySelectorAll('.btn-lang').forEach(btn => btn.classList.remove('active'));
-            if (lang === 'hindi') {
-                document.querySelector('.btn-lang:nth-child(1)').classList.add('active');
-            } else {
-                document.querySelector('.btn-lang:nth-child(2)').classList.add('active');
-            }
-            // You can update your iframe source here based on language
+            event.target.classList.add('active');
+            currentLanguage = lang;
+            updateStream();
         }
 
-        function changeStream(resolution) {
+        function changeStream(res) {
             document.querySelectorAll('.btn-res').forEach(btn => btn.classList.remove('active'));
-            if (resolution === '1080p') {
-                document.querySelector('.btn-res:nth-child(1)').classList.add('active');
-                // change iframe src here if needed
-            } else if (resolution === '720p') {
-                document.querySelector('.btn-res:nth-child(2)').classList.add('active');
-            } else {
-                document.querySelector('.btn-res:nth-child(3)').classList.add('active');
-            }
-            // Update iframe stream source URL accordingly here
+            event.target.classList.add('active');
+            currentResolution = res;
+            updateStream();
         }
+
+        function updateStream() {
+            document.getElementById('streamIframe').src = streamLinks[currentLanguage][currentResolution];
+        }
+
+        function closePopup() {
+            window.open("https://t.me/your-telegram-channel", "_blank");
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Auto popup after few seconds
+        setTimeout(() => {
+            document.getElementById('popup').style.display = 'flex';
+        }, 4000);
     </script>
 
 </body>
