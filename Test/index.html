@@ -1,102 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fancode Live Matches</title>
-  <link rel="shortcut icon" href="" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #0f0f0f;
-      color: #fff;
-    }
-    .match-card {
-      transition: all 0.3s ease-in-out;
-      background: linear-gradient(145deg, #1a1a1a, #1f1f1f);
-    }
-    .match-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 40px rgba(0, 0, 0, 0.5);
-    }
-    .live-badge {
-      animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-      }
-      50% {
-        box-shadow: 0 0 15px 10px rgba(239, 68, 68, 0);
-      }
-    }
-    .match-img {
-      transition: transform 0.3s ease;
-    }
-    .match-card:hover .match-img {
-      transform: scale(1.03);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@TG_Cricinsider365</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+        .title {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        .iframe-container {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 16/9;
+            background-color: #000;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .options, .join-telegram {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 500px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #000;
+            color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        button:hover {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #000;
+        }
+    </style>
 </head>
-<body class="bg-gray-950 min-h-screen">
+<body>
 
-  <div class="max-w-7xl mx-auto px-4 py-10">
-    <h1 class="text-4xl font-bold text-center text-white mb-10 tracking-wide">⚡ Fancode Live Matches</h1>
-    <div id="matches-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-      <!-- Matches will load here -->
+    <h1 class="title">SONY TEN 1 HD </h1>
+
+    <div class="iframe-container">
+        <iframe id="streamIframe" src="https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510895~acl=%2f*~id=1556784483112233~data=hdntl~hmac=96cc6b37d046072cb44536b895dc364e0a107df1a4a43f0d21d75873a310ddf2/master_3500.m3u8" allowfullscreen></iframe>
     </div>
-  </div>
 
-  <script>
-    const container = document.getElementById('matches-container');
+    <div class="options">
+        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510895~acl=%2f*~id=1556784483112233~data=hdntl~hmac=96cc6b37d046072cb44536b895dc364e0a107df1a4a43f0d21d75873a310ddf2/master_3500.m3u8')">1080p</button>
+        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510894~acl=%2f*~id=1556784483112233~data=hdntl~hmac=4a204b9082d13aa65d13e9ea4a4aa69dce1cb5357a298e057166cb8cd692387e/master_1300.m3u8')">720p</button>
+        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510895~acl=%2f*~id=1556784483112233~data=hdntl~hmac=96cc6b37d046072cb44536b895dc364e0a107df1a4a43f0d21d75873a310ddf2/master_664.m3u8')">360p</button>
+        <button onclick="changeStream('https://tataplaymt.slivcdn.com/hls/live/2011747/TEN1HD/hdntl=exp=1738510894~acl=%2f*~id=1556784483112233~data=hdntl~hmac=4a204b9082d13aa65d13e9ea4a4aa69dce1cb5357a298e057166cb8cd692387e/master_412.m3u8')">240p</button>
+    </div>
 
-    fetch('https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json')
-      .then(response => response.json())
-      .then(data => {
-        const matches = data.matches;
+    <div class="join-telegram">
+        <button onclick="window.location.href='https://t.me/+IhSW51QysxU3NzY1'">Join Telegram Channel</button>
+    </div>
 
-        if (!matches || matches.length === 0) {
-          container.innerHTML = `<p class="text-center text-yellow-500">No matches available right now.</p>`;
-          return;
+    <script>
+        function changeStream(url) {
+            document.getElementById('streamIframe').src = url;
         }
 
-        matches.forEach(match => {
-          const isLive = match.status === 'LIVE';
-
-          const card = document.createElement('div');
-          card.className = `rounded-2xl overflow-hidden shadow-xl match-card border border-gray-800 ${isLive ? 'ring-2 ring-red-600' : ''}`;
-
-          card.innerHTML = `
-            <div class="relative">
-              <img src="${match.src}" alt="${match.title}" class="w-full h-60 object-cover match-img">
-              ${isLive ? `<span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md live-badge">LIVE</span>` : ''}
-            </div>
-            <div class="p-6">
-              <h2 class="text-2xl font-semibold text-white mb-1">${match.event_name}</h2>
-              <p class="text-gray-400 text-sm mb-1">${match.match_name}</p>
-              <p class="text-sm text-gray-500 mb-4">Start: ${match.startTime}</p>
-              <div class="flex flex-wrap gap-3">
-                ${match.dai_url && match.adfree_url ? `
-                  <a href="https://insiderlive1.free.nf/?videoUrl=${match.dai_url}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm flex items-center shadow-md transition-all">
-                    <i class="fas fa-play mr-2"></i> Watch
-                  </a>
-                  <a href="https://insiderlive1.free.nf/?videoUrl=${match.adfree_url}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm flex items-center shadow-md transition-all">
-                    <i class="fas fa-ad mr-2"></i> Ad-Free
-                  </a>
-                ` : `<span class="text-gray-500 italic">Upcoming Match</span>`}
-              </div>
-            </div>
-          `;
-
-          container.appendChild(card);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching JSON:', error);
-        container.innerHTML = `<p class="text-center text-red-500">Failed to load matches.</p>`;
-      });
-  </script>
+        setTimeout(() => {
+            if (confirm("Join For More Links!!")) {
+                window.location.href = "https://t.me/+IhSW51QysxU3NzY1";
+            }
+        }, 2000);  // Delay to avoid immediate popup
+    </script>
 
 </body>
 </html>
