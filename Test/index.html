@@ -171,14 +171,6 @@
         function updateStream() {
             document.getElementById('streamIframe').src = streamLinks[currentLanguage][currentResolution];
         }
-
-        function closePopup() {
-            window.open("https://t.me/+IhSW51QysxU3NzY1", "_blank");
-            document.getElementById('popup').style.display = 'none';
-        }
-
-        // Auto popup after few seconds
-        setTimeout(() => {
             document.getElementById('popup').style.display = 'flex';
         }, 4000);
     </script>
