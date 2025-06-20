@@ -3,90 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@TG_Cricinsider365</title>
+    <title>The Cricsters</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: #000;
+            color: #fff;
             font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
             margin: 0;
             padding: 0;
-        }
-        .title {
-            background-color: #000;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-            font-size: 1.5em;
             text-align: center;
         }
-        .iframe-container {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 16/9;
-            background-color: #000;
+        .header {
+            font-size: 2em;
+            margin: 20px 0;
+            color: #3498db;
         }
-        iframe {
-            width: 100%;
-            height: 100%;
+        .poster img {
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        .buttons {
+            margin: 10px 0;
+        }
+        .btn {
+            padding: 15px 25px;
+            margin: 10px;
             border: none;
-        }
-        .options, .join-telegram {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            width: 100%;
-            max-width: 500px;
-        }
-        button {
-            padding: 10px 15px;
+            border-radius: 10px;
             font-size: 1em;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
-            background-color: #000;
-            color: #fff;
-            transition: background-color 0.3s, color 0.3s;
+            transition: 0.3s;
         }
-        button:hover {
-            background-color: #fff;
-            color: #000;
-            border: 1px solid #000;
+        .btn-lang {
+            background-color: #000;
+            border: 2px solid #fff;
+            color: #fff;
+        }
+        .btn-lang.active {
+            background-color: #00BFFF;
+            border-color: #00BFFF;
+        }
+        .btn-res {
+            background-color: #000;
+            border: 2px solid #fff;
+            color: #fff;
+        }
+        .btn-res.active {
+            background-color: #00BFFF;
+            border-color: #00BFFF;
+        }
+        .telegram {
+            margin-top: 30px;
+        }
+        .telegram a {
+            background-color: #00BFFF;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .telegram a:hover {
+            background-color: #0077B6;
         }
     </style>
 </head>
 <body>
 
-    <h1 class="title">SONY TEN 1 HD </h1>
+    <div class="header">THE CRICSTERS</div>
 
-    <div class="iframe-container">
-        <iframe id="streamIframe" src="https://tataplay.slivcdn.com/hls/live/2011747/TEN1HD/master_3500.m3u8" allowfullscreen></iframe>
+    <div class="poster">
+        <img src="https://your-poster-image-link.jpg" alt="Bharat Tum Chale Chalo">
     </div>
 
-    <div class="options">
-        <button onclick="changeStream('https://tataplay.slivcdn.com/hls/live/2011747/TEN1HD/master_3500.m3u8')">1080p</button>
-        <button 
+    <div class="buttons">
+        <button class="btn btn-lang active" onclick="selectLanguage('hindi')">Hindi</button>
+        <button class="btn btn-lang" onclick="selectLanguage('english')">English</button>
     </div>
 
-    <div class="join-telegram">
-        <button onclick="window.location.href='https://t.me/+IhSW51QysxU3NzY1'">Join Telegram Channel</button>
+    <div class="buttons">
+        <button class="btn btn-res active" onclick="changeStream('1080p')">1080p</button>
+        <button class="btn btn-res" onclick="changeStream('720p')">720p</button>
+        <button class="btn btn-res" onclick="changeStream('540p')">540p</button>
+    </div>
+
+    <div class="telegram">
+        <a href="https://t.me/your-telegram-channel" target="_blank">Join us on Telegram</a>
     </div>
 
     <script>
-        function changeStream(url) {
-            document.getElementById('streamIframe').src = url;
+        function selectLanguage(lang) {
+            document.querySelectorAll('.btn-lang').forEach(btn => btn.classList.remove('active'));
+            if (lang === 'hindi') {
+                document.querySelector('.btn-lang:nth-child(1)').classList.add('active');
+            } else {
+                document.querySelector('.btn-lang:nth-child(2)').classList.add('active');
+            }
+            // You can update your iframe source here based on language
         }
 
-        setTimeout(() => {
-            if (confirm("Join For More Links!!")) {
-                window.location.href = "https://t.me/+IhSW51QysxU3NzY1";
+        function changeStream(resolution) {
+            document.querySelectorAll('.btn-res').forEach(btn => btn.classList.remove('active'));
+            if (resolution === '1080p') {
+                document.querySelector('.btn-res:nth-child(1)').classList.add('active');
+                // change iframe src here if needed
+            } else if (resolution === '720p') {
+                document.querySelector('.btn-res:nth-child(2)').classList.add('active');
+            } else {
+                document.querySelector('.btn-res:nth-child(3)').classList.add('active');
             }
-        }, 2000);  // Delay to avoid immediate popup
+            // Update iframe stream source URL accordingly here
+        }
     </script>
 
 </body>
